@@ -1,8 +1,8 @@
-FROM node:alpine as astro-watch
+FROM node:alpine as astro
 
 LABEL version="1.0.0"
 LABEL maintainer="Vladimir Lukyanov | vladimir@liikyanov.com"
-LABEL description="Docker container for Astro.build"
+LABEL description="Docker container for XII/Grid docs generator"
 
 WORKDIR /app
 
@@ -18,3 +18,8 @@ RUN ["npm", "i"]
 EXPOSE 3000
 
 CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+
+# production environment
+#FROM nginx:latest
+#COPY ./.config/nginx.conf /etc/nginx/nginx.conf
+#CMD ["nginx", "-g", "daemon off;"]
