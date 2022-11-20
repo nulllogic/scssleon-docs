@@ -1,5 +1,10 @@
 ---
-import languages from '../../../../i18n/languages';
+import Index from "src/layouts/index.astro";
+import Head from "src/components/head.astro";
 ---
 
-<meta http-equiv="refresh" content={`0;url=/docs/1.0/en/getting-started/introduction`} />
+<Index>
+    <Head>
+        <meta http-equiv="refresh" content={`0;url=/docs/1.0/en/getting-started/introduction`} />
+    </Head>
+</Index>
