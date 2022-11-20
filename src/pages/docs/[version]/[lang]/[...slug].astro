@@ -1,7 +1,17 @@
 ---
 import { Debug } from 'astro/components';
-const pages = await Astro.glob<Frontmatter>('../../../../../data/docs/1.0/en/**/*.md');
+import Docs from '~/layouts/docs.astro';
+
+const {version, lang, slug} = Astro.params;
+
+const content = await Astro.glob('../../../../../data/docs/1.0/en/**/*.md');
+const post = content.find(({file}) => file === '/app/data/docs/' + version + '/' + lang + '/' + slug + '.md');
+const {title, layout} = post.frontmatter;
+console.log(post)
+
 // const { Content } = pages.find((p) => p.url.endsWith(Astro.params.slug));
 ---
-
-123
+<Docs>
+    {title}
+    <div set:html={post.compiledContent()} />
+</Docs>

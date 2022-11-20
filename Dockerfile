@@ -9,9 +9,9 @@ WORKDIR /app
 COPY package.json .
 COPY astro.config.mjs .
 COPY tsconfig.json .
-COPY src/ .
 
 RUN ["mkdir", "public"]
+RUN ["mkdir", "src"]
 
 RUN ["npm", "i"]
 

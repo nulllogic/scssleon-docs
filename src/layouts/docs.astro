@@ -1,5 +1,4 @@
 ---
-import { Debug } from 'astro/components';
 export interface Props {
 	title: string;
 }
@@ -7,6 +6,7 @@ export interface Props {
 const { title } = Astro.props;
 
 import Head from '../components/head.astro';
+import Header from '../components/header.astro';
 import Footer from '../components/footer.astro';
 ---
 
@@ -15,9 +15,9 @@ import Footer from '../components/footer.astro';
 	<head>
 		<Head title="XII/Grid docs" description="Desciption" />
 	</head>
-	<Debug {Astro} />
 	<body>
+		<Header />
 		<slot />
+		<Footer />
 	</body>
-	<Footer />
 </html>
