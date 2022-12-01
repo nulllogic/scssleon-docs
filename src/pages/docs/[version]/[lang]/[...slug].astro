@@ -8,7 +8,6 @@ const content = await Astro.glob('../../../../../data/docs/1.0/en/**/*.md');
 
 const post = content.find(({file}) => file === '/app/data/docs/' + version + '/' + lang + '/' + slug + '.md');
 const {title, layout} = post.frontmatter;
-console.log(post)
 
 // const { Content } = pages.find((p) => p.url.endsWith(Astro.params.slug));
 ---
