@@ -12,6 +12,10 @@ const {title, layout} = post.frontmatter;
 // const { Content } = pages.find((p) => p.url.endsWith(Astro.params.slug));
 ---
 <Docs>
-    {title}
-    <div set:html={post.compiledContent()} />
+    <div class="container">
+        <div class="col-md-12">
+            {title}
+            <div set:html={post.compiledContent()} />
+        </div>
+    </div>
 </Docs>
