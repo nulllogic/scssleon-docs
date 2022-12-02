@@ -2,10 +2,17 @@
 import Index from '../layouts/index.astro';
 import footer from '../components/footer.astro';
 import '../styles/xiigrid.scss';
+
+//https://api.github.com/repos/nulllogic/xiigrid/branches/master
+
+const response = await fetch('https://api.github.com/repos/nulllogic/xiigrid/branches/master');
+const data = await response.json();
+const commit_date = typeof data.message === 'undefined' ? new Date(data.commit.commit.author.date) : new Date;
 ---
 
 <Index>
 	<main>
+
 		<div class="welcome">
 			<div class="container">
 				<div class="row">
@@ -18,10 +25,11 @@ import '../styles/xiigrid.scss';
 				</div>
 			</div>
 		</div>
+		
 		<div class="github">
 			<div class="container">
-				<div class="col-md-24">
-					<p>Latest Commit on GitHub:</p>
+				<div class="col-md-12">
+					<p>Latest Commit on GitHub: {commit_date.toISOString().replace(/(.*)T(.*)\..*/,'$1 $2')}</p>
 				</div>
 			</div>
 		</div>
@@ -29,6 +37,10 @@ import '../styles/xiigrid.scss';
 </Index>
 
 <style lang="scss">
+	.welcome {
+
+	}
+
 	.main {
 		margin: 1.5rem 0;
 	}
