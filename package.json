@@ -17,6 +17,6 @@
     "@astrojs/sitemap": "^1.0.1"
   },
   "devDependencies": {
-    "sass": "^1.58"
+    "sass": "^1.58.1"
   }
 }
