@@ -11,41 +11,41 @@ const commit_date = typeof data.message === 'undefined' ? new Date(data.commit.c
 ---
 
 <Index>
-	<main>
+    <main>
 
-		<div class="welcome">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						1
-					</div>
-					<div class="col-12">
-						2
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="github">
-			<div class="container">
-				<div class="col-md-12">
-					<p>Latest Commit on GitHub: {commit_date.toISOString().replace(/(.*)T(.*)\..*/,'$1 $2')}</p>
-				</div>
-			</div>
-		</div>
-	</main>
+        <div class="welcome">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        1
+                    </div>
+                    <div class="col-12">
+                        2
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="github">
+            <div class="container">
+                <div class="col-md-12">
+                    <p>Latest Commit on GitHub: {commit_date.toISOString().replace(/(.*)T(.*)\..*/, '$1 $2')}</p>
+                </div>
+            </div>
+        </div>
+    </main>
 </Index>
 
 <style lang="scss">
-	.welcome {
-		background: linear-gradient(71.93deg,#001b33 26.34%,#004887 56.72%,#273b49 94.79%)
-	}
+    .welcome {
+        background: linear-gradient(71.93deg, #001b33 26.34%, #004887 56.72%, #273b49 94.79%)
+    }
 
-	.main {
-		margin: 1.5rem 0;
-	}
+    .main {
+        margin: 1.5rem 0;
+    }
 
-	.github {
+    .github {
 
-	}
+    }
 </style>
