@@ -2,20 +2,24 @@
 import { Debug } from 'astro/components';
 import Docs from '~/layouts/docs.astro';
 
-const {version, lang, slug} = Astro.params;
+import { getCollection } from 'astro:content';
+const englishDocsEntries = await getCollection('docs', ({ id }) => {
+    return id;
+});
 
-const content = await Astro.glob('../../../../../data/docs/1.0/en/**/*.md');
-
-const post = content.find(({file}) => file === '/app/data/docs/' + version + '/' + lang + '/' + slug + '.md');
-const {title, layout} = post.frontmatter;
-
-// const { Content } = pages.find((p) => p.url.endsWith(Astro.params.slug));
+// const {version, lang, slug} = Astro.params;
+//
+// const content = await Astro.glob('../../../../../content/docs/1.0/en/**/*.md');
+//
+// const post = content.find(({file}) => file === '/app/content/docs/' + version + '/' + lang + '/' + slug + '.md');
+// const {title, layout} = post.frontmatter;
+//
+// // const { Content } = pages.find((p) => p.url.endsWith(Astro.params.slug));
 ---
 <Docs>
     <div class="container">
         <div class="col-md-12">
-            {title}
-            <div set:html={post.compiledContent()} />
+            123
         </div>
     </div>
 </Docs>
