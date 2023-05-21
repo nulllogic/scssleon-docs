@@ -1,6 +1,16 @@
 ---
-const { content, githubEditUrl, headings } = Astro.props;
+const {headings} = Astro.props
 ---
 <nav>
-    123
+    <ul>
+        {headings.map((heading) => {
+            return (
+                    <li>
+                        <a href='#' onClick={(e) => {
+                            e.preventDefault()
+                        }}>{heading.text}</a>
+                    </li>
+            )
+        })}
+    </ul>
 </nav>

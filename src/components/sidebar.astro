@@ -1,7 +1,53 @@
 ---
+import {getCollection} from 'astro:content';
+const docsCollection = await getCollection('docs');
+
+const gettingStartedCollection = docsCollection.filter((doc) => {
+    if (doc?.data?.group) return doc?.data?.group.includes('getting-started')
+}).sort((a, b) => {
+    return b.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(a.slug.replace(/.*\/(\w+)\/?$/, '$1'))
+})
+const componentsCollection = docsCollection.filter((doc) => {
+    if (doc?.data?.group) return doc?.data?.group.includes('components')
+}).sort((a, b) => {
+    return a.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
+})
 ---
 <aside class="sidebar">
-
+    <nav>
+        <ul>
+            <li>
+                <strong>Getting started</strong>
+                <ul>
+                    {gettingStartedCollection.map((doc, index) => {
+                            return (
+                                    <li>
+                                        <a href={'/docs/' + Astro.params.version + '/' + Astro.params.lang + doc.slug.replace(Astro.params.version.replace(/\./g, '') + '/' + Astro.params.lang, '')}>
+                                            {doc.slug.replace(/.*\/(\w+)\/?$/, '$1')}
+                                        </a>
+                                    </li>
+                            )
+                        }
+                    )}
+                </ul>
+            </li>
+            <li>
+                <strong>Components</strong>
+                <ul>
+                    {componentsCollection.map((doc, index) => {
+                            return (
+                                    <li>
+                                        <a href={'/docs/' + Astro.params.version + '/' + Astro.params.lang + doc.slug.replace(Astro.params.version.replace(/\./g, '') + '/' + Astro.params.lang, '')}>
+                                            {doc.slug.replace(/.*\/(\w+)\/?$/, '$1')}
+                                        </a>
+                                    </li>
+                            )
+                        }
+                    )}
+                </ul>
+            </li>
+        </ul>
+    </nav>
 </aside>
 <style lang="scss">
     .sidebar {
@@ -10,7 +56,7 @@
         position: sticky;
         top: 5rem;
         display: block;
-
         overflow-y: auto;
+        align-self: start;
     }
 </style>

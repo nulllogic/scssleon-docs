@@ -3,14 +3,7 @@ import Toc from "./toc.astro";
 
 ---
 <main class="main">
-    <div class="intro">
-    </div>
-    <div class="toc">
-        <Toc />
-    </div>
-    <div class="content">
-        <slot/>
-    </div>
+    <slot/>
 </main>
 <style lang="scss">
     .main {
@@ -40,23 +33,4 @@ import Toc from "./toc.astro";
             grid-template-columns:4fr 1fr
         }
     }
-
-    .intro {
-        grid-area: intro;
-    }
-
-    .toc {
-        grid-area: toc;
-
-        position: sticky;
-        top: 5rem;
-        right: 0;
-        z-index: 2;
-        overflow-y: auto;
-    }
-
-    .content {
-        grid-area: content;
-    }
-
 </style>

@@ -1,11 +1,5 @@
 ---
 import Docs from '../layouts/docs.astro';
-
-import { getCollection } from 'astro:content';
-const englishDocsEntries = await getCollection('docs', ({ id }) => {
-    return id;
-});
-
 ---
 
 <Docs>

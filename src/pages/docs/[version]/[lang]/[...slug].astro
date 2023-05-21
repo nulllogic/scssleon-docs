@@ -1,25 +1,62 @@
 ---
-import { Debug } from 'astro/components';
 import Docs from '~/layouts/docs.astro';
 
-import { getCollection } from 'astro:content';
-const englishDocsEntries = await getCollection('docs', ({ id }) => {
-    return id;
-});
+import {Debug} from 'astro/components';
+import Docs from '~/layouts/docs.astro';
+import Toc from "../../../../components/toc.astro";
 
-// const {version, lang, slug} = Astro.params;
-//
-// const content = await Astro.glob('../../../../../content/docs/1.0/en/**/*.md');
-//
-// const post = content.find(({file}) => file === '/app/content/docs/' + version + '/' + lang + '/' + slug + '.md');
-// const {title, layout} = post.frontmatter;
-//
-// // const { Content } = pages.find((p) => p.url.endsWith(Astro.params.slug));
+// import type { CollectionEntry } from 'astro:content';
+// interface Props {
+//     post: CollectionEntry<'docs'>;
+// }
+
+import {getCollection, getEntry} from 'astro:content';
+const docsCollection = await getCollection('docs');
+const page = await getEntry('docs', Astro.params.version.replace(/\./g, '') + '/' + Astro.params.lang + '/' + Astro.params.slug);
+
+const {headings, Content}  = await page.render()
 ---
 <Docs>
-    <div class="container">
-        <div class="col-md-12">
-            123
-        </div>
+    <div class="intro">
+        <h1 class="title">{page?.data?.title}</h1>
+        <p class="subtitle">{page?.data?.description}</p>
+    </div>
+    <div class="toc">
+        <Toc headings={headings} />
+    </div>
+    <div class="content">
+        <Content />
     </div>
 </Docs>
+
+<style lang="scss">
+    .title {
+        margin-bottom: .5rem;
+    }
+
+    .subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .intro {
+        grid-area: intro;
+    }
+
+    .toc {
+        grid-area: toc;
+
+        position: sticky;
+        top: 5rem;
+        right: 0;
+        z-index: 2;
+        overflow-y: auto;
+
+        align-self: start;
+    }
+
+    .content {
+        grid-area: content;
+    }
+</style>
+
