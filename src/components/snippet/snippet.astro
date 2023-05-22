@@ -67,12 +67,25 @@ const html = repairShikiTheme(_html);
 
 <div class="snippet">
     <div class="preview">
-        <slot class="test"/>
-    </div>
-    <div class="resizer">
-        <span class="drag">
-            <span class="el"></span>
-        </span>
+
+        <div class="inline">
+            <slot />
+        </div>
+
+        <svg class="background">
+            <defs>
+                <pattern id="pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                    <path d="M-3 13 15-5M-5 5l18-18M-1 21 17 3"></path>
+                </pattern>
+            </defs>
+            <rect stroke="none" fill="url(#pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001)" width="100%" height="100%"></rect>
+        </svg>
+
+        <div class="resizer">
+            <span class="drag">
+                <span class="el"></span>
+            </span>
+        </div>
     </div>
     <div class="code">
         <Fragment set:html={html} wrap />
@@ -80,6 +93,22 @@ const html = repairShikiTheme(_html);
 </div>
 
 <style is:global lang="scss">
+    .dragging {
+        .snippet {
+            .preview {
+                &::after {
+                     background: rgba(58, 69, 82, 1);
+                }
+            }
+        }
+
+        & * {
+          cursor: ew-resize;
+          -webkit-user-select: none;
+          user-select: none;
+      }
+    }
+
 
     p code {
         background: rgb(31, 81, 129);
@@ -106,6 +135,35 @@ const html = repairShikiTheme(_html);
             transition: 0.75s background-color;
             padding: 1rem;
 
+            .inline {
+                position: relative;
+                z-index: 10;
+            }
+
+            .background {
+                stroke: rgba(40, 51, 56, 0.63);
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 1;
+
+                -webkit-user-select: none;
+                user-select: none;
+            }
+
+            &::after {
+                 width: 1px;
+                 height: 100%;
+                 position: absolute;
+                 top: 0;
+                 right: -1px;
+                 display: inline-block;
+                 background: transparent;
+                 transition: 0.75s background-color;
+                 content: '';
+             }
 
             h1, h2, h3, h4, h5, h6,
             p,
@@ -117,34 +175,35 @@ const html = repairShikiTheme(_html);
             table:not(:last-child) {
                 margin: 0;
             }
-        }
 
-        .resizer {
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            user-select: none;
-
-            .drag {
-                padding: .5rem;
-                touch-action: pan-y;
-                cursor: ew-resize;
-                display: block;
+            .resizer {
                 position: absolute;
-                top: 50%;
-                left: .75rem;
-                transform: translate(-50%, -50%);
+                right: 0;
+                top: 0;
+                bottom: 0;
+                -webkit-user-select: none;
                 user-select: none;
 
-                .el {
-                    background: rgba(100, 116, 139, .6);
-                    border-radius: 10px;
-                    width: .375rem;
-                    height: 2rem;
+                .drag {
+                    padding: .5rem;
+                    touch-action: pan-y;
+                    cursor: ew-resize;
                     display: block;
-                }
+                    position: absolute;
+                    top: 50%;
+                    left: .75rem;
+                    transform: translate(-50%, -50%);
+                    user-select: none;
 
+                    .el {
+                        background: rgba(100, 116, 139, .6);
+                        border-radius: 10px;
+                        width: .375rem;
+                        height: 2rem;
+                        display: block;
+                    }
+
+                }
             }
         }
 
