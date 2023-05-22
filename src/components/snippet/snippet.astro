@@ -1,0 +1,157 @@
+---
+import prettier from 'prettier'
+import type * as shiki from 'shiki';
+import { getHighlighter } from './shiki.js';
+
+export interface Props {
+    /** The code to highlight. Required. */
+    code: string;
+    /**
+     * The language of your code.
+     * Supports all languages listed here: https://github.com/shikijs/shiki/blob/main/docs/languages.md#all-languages
+     * Instructions for loading a custom language: https://github.com/shikijs/shiki/blob/main/docs/languages.md#supporting-your-own-languages-with-shiki
+     *
+     * @default "plaintext"
+     */
+    lang?: shiki.Lang | shiki.ILanguageRegistration;
+    /**
+     * The styling theme.
+     * Supports all themes listed here: https://github.com/shikijs/shiki/blob/main/docs/themes.md#all-themes
+     * Instructions for loading a custom theme: https://github.com/shikijs/shiki/blob/main/docs/themes.md#loading-theme
+     *
+     * @default "github-dark"
+     */
+    theme?: shiki.IThemeRegistration;
+    /**
+     * Enable word wrapping.
+     *  - true: enabled.
+     *  - false: disabled.
+     *  - null: All overflow styling removed. Code will overflow the element by default.
+     *
+     * @default false
+     */
+    wrap?: boolean | null;
+}
+
+const code = await Astro.slots.render('default');
+
+const {  lang = 'plaintext', theme = 'github-dark', wrap = false } = Astro.props;
+
+/** Replace the shiki class name with a custom astro class name. */
+function repairShikiTheme(html: string): string {
+    // Replace "shiki" class naming with "astro"
+    html = html.replace(/<pre class="(.*?)shiki(.*?)"/, '<pre class="$1astro-code$2"');
+    // Handle code wrapping
+    // if wrap=null, do nothing.
+    if (wrap === false) {
+        html = html.replace(/style="(.*?)"/, 'style="$1; overflow-x: auto;"');
+    } else if (wrap === true) {
+        html = html.replace(
+            /style="(.*?)"/,
+            'style="$1; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"'
+        );
+    }
+    return html;
+}
+
+const highlighter = await getHighlighter({
+    theme,
+    // Load custom lang if passed an object, otherwise load the default
+    langs: typeof lang !== 'string' ? [lang] : undefined,
+});
+const _html = highlighter.codeToHtml(prettier.format(code, { parser: 'mdx' }), {
+    lang: typeof lang === 'string' ? lang : lang.id,
+});
+const html = repairShikiTheme(_html);
+---
+
+<div class="snippet">
+    <div class="preview">
+        <slot class="test"/>
+    </div>
+    <div class="resizer">
+        <span class="drag">
+            <span class="el"></span>
+        </span>
+    </div>
+    <div class="code">
+        <Fragment set:html={html} wrap />
+    </div>
+</div>
+
+<style is:global lang="scss">
+
+    @media (prefers-color-scheme: light) {
+
+    }
+
+    @media (prefers-color-scheme: dark) {
+    }
+
+    .snippet {
+
+        position: relative;
+        margin-bottom: 1rem;
+
+        border-radius: 5px;
+        border: 1px solid rgb(58, 69, 82);
+
+        .preview {
+            position: relative;
+            transition: 0.75s background-color;
+            padding: 1rem;
+
+
+            h1, h2, h3, h4, h5, h6,
+            p,
+            dl,
+            ol,
+            ul,
+            blockquote,
+            pre,
+            table:not(:last-child) {
+                margin: 0;
+            }
+        }
+
+        .resizer {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            user-select: none;
+
+            .drag {
+                padding: .5rem;
+                touch-action: pan-y;
+                cursor: ew-resize;
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: .75rem;
+                transform: translate(-50%, -50%);
+                user-select: none;
+
+                .el {
+                    background: rgba(100, 116, 139, .6);
+                    border-radius: 10px;
+                    width: .375rem;
+                    height: 2rem;
+                    display: block;
+                }
+
+            }
+        }
+
+        .code {
+            overflow: hidden;
+            width:100%;
+
+            .astro-code {
+                padding: 1rem;
+                margin:0;
+                border-radius: 0 0 5px 5px;
+            }
+        }
+    }
+</style>
