@@ -1,7 +1,7 @@
-FROM node:alpine as astro
+FROM node:18 as astro
 
 LABEL version="1.0.0"
-LABEL maintainer="Vladimir Lukyanov | vladimir@liikyanov.com"
+LABEL maintainer="Vladimir Lukyanov | vladimir@lukyanov.net"
 LABEL description="Docker container for XII/Grid docs generator"
 
 WORKDIR /app
