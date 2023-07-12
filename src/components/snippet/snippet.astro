@@ -1,84 +1,37 @@
 ---
 import prettier from 'prettier'
-import type * as shiki from 'shiki';
-import { getHighlighter } from './shiki.js';
-
-export interface Props {
-    /** The code to highlight. Required. */
-    code: string;
-    /**
-     * The language of your code.
-     * Supports all languages listed here: https://github.com/shikijs/shiki/blob/main/docs/languages.md#all-languages
-     * Instructions for loading a custom language: https://github.com/shikijs/shiki/blob/main/docs/languages.md#supporting-your-own-languages-with-shiki
-     *
-     * @default "plaintext"
-     */
-    lang?: shiki.Lang | shiki.ILanguageRegistration;
-    /**
-     * The styling theme.
-     * Supports all themes listed here: https://github.com/shikijs/shiki/blob/main/docs/themes.md#all-themes
-     * Instructions for loading a custom theme: https://github.com/shikijs/shiki/blob/main/docs/themes.md#loading-theme
-     *
-     * @default "github-dark"
-     */
-    theme?: shiki.IThemeRegistration;
-    /**
-     * Enable word wrapping.
-     *  - true: enabled.
-     *  - false: disabled.
-     *  - null: All overflow styling removed. Code will overflow the element by default.
-     *
-     * @default false
-     */
-    wrap?: boolean | null;
-}
+import shiki from 'shiki'
 
 const code = await Astro.slots.render('default');
 
-const {  lang = 'plaintext', theme = 'github-dark', wrap = false } = Astro.props;
+const code_formatted = await prettier.format(code, {
+    parser: 'mdx'
+})
 
-/** Replace the shiki class name with a custom astro class name. */
-function repairShikiTheme(html: string): string {
-    // Replace "shiki" class naming with "astro"
-    html = html.replace(/<pre class="(.*?)shiki(.*?)"/, '<pre class="$1astro-code$2"');
-    // Handle code wrapping
-    // if wrap=null, do nothing.
-    if (wrap === false) {
-        html = html.replace(/style="(.*?)"/, 'style="$1; overflow-x: auto;"');
-    } else if (wrap === true) {
-        html = html.replace(
-            /style="(.*?)"/,
-            'style="$1; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"'
-        );
-    }
-    return html;
-}
 
-const highlighter = await getHighlighter({
-    theme,
-    // Load custom lang if passed an object, otherwise load the default
-    langs: typeof lang !== 'string' ? [lang] : undefined,
-});
-const _html = highlighter.codeToHtml(prettier.format(code, { parser: 'mdx' }), {
-    lang: typeof lang === 'string' ? lang : lang.id,
-});
-const html = repairShikiTheme(_html);
+const html = await shiki.getHighlighter({
+    theme: 'slack-dark'
+}).then(highlighter => {
+    return highlighter.codeToHtml(code_formatted, {lang: 'js'})
+})
 ---
 
 <div class="snippet">
     <div class="preview">
 
         <div class="inline">
-            <slot />
+            <slot/>
         </div>
 
         <svg class="background">
             <defs>
-                <pattern id="pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                <pattern id="pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001" x="0" y="0" width="10" height="10"
+                         patternUnits="userSpaceOnUse">
                     <path d="M-3 13 15-5M-5 5l18-18M-1 21 17 3"></path>
                 </pattern>
             </defs>
-            <rect stroke="none" fill="url(#pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001)" width="100%" height="100%"></rect>
+            <rect stroke="none" fill="url(#pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001)" width="100%"
+                  height="100%"></rect>
         </svg>
 
         <div class="resizer">
@@ -88,134 +41,140 @@ const html = repairShikiTheme(_html);
         </div>
     </div>
     <div class="code">
-        <Fragment set:html={html} wrap />
+        <Fragment client:load set:html={html}/>
     </div>
 </div>
 
 <style is:global lang="scss">
-    .dragging {
-        .snippet {
-            .preview {
-                &::after {
-                     background: rgba(58, 69, 82, 1);
-                }
-            }
-        }
 
-        & * {
-          cursor: ew-resize;
-          -webkit-user-select: none;
-          user-select: none;
+  .content .shiki {
+    margin: 0;
+    padding: 0.825rem;
+  }
+
+  .dragging {
+    .snippet {
+      .preview {
+        &::after {
+          background: rgba(58, 69, 82, 1);
+        }
       }
     }
 
-
-    p code {
-        background: rgb(31, 81, 129);
-        padding: 0.2rem;
+    & * {
+      cursor: ew-resize;
+      -webkit-user-select: none;
+      user-select: none;
     }
+  }
 
-    @media (prefers-color-scheme: light) {
 
-    }
+  p code {
+    background: rgb(31, 81, 129);
+    padding: 0.2rem;
+  }
 
-    @media (prefers-color-scheme: dark) {
-    }
+  @media (prefers-color-scheme: light) {
 
-    .snippet {
+  }
 
+  @media (prefers-color-scheme: dark) {
+  }
+
+  .snippet {
+
+    position: relative;
+    margin-bottom: 2rem;
+
+    border-radius: 5px;
+    border: 1px solid rgb(58, 69, 82);
+
+    .preview {
+      position: relative;
+      transition: 0.75s background-color;
+      padding: 1rem;
+
+      .inline {
         position: relative;
-        margin-bottom: 2rem;
+        z-index: 10;
+      }
 
-        border-radius: 5px;
-        border: 1px solid rgb(58, 69, 82);
+      .background {
+        stroke: rgba(40, 51, 56, 0.63);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
 
-        .preview {
-            position: relative;
-            transition: 0.75s background-color;
-            padding: 1rem;
+        -webkit-user-select: none;
+        user-select: none;
+      }
 
-            .inline {
-                position: relative;
-                z-index: 10;
-            }
+      &::after {
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: -1px;
+        display: inline-block;
+        background: transparent;
+        transition: 0.75s background-color;
+        content: '';
+      }
 
-            .background {
-                stroke: rgba(40, 51, 56, 0.63);
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                z-index: 1;
+      h1, h2, h3, h4, h5, h6,
+      p,
+      dl,
+      ol,
+      ul,
+      blockquote,
+      pre,
+      table:not(:last-child) {
+        margin: 0;
+      }
 
-                -webkit-user-select: none;
-                user-select: none;
-            }
+      .resizer {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        -webkit-user-select: none;
+        user-select: none;
 
-            &::after {
-                 width: 1px;
-                 height: 100%;
-                 position: absolute;
-                 top: 0;
-                 right: -1px;
-                 display: inline-block;
-                 background: transparent;
-                 transition: 0.75s background-color;
-                 content: '';
-             }
+        .drag {
+          padding: .5rem;
+          touch-action: pan-y;
+          cursor: ew-resize;
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: .75rem;
+          transform: translate(-50%, -50%);
+          user-select: none;
 
-            h1, h2, h3, h4, h5, h6,
-            p,
-            dl,
-            ol,
-            ul,
-            blockquote,
-            pre,
-            table:not(:last-child) {
-                margin: 0;
-            }
+          .el {
+            background: rgba(100, 116, 139, .6);
+            border-radius: 10px;
+            width: .375rem;
+            height: 2rem;
+            display: block;
+          }
 
-            .resizer {
-                position: absolute;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                -webkit-user-select: none;
-                user-select: none;
-
-                .drag {
-                    padding: .5rem;
-                    touch-action: pan-y;
-                    cursor: ew-resize;
-                    display: block;
-                    position: absolute;
-                    top: 50%;
-                    left: .75rem;
-                    transform: translate(-50%, -50%);
-                    user-select: none;
-
-                    .el {
-                        background: rgba(100, 116, 139, .6);
-                        border-radius: 10px;
-                        width: .375rem;
-                        height: 2rem;
-                        display: block;
-                    }
-
-                }
-            }
         }
-
-        .code {
-            overflow: hidden;
-            width:100%;
-
-            .astro-code {
-                padding: 1rem;
-                margin:0;
-                border-radius: 0 0 5px 5px;
-            }
-        }
+      }
     }
+
+    .code {
+      overflow: hidden;
+      width: 100%;
+
+      .astro-code {
+        padding: 1rem;
+        margin: 0;
+        border-radius: 0 0 5px 5px;
+      }
+    }
+  }
 </style>
