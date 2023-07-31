@@ -1,6 +1,6 @@
 ---
 import prettier from 'prettier'
-import shiki from 'shiki'
+import shiki, {renderToHtml, getHighlighter} from 'shiki'
 
 const code = await Astro.slots.render('default');
 
@@ -9,10 +9,36 @@ const code_formatted = await prettier.format(code, {
 })
 
 
-const html = await shiki.getHighlighter({
-    theme: 'slack-dark'
-}).then(highlighter => {
-    return highlighter.codeToHtml(code_formatted, {lang: 'js'})
+const highlighter = await getHighlighter({
+    theme: 'slack-dark',
+    themes: ['slack-dark'],
+    langs: ['java', 'javascript', 'html', 'css', 'typescript', 'json', 'scss', 'vue'],
+})
+
+const tokens = highlighter.codeToThemedTokens(code_formatted.trim(), 'js')
+
+const html = renderToHtml(tokens, {
+    fg: highlighter.getForegroundColor('slack-dark'),
+    bg: highlighter.getBackgroundColor('slack-dark'),
+    // custom element renderer
+    elements: {
+        pre({className, style, children}: any) {
+            return `<pre tabindex="1" class="${className} code" style="${style}">${children}</pre>`
+        },
+        code({children, className, style}) {
+            return `<code class="${className}" style="${style}"><table>${children}</table></code>`
+        },
+        line({className, index, children}: any) {
+            let shallHighlight = false
+            let lineNumber = `<td><span class="line-number">${index + 1}</span></td>`
+            lineNumber = ''
+
+            return `<tr class="${className} ${shallHighlight ? 'highlighted-line' : ''}">
+                        ${lineNumber}
+                        <td>${children}</td>
+                    </tr>`
+        },
+    },
 })
 ---
 
@@ -20,7 +46,7 @@ const html = await shiki.getHighlighter({
     <div class="preview">
 
         <div class="inline">
-            <slot/>
+            <Fragment set:html={code} is:raw />
         </div>
 
         <svg class="background">
@@ -40,9 +66,7 @@ const html = await shiki.getHighlighter({
             </span>
         </div>
     </div>
-    <div class="code">
-        <Fragment client:load set:html={html}/>
-    </div>
+    <Fragment client:load set:html={html} class="code"/>
 </div>
 
 <script>
@@ -113,6 +137,14 @@ const html = await shiki.getHighlighter({
 
 <style is:global lang="scss">
 
+  .content {
+
+    .astro-code {
+      white-space: normal;
+    }
+
+  }
+
   .content .shiki {
     margin: 0;
     padding: 0.825rem;
@@ -132,12 +164,6 @@ const html = await shiki.getHighlighter({
       -webkit-user-select: none;
       user-select: none;
     }
-  }
-
-
-  p code {
-    background: rgb(31, 81, 129);
-    padding: 0.2rem;
   }
 
   @media (prefers-color-scheme: light) {
@@ -233,14 +259,17 @@ const html = await shiki.getHighlighter({
     }
 
     .code {
-      overflow: hidden;
-      width: 100%;
 
-      .astro-code {
-        padding: 1rem;
-        margin: 0;
-        border-radius: 0 0 5px 5px;
+      display: block;
+      margin-bottom: 0;
+      width: 100%;
+      position: relative;
+      overflow: scroll;
+
+      code {
+        word-break: normal;
       }
     }
+
   }
 </style>
