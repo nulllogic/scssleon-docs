@@ -1,5 +1,5 @@
 {
-  "name": "@example/basics",
+  "name": "@xiigrid/docs",
   "type": "module",
   "version": "0.0.1",
   "private": true,
@@ -11,16 +11,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^3.2.0",
-    "@astrojs/mdx": "^1.1.0",
+    "astro": "^3.2.4",
+    "@astrojs/mdx": "^1.1.1",
     "@astrojs/rss": "^3.0.0",
-    "@astrojs/sitemap": "^3.0.0",
-    "@astrojs/preact": "^3.0.0"
+    "@astrojs/sitemap": "^3.0.1",
+    "@astrojs/preact": "^3.0.1"
   },
   "devDependencies": {
     "@types/prettier": "^3.0.0",
     "prettier": "^3.0.3",
-    "shiki": "^0.14.4",
-    "sass": "^1.68.0"
+    "shiki": "^0.14.5",
+    "sass": "^1.69.1"
   }
 }
