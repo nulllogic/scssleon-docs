@@ -2,7 +2,7 @@ include .env
 
 .PHONY: help docs-build docs-watch
 
-CURRENT_DIR := $(shell pwd)
+CURRENT_DIR := $(PWD)
 
 help:
 	@echo "[ENV SETUP]"
