@@ -1,0 +1,60 @@
+---
+import Examples from '~/layouts/examples.astro';
+import {Debug} from 'astro/components';
+import Toc from "../../../../components/toc.astro";
+
+// import type { CollectionEntry } from 'astro:content';
+// interface Props {
+//     post: CollectionEntry<'docs'>;
+// }
+
+import {getCollection, getEntry} from 'astro:content';
+const docsCollection = await getCollection('examples');
+const page = await getEntry('examples', Astro.params.version.replace(/\./g, '') + '/' + Astro.params.lang + '/' + Astro.params.slug);
+
+const {headings, Content}  = await page.render()
+---
+<Examples>
+    <div class="toc">
+        <Toc headings={headings} />
+    </div>
+    <div class="content">
+        <div class="intro">
+            <h1 class="title">{page?.data?.title}</h1>
+            <p class="subtitle">{page?.data?.description}</p>
+        </div>
+        <Content />
+    </div>
+</Examples>
+
+<style lang="scss">
+
+    .title {
+        margin-bottom: .5rem;
+    }
+
+    .subtitle {
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin-bottom: 1rem;
+        color: rgba(125, 133, 144, 1);
+    }
+
+    .toc {
+        grid-area: toc;
+
+        position: sticky;
+        top: 5rem;
+        right: 0;
+        z-index: 2;
+        overflow-y: auto;
+
+        align-self: start;
+    }
+
+    .content {
+        grid-area: content;
+        min-width: 1px;
+    }
+</style>
+
