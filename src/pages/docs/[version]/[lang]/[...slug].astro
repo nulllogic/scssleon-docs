@@ -11,6 +11,7 @@ import Toc from "../../../../components/toc.astro";
 import {getCollection, getEntry} from 'astro:content';
 const docsCollection = await getCollection('docs');
 const page = await getEntry('docs', Astro.params.version.replace(/\./g, '') + '/' + Astro.params.lang + '/' + Astro.params.slug);
+const github_page = "https://github.com/nulllogic/xiigrid/blob/master/docs/" + page.id;
 
 const {headings, Content}  = await page.render()
 ---
@@ -22,6 +23,11 @@ const {headings, Content}  = await page.render()
         <div class="intro">
             <h1 class="title">{page?.data?.title}</h1>
             <p class="subtitle">{page?.data?.description}</p>
+        </div>
+        <div class="flex justify-content-end">
+          <a href={github_page} class="btn" target="_blank">
+            View on GitHub
+          </a>
         </div>
         <Content />
     </div>
