@@ -3,21 +3,15 @@ import Examples from '~/layouts/examples.astro';
 import {Debug} from 'astro/components';
 import Toc from "../../../../components/toc.astro";
 
-// import type { CollectionEntry } from 'astro:content';
-// interface Props {
-//     post: CollectionEntry<'docs'>;
-// }
-
 import {getCollection, getEntry} from 'astro:content';
 const docsCollection = await getCollection('examples');
 const page = await getEntry('examples', Astro.params.version.replace(/\./g, '') + '/' + Astro.params.lang + '/' + Astro.params.slug);
 
-const {headings, Content}  = await page.render()
+const {headings, Content}  = await page.render();
+
+console.log(headings)
 ---
 <Examples>
-    <div class="toc">
-        <Toc headings={headings} />
-    </div>
     <div class="content">
         <div class="intro">
             <h1 class="title">{page?.data?.title}</h1>

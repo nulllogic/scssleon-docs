@@ -10,6 +10,18 @@ import Header from '../components/header.astro';
 import Sidebar from "../components/sidebar.astro";
 import Main from "../components/main.astro";
 import Footer from '../components/footer.astro';
+
+import {getCollection} from 'astro:content';
+const examplesCollection = await getCollection('examples');
+
+const examplesCollectionModified = examplesCollection.filter((doc) => {
+//   if (doc?.data?.group) return doc?.data?.group.includes('components')
+}).sort((a, b) => {
+//    return a.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
+})
+
+console.log(examplesCollectionModified)
+
 ---
 
 <!doctype html>
@@ -19,8 +31,22 @@ import Footer from '../components/footer.astro';
     </head>
     <body>
         <Header/>
-        <div class="container layout">
-          <slot />
+        <div class="container">
+          <div class="">
+            <div>
+               {examplesCollection.map((doc, index) => {
+                   return (
+                       <li>
+                         <a href={'/examples/' + Astro.params.version + '/' + Astro.params.lang + doc.slug.replace(Astro.params.version.replace(/\./g, '') + '/' + Astro.params.lang, '')}>
+                           {doc.slug.replace(/.*\/(\w+)\/?$/, '$1')}
+                         </a>
+                       </li>
+                     )
+                   }
+               )}
+            </div>
+            <slot />
+          </div>
         </div>
         <Footer/>
     </body>
