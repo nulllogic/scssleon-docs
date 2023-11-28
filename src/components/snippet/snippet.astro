@@ -84,13 +84,11 @@ const html = renderToHtml(tokens, {
         resizer.onmousedown = (event) => {
           event.preventDefault();
 
-          const original_width = parseFloat(isNaN(preview.style.marginRight) ? preview.style.marginRight : 0);
-          const original_x = preview.getBoundingClientRect().left;
-          const resizer_position_x = event.clientX;
+          const original_margin = parseFloat(isNaN(preview.style.marginRight) ? preview.style.marginRight : 0);
           const original_mouse_x = event.pageX;
 
           const event_drag_start_handler = (event) => {
-            const width = original_width - (event.pageX - original_mouse_x);
+            const width = original_margin - (event.pageX - original_mouse_x);
             if(width < container_limit && width > 0) {
               preview.style.marginRight = width + 'px';
             } else if (width < 0) {
