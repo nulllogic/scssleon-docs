@@ -7,11 +7,19 @@ const gettingStartedCollection = docsCollection.filter((doc) => {
 }).sort((a, b) => {
     return b.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(a.slug.replace(/.*\/(\w+)\/?$/, '$1'))
 })
+
 const componentsCollection = docsCollection.filter((doc) => {
     if (doc?.data?.group) return doc?.data?.group.includes('components')
 }).sort((a, b) => {
     return a.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
 })
+
+const formsCollection = docsCollection.filter((doc) => {
+    if (doc?.data?.group) return doc?.data?.group.includes('form')
+}).sort((a, b) => {
+    return a.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
+})
+
 ---
 <aside class="sidebar">
     <nav>
@@ -46,6 +54,22 @@ const componentsCollection = docsCollection.filter((doc) => {
                     )}
                 </ul>
             </li>
+            <li>
+                <strong>Forms</strong>
+                <ul>
+                    {formsCollection.map((doc, index) => {
+                            return (
+                                    <li>
+                                        <a href={'/docs/' + Astro.params.version + '/' + Astro.params.lang + doc.slug.replace(Astro.params.version.replace(/\./g, '') + '/' + Astro.params.lang, '')}>
+                                            {doc.slug.replace(/.*\/(\w+)\/?$/, '$1')}
+                                        </a>
+                                    </li>
+                            )
+                        }
+                    )}
+                </ul>
+            </li>
+
         </ul>
     </nav>
 </aside>
