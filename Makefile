@@ -1,8 +1,7 @@
-include .env
-
 .PHONY: help docs-build docs-watch
 
 CURRENT_DIR := $(PWD)
+XIIGRID_DIR := ~/Developer/xiigrid
 
 help:
 	@echo "[ENV SETUP]"
