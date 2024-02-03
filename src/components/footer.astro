@@ -3,24 +3,25 @@
 ---
 
 <footer class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <div class="d-inline-flex align-items-center"></div>
+  <div class="container xxl">
+    <div class="grid">
+      <div class="column">
         <p>
           Designed and built with all the love in the world by the NullLogic
           team with the help of our contributors.
         </p>
         <p>Currently v</p>
       </div>
-      <div class="col-md-2">
+
+      <div class="column">
         <h5>Links</h5>
         <ul class="list-unstyled">
           <li><a href="/">Home</a></li>
           <li><a href="/docs/1.0/en/">Docs</a></li>
         </ul>
       </div>
-      <div class="col-md-2">
+
+      <div class="column">
         <h5>Community</h5>
         <ul class="list-unstyled">
           <li><a href="/xiigrid/issues">Issues</a></li>
@@ -67,10 +68,14 @@
 </footer>
 
 <style lang="scss">
-  :root {
-    color-scheme: only dark;
-  }
   .footer {
-    background: transparent;
+    background: rgba(45, 56, 66, 1);
+    padding: 15px 0;
+
+    .grid {
+      display: grid;
+      grid-template-columns: auto 200px 200px;
+      gap: 10px;
+    }
   }
 </style>
