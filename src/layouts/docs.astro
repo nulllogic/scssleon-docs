@@ -1,41 +1,39 @@
 ---
 export interface Props {
-    title: string;
+  title: string;
 }
 
-const {title} = Astro.props;
+const { title } = Astro.props;
 
-import Head from '../components/head.astro';
-import Header from '../components/header.astro';
+import Head from "../components/head.astro";
+import Header from "../components/header.astro";
 import Sidebar from "../components/sidebar.astro";
 import Main from "../components/main.astro";
-import Footer from '../components/footer.astro';
+import Footer from "../components/footer.astro";
 ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <Head title="XII/Grid docs" description="Desciption"/>
-    </head>
-    <body>
-        <Header/>
-        <div class="container layout">
-            <Sidebar />
-            <Main>
-                <slot/>
-            </Main>
-        </div>
-        <Footer/>
-    </body>
-</html>
-
-<style lang="scss">
+  <head>
+    <Head title="XII/Grid docs" description="Desciption" />
+  </head>
+  <body>
+    <Header />
+    <div class="container xxl layout">
+      <Sidebar />
+      <Main>
+        <slot />
+      </Main>
+    </div>
+    <Footer />
+  </body><style lang="scss">
     @media (min-width: 992px) {
-        .layout {
-            display: grid;
-            grid-template-areas: "sidebar main";
-            grid-template-columns: 1fr 5fr;
-            gap: 1rem
-        }
+      .layout {
+        display: grid;
+        grid-template-areas: "sidebar main";
+        grid-template-columns: 1fr 5fr;
+        gap: 1rem;
+      }
     }
-</style>
+  </style>
+</html>
