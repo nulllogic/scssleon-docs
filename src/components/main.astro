@@ -1,36 +1,36 @@
 ---
 import Toc from "./toc.astro";
-
 ---
+
 <main class="main">
-    <slot/>
+  <slot />
 </main>
 <style lang="scss">
+  .main {
+    grid-area: main;
+  }
+
+  @media (max-width: 991.98px) {
     .main {
-        grid-area: main
+      max-width: 760px;
+      margin-inline: auto;
     }
+  }
 
-    @media (max-width: 991.98px) {
-        .main {
-            max-width: 760px;
-            margin-inline: auto
-        }
+  @media (min-width: 768px) {
+    .main {
+      display: grid;
+      grid-template-areas: "intro" "toc" "content";
+      grid-template-rows: auto auto 1fr;
+      gap: inherit;
     }
+  }
 
-    @media (min-width: 768px) {
-        .main {
-            display: grid;
-            grid-template-areas: "intro" "toc" "content";
-            grid-template-rows: auto auto 1fr;
-            gap: inherit
-        }
+  @media (min-width: 992px) {
+    .main {
+      grid-template-areas: "content toc";
+      grid-template-rows: auto 1fr;
+      grid-template-columns: 4fr 1fr;
     }
-
-    @media (min-width: 992px) {
-        .main {
-            grid-template-areas: "content toc";
-            grid-template-rows: auto 1fr;
-            grid-template-columns:4fr 1fr
-        }
-    }
+  }
 </style>
