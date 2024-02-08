@@ -1,54 +1,59 @@
 ---
-import Examples from '~/layouts/examples.astro';
-import {Debug} from 'astro/components';
+import Examples from "~/layouts/examples.astro";
+import { Debug } from "astro/components";
 import Toc from "../../../../components/toc.astro";
 
-import {getCollection, getEntry} from 'astro:content';
-const docsCollection = await getCollection('examples');
-const page = await getEntry('examples', Astro.params.version.replace(/\./g, '') + '/' + Astro.params.lang + '/' + Astro.params.slug);
+import { getCollection, getEntry } from "astro:content";
+const docsCollection = await getCollection("examples");
+const page = await getEntry(
+  "examples",
+  Astro.params.version.replace(/\./g, "") +
+    "/" +
+    Astro.params.lang +
+    "/" +
+    Astro.params.slug,
+);
 
-const {headings, Content}  = await page.render();
+const { headings, Content } = await page.render();
 
-console.log(headings)
+console.log(headings);
 ---
+
 <Examples>
-    <div class="content">
-        <div class="intro">
-            <h1 class="title">{page?.data?.title}</h1>
-            <p class="subtitle">{page?.data?.description}</p>
-        </div>
-        <Content />
+  <div class="content">
+    <div class="intro">
+      <h1 class="title">{page?.data?.title}</h1>
+      <p class="subtitle">{page?.data?.description}</p>
     </div>
+    <Content />
+  </div>
 </Examples>
 
 <style lang="scss">
+  .title {
+    margin-bottom: 0.5rem;
+  }
 
-    .title {
-        margin-bottom: .5rem;
-    }
+  .subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: rgba(125, 133, 144, 1);
+  }
 
-    .subtitle {
-        font-size: 1.5rem;
-        font-weight: 300;
-        margin-bottom: 1rem;
-        color: rgba(125, 133, 144, 1);
-    }
+  .toc {
+    grid-area: toc;
 
-    .toc {
-        grid-area: toc;
+    position: sticky;
+    top: 0;
+    right: 0;
+    z-index: 2;
 
-        position: sticky;
-        top: 5rem;
-        right: 0;
-        z-index: 2;
-        overflow-y: auto;
+    align-self: start;
+  }
 
-        align-self: start;
-    }
-
-    .content {
-        grid-area: content;
-        min-width: 1px;
-    }
+  .content {
+    grid-area: content;
+    min-width: 1px;
+  }
 </style>
-

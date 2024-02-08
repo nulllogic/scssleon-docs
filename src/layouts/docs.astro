@@ -19,21 +19,30 @@ import Footer from "../components/footer.astro";
   </head>
   <body>
     <Header />
-    <div class="container xxl layout">
-      <Sidebar />
-      <Main>
-        <slot />
-      </Main>
+    <div class="docs">
+      <div class="container xxl">
+        <div class="layout">
+          <Sidebar />
+          <Main>
+            <slot />
+          </Main>
+        </div>
+      </div>
     </div>
     <Footer />
-  </body><style lang="scss">
-    @media (min-width: 992px) {
+    <style lang="scss">
       .layout {
-        display: grid;
-        grid-template-areas: "sidebar main";
-        grid-template-columns: 1fr 5fr;
-        gap: 1rem;
+        padding: 25px 0;
       }
-    }
-  </style>
+
+      @media (min-width: 992px) {
+        .layout {
+          display: grid;
+          grid-template-areas: "sidebar main";
+          grid-template-columns: 1fr 5fr;
+          gap: 1rem;
+        }
+      }
+    </style>
+  </body>
 </html>

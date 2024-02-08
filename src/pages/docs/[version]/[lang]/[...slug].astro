@@ -1,6 +1,6 @@
 ---
-import Docs from '~/layouts/docs.astro';
-import {Debug} from 'astro/components';
+import Docs from "~/layouts/docs.astro";
+import { Debug } from "astro/components";
 import Toc from "../../../../components/toc.astro";
 
 // import type { CollectionEntry } from 'astro:content';
@@ -8,59 +8,63 @@ import Toc from "../../../../components/toc.astro";
 //     post: CollectionEntry<'docs'>;
 // }
 
-import {getCollection, getEntry} from 'astro:content';
-const docsCollection = await getCollection('docs');
-const page = await getEntry('docs', Astro.params.version.replace(/\./g, '') + '/' + Astro.params.lang + '/' + Astro.params.slug);
-const github_page = "https://github.com/nulllogic/xiigrid/blob/master/docs/" + page.id;
+import { getCollection, getEntry } from "astro:content";
+const docsCollection = await getCollection("docs");
+const page = await getEntry(
+  "docs",
+  Astro.params.version.replace(/\./g, "") +
+    "/" +
+    Astro.params.lang +
+    "/" +
+    Astro.params.slug,
+);
+const github_page =
+  "https://github.com/nulllogic/xiigrid/blob/master/docs/" + page.id;
 
-const {headings, Content}  = await page.render()
+const { headings, Content } = await page.render();
 ---
+
 <Docs>
-    <div class="toc">
-        <Toc headings={headings} />
+  <div class="toc">
+    <Toc headings={headings} />
+  </div>
+  <div class="content">
+    <div class="intro">
+      <h1 class="title">{page?.data?.title}</h1>
+      <p class="subtitle">{page?.data?.description}</p>
     </div>
-    <div class="content">
-        <div class="intro">
-            <h1 class="title">{page?.data?.title}</h1>
-            <p class="subtitle">{page?.data?.description}</p>
-        </div>
-        <div class="flex justify-content-end">
-          <a href={github_page} class="btn" target="_blank">
-            View on GitHub
-          </a>
-        </div>
-        <Content />
+    <div class="flex justify-content-end">
+      <a href={github_page} class="btn" target="_blank"> View on GitHub </a>
     </div>
+    <Content />
+  </div>
 </Docs>
 
 <style lang="scss">
+  .title {
+    margin-bottom: 0.5rem;
+  }
 
-    .title {
-        margin-bottom: .5rem;
-    }
+  .subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: rgba(125, 133, 144, 1);
+  }
 
-    .subtitle {
-        font-size: 1.5rem;
-        font-weight: 300;
-        margin-bottom: 1rem;
-        color: rgba(125, 133, 144, 1);
-    }
+  .toc {
+    grid-area: toc;
 
-    .toc {
-        grid-area: toc;
+    position: sticky;
+    top: 0;
+    right: 0;
+    z-index: 2;
 
-        position: sticky;
-        top: 5rem;
-        right: 0;
-        z-index: 2;
-        overflow-y: auto;
+    align-self: start;
+  }
 
-        align-self: start;
-    }
-
-    .content {
-        grid-area: content;
-        min-width: 1px;
-    }
+  .content {
+    grid-area: content;
+    min-width: 1px;
+  }
 </style>
-
