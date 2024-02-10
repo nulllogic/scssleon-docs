@@ -1,6 +1,7 @@
 .PHONY: help docs-build docs-watch
 
 CURRENT_DIR := $(PWD)
+# Configure path to XII/Grid directory here
 XIIGRID_DIR := ~/Developer/xiigrid
 
 help:
