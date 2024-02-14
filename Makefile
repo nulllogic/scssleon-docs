@@ -2,7 +2,7 @@
 
 CURRENT_DIR := $(PWD)
 # Configure path to XII/Grid directory here
-XIIGRID_DIR := ~/Developer/xiigrid
+XIIGRID_DIR := ~/Developer/my/xiigrid
 
 help:
 	@echo "[ENV SETUP]"
