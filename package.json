@@ -11,16 +11,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.3.5",
+    "astro": "^4.4.6",
     "@astrojs/mdx": "^2.1.1",
     "@astrojs/rss": "^4.0.5",
-    "@astrojs/sitemap": "^3.0.5",
-    "@astrojs/preact": "^3.1.0"
+    "@astrojs/sitemap": "^3.1.1",
+    "@astrojs/preact": "^3.1.1"
   },
   "devDependencies": {
     "@types/prettier": "^3.0.0",
-    "prettier": "^3.0.3",
-    "shiki": "^0.14.5",
-    "sass": "^1.69.4"
+    "prettier": "^3.2.5",
+    "shiki": "^0.14.7",
+    "sass": "^1.71.1"
   }
 }
