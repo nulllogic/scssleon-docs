@@ -2,7 +2,7 @@ FROM node:slim as astro
 
 LABEL version="1.0.0"
 LABEL maintainer="Vladimir Lukyanov | vladimir@lukyanov.net"
-LABEL description="Docker container for XII/Grid docs generator"
+LABEL description="Docker container for SCSSleon docs generator"
 
 WORKDIR /app
 

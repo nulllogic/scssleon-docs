@@ -1,50 +1,58 @@
 ---
-import Index from '../layouts/index.astro';
-import footer from '../components/footer.astro';
+import Index from "../layouts/index.astro";
+import footer from "../components/footer.astro";
 
-//https://api.github.com/repos/nulllogic/xiigrid/branches/master
+//https://api.github.com/repos/nulllogic/scssleon/branches/master
 
-const response = await fetch('https://api.github.com/repos/nulllogic/xiigrid/branches/master');
+const response = await fetch(
+  "https://api.github.com/repos/nulllogic/scssleon/branches/master",
+);
 const data = await response.json();
-const commit_date = typeof data.message === 'undefined' ? new Date(data.commit.commit.author.date) : new Date;
+const commit_date =
+  typeof data.message === "undefined"
+    ? new Date(data.commit.commit.author.date)
+    : new Date();
 ---
 
 <Index>
-    <main>
-
-        <div class="welcome">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        1
-                    </div>
-                    <div class="col-12">
-                        2
-                    </div>
-                </div>
-            </div>
+  <main>
+    <div class="welcome">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">1</div>
+          <div class="col-12">2</div>
         </div>
+      </div>
+    </div>
 
-        <div class="github">
-            <div class="container">
-                <div class="col-md-12">
-                    <p>Latest Commit on GitHub: {commit_date.toISOString().replace(/(.*)T(.*)\..*/, '$1 $2')}</p>
-                </div>
-            </div>
+    <div class="github">
+      <div class="container">
+        <div class="col-md-12">
+          <p>
+            Latest Commit on GitHub: {
+              commit_date.toISOString().replace(/(.*)T(.*)\..*/, "$1 $2")
+            }
+          </p>
         </div>
-    </main>
+      </div>
+    </div>
+  </main>
 </Index>
 
 <style lang="scss">
-    .welcome {
-        background: linear-gradient(71.93deg, #001b33 26.34%, #004887 56.72%, #273b49 94.79%)
-    }
+  .welcome {
+    background: linear-gradient(
+      71.93deg,
+      #001b33 26.34%,
+      #004887 56.72%,
+      #273b49 94.79%
+    );
+  }
 
-    .main {
-        margin: 1.5rem 0;
-    }
+  .main {
+    margin: 1.5rem 0;
+  }
 
-    .github {
-
-    }
+  .github {
+  }
 </style>
