@@ -1,6 +1,4 @@
 ---
-import "../styles/scssleon.scss";
-
 export interface Props {
   title: string;
   description: string;
@@ -18,10 +16,10 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
 
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
 
+<slot />
+
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap.xml" />
-
-<slot />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -41,3 +39,21 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Styles -->
+<style lang="scss" is:global>
+  @use "sass:list";
+  @use "sass:meta";
+  @use "../styles/app.scss" as app;
+
+  $modules: ("root", "reset", "base", "content");
+  $components: ("components/nav", "components/container");
+  $modules: list.join($modules, $components);
+
+  @each $module in $modules {
+    @include meta.load-css(
+        "../styles/scss/#{$module}",
+      $with: (config: app.$config, theme: app.$theme)
+    );
+  }
+</style>

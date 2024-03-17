@@ -9,7 +9,7 @@ import Head from '../components/head.astro';
 import Header from '../components/header.astro';
 import Sidebar from "../components/sidebar.astro";
 import Main from "../components/main.astro";
-import Footer from '../components/footer.astro';
+import Footer from "../components/footer/index.astro";
 
 import {getCollection} from 'astro:content';
 const examplesCollection = await getCollection('examples');
