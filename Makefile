@@ -14,7 +14,7 @@ docs-build:
 docs-watch:
 	@echo "[Running Docker XII/Grid docs]"
 	docker run --rm -it -v ${CURRENT_DIR}/src:/app/src \
-		-v ${SCSSLEON_DIR}/scss:/app/src/styles \
+		-v ${SCSSLEON_DIR}/scss:/app/src/styles/scss \
 		-v ${SCSSLEON_DIR}/docs:/app/src/content/docs \
 		-v ${SCSSLEON_DIR}/examples:/app/src/content/examples \
 		-p 4321:4321 scssleon-docs
