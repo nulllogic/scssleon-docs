@@ -76,7 +76,7 @@
   @use "../../styles/scss/mixins.scss" as mixins;
 
   $footer-component: (
-    --padding: 25px 10px,
+    --padding: 25px 15px,
     background: rgba(45, 56, 66, 1),
     padding: var(--padding),
     responsive: (
@@ -92,12 +92,14 @@
         --columns: "",
         display: grid,
         grid-template-columns: var(--columns),
-        gap: 10px,
+        gap: 15px,
         responsive: (
           md: (
             --columns: auto 200px 200px,
           ),
-          lg: (),
+          lg: (
+            --columns: auto 200px 200px,
+          ),
         ),
       ),
     ),
