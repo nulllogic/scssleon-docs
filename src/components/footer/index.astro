@@ -77,7 +77,7 @@
 
   $footer-component: (
     --padding: 25px 15px,
-    background: rgba(45, 56, 66, 1),
+    background: var(--background),
     padding: var(--padding),
     responsive: (
       md: (
@@ -86,6 +86,11 @@
       lg: (
         --padding: 10px 5px,
       ),
+    ),
+    colors: (
+      dark: (
+        background : rgba(45, 56, 66, 1),
+      )
     ),
     subclasses: (
       ".grid": (

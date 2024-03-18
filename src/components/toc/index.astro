@@ -1,0 +1,16 @@
+---
+const {headings} = Astro.props
+---
+<nav>
+  <ul>
+      {headings.map((heading) => {
+          return (
+              <li>
+                <a href='#' onClick={(e) => {
+                    e.preventDefault()
+                }}>{heading.text}</a>
+              </li>
+          )
+      })}
+  </ul>
+</nav>

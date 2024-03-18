@@ -44,7 +44,7 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
 <style lang="scss" is:global>
   @use "sass:list";
   @use "sass:meta";
-  @use "../styles/app.scss" as app;
+  @use "../../styles/app.scss" as app;
 
   $modules: ("root", "reset", "base", "content");
   $components: (
@@ -57,7 +57,7 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
 
   @each $module in $modules {
     @include meta.load-css(
-      "../styles/scss/#{$module}",
+      "../../styles/scss/#{$module}",
       $with: (config: app.$config, theme: app.$theme)
     );
   }

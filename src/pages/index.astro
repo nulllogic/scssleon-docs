@@ -5,33 +5,29 @@ import footer from "../components/footer.astro";
 //https://api.github.com/repos/nulllogic/scssleon/branches/master
 
 const response = await fetch(
-  "https://api.github.com/repos/nulllogic/scssleon/branches/master",
+    "https://api.github.com/repos/nulllogic/scssleon/branches/master",
 );
 const data = await response.json();
 const commit_date =
-  typeof data.message === "undefined"
-    ? new Date(data.commit.commit.author.date)
-    : new Date();
+    typeof data.message === "undefined"
+        ? new Date(data.commit.commit.author.date)
+        : new Date();
 ---
 
 <Index>
   <main>
     <div class="welcome">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">1</div>
-          <div class="col-12">2</div>
-        </div>
-      </div>
+      SCSS superpowers.
+      Get ready to notice flaws in every product you use, and then reverse-engineer how experts make stuff feel
+      ‘intuitive’ and ‘easy’.
     </div>
-
     <div class="github">
       <div class="container">
         <div class="col-md-12">
           <p>
             Latest Commit on GitHub: {
               commit_date.toISOString().replace(/(.*)T(.*)\..*/, "$1 $2")
-            }
+          }
           </p>
         </div>
       </div>
@@ -40,19 +36,25 @@ const commit_date =
 </Index>
 
 <style lang="scss">
-  .welcome {
-    background: linear-gradient(
-      71.93deg,
-      #001b33 26.34%,
-      #004887 56.72%,
-      #273b49 94.79%
-    );
-  }
+  @use "sass:list";
+  @use "sass:meta";
 
-  .main {
-    margin: 1.5rem 0;
-  }
+  @use "../styles/app.scss" as app;
+  @use "../styles/scss/mixins.scss" as mixins;
 
-  .github {
-  }
+  $welcome-section: (
+    background: var(--background),
+    colors : (
+      dark : (
+        background: linear-gradient(71.93deg, #001b33 26.34%, #004887 56.72%, #273b49 94.79%)
+      )
+    )
+  );
+
+  @include mixins.generate-component(
+      $welcome-section,
+      "welcome",
+      app.$config,
+      app.$theme
+  );
 </style>
