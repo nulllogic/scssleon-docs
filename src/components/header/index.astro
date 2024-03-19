@@ -98,6 +98,7 @@
   ));
 
   $header-section: (
+      padding: 0 5px,
       background: var(--background),
       colors : (
           dark : (
@@ -106,6 +107,11 @@
       ),
       subclasses : (
         ".navbar" : $navbar
+      ),
+      responsive : (
+        md : (
+          padding: 0
+        )
       )
   );
 
