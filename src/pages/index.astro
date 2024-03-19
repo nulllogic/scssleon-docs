@@ -17,9 +17,12 @@ const commit_date =
 <Index>
   <main>
     <div class="welcome">
-      SCSS superpowers.
-      Get ready to notice flaws in every product you use, and then reverse-engineer how experts make stuff feel
-      ‘intuitive’ and ‘easy’.
+      <div class="container xxl">
+        <h1 class="title">SCSS superpowers.</h1>
+        <h2 class="subtitle">Get ready to notice flaws in every product you use, and then reverse-engineer how experts
+          make stuff feel
+          <code>‘intuitive’</code> and <code>‘easy’</code>.</h2>
+      </div>
     </div>
     <div class="github">
       <div class="container">
@@ -43,7 +46,9 @@ const commit_date =
   @use "../styles/scss/mixins.scss" as mixins;
 
   $welcome-section: (
+    --padding: 50px 0,
     background: var(--background),
+    padding: var(--padding),
     colors : (
       dark : (
         background: linear-gradient(71.93deg, #001b33 26.34%, #004887 56.72%, #273b49 94.79%)

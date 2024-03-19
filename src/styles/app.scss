@@ -19,11 +19,3 @@ $theme: () !default;
 
 $config: config.$config;
 $theme: theme.$theme;
-
-@function add_components($components) {
-  $components_updated: ();
-  @each $component in $components {
-    $components_updated : list.append($components_updated, "components/" + $component);
-  }
-  @return $components_updated;
-}

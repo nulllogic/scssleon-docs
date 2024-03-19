@@ -45,6 +45,7 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
   @use "sass:list";
   @use "sass:meta";
   @use "../../styles/app.scss" as app;
+  @use "../../styles/scss/functions.scss" as functions;
 
   $modules: ("root", "reset", "base", "content");
   $components: (
@@ -53,7 +54,7 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
     "container"
   );
 
-  $modules: list.join($modules, app.add_components($components));
+  $modules: list.join($modules, functions.add_components($components));
 
   @each $module in $modules {
     @include meta.load-css(
