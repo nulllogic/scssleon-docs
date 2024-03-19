@@ -46,12 +46,33 @@ const commit_date =
   @use "../styles/scss/mixins.scss" as mixins;
 
   $welcome-section: (
-    --padding: 50px 0,
+    --padding: 65px 0,
+    text-align: center,
     background: var(--background),
     padding: var(--padding),
     colors : (
       dark : (
         background: linear-gradient(71.93deg, #001b33 26.34%, #004887 56.72%, #273b49 94.79%)
+      )
+    ),
+    subclasses : (
+      ".title" : (
+        display: inline-block,
+        font-size: 3.5rem,
+        font-weight: 700,
+        background-image: linear-gradient(143deg, rgb(126, 35, 246) 30%, rgb(253, 104, 253), rgb(126, 35, 246) 60%),
+        background-clip: text,
+        -webkit-background-clip: text,
+        -webkit-text-fill-color: transparent,
+        background-size: 500% 500%,
+        animation-duration: 3s,
+        animation-timing-function: linear,
+        animation-delay: 0s,
+        animation-iteration-count: infinite,
+        animation-direction: normal,
+        animation-fill-mode: none,
+        animation-play-state: running,
+        animation-name: dobza,
       )
     )
   );
