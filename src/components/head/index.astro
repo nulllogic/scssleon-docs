@@ -48,11 +48,11 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
 
   $modules: ("root", "reset", "base", "content");
   $components: (
-    "navbar",
     "nav",
     "button",
     "container"
   );
+
   $modules: list.join($modules, app.add_components($components));
 
   @each $module in $modules {

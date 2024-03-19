@@ -83,5 +83,36 @@
 </div>
 
 <style lang="scss">
+  @use "sass:list";
+  @use "sass:meta";
+  @use "sass:map";
 
+  @use "../../styles/app.scss" as app;
+  @use "../../styles/scss/mixins.scss" as mixins;
+  @use "../../styles/scss/functions.scss" as functions;
+
+  $navbar : functions.get-theme(app.$theme, 'components.navbar');
+
+  $navbar: map.deep-merge($navbar, (
+      --grid-template-columns: auto auto
+  ));
+
+  $header-section: (
+      background: var(--background),
+      colors : (
+          dark : (
+              background : rgba(45, 56, 66, 1),
+          )
+      ),
+      subclasses : (
+        ".navbar" : $navbar
+      )
+  );
+
+  @include mixins.generate-component(
+          $header-section,
+          "header",
+          app.$config,
+          app.$theme
+  );
 </style>
