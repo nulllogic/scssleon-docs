@@ -23,7 +23,7 @@ const highlighter = await getHighlighter({
   ],
 });
 
-const tokens = highlighter.codeToThemedTokens(code_formatted.trim(), "js");
+const tokens = highlighter.codeToTokensBase(code_formatted.trim(), "js");
 
 const html = renderToHtml(tokens, {
   fg: highlighter.getForegroundColor("slack-dark"),
