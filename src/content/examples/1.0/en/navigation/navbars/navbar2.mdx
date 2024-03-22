@@ -1,0 +1,41 @@
+---
+title: Navbar 2
+description: Navbar
+group: navbars
+---
+
+import {Snippet} from "/app/src/components/snippet"
+
+<Snippet>
+  <nav class="navbar" style="--xii-navbar-grid-template-columns: 1fr 100px 1fr">
+    <div class="left">
+        <ul class="nav horizontal">
+            <li class="item">
+              <a class="link active" aria-current="page" href="#">Active</a>
+            </li>
+            <li class="item">
+              <a class="link" href="#">Link</a>
+            </li>
+            <li class="item">
+              <a class="link" href="#">Link</a>
+            </li>
+            <li class="item">
+              <a class="link" href="#">Link</a>
+            </li>
+            <li class="item">
+              <a class="link disabled" aria-disabled="true">Disabled</a>
+            </li>
+        </ul>
+    </div>
+    <div class="center">
+        logo
+    </div>
+    <div class="right">
+        <ul class="nav horizontal">
+          <li class="item">
+            <a class="item" href="#">Github</a>
+          </li>
+        </ul>
+    </div>
+  </nav>
+</Snippet>

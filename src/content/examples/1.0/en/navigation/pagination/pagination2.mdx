@@ -1,0 +1,28 @@
+---
+title: Pagination
+description: Pagination
+group: pagination
+---
+
+import {Snippet} from "/app/src/components/snippet"
+
+<Snippet>
+  <nav class="pagination" aria-label="Pagination"
+      style="--xii-pagination-grid-template-columns: 100px 1fr 100px">
+      <div class="left">
+        <button class="btn">Previous</button>
+      </div>
+      <div class="center">
+        <div class="btn-group separated" role="group" aria-label="Basic example">
+          <button type="button" class="btn">Left</button>
+          <button type="button" class="btn">Middle</button>
+          <button type="button" class="btn">Right</button>
+        </div>
+      </div>
+      <div class="right">
+        <button class="btn">Next</button>
+      </div>
+    </nav>
+</Snippet>
+
+

@@ -1,0 +1,43 @@
+---
+title: Tables
+description: Tables
+group: components
+toc: true
+---
+
+
+## Overview
+
+Due to the widespread use of `<table>` elements across third-party widgets like calendars and date pickers, xiigrid's tables are **opt-in**. Add the base class `.table` to any `<table>`, then extend with our optional modifier classes or custom styles. All table styles are not inherited in xiigrid, meaning any nested tables can be styled independent from the parent.
+
+Using the most basic table markup, here's how `.table`-based tables look in xiigrid.
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Twitter</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">1</th>
+        <td>T</td>
+        <td>B</td>
+        <td>@tbd</td>
+    </tr>
+    <tr>
+        <th scope="row">2</th>
+        <td>A</td>
+        <td>B</td>
+        <td>@abc</td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td colspan="2">Void</td>
+        <td>@nulllogic</td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,61 @@
+---
+title: Form controls
+description: Give textual form controls like `<input>`s and `<textarea>`s an upgrade with custom styles, sizing, focus states, and more.
+group: forms
+toc: true
+---
+import {Snippet} from "/app/src/components/snippet"
+
+## Example
+
+<Snippet lang="html">
+  <div>
+    <label for="input1" class="label">Email address</label>
+    <input type="email" class="input" 
+      id="input1" placeholder="name@example.com" />
+  </div>
+  <div>
+    <label for="input2" class="label">Example textarea</label>
+    <textarea class="input" id="input2" rows="3"></textarea>
+  </div>
+  <div>
+    <input type="name" value="John Doe" class="input" />
+
+    <input type="email" value="john.doe@cirrus.io" class="input" />
+
+    <input type="url" value="https://spiderpig86.github.io/Cirrus" class="input" />
+
+    <input type="search" placeholder="Search" class="input" />
+
+    <input type="tel" value="1-(800)-777-7777" class="input" />
+
+    <input type="password" value="password" class="input" />
+
+    <input type="number" value="420" class="input" />
+
+    <input type="date" value="2017-3-21" class="input" />
+
+    <input type="time" class="input" />
+
+    <input type="color" value="#f03d4d" class="input" />
+
+    <input type="file" class="input" />
+
+
+    <select class="select" placeholder="Choose one">
+        <option>Shibe</option>
+        <option>Doggo</option>
+        <option>Pupper</option>
+    </select>
+
+    <select class="select" multiple>
+        <option>Shibe</option>
+        <option>Doggo</option>
+        <option>Pupper</option>
+    </select>
+
+    <input type="range" id="volume" name="volume" min="0" max="11" />
+    <label htmlFor="volume">Volume</label>
+  </div>
+</Snippet>
+
