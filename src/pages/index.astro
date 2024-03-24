@@ -35,6 +35,9 @@ const commit_date =
         </div>
       </div>
     </div>
+    <div class="customize">
+      <h2 class="title">Customize everything with Sass</h2>
+    </div>
   </main>
 </Index>
 
@@ -82,5 +85,20 @@ const commit_date =
       "welcome",
       app.$config,
       app.$theme
+  );
+
+  $customize-section: (
+      subclasses : (
+          ".title" : (
+            font-size: 3.25rem,
+          )
+      )
+  );
+
+  @include mixins.generate-component(
+          $customize-section,
+          "customize",
+          app.$config,
+          app.$theme
   );
 </style>
