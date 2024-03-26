@@ -79,6 +79,7 @@ import Logo from '../logo/index.astro'
   $footer-component: (
     --padding: 35px 15px,
     background: var(--background),
+    border-top: var(--border),
     padding: var(--padding),
     responsive: (
       md: (
@@ -90,7 +91,8 @@ import Logo from '../logo/index.astro'
     ),
     colors: (
       dark: (
-        background : rgba(45, 56, 66, 1),
+          background : #1a3851,
+          border : 1px solid #173b56,
       )
     ),
     subclasses: (
