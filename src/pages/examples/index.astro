@@ -1,15 +1,53 @@
 ---
 import Examples from "~/layouts/examples.astro";
-import { Debug } from "astro/components";
+import {Debug} from "astro/components";
 import Toc from "../../../../components/toc.astro";
 
-import { getCollection, getEntry } from "astro:content";
-
+import {getCollection, getEntry} from "astro:content";
 ---
 
 <Examples>
-  Introducing responsive section library
-  17+ Sections in 9 Categories
+  <div class="intro">
+    <div class="container xxl">
+      <h1 class="title">Introducing responsive pre-built sections library</h1>
+      <p>Discover Sections, a comprehensive collection of meticulously designed UI elements and pre-built layouts</p>
+      <p>17+ Sections in 9 Categories</p>
+    </div>
+  </div>
+  <div class="examples">
+    <div class="container xxl">
+      <div class="grid">
+        <div class="item">
+          <div class="card">
+            <a href="#" class="content">
+              Navbar
+            </a>
+          </div>
+        </div>
+        <div class="item">
+          <div class="card">
+            <a href="#" class="content">
+              Pagination
+            </a>
+          </div>
+        </div>
+        <div class="item">
+          <div class="card">
+            <a href="#" class="content">
+              Nav
+            </a>
+          </div>
+        </div>
+        <div class="item">
+          <div class="card">
+            <a href="#" class="content">
+              Breadcrumbs
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </Examples>
 
 <style lang="scss">
@@ -19,11 +57,15 @@ import { getCollection, getEntry } from "astro:content";
   @use "../../styles/app.scss" as app;
   @use "../../styles/scss/mixins.scss" as mixins;
 
-  $welcome-section: (
+  $intro-section: (
     --padding: 105px 0,
     text-align: center,
-    background: var(--background),
+    /*background: var(--background),*/
     padding: var(--padding),
+    background: linear-gradient(231deg, #f93b3b 0%, #295496 100%),
+    background-blend-mode: overlay,
+    -webkit-mask-image: radial-gradient(52.65% 42.44% at 50.93% 50%, #000 0%, rgba(0, 0, 0, 0) 100%),
+    mask-image: radial-gradient(52.65% 42.44% at 50.93% 50%, #000 0%, rgba(0, 0, 0, 0) 100%),
     colors : (
       dark : (
         background: linear-gradient(71.93deg, #001b33 26.34%, #004887 56.72%, #273b49 94.79%)
@@ -52,8 +94,33 @@ import { getCollection, getEntry } from "astro:content";
   );
 
   @include mixins.generate-component(
-      $welcome-section,
-      "welcome",
+      $intro-section,
+      "intro",
+      app.$config,
+      app.$theme
+  );
+
+  $examples-section: (
+    --padding: 105px 0,
+    text-align: center,
+    background: var(--background),
+    padding: var(--padding),
+    colors : (
+      dark : (
+        background: linear-gradient(71.93deg, #001b33 26.34%, #004887 56.72%, #273b49 94.79%)
+      )
+    ),
+    subclasses : (
+      ".grid" : (
+        display: grid,
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+      )
+    )
+  );
+
+  @include mixins.generate-component(
+      $examples-section,
+      "examples",
       app.$config,
       app.$theme
   );
