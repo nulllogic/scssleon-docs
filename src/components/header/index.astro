@@ -85,7 +85,22 @@ import Logo from '../logo/index.astro'
 </div>
 
 <script type="text/javascript">
+    const nav = document.querySelector('.header');
+    const navTop = nav.offsetTop;
 
+    function stickyNavigation() {
+        console.log('navTop = ' + navTop);
+        console.log('scrollY = ' + window.scrollY);
+
+        if (window.scrollY >= navTop) {
+            // nav offsetHeight = height of nav
+            nav.classList.add('sticky');
+        } else {
+            nav.classList.remove('sticky');
+        }
+    }
+
+    window.addEventListener('scroll', stickyNavigation);
 </script>
 
 <style lang="scss">
@@ -110,6 +125,7 @@ import Logo from '../logo/index.astro'
     background: var(--background),
     border-bottom: var(--border),
     box-shadow: string.unquote("rgba(13, 13, 17, 0.4) 0px 10px 10px, rgba(13, 13, 17, 0.5) 0px 25px 50px"),
+    top: 0,
     colors : (
       dark : (
         background : #1a3851,
@@ -117,7 +133,10 @@ import Logo from '../logo/index.astro'
       )
     ),
     subclasses : (
-      ".navbar" : $navbar
+      ".navbar" : $navbar,
+      "&.sticky" : (
+        position: sticky
+      )
     ),
     responsive : (
       md : (
