@@ -88,17 +88,17 @@ const commit_date =
   );
 
   $customize-section: (
-      subclasses : (
-          ".title" : (
-            font-size: 3.25rem,
-          )
+    subclasses : (
+      ".title" : (
+        font-size: 3.25rem,
       )
+    )
   );
 
   @include mixins.generate-component(
-          $customize-section,
-          "customize",
-          app.$config,
-          app.$theme
+      $customize-section,
+      "customize",
+      app.$config,
+      app.$theme
   );
 </style>

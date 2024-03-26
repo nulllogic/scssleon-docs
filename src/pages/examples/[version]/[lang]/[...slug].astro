@@ -1,33 +1,29 @@
 ---
-import Sections from "~/layouts/sections.astro";
+import Examples from "~/layouts/examples.astro";
 import { Debug } from "astro/components";
 import Toc from "../../../../components/toc.astro";
 
 import { getCollection, getEntry } from "astro:content";
-const sectionsCollection = await getCollection("sections");
-const page = await getEntry(
-  "sections",
-  Astro.params.version.replace(/\./g, "") +
-    "/" +
-    Astro.params.lang +
-    "/" +
-    Astro.params.slug,
-);
-
-const { headings, Content } = await page.render();
-
-console.log(headings);
+// const sectionsCollection = await getCollection("examples");
+// const page = await getEntry(
+//   "examples",
+//   Astro.params.version.replace(/\./g, "") +
+//     "/" +
+//     Astro.params.lang +
+//     "/" +
+//     Astro.params.slug,
+// );
+//
+// const { headings, Content } = await page.render();
+//
+// console.log(headings);
 ---
 
-<Sections>
+<Examples>
   <div class="content">
-    <div class="intro">
-      <h1 class="title">{page?.data?.title}</h1>
-      <p class="subtitle">{page?.data?.description}</p>
-    </div>
-    <Content />
+    333
   </div>
-</Sections>
+</Examples>
 
 <style lang="scss">
   .title {
