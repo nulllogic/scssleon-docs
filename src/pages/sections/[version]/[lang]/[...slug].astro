@@ -1,12 +1,12 @@
 ---
-import Examples from "~/layouts/examples.astro";
+import Sections from "~/layouts/sections.astro";
 import { Debug } from "astro/components";
 import Toc from "../../../../components/toc.astro";
 
 import { getCollection, getEntry } from "astro:content";
-const docsCollection = await getCollection("examples");
+const sectionsCollection = await getCollection("sections");
 const page = await getEntry(
-  "examples",
+  "sections",
   Astro.params.version.replace(/\./g, "") +
     "/" +
     Astro.params.lang +
@@ -19,7 +19,7 @@ const { headings, Content } = await page.render();
 console.log(headings);
 ---
 
-<Examples>
+<Sections>
   <div class="content">
     <div class="intro">
       <h1 class="title">{page?.data?.title}</h1>
@@ -27,7 +27,7 @@ console.log(headings);
     </div>
     <Content />
   </div>
-</Examples>
+</Sections>
 
 <style lang="scss">
   .title {

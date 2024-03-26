@@ -12,15 +12,15 @@ import Main from "../components/main.astro";
 import Footer from "../components/footer/index.astro";
 
 import {getCollection} from 'astro:content';
-const examplesCollection = await getCollection('examples');
+const sectionsCollection = await getCollection('sections');
 
-const examplesCollectionModified = examplesCollection.filter((doc) => {
+const sectionsCollectionModified = sectionsCollection.filter((doc) => {
 //   if (doc?.data?.group) return doc?.data?.group.includes('components')
 }).sort((a, b) => {
 //    return a.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
 })
 
-console.log(examplesCollectionModified)
+console.log(sectionsCollection)
 
 ---
 
@@ -34,7 +34,7 @@ console.log(examplesCollectionModified)
         <div class="container">
           <div class="">
             <div>
-               {examplesCollection.map((doc, index) => {
+               {sectionsCollection.map((doc, index) => {
                    return (
                        <li>
                          <a href={'/examples/' + Astro.params.version + '/' + Astro.params.lang + doc.slug.replace(Astro.params.version.replace(/\./g, '') + '/' + Astro.params.lang, '')}>
