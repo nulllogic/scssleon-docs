@@ -89,10 +89,7 @@ import Logo from '../logo/index.astro'
     const navTop = nav.offsetTop;
 
     function stickyNavigation() {
-        console.log('navTop = ' + navTop);
-        console.log('scrollY = ' + window.scrollY);
-
-        if (window.scrollY >= navTop) {
+        if (window.scrollY > navTop) {
             // nav offsetHeight = height of nav
             nav.classList.add('sticky');
         } else {
