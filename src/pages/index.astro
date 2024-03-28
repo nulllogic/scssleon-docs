@@ -1,6 +1,5 @@
 ---
 import Index from "../layouts/index.astro";
-import footer from "../components/footer.astro";
 
 //https://api.github.com/repos/nulllogic/scssleon/branches/master
 
@@ -21,18 +20,13 @@ const commit_date =
         <h1 class="title">SCSS superpowers.</h1>
         <h2 class="subtitle">Get ready to notice flaws in every product you use, and then reverse-engineer how experts
           make stuff feel
-          <code>‘intuitive’</code> and <code>‘easy’</code>.</h2>
-      </div>
-    </div>
-    <div class="github">
-      <div class="container">
-        <div class="col-md-12">
-          <p>
-            Latest Commit on GitHub: {
-              commit_date.toISOString().replace(/(.*)T(.*)\..*/, "$1 $2")
-          }
-          </p>
-        </div>
+          <code>‘intuitive’</code> and <code>‘easy’</code>.
+        </h2>
+        <p class="latest-commit">
+          Latest Commit on GitHub: {
+            commit_date.toISOString().replace(/(.*)T(.*)\..*/, "$1 $2")
+        }
+        </p>
       </div>
     </div>
     <div class="customize">
@@ -53,6 +47,7 @@ const commit_date =
 <style lang="scss">
   @use "sass:list";
   @use "sass:meta";
+  @use "sass:string";
 
   @use "../styles/app.scss" as app;
   @use "../styles/scss/mixins.scss" as mixins;
@@ -64,7 +59,7 @@ const commit_date =
     padding: var(--padding),
     colors : (
       dark : (
-        background: radial-gradient(at 0 0, rgba(0, 62, 107, .4) 35%, #00000000 70%)
+        background: #121417FF radial-gradient(at 0 0, rgba(0, 62, 107, .4) 35%, #00000000 70%),
       )
     ),
     subclasses : (
@@ -85,6 +80,14 @@ const commit_date =
         animation-fill-mode: none,
         animation-play-state: running,
         animation-name: dobza,
+      ),
+      ".latest-commit" : (
+        background: var(--background),
+        colors : (
+          dark : (
+            background: rgba(65, 52, 99, 0.4)
+          )
+        )
       )
     )
   );
@@ -97,6 +100,12 @@ const commit_date =
   );
 
   $customize-section: (
+    background: var(--background),
+    colors: (
+      dark: (
+        background: rgba(18, 20, 23, 1)
+      )
+    ),
     subclasses : (
       ".title" : (
         font-size: 3.25rem,

@@ -7,7 +7,22 @@ $config: (
   ),
 ) !default;
 
-$theme: () !default;
+$theme: (
+  html : (
+    body : (
+      colors: (
+        light : (
+          background: '#fff',
+          color: '#ccc',
+        ),
+        dark : (
+          background : rgba(23, 33, 33, 1),
+          color: '#ccc'
+        )
+      )
+    )
+  )
+) !default;
 
 @use "./scss/_config.scss" as config with (
   $config: $config
