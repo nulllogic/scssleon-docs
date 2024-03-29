@@ -162,11 +162,21 @@ const commit_date =
   ));
 
   $features-section: (
+    --padding: 35px 15px,
     background: var(--background),
+    padding: var(--padding),
     colors: (
       dark: (
         background: rgba(17, 23, 26, 1)
       )
+    ),
+    responsive: (
+      md: (
+        --padding: 35px 5px,
+      ),
+      lg: (
+        --padding: 35px 5px,
+      ),
     ),
     subclasses : (
       ".grid" : (
