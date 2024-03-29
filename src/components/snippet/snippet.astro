@@ -1,79 +1,86 @@
 ---
 import prettier from "prettier";
-import shiki, { renderToHtml, getHighlighter } from "shiki";
+import {codeToHtml, getHighlighter} from "shiki";
 
 const code = await Astro.slots.render("default");
 
 const code_formatted = await prettier.format(code, {
-  parser: "mdx",
+    parser: "mdx",
 });
 
-const highlighter = await getHighlighter({
-  theme: "slack-dark",
-  themes: ["slack-dark"],
-  langs: [
-    "java",
-    "javascript",
-    "html",
-    "css",
-    "typescript",
-    "json",
-    "scss",
-    "vue",
-  ],
-});
+const html = codeToHtml(code_formatted.trim(), {
+    theme: "slack-dark",
+    // themes: ["slack-dark"],
+    langs: [
+        "java",
+        "javascript",
+        "html",
+        "css",
+        "typescript",
+        "json",
+        "scss",
+        "vue",
+    ],
+    // custom element renderer
+    transformers: [
+        {
+            code(node) {
+                this.addClassToHast(node, 'language-js')
+            },
+            line(node, line) {
+                node.properties['data-line'] = line
+                if ([1, 3, 4].includes(line))
+                    this.addClassToHast(node, 'highlight')
+            },
+            span(node, line, col) {
+                node.properties['data-token'] = `token:${line}:${col}`
+            },
 
-const tokens = highlighter.codeToTokensBase(code_formatted.trim(), "js");
-
-const html = renderToHtml(tokens, {
-  fg: highlighter.getForegroundColor("slack-dark"),
-  bg: highlighter.getBackgroundColor("slack-dark"),
-  // custom element renderer
-  elements: {
-    pre({ className, style, children }: any) {
-      return `<pre tabindex="1" class="${className} code" style="${style}">${children}</pre>`;
-    },
-    code({ children, className, style }) {
-      return `<code class="${className}" style="${style}"><table>${children}</table></code>`;
-    },
-    line({ className, index, children }: any) {
-      let shallHighlight = false;
-      let lineNumber = `<td><span class="line-number">${index + 1}</span></td>`;
-      lineNumber = "";
-
-      return `<tr class="${className} ${shallHighlight ? "highlighted-line" : ""}">
-                        ${lineNumber}
-                        <td>${children}</td>
-                    </tr>`;
-    },
-  },
+            // code({children, className, style}) {
+            //   return `<code class="${className}" style="${style}"><table>${children}</table></code>`;
+            // },
+            // line({className, index, children}: any) {
+            //   let shallHighlight = false;
+            //   let lineNumber = `<td><span class="line-number">${index + 1}</span></td>`;
+            //   lineNumber = "";
+            //
+            //   return `<tr class="${className} ${shallHighlight ? "highlighted-line" : ""}">
+            //               ${lineNumber}
+            //               <td>${children}</td>
+            //           </tr>`;
+            // },
+            // span(node, line, col) {
+            //   node.properties['data-token'] = `token:${line}:${col}`
+            // },
+        },
+    ],
 });
 ---
 
 <div class="snippet">
   <div class="preview">
     <div class="inline">
-      <Fragment set:html={code} is:raw />
+      <Fragment set:html={code} is:raw/>
     </div>
 
     <svg class="background">
       <defs>
         <pattern
-          id="pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001"
-          x="0"
-          y="0"
-          width="10"
-          height="10"
-          patternUnits="userSpaceOnUse"
+            id="pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001"
+            x="0"
+            y="0"
+            width="10"
+            height="10"
+            patternUnits="userSpaceOnUse"
         >
           <path d="M-3 13 15-5M-5 5l18-18M-1 21 17 3"></path>
         </pattern>
       </defs>
       <rect
-        stroke="none"
-        fill="url(#pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001)"
-        width="100%"
-        height="100%"></rect>
+          stroke="none"
+          fill="url(#pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001)"
+          width="100%"
+          height="100%"></rect>
     </svg>
 
     <div class="resizer">
@@ -82,62 +89,62 @@ const html = renderToHtml(tokens, {
       </span>
     </div>
   </div>
-  <Fragment client:load set:html={html} class="code" />
+  <Fragment client:load set:html={html} class="code"/>
 </div>
 
 <script>
-  document.querySelectorAll(".snippet").forEach((element) => {
-    const preview = element.querySelector(".preview");
-    if (preview) {
-      // Proceed, if preview is enabled
+    document.querySelectorAll(".snippet").forEach((element) => {
+        const preview = element.querySelector(".preview");
+        if (preview) {
+            // Proceed, if preview is enabled
 
-      const resizer = element.querySelector(".preview .resizer .drag");
-      if (resizer) {
-        const container_limit = Math.round(preview.clientWidth / 1.5);
+            const resizer = element.querySelector(".preview .resizer .drag");
+            if (resizer) {
+                const container_limit = Math.round(preview.clientWidth / 1.5);
 
-        resizer.onmousedown = (event) => {
-          event.preventDefault();
+                resizer.onmousedown = (event) => {
+                    event.preventDefault();
 
-          const original_margin = parseFloat(
-            isNaN(preview.style.marginRight) ? preview.style.marginRight : 0,
-          );
-          const original_mouse_x = event.pageX;
+                    const original_margin = parseFloat(
+                        isNaN(preview.style.marginRight) ? preview.style.marginRight : 0,
+                    );
+                    const original_mouse_x = event.pageX;
 
-          const event_drag_start_handler = (event) => {
-            const width = original_margin - (event.pageX - original_mouse_x);
-            if (width < container_limit && width > 0) {
-              preview.style.marginRight = width + "px";
-            } else if (width < 0) {
-              preview.style.marginRight = 0 + "px";
+                    const event_drag_start_handler = (event) => {
+                        const width = original_margin - (event.pageX - original_mouse_x);
+                        if (width < container_limit && width > 0) {
+                            preview.style.marginRight = width + "px";
+                        } else if (width < 0) {
+                            preview.style.marginRight = 0 + "px";
+                        }
+                    };
+
+                    const event_drag_end_handler = (event) => {
+                        document.documentElement.classList.remove("dragging");
+                        document.removeEventListener("mousemove", event_drag_start_handler);
+                        document.removeEventListener("mouseup", event_drag_end_handler);
+                    };
+
+                    document.documentElement.classList.add("dragging");
+                    document.addEventListener("mousemove", event_drag_start_handler);
+                    document.addEventListener("mouseup", event_drag_end_handler);
+                };
             }
-          };
+        }
+    });
 
-          const event_drag_end_handler = (event) => {
-            document.documentElement.classList.remove("dragging");
-            document.removeEventListener("mousemove", event_drag_start_handler);
-            document.removeEventListener("mouseup", event_drag_end_handler);
-          };
-
-          document.documentElement.classList.add("dragging");
-          document.addEventListener("mousemove", event_drag_start_handler);
-          document.addEventListener("mouseup", event_drag_end_handler);
-        };
-      }
-    }
-  });
-
-  // // Clipboard
-  // const clipboard = new ClipboardJS('.btn-clipboard', {
-  //     target: trigger => trigger.closest('.code-snippet').querySelector('.highlight')
-  // })
-  //
-  // clipboard.on('success', event => {
-  //
-  // })
-  //
-  // clipboard.on('error', event => {
-  //
-  // })
+    // // Clipboard
+    // const clipboard = new ClipboardJS('.btn-clipboard', {
+    //     target: trigger => trigger.closest('.code-snippet').querySelector('.highlight')
+    // })
+    //
+    // clipboard.on('success', event => {
+    //
+    // })
+    //
+    // clipboard.on('error', event => {
+    //
+    // })
 </script>
 
 <style is:global lang="scss">
@@ -277,3 +284,4 @@ const html = renderToHtml(tokens, {
     }
   }
 </style>
+

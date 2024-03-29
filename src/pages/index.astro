@@ -29,16 +29,35 @@ const commit_date =
         </p>
       </div>
     </div>
+
     <div class="customize">
+      <div class="container xxl">
+        <h2 class="title">Customize everything with SCSS</h2>
+      </div>
+    </div>
+
+    <div class="features">
       <div class="container xxl">
         <h2 class="title">Why SCSSLeon ?</h2>
         <p>SCSSLeon understands the full frontend development journey in ways few other tools do.
           Make any deployment simple, wherever you develop software.</p>
-      </div>
-    </div>
-    <div class="customize">
-      <div class="container xxl">
-        <h2 class="title">Customize everything with SCSS</h2>
+        <div class="grid">
+          <div class="first">
+            <div class="card">
+              123
+            </div>
+          </div>
+          <div class="second">
+            <div class="card">
+              123
+            </div>
+          </div>
+          <div class="third">
+            <div class="card">
+              123
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -48,9 +67,11 @@ const commit_date =
   @use "sass:list";
   @use "sass:meta";
   @use "sass:string";
+  @use "sass:map";
 
   @use "../styles/app.scss" as app;
   @use "../styles/scss/mixins.scss" as mixins;
+  @use "../styles/scss/functions.scss" as functions;
 
   $welcome-section: (
     --padding: 105px 0,
@@ -59,7 +80,7 @@ const commit_date =
     padding: var(--padding),
     colors : (
       dark : (
-        background: #121417FF radial-gradient(at 0 0, rgba(0, 62, 107, .4) 35%, #00000000 70%),
+        background: rgba(17, 23, 26, 1) radial-gradient(at 0 0, rgba(0, 62, 107, .4) 35%, #00000000 70%),
       )
     ),
     subclasses : (
@@ -103,7 +124,7 @@ const commit_date =
     background: var(--background),
     colors: (
       dark: (
-        background: rgba(18, 20, 23, 1)
+        background: rgba(17, 23, 26, 1)
       )
     ),
     subclasses : (
@@ -116,6 +137,71 @@ const commit_date =
   @include mixins.generate-component(
       $customize-section,
       "customize",
+      app.$config,
+      app.$theme
+  );
+
+  $card: functions.get-theme(app.$theme, 'components.card');
+
+  $card: map.deep-merge($card, (
+    border: var(--border),
+    background: var(--background),
+    box-shadow: var(--box-shadow),
+    colors: (
+      dark : (
+        border: 1px solid rgba(74, 58, 118, .5),
+        background: string.unquote("linear-gradient(165deg, rgb(29, 30, 37) -5%, rgb(22, 23, 29) 25%)"),
+        box-shadow: 0 0 10px rgba(0, 0, 0, .3)
+      )
+    )
+  ));
+
+  $features-section: (
+    background: var(--background),
+    colors: (
+      dark: (
+        background: rgba(17, 23, 26, 1)
+      )
+    ),
+    subclasses : (
+      ".grid" : (
+        display: grid,
+        width: 100%,
+        grid-template-columns: repeat(12, minmax(0, 1fr)),
+        grid-auto-rows: 5rem,
+        grid-gap: 1.25rem,
+        position: relative,
+        subclasses : (
+          ".first" : (
+            grid-row: auto/span 5,
+            grid-column: auto/span 7,
+            grid-auto-flow: row,
+            subclasses : (
+              ".card" : $card
+            )
+          ),
+          ".second" : (
+            grid-row: auto/span 5,
+            grid-column: auto/span 5,
+            subclasses : (
+              ".card" : $card
+            )
+          ),
+          ".third" : (
+            grid-row: auto/span 5,
+            grid-column: auto/span 7,
+            subclasses : (
+              ".card" : $card
+            )
+          )
+        )
+      )
+    )
+  );
+
+  @include mixins.generate-component(
+      $features-section,
+      "features",
       app.$config,
       app.$theme
   );
