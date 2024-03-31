@@ -1,147 +1,202 @@
 ---
-import { getCollection } from "astro:content";
+import {getCollection} from "astro:content";
 const docsCollection = await getCollection("docs");
 
 const gettingStartedCollection = docsCollection
-  .filter((doc) => {
-    if (doc?.data?.group) return doc?.data?.group.includes("getting-started");
-  })
-  .sort((a, b) => {
-    return b.slug
-      .replace(/.*\/(\w+)\/?$/, "$1")
-      .localeCompare(a.slug.replace(/.*\/(\w+)\/?$/, "$1"));
-  });
+    .filter((doc) => {
+        if (doc?.data?.category) return doc?.data?.category.includes("getting-started");
+    })
+    .sort((a, b) => {
+        return b.slug
+            .replace(/.*\/(\w+)\/?$/, "$1")
+            .localeCompare(a.slug.replace(/.*\/(\w+)\/?$/, "$1"));
+    });
 
 const componentsCollection = docsCollection
-  .filter((doc) => {
-    if (doc?.data?.group) return doc?.data?.group.includes("components");
-  })
-  .sort((a, b) => {
-    return a.slug
-      .replace(/.*\/(\w+)\/?$/, "$1")
-      .localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, "$1"));
-  });
+    .filter((doc) => {
+        if (doc?.data?.category) return doc?.data?.category.includes("components");
+    })
+    .sort((a, b) => {
+        return a.slug
+            .replace(/.*\/(\w+)\/?$/, "$1")
+            .localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, "$1"));
+    });
 
 const formsCollection = docsCollection
-  .filter((doc) => {
-    if (doc?.data?.group) return doc?.data?.group.includes("form");
-  })
-  .sort((a, b) => {
-    return a.slug
-      .replace(/.*\/(\w+)\/?$/, "$1")
-      .localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, "$1"));
-  });
+    .filter((doc) => {
+        if (doc?.data?.category) return doc?.data?.category.includes("forms");
+    })
+    .sort((a, b) => {
+        return a.slug
+            .replace(/.*\/(\w+)\/?$/, "$1")
+            .localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, "$1"));
+    });
+
+const aboutCollection = docsCollection
+    .filter((doc) => {
+        if (doc?.data?.category) return doc?.data?.category.includes("about");
+    })
+    .sort((a, b) => {
+        return a.slug
+            .replace(/.*\/(\w+)\/?$/, "$1")
+            .localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, "$1"));
+    });
 ---
 
 <aside class="sidebar">
   <nav>
     <ul class="nav">
       <li class="item">
-        <strong>Getting started</strong>
+        <h5>Getting started</h5>
         <ul class="nav">
-          {
-            gettingStartedCollection.map((doc, index) => {
-              return (
-                <li class="item">
-                  <a
-                    class="link"
-                    href={
-                      "/docs/" +
-                      Astro.params.version +
-                      "/" +
-                      Astro.params.lang +
-                      doc.slug.replace(
-                        Astro.params.version.replace(/\./g, "") +
-                          "/" +
-                          Astro.params.lang,
-                        "",
-                      )
-                    }
-                  >
-                    {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
-                  </a>
-                </li>
-              );
-            })
-          }
+            {
+                gettingStartedCollection.map((doc, index) => {
+                    return (
+                        <li class="item">
+                          <a
+                              class="link"
+                              href={
+                                  "/docs/" +
+                                  Astro.params.version +
+                                  "/" +
+                                  Astro.params.lang +
+                                  doc.slug.replace(
+                                      Astro.params.version.replace(/\./g, "") +
+                                      "/" +
+                                      Astro.params.lang,
+                                      "",
+                                  )
+                              }
+                          >
+                              {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
+                          </a>
+                        </li>
+                    );
+                })
+            }
         </ul>
       </li>
       <li>
         <strong>Components</strong>
         <ul class="nav">
-          {
-            componentsCollection.map((doc, index) => {
-              return (
-                <li class="item">
-                  <a
-                    class="link"
-                    href={
-                      "/docs/" +
-                      Astro.params.version +
-                      "/" +
-                      Astro.params.lang +
-                      doc.slug.replace(
-                        Astro.params.version.replace(/\./g, "") +
-                          "/" +
-                          Astro.params.lang,
-                        "",
-                      )
-                    }
-                  >
-                    {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
-                  </a>
-                </li>
-              );
-            })
-          }
+            {
+                componentsCollection.map((doc, index) => {
+                    return (
+                        <li class="item">
+                          <a
+                              class="link"
+                              href={
+                                  "/docs/" +
+                                  Astro.params.version +
+                                  "/" +
+                                  Astro.params.lang +
+                                  doc.slug.replace(
+                                      Astro.params.version.replace(/\./g, "") +
+                                      "/" +
+                                      Astro.params.lang,
+                                      "",
+                                  )
+                              }
+                          >
+                              {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
+                          </a>
+                        </li>
+                    );
+                })
+            }
         </ul>
       </li>
       <li>
         <strong>Forms</strong>
         <ul class="nav">
-          {
-            formsCollection.map((doc, index) => {
-              return (
-                <li class="item">
-                  <a
-                    class="link"
-                    href={
-                      "/docs/" +
-                      Astro.params.version +
-                      "/" +
-                      Astro.params.lang +
-                      doc.slug.replace(
-                        Astro.params.version.replace(/\./g, "") +
-                          "/" +
-                          Astro.params.lang,
-                        "",
-                      )
-                    }
-                  >
-                    {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
-                  </a>
-                </li>
-              );
-            })
-          }
+            {
+                formsCollection.map((doc, index) => {
+                    return (
+                        <li class="item">
+                          <a
+                              class="link"
+                              href={
+                                  "/docs/" +
+                                  Astro.params.version +
+                                  "/" +
+                                  Astro.params.lang +
+                                  doc.slug.replace(
+                                      Astro.params.version.replace(/\./g, "") +
+                                      "/" +
+                                      Astro.params.lang,
+                                      "",
+                                  )
+                              }
+                          >
+                              {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
+                          </a>
+                        </li>
+                    );
+                })
+            }
+        </ul>
+      </li>
+      <li>
+        <strong>About</strong>
+        <ul class="nav">
+            {
+                aboutCollection.map((doc, index) => {
+                    return (
+                        <li class="item">
+                          <a
+                              class="link"
+                              href={
+                                  "/docs/" +
+                                  Astro.params.version +
+                                  "/" +
+                                  Astro.params.lang +
+                                  doc.slug.replace(
+                                      Astro.params.version.replace(/\./g, "") +
+                                      "/" +
+                                      Astro.params.lang,
+                                      "",
+                                  )
+                              }
+                          >
+                              {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
+                          </a>
+                        </li>
+                    );
+                })
+            }
         </ul>
       </li>
     </ul>
   </nav>
 </aside>
 <style lang="scss">
-  .sidebar {
-    grid-area: sidebar;
+  @use "sass:list";
+  @use "sass:meta";
 
-    position: sticky;
-    top: 0;
-    display: block;
-    align-self: start;
+  @use "../../styles/app.scss" as app;
+  @use "../../styles/scss/mixins.scss" as mixins;
 
-    .nav {
-      --xii-nav-flex-direction: column;
-      --xii-nav-align-items: stretch;
-      --xii-nav-gap: 0;
-    }
-  }
+  $sidebar-section: (
+    grid-area: sidebar,
+    display: block,
+    align-self: start,
+    colors : (
+      dark : (
+      )
+    ),
+    subclasses : (
+      ".nav" : (
+        --flex-direction : column,
+        flex-direction: var(--flex-direction),
+        width: 100%,
+      )
+    )
+  );
+
+  @include mixins.generate-component(
+      $sidebar-section,
+      "sidebar",
+      app.$config,
+      app.$theme
+  );
 </style>

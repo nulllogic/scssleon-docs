@@ -1,9 +1,9 @@
 ---
 export interface Props {
-  title: string;
+    title: string;
 }
 
-const { title } = Astro.props;
+const {title} = Astro.props;
 
 import Head from "../components/head/index.astro";
 import Header from "../components/header/index.astro";
@@ -14,35 +14,55 @@ import Footer from "../components/footer/index.astro";
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <Head title="XII/Grid docs" description="Desciption" />
-  </head>
-  <body>
-    <Header />
-    <div class="docs">
-      <div class="container xxl">
-        <div class="layout">
-          <Sidebar />
-          <Main>
-            <slot />
-          </Main>
-        </div>
-      </div>
+<head>
+  <Head title="SCSSLeon documentation" description="Desciption"/>
+</head>
+<body>
+<Header/>
+<div class="docs">
+  <div class="container xxl">
+    <div class="layout">
+      <Sidebar/>
+      <Main>
+        <slot/>
+      </Main>
     </div>
-    <Footer />
-    <style lang="scss">
-      .layout {
-        padding: 25px 0;
-      }
-
-      @media (min-width: 992px) {
-        .layout {
-          display: grid;
-          grid-template-areas: "sidebar main";
-          grid-template-columns: 1fr 5fr;
-          gap: 1rem;
-        }
-      }
-    </style>
-  </body>
+  </div>
+</div>
+<Footer/>
+</body>
 </html>
+
+<style lang="scss">
+  @use "sass:list";
+  @use "sass:meta";
+
+  @use "../styles/app.scss" as app;
+  @use "../styles/scss/mixins.scss" as mixins;
+
+  $layout-section: (
+    --padding: 2.5rem 0,
+    display: grid,
+    grid-template-areas: "sidebar main",
+    grid-template-columns: 1fr 5fr,
+    gap: 1rem,
+    padding: var(--padding),
+    colors : (
+      dark : (
+        background: linear-gradient(71.93deg, #001b33 26.34%, #004887 56.72%, #273b49 94.79%)
+      )
+    ),
+    subclasses : (
+      ".title" : (
+        display: inline-block,
+      )
+    )
+  );
+
+  @include mixins.generate-component(
+      $layout-section,
+      "layout",
+      app.$config,
+      app.$theme
+  );
+</style>

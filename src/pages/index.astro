@@ -1,5 +1,6 @@
 ---
 import Index from "../layouts/index.astro";
+import Snippet from "../components/snippet/snippet.astro";
 
 //https://api.github.com/repos/nulllogic/scssleon/branches/master
 
@@ -33,6 +34,24 @@ const commit_date =
     <div class="customize">
       <div class="container xxl">
         <h2 class="title">Customize everything with SCSS</h2>
+        <p>SCSSleon utilizes Sass for a modular and customizable architecture. Import only the components you need,
+          enable global options like gradients and shadows, and write your own CSS with our variables, maps, functions,
+          and mixins.</p>
+        <div class="grid">
+          <div class="column">
+            <h3>Include all of SCSSleon’s parts</h3>
+            <p>Import one stylesheet and you're off to the races with every feature of our CSS.</p>
+            <Snippet>
+              // Variable overrides first
+            </Snippet>
+          </div>
+          <div class="column">
+            <h3>Include what you need</h3>
+            <Snippet>
+              // Variable overrides first
+            </Snippet>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -135,6 +154,11 @@ const commit_date =
     subclasses : (
       ".title" : (
         font-size: 3.25rem,
+      ),
+      ".grid" : (
+        display: grid,
+        grid-template-columns: 1fr 1fr,
+        grid-gap: 1.5rem
       )
     )
   );
