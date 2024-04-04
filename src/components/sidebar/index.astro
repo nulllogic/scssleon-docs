@@ -45,10 +45,10 @@ const aboutCollection = docsCollection
 
 <aside class="sidebar">
   <nav>
-    <ul class="nav">
+    <ul class="nav vertical">
       <li class="item">
         <h5>Getting started</h5>
-        <ul class="nav">
+        <ul class="nav vertical">
             {
                 gettingStartedCollection.map((doc, index) => {
                     return (
@@ -78,7 +78,7 @@ const aboutCollection = docsCollection
       </li>
       <li>
         <strong>Components</strong>
-        <ul class="nav">
+        <ul class="nav vertical">
             {
                 componentsCollection.map((doc, index) => {
                     return (
@@ -108,7 +108,7 @@ const aboutCollection = docsCollection
       </li>
       <li>
         <strong>Forms</strong>
-        <ul class="nav">
+        <ul class="nav vertical">
             {
                 formsCollection.map((doc, index) => {
                     return (
@@ -138,7 +138,7 @@ const aboutCollection = docsCollection
       </li>
       <li>
         <strong>About</strong>
-        <ul class="nav">
+        <ul class="nav vertical">
             {
                 aboutCollection.map((doc, index) => {
                     return (
@@ -172,9 +172,17 @@ const aboutCollection = docsCollection
 <style lang="scss">
   @use "sass:list";
   @use "sass:meta";
+  @use "sass:map";
 
   @use "../../styles/app.scss" as app;
   @use "../../styles/scss/mixins.scss" as mixins;
+  @use "../../styles/scss/functions.scss" as functions;
+
+  $nav: functions.get-theme(app.$theme, 'components.nav');
+
+  $nav: map.deep-merge($nav, (
+      --grid-template-columns: auto auto
+  ));
 
   $sidebar-section: (
     grid-area: sidebar,
@@ -185,11 +193,7 @@ const aboutCollection = docsCollection
       )
     ),
     subclasses : (
-      ".nav" : (
-        --flex-direction : column,
-        flex-direction: var(--flex-direction),
-        width: 100%,
-      )
+      ".nav" : $nav
     )
   );
 
