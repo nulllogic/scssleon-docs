@@ -41,6 +41,9 @@ const aboutCollection = docsCollection
             .replace(/.*\/(\w+)\/?$/, "$1")
             .localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, "$1"));
     });
+
+const pathname = new URL(Astro.request.url).pathname;
+console.log(pathname);
 ---
 
 <aside class="sidebar">
@@ -182,6 +185,7 @@ const aboutCollection = docsCollection
 
   $nav: map.deep-merge($nav, (
     --grid-template-columns: auto auto,
+    margin: 0 0 8px 0,
     subclasses : (
       ".item" : (
         subclasses: (
