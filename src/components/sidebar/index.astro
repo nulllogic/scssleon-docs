@@ -43,7 +43,25 @@ const aboutCollection = docsCollection
     });
 
 const pathname = new URL(Astro.request.url).pathname;
-console.log(pathname);
+const generate_class = (link) => {
+    let classes = ['link'];
+    let url = "/docs/" +
+        Astro.params.version +
+        "/" +
+        Astro.params.lang +
+        link.slug.replace(
+            Astro.params.version.replace(/\./g, "") +
+            "/" +
+            Astro.params.lang,
+            "",
+        );
+
+    if (pathname === url) {
+        classes.push('active');
+    }
+
+    return [classes]
+}
 ---
 
 <aside class="sidebar">
@@ -57,7 +75,7 @@ console.log(pathname);
                     return (
                         <li class="item">
                           <a
-                              class="link"
+                              class:list={generate_class(doc)}
                               href={
                                   "/docs/" +
                                   Astro.params.version +
@@ -206,7 +224,11 @@ console.log(pathname);
                 text-decoration: none,
                 text-transform: capitalize,
                 subclasses: (
-                  "&:hover" : (
+                  "&.active" : (
+                    color: rgba(26, 104, 45, 0.85),
+                    border-left : 1px solid rgba(26, 104, 45, 0.85),
+                  ),
+                  "&:hover:not(.active)" : (
                     color: rgb(230, 230, 230),
                     border-left : 1px solid rgba(26, 104, 45, 0.35),
                   )
