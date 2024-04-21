@@ -47,7 +47,7 @@ const aboutCollection = docsCollection
   <nav>
     <ul class="nav vertical">
       <li class="item">
-        <h5>Getting started</h5>
+        <h5 class="title">Getting started</h5>
         <ul class="nav vertical">
             {
                 gettingStartedCollection.map((doc, index) => {
@@ -76,8 +76,8 @@ const aboutCollection = docsCollection
             }
         </ul>
       </li>
-      <li>
-        <strong>Components</strong>
+      <li class="item">
+        <h5 class="title">Components</h5>
         <ul class="nav vertical">
             {
                 componentsCollection.map((doc, index) => {
@@ -106,8 +106,8 @@ const aboutCollection = docsCollection
             }
         </ul>
       </li>
-      <li>
-        <strong>Forms</strong>
+      <li class="item">
+        <h5 class="title">Forms</h5>
         <ul class="nav vertical">
             {
                 formsCollection.map((doc, index) => {
@@ -136,8 +136,8 @@ const aboutCollection = docsCollection
             }
         </ul>
       </li>
-      <li>
-        <strong>About</strong>
+      <li class="item">
+        <h5 class="title">About</h5>
         <ul class="nav vertical">
             {
                 aboutCollection.map((doc, index) => {
@@ -169,7 +169,7 @@ const aboutCollection = docsCollection
     </ul>
   </nav>
 </aside>
-<style lang="scss">
+<style lang="scss" is:global>
   @use "sass:list";
   @use "sass:meta";
   @use "sass:map";
@@ -181,7 +181,21 @@ const aboutCollection = docsCollection
   $nav: functions.get-theme(app.$theme, 'components.nav');
 
   $nav: map.deep-merge($nav, (
-      --grid-template-columns: auto auto
+    --grid-template-columns: auto auto,
+    subclasses : (
+      ".item" : (
+        subclasses: (
+          "&:first-child .title" : (
+            margin: 0 0 10px 0
+          ),
+          ".title" : (
+            font-size: 1.25rem,
+            font-weight: 500,
+            margin: 10px 0,
+          )
+        )
+      )
+    )
   ));
 
   $sidebar-section: (
