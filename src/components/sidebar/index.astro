@@ -62,6 +62,19 @@ const generate_class = (link) => {
 
     return [classes]
 }
+
+const generate_link = (link) => {
+    return "/docs/" +
+        Astro.params.version +
+        "/" +
+        Astro.params.lang +
+        link.slug.replace(
+            Astro.params.version.replace(/\./g, "") +
+            "/" +
+            Astro.params.lang,
+            "",
+        )
+}
 ---
 
 <aside class="sidebar">
@@ -76,18 +89,7 @@ const generate_class = (link) => {
                         <li class="item">
                           <a
                               class:list={generate_class(doc)}
-                              href={
-                                  "/docs/" +
-                                  Astro.params.version +
-                                  "/" +
-                                  Astro.params.lang +
-                                  doc.slug.replace(
-                                      Astro.params.version.replace(/\./g, "") +
-                                      "/" +
-                                      Astro.params.lang,
-                                      "",
-                                  )
-                              }
+                              href={generate_link(doc)}
                           >
                               {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
                           </a>
@@ -105,19 +107,8 @@ const generate_class = (link) => {
                     return (
                         <li class="item">
                           <a
-                              class="link"
-                              href={
-                                  "/docs/" +
-                                  Astro.params.version +
-                                  "/" +
-                                  Astro.params.lang +
-                                  doc.slug.replace(
-                                      Astro.params.version.replace(/\./g, "") +
-                                      "/" +
-                                      Astro.params.lang,
-                                      "",
-                                  )
-                              }
+                              class:list={generate_class(doc)}
+                              href={generate_link(doc)}
                           >
                               {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
                           </a>
@@ -135,19 +126,8 @@ const generate_class = (link) => {
                     return (
                         <li class="item">
                           <a
-                              class="link"
-                              href={
-                                  "/docs/" +
-                                  Astro.params.version +
-                                  "/" +
-                                  Astro.params.lang +
-                                  doc.slug.replace(
-                                      Astro.params.version.replace(/\./g, "") +
-                                      "/" +
-                                      Astro.params.lang,
-                                      "",
-                                  )
-                              }
+                              class:list={generate_class(doc)}
+                              href={generate_link(doc)}
                           >
                               {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
                           </a>
@@ -165,19 +145,8 @@ const generate_class = (link) => {
                     return (
                         <li class="item">
                           <a
-                              class="link"
-                              href={
-                                  "/docs/" +
-                                  Astro.params.version +
-                                  "/" +
-                                  Astro.params.lang +
-                                  doc.slug.replace(
-                                      Astro.params.version.replace(/\./g, "") +
-                                      "/" +
-                                      Astro.params.lang,
-                                      "",
-                                  )
-                              }
+                              class:list={generate_class(doc)}
+                              href={generate_link(doc)}
                           >
                               {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
                           </a>
