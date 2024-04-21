@@ -193,9 +193,22 @@ const aboutCollection = docsCollection
             font-weight: 500,
             margin: 10px 0,
           ),
-          ".link" : (
-            padding: 10px 0,
-            text-decoration: none
+          ".item" : (
+            subclasses: (
+              ".link" : (
+                border-left : 1px solid rgba(231, 231, 235, 0.2),
+                color: rgb(148, 163, 184),
+                padding: 5px 10px,
+                text-decoration: none,
+                text-transform: capitalize,
+                subclasses: (
+                  "&:hover" : (
+                    color: rgb(230, 230, 230),
+                    border-left : 1px solid rgba(26, 104, 45, 0.35),
+                  )
+                )
+              )
+            )
           )
         )
       )
