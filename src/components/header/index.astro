@@ -113,7 +113,16 @@ import Logo from '../logo/index.astro'
   $navbar: functions.get-theme(app.$theme, 'components.navbar');
 
   $navbar: map.deep-merge($navbar, (
-    --grid-template-columns: auto auto
+    --grid-template-columns: auto auto,
+      subclasses : (
+        ".item" : (
+          subclasses: (
+            ".link" : (
+              text-decoration: none
+            )
+          )
+        )
+      )
   ));
 
   $header-section: (
