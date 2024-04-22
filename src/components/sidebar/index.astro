@@ -90,9 +90,7 @@ const generate_link = (link) => {
                           <a
                               class:list={generate_class(doc)}
                               href={generate_link(doc)}
-                          >
-                              {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
-                          </a>
+                          >{doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}</a>
                         </li>
                     );
                 })
@@ -109,9 +107,7 @@ const generate_link = (link) => {
                           <a
                               class:list={generate_class(doc)}
                               href={generate_link(doc)}
-                          >
-                              {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
-                          </a>
+                          >{doc.slug.replace(/.*\/(\w+)\/?$/, "$1").replace(/_/g, ' ')}</a>
                         </li>
                     );
                 })
@@ -128,9 +124,7 @@ const generate_link = (link) => {
                           <a
                               class:list={generate_class(doc)}
                               href={generate_link(doc)}
-                          >
-                              {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
-                          </a>
+                          >{doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}</a>
                         </li>
                     );
                 })
@@ -147,9 +141,7 @@ const generate_link = (link) => {
                           <a
                               class:list={generate_class(doc)}
                               href={generate_link(doc)}
-                          >
-                              {doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}
-                          </a>
+                          >{doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}</a>
                         </li>
                     );
                 })
