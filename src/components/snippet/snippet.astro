@@ -2,65 +2,35 @@
 import prettier from "prettier";
 import {codeToHtml, getHighlighter} from "shiki";
 
-const code = await Astro.slots.render("default");
+// const html = await Astro.slots.render('html');
+// const scss = await Astro.slots.render('scss');
+// // const js = await Astro.slots.render('js');
+//
+// const html_code_formatted = await typeof html !== undefined ? prettier.format(html, {
+//     parser: "mdx",
+// }) : '';
+//
+// const scss_code_formatted = await typeof scss !== undefined ? prettier.format(scss.replace(/(<p[^>]+?>|<p>|<\/p>)/img, ''), {
+//     parser: "scss",
+// }) : '';
 
-const code_formatted = await prettier.format(code, {
-    parser: "mdx",
-});
+let slots = [];
+Object.keys(Astro.slots).forEach(element => slots.push(Astro.slots.render(element)));
+let props = await Promise.all(slots)
 
-const html = codeToHtml(code_formatted.trim(), {
-    theme: "slack-dark",
-    // themes: ["slack-dark"],
-    langs: [
-        "java",
-        "javascript",
-        "html",
-        "css",
-        "typescript",
-        "json",
-        "scss",
-        "vue",
-    ],
-    // custom element renderer
-    transformers: [
-        {
-            code(node) {
-                this.addClassToHast(node, 'language-js')
-            },
-            line(node, line) {
-                node.properties['data-line'] = line
-                if ([1, 3, 4].includes(line))
-                    this.addClassToHast(node, 'highlight')
-            },
-            span(node, line, col) {
-                node.properties['data-token'] = `token:${line}:${col}`
-            },
+// console.log(typeof props[1], props[1]);
 
-            // code({children, className, style}) {
-            //   return `<code class="${className}" style="${style}"><table>${children}</table></code>`;
-            // },
-            // line({className, index, children}: any) {
-            //   let shallHighlight = false;
-            //   let lineNumber = `<td><span class="line-number">${index + 1}</span></td>`;
-            //   lineNumber = "";
-            //
-            //   return `<tr class="${className} ${shallHighlight ? "highlighted-line" : ""}">
-            //               ${lineNumber}
-            //               <td>${children}</td>
-            //           </tr>`;
-            // },
-            // span(node, line, col) {
-            //   node.properties['data-token'] = `token:${line}:${col}`
-            // },
-        },
-    ],
-});
+const html_code_formatted = typeof props[1] !== 'undefined' ? prettier.format(props[1], {
+    parser: "html",
+}) : '';
 ---
 
 <div class="snippet">
+  {typeof props[1] !== 'undefined' ? 'test' : 'test2'}
   <div class="preview">
     <div class="inline">
-      <Fragment set:html={code} is:raw/>
+      <slot name="html" set:html={html_code_formatted} />
+      <slot name="scss"/>
     </div>
 
     <svg class="background">
@@ -89,7 +59,6 @@ const html = codeToHtml(code_formatted.trim(), {
       </span>
     </div>
   </div>
-  <Fragment client:load set:html={html} class="code"/>
 </div>
 
 <script>
@@ -147,7 +116,10 @@ const html = codeToHtml(code_formatted.trim(), {
     // })
 </script>
 
-<style is:global lang="scss">
+<style lang="scss">
+
+  /*
+
   .content {
     .astro-code {
       white-space: normal;
@@ -283,5 +255,7 @@ const html = codeToHtml(code_formatted.trim(), {
       }
     }
   }
+
+  */
 </style>
 
