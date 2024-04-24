@@ -26,10 +26,10 @@ const html_code_formatted = typeof props[1] !== 'undefined' ? prettier.format(pr
 ---
 
 <div class="snippet">
-  {typeof props[1] !== 'undefined' ? 'test' : 'test2'}
+    {typeof props[1] !== 'undefined' ? 'test' : 'test2'}
   <div class="preview">
     <div class="inline">
-      <slot name="html" set:html={html_code_formatted} />
+      <slot name="html" set:html={html_code_formatted}/>
       <slot name="scss"/>
     </div>
 
@@ -117,8 +117,8 @@ const html_code_formatted = typeof props[1] !== 'undefined' ? prettier.format(pr
 </script>
 
 <style lang="scss">
-
   /*
+
 
   .content {
     .astro-code {

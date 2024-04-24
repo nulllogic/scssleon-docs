@@ -1,9 +1,9 @@
 ---
 export interface Props {
-  title: string;
+    title: string;
 }
 
-const { title } = Astro.props;
+const {title} = Astro.props;
 
 import Head from "../components/head/index.astro";
 import Header from "../components/header/index.astro";
@@ -12,12 +12,12 @@ import Footer from "../components/footer/index.astro";
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <Head title="SCSSleon docs" description="Desciption" />
-  </head>
-  <body>
-    <Header />
-    <slot />
-    <Footer />
-  </body>
+<head>
+  <Head title="SCSSleon docs" description="Desciption"/>
+</head>
+<body>
+<Header/>
+<slot/>
+<Footer/>
+</body>
 </html>
