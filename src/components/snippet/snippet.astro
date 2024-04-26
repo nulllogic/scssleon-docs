@@ -18,8 +18,6 @@ let slots = [];
 Object.keys(Astro.slots).forEach(element => slots.push(Astro.slots.render(element)));
 let props = await Promise.all(slots)
 
-// console.log(typeof props[1], props[1]);
-
 const html_code_formatted = typeof props[1] !== 'undefined' ? prettier.format(props[1], {
     parser: "html",
 }) : '';
@@ -118,9 +116,30 @@ const html_code_formatted = typeof props[1] !== 'undefined' ? prettier.format(pr
 </script>
 
 <style lang="scss">
+
+  @use "sass:list";
+  @use "sass:meta";
+  @use "../../styles/app.scss" as app;
+  @use "../../styles/scss/functions.scss" as functions;
+
+  $modules: ("root", "reset", "base", "content");
+  $components: (
+      "nav",
+      "button",
+      "container",
+  );
+
+  $modules: list.join($modules, functions.add_components($components));
+
+  @each $module in $modules {
+    @debug "../../styles/scss/#{$module}";
+    @include meta.load-css(
+            "../../styles/scss/#{$module}",
+        $with: (config: app.$config, theme: app.$theme)
+    );
+  }
+
   /*
-
-
   .content {
     .astro-code {
       white-space: normal;
@@ -259,4 +278,3 @@ const html_code_formatted = typeof props[1] !== 'undefined' ? prettier.format(pr
 
   */
 </style>
-
