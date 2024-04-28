@@ -18,16 +18,40 @@ let slots = [];
 Object.keys(Astro.slots).forEach(element => slots.push(Astro.slots.render(element)));
 let props = await Promise.all(slots)
 
+// HTML
 const html_code_formatted = typeof props[1] !== 'undefined' ? prettier.format(props[1], {
     parser: "html",
-}) : '';
+}) : null;
+
+// SCSS
+const scss_code_formatted = typeof props[2] !== 'undefined' ? prettier.format(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/img, ''), {
+  parser: "scss",
+}) : null;
+
+const backgroundColor = "rgb(24 121 78)";
+
 ---
 
 
 <div class="snippet">
     {typeof props[1] !== 'undefined' ? 'test' : 'test2'}
+  <ul class="nav">
+    {Astro.slots.has('html')}
+    <li class="item">
+      <a class="link" href="#">
+        HTML
+      </a>
+      <a class="link" href="#">
+        SCSS
+      </a>
+      <a class="link" href="#">
+        JS
+      </a>
+    </li>
+  </ul>
   <div class="preview">
     <div class="inline">
+      {typeof html_code_formatted !== null ? <slot name="html" set:html={html_code_formatted}/> : ''}
       <slot name="html" set:html={html_code_formatted}/>
       <slot name="scss"/>
     </div>
@@ -116,29 +140,6 @@ const html_code_formatted = typeof props[1] !== 'undefined' ? prettier.format(pr
 </script>
 
 <style lang="scss">
-
-  @use "sass:list";
-  @use "sass:meta";
-  @use "../../styles/app.scss" as app;
-  @use "../../styles/scss/functions.scss" as functions;
-
-  $modules: ("root", "reset", "base", "content");
-  $components: (
-      "nav",
-      "button",
-      "container",
-  );
-
-  $modules: list.join($modules, functions.add_components($components));
-
-  @each $module in $modules {
-    @debug "../../styles/scss/#{$module}";
-    @include meta.load-css(
-            "../../styles/scss/#{$module}",
-        $with: (config: app.$config, theme: app.$theme)
-    );
-  }
-
   /*
   .content {
     .astro-code {
