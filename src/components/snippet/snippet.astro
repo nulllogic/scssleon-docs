@@ -25,36 +25,54 @@ const html_code_formatted = typeof props[1] !== 'undefined' ? prettier.format(pr
 
 // SCSS
 const scss_code_formatted = typeof props[2] !== 'undefined' ? prettier.format(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/img, ''), {
-  parser: "scss",
+    parser: "scss",
 }) : null;
 
 const backgroundColor = "rgb(24 121 78)";
-
 ---
 
 
 <div class="snippet">
     {typeof props[1] !== 'undefined' ? 'test' : 'test2'}
   <ul class="nav">
-    {Astro.slots.has('html')}
-    <li class="item">
-      <a class="link" href="#">
-        HTML
-      </a>
-      <a class="link" href="#">
-        SCSS
-      </a>
-      <a class="link" href="#">
-        JS
-      </a>
-    </li>
+      {Astro.slots.has('html') &&
+          <li class="item">
+            <a class="link" href="#">
+              HTML
+            </a>
+          </li>
+      }
+      {Astro.slots.has('scss') &&
+          <li class="item">
+            <a class="link" href="#">
+              SCSS
+            </a>
+          </li>
+      }
+      {Astro.slots.has('js') &&
+          <li class="item">
+            <a class="link" href="#">
+              JS
+            </a>
+          </li>
+      }
   </ul>
   <div class="preview">
     <div class="inline">
-      {typeof html_code_formatted !== null ? <slot name="html" set:html={html_code_formatted}/> : ''}
+      {Astro.slots.has('html') &&
+          <slot name="html" set:html={html_code_formatted} is:raw />
+      }
       <slot name="html" set:html={html_code_formatted}/>
-      <slot name="scss"/>
+      <slot name="scss" set:html={scss_code_formatted}/>
     </div>
+
+    <style is:inline lang="scss" define:vars={{backgroundColor}}>
+      ul {
+        & li {
+          background: var(--backgroundColor);
+        }
+      }
+    </style>
 
     <svg class="background">
       <defs>
@@ -81,6 +99,8 @@ const backgroundColor = "rgb(24 121 78)";
         <span class="el"></span>
       </span>
     </div>
+
+    <Fragment client:load set:html={html_code_formatted} class="code"/>
   </div>
 </div>
 
