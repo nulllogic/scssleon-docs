@@ -8,7 +8,7 @@ import { lifecycleLogs } from './src/utils/integrations/docs'
 
 export default defineConfig({
     site: 'https://example.com',
-    integrations: [mdx(), sitemap(), preact(), lifecycleLogs()],
+    integrations: [mdx(), sitemap(), preact()],
     compressHTML: true,
     output: 'server',
     markdown: {

@@ -6,12 +6,13 @@ let slots = [];
 Object.keys(Astro.slots).forEach((element) =>
     slots.push(Astro.slots.render(element)),
 );
+
 let props = await Promise.all(slots);
 
 // HTML
 const html_code_formatted =
     typeof props[1] !== "undefined"
-        ? prettier.format(props[1], {
+        ? await prettier.format(props[1], {
             parser: "html",
         })
         : null;
@@ -19,7 +20,7 @@ const html_code_formatted =
 // SCSS
 const scss_code_formatted =
     typeof props[2] !== "undefined"
-        ? prettier.format(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
+        ? await prettier.format(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
             parser: "scss",
         })
         : null;
@@ -27,15 +28,14 @@ const scss_code_formatted =
 // `getHighlighter` is async, it initializes the internal and
 // loads the themes and languages specified.
 const highlighter = await getHighlighter({
-    themes: ["nord"],
+    themes: ["vitesse-dark"],
     langs: ["javascript"],
 });
 
-// then later you can use `highlighter.codeToHtml` synchronously
-// with the loaded themes and languages.
-const html_code_shiki = highlighter.codeToHtml(props[1], {
+// Remove last line added by prettier using regex
+const html_code_shiki = highlighter.codeToHtml(html_code_formatted.replace(/\n.*$/, ''), {
     lang: "javascript",
-    theme: "nord",
+    theme: "vitesse-dark",
 });
 ---
 
@@ -185,7 +185,7 @@ const html_code_shiki = highlighter.codeToHtml(props[1], {
     // })
 </script>
 
-<style lang="scss">
+<style lang="scss" is:global>
   @use "sass:list";
   @use "sass:string";
   @use "sass:meta";
@@ -200,7 +200,35 @@ const html_code_shiki = highlighter.codeToHtml(props[1], {
   $nav: map.deep-merge(
       $nav,
       (
-        --grid-template-columns: auto auto,
+        subclasses : (
+          ".item" : (
+            margin: 0 5px -1px 0,
+            subclasses: (
+              "&.active" : (
+                subclasses: (
+                  ".link" : (
+                    text-decoration: none,
+                    background: #333,
+                    color: rgb(125, 211, 252),
+                  ),
+                  "&:hover" : (
+                  )
+                )
+              ),
+              ".link" : (
+                text-decoration: none,
+                border: 1px solid red,
+                border-radius: 5px 5px 0 0,
+                font-size: 0.825em,
+                subclasses: (
+                  "&:hover" : (
+                    background: #333,
+                  )
+                )
+              )
+            )
+          )
+        )
       )
   );
 
@@ -241,8 +269,26 @@ const html_code_shiki = highlighter.codeToHtml(props[1], {
                   ),
                   ".code" : (
                     border: 1px solid red,
-                    border-bottom: none,
+                    border-top: none,
                     border-radius: 0 0 5px 5px,
+                    display: block,
+                    margin-bottom: 0,
+                    width: 100%,
+                    position: relative,
+                    overflow: auto,
+                    subclasses : (
+                      "pre" : (
+                        padding: 1rem,
+                        subclasses : (
+                          "code" : (
+                            word-break: normal,
+                            background: none,
+                            padding: 0,
+                            font-size: 0.875em,
+                          )
+                        )
+                      ),
+                    )
                   )
                 )
               )
