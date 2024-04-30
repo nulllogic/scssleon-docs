@@ -8,27 +8,45 @@ toc: true
 
 import {Snippet} from "/app/src/components/snippet"
 
-<Snippet lang="html">
-    <div class="alert" role="alert">
-      <div class="flex align-items-top">
-        <div>
-          <svg width="20" height="20" viewBox="0 0 20 20" focusable="false" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M10 20c5.514 0 10-4.486 10-10s-4.486-10-10-10-10 4.486-10 10 4.486 10 10 10zm1-6a1 1 0 1 1-2 0v-4a1 1 0 1 1 2 0v4zm-1-9a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path></svg>
-        </div>
-        <div>
-          <div>
-            <p class="title">Your order is ready to ship.</p>
-            <div class="content">
-                <p>This order is ready to ship on March 7, 2017 at 3:12pm EDT.</p>
+<Snippet>
+    <Fragment slot="html">
+        <div class="alert" role="alert">
+            <div class="flex align-items-top">
+                <div>
+                    <svg width="20" height="20" viewBox="0 0 20 20" focusable="false" aria-hidden="true">
+                        <path fill="currentColor" fill-rule="evenodd"
+                              d="M10 20c5.514 0 10-4.486 10-10s-4.486-10-10-10-10 4.486-10 10 4.486 10 10 10zm1-6a1 1 0 1 1-2 0v-4a1 1 0 1 1 2 0v4zm-1-9a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <div>
+                        <p class="title">Your order is ready to ship.</p>
+                        <div class="content">
+                            <p>This order is ready to ship on March 7, 2017 at 3:12pm EDT.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
+    </Fragment>
+    <Fragment slot="scss">
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "../../styles/app.scss" as app;
+        @use "../../styles/scss/mixins.scss" as mixins;
+        @use "../../styles/scss/functions.scss" as functions;
+
+        $navbar: functions.get-theme(app.$theme, 'components.navbar');
+    </Fragment>
 </Snippet>
 
- <button class="btn btn-close" aria-label="Dismiss notification" type="button">
-  <svg viewBox="0 0 20 20" class="icon" focusable="false" aria-hidden="true" fill="currentColor">
-    <path fill="evenodd" d="M6.707 5.293a1 1 0 0 0-1.414 1.414l3.293 3.293-3.293 3.293a1 1 0 1 0 1.414 1.414l3.293-3.293 3.293 3.293a1 1 0 0 0 1.414-1.414l-3.293-3.293 3.293-3.293a1 1 0 0 0-1.414-1.414l-3.293 3.293-3.293-3.293Z"></path>
-  </svg>
- </button>
+<button class="btn btn-close" aria-label="Dismiss notification" type="button">
+    <svg viewBox="0 0 20 20" class="icon" focusable="false" aria-hidden="true" fill="currentColor">
+        <path fill="evenodd"
+              d="M6.707 5.293a1 1 0 0 0-1.414 1.414l3.293 3.293-3.293 3.293a1 1 0 1 0 1.414 1.414l3.293-3.293 3.293 3.293a1 1 0 0 0 1.414-1.414l-3.293-3.293 3.293-3.293a1 1 0 0 0-1.414-1.414l-3.293 3.293-3.293-3.293Z"></path>
+    </svg>
+</button>
 

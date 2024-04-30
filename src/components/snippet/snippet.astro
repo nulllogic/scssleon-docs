@@ -9,9 +9,11 @@ Object.keys(Astro.slots).forEach((element) =>
 
 let props = await Promise.all(slots);
 
+console.log(props);
+
 // HTML
 const html_code_formatted =
-    typeof props[1] !== "undefined"
+    typeof props[0] !== "undefined"
         ? await prettier.format(props[1], {
             parser: "html",
         })
@@ -19,7 +21,7 @@ const html_code_formatted =
 
 // SCSS
 const scss_code_formatted =
-    typeof props[2] !== "undefined"
+    typeof props[1] !== "undefined"
         ? await prettier.format(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
             parser: "scss",
         })
@@ -185,7 +187,7 @@ const html_code_shiki = highlighter.codeToHtml(html_code_formatted.replace(/\n.*
     // })
 </script>
 
-<style lang="scss" is:global>
+<style lang="scss">
   @use "sass:list";
   @use "sass:string";
   @use "sass:meta";
