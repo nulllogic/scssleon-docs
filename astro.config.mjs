@@ -4,11 +4,11 @@ import preact from '@astrojs/preact';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
-const tt = "test";
+import { lifecycleLogs } from './src/utils/integrations/docs'
 
 export default defineConfig({
     site: 'https://example.com',
-    integrations: [mdx(), sitemap(), preact()],
+    integrations: [mdx(), sitemap(), preact(), lifecycleLogs()],
     compressHTML: true,
     output: 'server',
     markdown: {
@@ -18,7 +18,7 @@ export default defineConfig({
         css: {
             preprocessorOptions: {
                 scss: {
-                    additionalData: `$url : ${tt};`,
+
                 },
             },
         }

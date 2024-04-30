@@ -2,18 +2,6 @@
 import prettier from "prettier";
 import {codeToHtml, getHighlighter} from "shiki";
 
-// const html = await Astro.slots.render('html');
-// const scss = await Astro.slots.render('scss');
-// // const js = await Astro.slots.render('js');
-//
-// const html_code_formatted = await typeof html !== undefined ? prettier.format(html, {
-//     parser: "mdx",
-// }) : '';
-//
-// const scss_code_formatted = await typeof scss !== undefined ? prettier.format(scss.replace(/(<p[^>]+?>|<p>|<\/p>)/img, ''), {
-//     parser: "scss",
-// }) : '';
-
 let slots = [];
 Object.keys(Astro.slots).forEach(element => slots.push(Astro.slots.render(element)));
 let props = await Promise.all(slots)
@@ -27,48 +15,67 @@ const html_code_formatted = typeof props[1] !== 'undefined' ? prettier.format(pr
 const scss_code_formatted = typeof props[2] !== 'undefined' ? prettier.format(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/img, ''), {
     parser: "scss",
 }) : null;
-
-const backgroundColor = "rgb(24 121 78)";
 ---
 
 
 <div class="snippet">
-    {typeof props[1] !== 'undefined' ? 'test' : 'test2'}
-  <ul class="nav">
-      {Astro.slots.has('html') &&
-          <li class="item">
-            <a class="link" href="#">
-              HTML
-            </a>
-          </li>
-      }
-      {Astro.slots.has('scss') &&
-          <li class="item">
-            <a class="link" href="#">
-              SCSS
-            </a>
-          </li>
-      }
-      {Astro.slots.has('js') &&
-          <li class="item">
-            <a class="link" href="#">
-              JS
-            </a>
-          </li>
-      }
-  </ul>
+  <div class="navtabs">
+    <ul class="nav">
+        {Astro.slots.has('html') &&
+            <li class="item">
+              <a class="link" href="#">
+                HTML
+              </a>
+            </li>
+        }
+        {Astro.slots.has('scss') &&
+            <li class="item">
+              <a class="link" href="#">
+                SCSS
+              </a>
+            </li>
+        }
+        {Astro.slots.has('js') &&
+            <li class="item">
+              <a class="link" href="#">
+                JS
+              </a>
+            </li>
+        }
+    </ul>
+  </div>
+
   <div class="preview">
     <div class="inline">
-      {Astro.slots.has('html') && html_code_formatted}
-      {Astro.slots.has('scss') && scss_code_formatted}
+        {Astro.slots.has('html') && props[1]}
+        {Astro.slots.has('scss') && props[2]}
+        {Astro.slots.has('js') && props[3]}
     </div>
 
-    <style is:inline lang="scss" define:vars={{backgroundColor}}>
-      ul {
-        & li {
-          background: var(--backgroundColor);
-        }
-      }
+    <style lang="scss">
+      @use "sass:list";
+      @use "sass:string";
+      @use "sass:meta";
+      @use "sass:map";
+
+      @use "../../styles/app.scss" as app;
+      @use "../../styles/scss/mixins.scss" as mixins;
+      @use "../../styles/scss/functions.scss" as functions;
+
+      $nav: functions.get-theme(app.$theme, "components.nav");
+
+      $nav-tabs: (
+        subclasses : (
+          ".nav" : $nav
+        )
+      );
+
+      @include mixins.generate-component(
+          $nav-tabs,
+          "navtabs",
+          app.$config,
+          app.$theme
+      );
     </style>
 
     <svg class="background">
@@ -97,7 +104,6 @@ const backgroundColor = "rgb(24 121 78)";
       </span>
     </div>
 
-    <Fragment client:load set:html={html_code_formatted} class="code"/>
   </div>
 </div>
 
