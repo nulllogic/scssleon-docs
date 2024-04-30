@@ -1,55 +1,111 @@
 ---
 import prettier from "prettier";
-import {codeToHtml, getHighlighter} from "shiki";
+import { getHighlighter } from "shiki";
 
 let slots = [];
-Object.keys(Astro.slots).forEach(element => slots.push(Astro.slots.render(element)));
-let props = await Promise.all(slots)
+Object.keys(Astro.slots).forEach((element) =>
+  slots.push(Astro.slots.render(element)),
+);
+let props = await Promise.all(slots);
 
 // HTML
-const html_code_formatted = typeof props[1] !== 'undefined' ? prettier.format(props[1], {
-    parser: "html",
-}) : null;
+const html_code_formatted =
+  typeof props[1] !== "undefined"
+    ? prettier.format(props[1], {
+        parser: "html",
+      })
+    : null;
 
 // SCSS
-const scss_code_formatted = typeof props[2] !== 'undefined' ? prettier.format(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/img, ''), {
-    parser: "scss",
-}) : null;
----
+const scss_code_formatted =
+  typeof props[2] !== "undefined"
+    ? prettier.format(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
+        parser: "scss",
+      })
+    : null;
 
+// `getHighlighter` is async, it initializes the internal and
+// loads the themes and languages specified.
+const highlighter = await getHighlighter({
+  themes: ["nord"],
+  langs: ["javascript"],
+});
+
+// then later you can use `highlighter.codeToHtml` synchronously
+// with the loaded themes and languages.
+const html_code_shiki = highlighter.codeToHtml(props[1], {
+  lang: "javascript",
+  theme: "nord",
+});
+---
 
 <div class="snippet">
   <div class="navtabs">
     <ul class="nav">
-        {Astro.slots.has('html') &&
-            <li class="item">
-              <a class="link" href="#">
-                HTML
-              </a>
-            </li>
-        }
-        {Astro.slots.has('scss') &&
-            <li class="item">
-              <a class="link" href="#">
-                SCSS
-              </a>
-            </li>
-        }
-        {Astro.slots.has('js') &&
-            <li class="item">
-              <a class="link" href="#">
-                JS
-              </a>
-            </li>
-        }
+      {
+        Astro.slots.has("html") && (
+          <li class="item active">
+            <a class="link" href="#">
+              HTML
+            </a>
+          </li>
+        )
+      }
+      {
+        Astro.slots.has("scss") && (
+          <li class="item">
+            <a class="link" href="#">
+              SCSS
+            </a>
+          </li>
+        )
+      }
+      {
+        Astro.slots.has("js") && (
+          <li class="item">
+            <a class="link" href="#">
+              JS
+            </a>
+          </li>
+        )
+      }
     </ul>
   </div>
 
-  <div class="preview">
+  <div class="preview-container">
+    {
+      Astro.slots.has("html") && (
+        <div client:load class="preview" set:html={html_code_formatted} />
+      )
+    }
+    <div class="tab-content">
+      {
+        Astro.slots.has("html") && (
+          <div class="tab active">
+            <div client:load class="code" set:html={html_code_shiki} />
+          </div>
+        )
+      }
+      {
+        Astro.slots.has("scss") && (
+          <div class="tab">
+            <div client:load lass="code" set:html={html_code_shiki} />
+          </div>
+        )
+      }
+      {
+        Astro.slots.has("js") && (
+          <div class="tab">
+            <div class="code" set:html={html_code_shiki} />
+          </div>
+        )
+      }
+    </div>
     <div class="inline">
-        {Astro.slots.has('html') && props[1]}
-        {Astro.slots.has('scss') && props[2]}
-        {Astro.slots.has('js') && props[3]}
+      <div set:html={html_code_shiki} />
+      {Astro.slots.has("html") && props[1]}
+      {Astro.slots.has("scss") && props[2]}
+      {Astro.slots.has("js") && props[3]}
     </div>
 
     <style lang="scss">
@@ -65,37 +121,37 @@ const scss_code_formatted = typeof props[2] !== 'undefined' ? prettier.format(pr
       $nav: functions.get-theme(app.$theme, "components.nav");
 
       $nav-tabs: (
-        subclasses : (
-          ".nav" : $nav
-        )
+        subclasses: (
+          ".nav": $nav,
+        ),
       );
 
       @include mixins.generate-component(
-          $nav-tabs,
-          "navtabs",
-          app.$config,
-          app.$theme
+        $nav-tabs,
+        "navtabs",
+        app.$config,
+        app.$theme
       );
     </style>
 
     <svg class="background">
       <defs>
         <pattern
-            id="pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001"
-            x="0"
-            y="0"
-            width="10"
-            height="10"
-            patternUnits="userSpaceOnUse"
+          id="pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001"
+          x="0"
+          y="0"
+          width="10"
+          height="10"
+          patternUnits="userSpaceOnUse"
         >
           <path d="M-3 13 15-5M-5 5l18-18M-1 21 17 3"></path>
         </pattern>
       </defs>
       <rect
-          stroke="none"
-          fill="url(#pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001)"
-          width="100%"
-          height="100%"></rect>
+        stroke="none"
+        fill="url(#pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001)"
+        width="100%"
+        height="100%"></rect>
     </svg>
 
     <div class="resizer">
@@ -103,63 +159,62 @@ const scss_code_formatted = typeof props[2] !== 'undefined' ? prettier.format(pr
         <span class="el"></span>
       </span>
     </div>
-
   </div>
 </div>
 
 <script>
-    document.querySelectorAll(".snippet").forEach((element) => {
-        const preview = element.querySelector(".preview");
-        if (preview) {
-            // Proceed, if preview is enabled
+  document.querySelectorAll(".snippet").forEach((element) => {
+    const preview = element.querySelector(".preview");
+    if (preview) {
+      // Proceed, if preview is enabled
 
-            const resizer = element.querySelector(".preview .resizer .drag");
-            if (resizer) {
-                const container_limit = Math.round(preview.clientWidth / 1.5);
+      const resizer = element.querySelector(".preview .resizer .drag");
+      if (resizer) {
+        const container_limit = Math.round(preview.clientWidth / 1.5);
 
-                resizer.onmousedown = (event) => {
-                    event.preventDefault();
+        resizer.onmousedown = (event) => {
+          event.preventDefault();
 
-                    const original_margin = parseFloat(
-                        isNaN(preview.style.marginRight) ? preview.style.marginRight : 0,
-                    );
-                    const original_mouse_x = event.pageX;
+          const original_margin = parseFloat(
+            isNaN(preview.style.marginRight) ? preview.style.marginRight : 0,
+          );
+          const original_mouse_x = event.pageX;
 
-                    const event_drag_start_handler = (event) => {
-                        const width = original_margin - (event.pageX - original_mouse_x);
-                        if (width < container_limit && width > 0) {
-                            preview.style.marginRight = width + "px";
-                        } else if (width < 0) {
-                            preview.style.marginRight = 0 + "px";
-                        }
-                    };
-
-                    const event_drag_end_handler = (event) => {
-                        document.documentElement.classList.remove("dragging");
-                        document.removeEventListener("mousemove", event_drag_start_handler);
-                        document.removeEventListener("mouseup", event_drag_end_handler);
-                    };
-
-                    document.documentElement.classList.add("dragging");
-                    document.addEventListener("mousemove", event_drag_start_handler);
-                    document.addEventListener("mouseup", event_drag_end_handler);
-                };
+          const event_drag_start_handler = (event) => {
+            const width = original_margin - (event.pageX - original_mouse_x);
+            if (width < container_limit && width > 0) {
+              preview.style.marginRight = width + "px";
+            } else if (width < 0) {
+              preview.style.marginRight = 0 + "px";
             }
-        }
-    });
+          };
 
-    // // Clipboard
-    // const clipboard = new ClipboardJS('.btn-clipboard', {
-    //     target: trigger => trigger.closest('.code-snippet').querySelector('.highlight')
-    // })
-    //
-    // clipboard.on('success', event => {
-    //
-    // })
-    //
-    // clipboard.on('error', event => {
-    //
-    // })
+          const event_drag_end_handler = (event) => {
+            document.documentElement.classList.remove("dragging");
+            document.removeEventListener("mousemove", event_drag_start_handler);
+            document.removeEventListener("mouseup", event_drag_end_handler);
+          };
+
+          document.documentElement.classList.add("dragging");
+          document.addEventListener("mousemove", event_drag_start_handler);
+          document.addEventListener("mouseup", event_drag_end_handler);
+        };
+      }
+    }
+  });
+
+  // // Clipboard
+  // const clipboard = new ClipboardJS('.btn-clipboard', {
+  //     target: trigger => trigger.closest('.code-snippet').querySelector('.highlight')
+  // })
+  //
+  // clipboard.on('success', event => {
+  //
+  // })
+  //
+  // clipboard.on('error', event => {
+  //
+  // })
 </script>
 
 <style lang="scss">
@@ -299,6 +354,37 @@ const scss_code_formatted = typeof props[2] !== 'undefined' ? prettier.format(pr
       }
     }
   }
+*/
+</style>
 
-  */
+<style lang="scss">
+  .snippet {
+    .navtabs {
+      margin: 0 0 0 8px;
+      .nav {
+        .item {
+          &.active {
+            .link {
+              background: red;
+            }
+          }
+          .link {
+            text-decoration: none;
+            &:hover {
+              background: yellow;
+            }
+          }
+        }
+      }
+    }
+    .preview {
+      position: relative;
+      transition: 0.75s background-color;
+      padding: 1rem;
+
+      border: 1px solid red;
+      border-bottom: none;
+      border-radius: 5px 5px 0 0;
+    }
+  }
 </style>

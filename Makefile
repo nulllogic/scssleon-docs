@@ -2,7 +2,7 @@
 
 CURRENT_DIR := $(PWD)
 # Configure path to SCSSleon directory here
-SCSSLEON_DIR := ~/Developer/my/scssleon
+SCSSLEON_DIR := ~/Developer/scssleon
 
 help:
 	@echo "[ENV SETUP]"
