@@ -59,11 +59,8 @@ const backgroundColor = "rgb(24 121 78)";
   </ul>
   <div class="preview">
     <div class="inline">
-      {Astro.slots.has('html') &&
-          <slot name="html" set:html={html_code_formatted} is:raw />
-      }
-      <slot name="html" set:html={html_code_formatted}/>
-      <slot name="scss" set:html={scss_code_formatted}/>
+      {Astro.slots.has('html') && html_code_formatted}
+      {Astro.slots.has('scss') && scss_code_formatted}
     </div>
 
     <style is:inline lang="scss" define:vars={{backgroundColor}}>
