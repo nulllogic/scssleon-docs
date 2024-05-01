@@ -11,11 +11,13 @@ import {Snippet} from "/app/src/components/snippet"
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
 <Snippet lang="html">
-  <div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn">Left</button>
-    <button type="button" class="btn">Middle</button>
-    <button type="button" class="btn">Right</button>
-  </div>
+    <Fragment slot="html">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn">Left</button>
+            <button type="button" class="btn">Middle</button>
+            <button type="button" class="btn">Right</button>
+        </div>
+    </Fragment>
 </Snippet>
 
 ## Separated example
@@ -23,9 +25,11 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
 <Snippet lang="html">
-  <div class="btn-group separated" role="group" aria-label="Basic example">
-    <button type="button" class="btn">Left</button>
-    <button type="button" class="btn">Middle</button>
-    <button type="button" class="btn">Right</button>
-  </div>
+    <Fragment slot="html">
+        <div class="btn-group separated" role="group" aria-label="Basic example">
+            <button type="button" class="btn">Left</button>
+            <button type="button" class="btn">Middle</button>
+            <button type="button" class="btn">Right</button>
+        </div>
+    </Fragment>
 </Snippet>

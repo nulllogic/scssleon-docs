@@ -8,18 +8,20 @@ import {Snippet} from "/app/src/components/snippet"
 
 ## Example
 
-<Snippet lang="html">
-  <div>
-    <input class="checkbox" type="checkbox" id="input1" value="" />
-    <label class="label" for="input1">
-      Default checkbox
-    </label>
-  </div>
-  <div>
-    <input class="checkbox" type="checkbox" id="input2" checked />
-    <label class="label" for="input2">
-      Default checked checkbox
-    </label>
-  </div>
+<Snippet>
+    <Fragment slot="html">
+        <div>
+            <input class="checkbox" type="checkbox" id="input1" value=""/>
+            <label class="label" for="input1">
+                Default checkbox
+            </label>
+        </div>
+        <div>
+            <input class="checkbox" type="checkbox" id="input2" checked/>
+            <label class="label" for="input2">
+                Default checked checkbox
+            </label>
+        </div>
+    </Fragment>
 </Snippet>
 

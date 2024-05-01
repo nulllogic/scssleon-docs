@@ -13,40 +13,48 @@ Placeholders can be used to enhance the experience of your application. They're 
 ## Example
 
 In the example below, we take a typical card component and recreate it with placeholders applied to create a "loading card". Size and proportions are the same between the two.
-<Snippet lang="html">
-    <div class="placeholder" aria-hidden="true">
-        <span class="el"></span>
-        <span class="el"></span>
-        <span class="el"></span>
-        <span class="el"></span>
-        <span class="el"></span>
-    </div>
+<Snippet>
+    <Fragment slot="html">
+        <div class="placeholder" aria-hidden="true">
+            <span class="el"></span>
+            <span class="el"></span>
+            <span class="el"></span>
+            <span class="el"></span>
+            <span class="el"></span>
+        </div>
+    </Fragment>
 </Snippet>
 ### Width
 
 You can change the `width` through grid column classes, width utilities, or inline styles.
-<Snippet lang="html">
-    <div class="placeholder" aria-hidden="true">
-        <span class="el"></span>
-        <span class="el"></span>
-        <span class="el" style="width: 25%;"></span>
-    </div>
+<Snippet>
+    <Fragment slot="html">
+        <div class="placeholder" aria-hidden="true">
+            <span class="el"></span>
+            <span class="el"></span>
+            <span class="el" style="width: 25%;"></span>
+        </div>
+    </Fragment>
 </Snippet>
 ### Animation
 
 Animate placeholders with `.glow` or `.wave` to better convey the perception of something being _actively_ loaded.
-<Snippet lang="html">
-    <p class="placeholder glow">
-        <span class="el"></span>
-        <span class="el"></span>
-        <span class="el"></span>
-    </p>
+<Snippet>
+    <Fragment slot="html">
+        <p class="placeholder glow">
+            <span class="el"></span>
+            <span class="el"></span>
+            <span class="el"></span>
+        </p>
+    </Fragment>
 </Snippet>
-<Snippet lang="html">
-    <p class="placeholder wave">
-        <span class="el"></span>
-        <span class="el"></span>
-        <span class="el"></span>
-    </p>
+<Snippet>
+    <Fragment slot="html">
+        <p class="placeholder wave">
+            <span class="el"></span>
+            <span class="el"></span>
+            <span class="el"></span>
+        </p>
+    </Fragment>
 </Snippet>
 ## Sass

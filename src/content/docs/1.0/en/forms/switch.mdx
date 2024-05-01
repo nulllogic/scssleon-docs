@@ -8,18 +8,20 @@ import {Snippet} from "/app/src/components/snippet"
 
 ## Example
 
-<Snippet lang="html">
-  <div>
-    <input class="radio" type="radio" name="input1" id="input1" />
-    <label class="label" for="input1">
-      Default radio
-    </label>
-  </div>
-  <div>
-    <input class="radio" type="radio" name="input1" id="input2" checked />
-    <label class="label" for="input2">
-      Default checked radio
-    </label>
-  </div>
+<Snippet>
+    <Fragment slot="html">
+        <div>
+            <input class="radio" type="radio" name="input1" id="input1"/>
+            <label class="label" for="input1">
+                Default radio
+            </label>
+        </div>
+        <div>
+            <input class="radio" type="radio" name="input1" id="input2" checked/>
+            <label class="label" for="input2">
+                Default checked radio
+            </label>
+        </div>
+    </Fragment>
 </Snippet>
 
