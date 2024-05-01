@@ -1,6 +1,6 @@
 ---
 import prettier from "prettier";
-import { getHighlighter } from "shiki";
+import {getHighlighter} from "shiki";
 
 let slots = [];
 Object.keys(Astro.slots).forEach((element) => {
@@ -13,34 +13,57 @@ const props = await Promise.all(slots);
 const html_code_formatted =
   typeof props[0] !== "undefined" && props[0] !== null
     ? await prettier.format(props[0], {
-        parser: "html",
-      })
-    : null;
+      parser: "html",
+    })
+    : '';
 
 // SCSS
 const scss_code_formatted =
   typeof props[1] !== "undefined" && props[1] !== null
     ? await prettier.format(props[1].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
-        parser: "scss",
-      })
-    : null;
+      parser: "scss",
+    })
+    : '';
+
+// JS
+const js_code_formatted =
+  typeof props[2] !== "undefined" && props[2] !== null
+    ? await prettier.format(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
+      parser: "babel",
+    })
+    : '';
 
 // `getHighlighter` is async, it initializes the internal and
 // loads the themes and languages specified.
 const highlighter = await getHighlighter({
   themes: ["vitesse-dark"],
-  langs: ["javascript"],
+  langs: ["html", "javascript", "scss"],
 });
 
 // Remove last line added by prettier using regex
 const html_code_shiki = highlighter.codeToHtml(
   html_code_formatted.replace(/\n.*$/, ""),
   {
-    lang: "javascript",
+    lang: "html",
     theme: "vitesse-dark",
   },
 );
 
+const scss_code_shiki = highlighter.codeToHtml(
+  scss_code_formatted.replace(/\n.*$/, ""),
+  {
+    lang: "scss",
+    theme: "vitesse-dark",
+  },
+);
+
+const js_code_shiki = highlighter.codeToHtml(
+  js_code_formatted.replace(/\n.*$/, ""),
+  {
+    lang: "javascript",
+    theme: "vitesse-dark",
+  },
+);
 ---
 
 <div class="snippet">
@@ -48,29 +71,29 @@ const html_code_shiki = highlighter.codeToHtml(
     <ul class="nav">
       {
         Astro.slots.has("html") && (
-          <li class="item active">
-            <a class="link" href="#">
-              HTML
-            </a>
-          </li>
+              <li class="item active">
+                <a class="link" href="#">
+                  HTML
+                </a>
+              </li>
         )
       }
       {
         Astro.slots.has("scss") && (
-          <li class="item">
-            <a class="link" href="#">
-              SCSS
-            </a>
-          </li>
+              <li class="item">
+                <a class="link" href="#">
+                  SCSS
+                </a>
+              </li>
         )
       }
       {
         Astro.slots.has("js") && (
-          <li class="item">
-            <a class="link" href="#">
-              JS
-            </a>
-          </li>
+              <li class="item">
+                <a class="link" href="#">
+                  JS
+                </a>
+              </li>
         )
       }
     </ul>
@@ -79,29 +102,29 @@ const html_code_shiki = highlighter.codeToHtml(
   <div class="preview-container">
     {
       Astro.slots.has("html") && (
-        <div client:load class="preview" set:html={html_code_formatted} />
+            <div client:load class="preview" set:html={html_code_formatted}/>
       )
     }
     <div class="tab-content">
       {
         Astro.slots.has("html") && (
-          <div class="tab active">
-            <div client:load class="code" set:html={html_code_shiki} />
-          </div>
+              <div class="tab active">
+                <div client:load class="code" set:html={html_code_shiki}/>
+              </div>
         )
       }
       {
         Astro.slots.has("scss") && (
-          <div class="tab">
-            <div client:load class="code" set:html={html_code_shiki} />
-          </div>
+              <div class="tab">
+                <div client:load class="code" set:html={scss_code_shiki}/>
+              </div>
         )
       }
       {
         Astro.slots.has("js") && (
-          <div class="tab">
-            <div class="code" set:html={html_code_shiki} />
-          </div>
+              <div class="tab">
+                <div class="code" set:html={js_code_shiki}/>
+              </div>
         )
       }
     </div>
@@ -109,21 +132,21 @@ const html_code_shiki = highlighter.codeToHtml(
     <svg class="background">
       <defs>
         <pattern
-          id="pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001"
-          x="0"
-          y="0"
-          width="10"
-          height="10"
-          patternUnits="userSpaceOnUse"
+            id="pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001"
+            x="0"
+            y="0"
+            width="10"
+            height="10"
+            patternUnits="userSpaceOnUse"
         >
           <path d="M-3 13 15-5M-5 5l18-18M-1 21 17 3"></path>
         </pattern>
       </defs>
       <rect
-        stroke="none"
-        fill="url(#pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001)"
-        width="100%"
-        height="100%"></rect>
+          stroke="none"
+          fill="url(#pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001)"
+          width="100%"
+          height="100%"></rect>
     </svg>
 
     <div class="resizer">
@@ -135,12 +158,32 @@ const html_code_shiki = highlighter.codeToHtml(
 </div>
 
 <script>
-  document.querySelectorAll(".snippet").forEach((element) => {
-    const preview = element.querySelector(".preview");
+
+  document.querySelectorAll('.snippet').forEach((snippet) => {
+
+    // Tabs
+    // Checking first, if element exist
+    if (snippet.querySelector('.navtabs')) {
+      const nav_items = snippet.querySelectorAll('.navtabs .nav .item');
+      const tab_items = snippet.querySelectorAll('.tab-content .tab');
+
+      nav_items.forEach((nav, index) => {
+        nav.querySelectorAll('.link').forEach(element => element.addEventListener('click', function (e) {
+          e.preventDefault();
+          nav_items.forEach(element => element.classList.remove('active'));
+          nav.classList.add('active');
+
+          tab_items.forEach(element => element.classList.remove('active'));
+          tab_items[index].classList.add('active');
+        }));
+      });
+    }
+
+    const preview = snippet.querySelector(".preview");
     if (preview) {
       // Proceed, if preview is enabled
 
-      const resizer = element.querySelector(".preview .resizer .drag");
+      const resizer = snippet.querySelector(".preview .resizer .drag");
       if (resizer) {
         const container_limit = Math.round(preview.clientWidth / 1.5);
 
@@ -189,11 +232,11 @@ const html_code_shiki = highlighter.codeToHtml(
   // })
 </script>
 
-<script define:vars={{ props }}>
+<script define:vars={{props}}>
   eval(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""));
 </script>
 
-<style lang="scss">
+<style lang="scss" is:global>
   @use "sass:list";
   @use "sass:string";
   @use "sass:meta";
@@ -206,37 +249,37 @@ const html_code_shiki = highlighter.codeToHtml(
   $nav: functions.get-theme(app.$theme, "components.nav");
 
   $nav: map.deep-merge(
-    $nav,
-    (
-      subclasses: (
-        ".item": (
-          margin: 0 5px -1px 0,
-          subclasses: (
-            "&.active": (
-              subclasses: (
-                ".link": (
-                  text-decoration: none,
-                  background: #333,
-                  color: rgb(125, 211, 252),
+      $nav,
+      (
+        subclasses: (
+          ".item": (
+            margin: 0 5px -1px 0,
+            subclasses: (
+              "&.active": (
+                subclasses: (
+                  ".link": (
+                    text-decoration: none,
+                    background: #333,
+                    color: rgb(125, 211, 252),
+                  ),
+                  "&:hover": (),
                 ),
-                "&:hover": (),
               ),
-            ),
-            ".link": (
-              text-decoration: none,
-              border: 1px solid red,
-              border-radius: 5px 5px 0 0,
-              font-size: 0.825em,
-              subclasses: (
-                "&:hover": (
-                  background: #333,
+              ".link": (
+                text-decoration: none,
+                border: 1px solid red,
+                border-radius: 5px 5px 0 0,
+                font-size: 0.825em,
+                subclasses: (
+                  "&:hover": (
+                    background: #333,
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-    )
+      )
   );
 
   $nav-tabs: (
@@ -245,54 +288,50 @@ const html_code_shiki = highlighter.codeToHtml(
     ),
   );
 
-  $preview-container: ();
-
-  $snippet: (
+  $preview-container: (
     subclasses: (
-      ".navtabs": (
-        margin: 0 0 0 8px,
+      ".preview": (
+        position: relative,
+        transition: 0.75s background-color,
+        padding: 1rem,
+        border: 1px solid red,
+        border-bottom: none,
+        border-radius: 5px 5px 0 0,
         subclasses: (
-          ".nav": $nav,
-        ),
-      ),
-      ".preview-container": (
-        subclasses: (
-          ".preview": (
-            position: relative,
-            transition: 0.75s background-color,
-            padding: 1rem,
-            border: 1px solid red,
-            border-bottom: none,
-            border-radius: 5px 5px 0 0,
+          "h1, h2, h3, h4, h5, h6, p, dl, ol, nav ul, blockquote, pre, table:not(:last-child)" : (
+            margin: 0
           ),
-          ".tab-content": (
+          "p" : (
+            padding: 0
+          )
+        )
+      ),
+      ".tab-content": (
+        subclasses: (
+          ".tab": (
+            display: none,
             subclasses: (
-              ".tab": (
-                display: none,
+              "&.active": (
+                display: block,
+              ),
+              ".code": (
+                border: 1px solid red,
+                border-top: none,
+                border-radius: 0 0 5px 5px,
+                display: block,
+                margin-bottom: 0,
+                width: 100%,
+                position: relative,
+                overflow: auto,
                 subclasses: (
-                  "&.active": (
-                    display: block,
-                  ),
-                  ".code": (
-                    border: 1px solid red,
-                    border-top: none,
-                    border-radius: 0 0 5px 5px,
-                    display: block,
-                    margin-bottom: 0,
-                    width: 100%,
-                    position: relative,
-                    overflow: auto,
+                  "pre": (
+                    padding: 1rem,
                     subclasses: (
-                      "pre": (
-                        padding: 1rem,
-                        subclasses: (
-                          "code": (
-                            word-break: normal,
-                            background: none,
-                            padding: 0,
-                            font-size: 0.875em,
-                          ),
-                        ),
+                      "code": (
+                        word-break: normal,
+                        background: none,
+                        padding: 0,
+                        font-size: 0.875em,
                       ),
                     ),
                   ),
@@ -305,11 +344,23 @@ const html_code_shiki = highlighter.codeToHtml(
     ),
   );
 
+  $snippet: (
+    subclasses: (
+      ".navtabs": (
+        margin: 0 0 0 8px,
+        subclasses: (
+          ".nav": $nav,
+        ),
+      ),
+      ".preview-container": $preview-container,
+    ),
+  );
+
   @include mixins.generate-component(
-    $snippet,
-    "snippet",
-    app.$config,
-    app.$theme
+      $snippet,
+      "snippet",
+      app.$config,
+      app.$theme
   );
 </style>
 
