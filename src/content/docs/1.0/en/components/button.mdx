@@ -8,32 +8,38 @@ import {Snippet} from "/app/src/components/snippet"
 
 ## Examples
 
-xiigrid includes several predefined button styles, each serving its own semantic purpose, with a few extras thrown in for more control.
+SCSSLeon includes several predefined button styles, each serving its own semantic purpose, with a few extras thrown in for more control.
 
-<Snippet lang="html">
-  <button type="button" class="btn">Default</button>
-  <button type="button" class="btn loading">Loading</button>
-  <button type="button" class="btn" disabled>Disabled</button>
-  <button type="button" class="btn btn-link">Link</button>
+<Snippet>
+    <Fragment slot="html">
+        <button type="button" class="btn">Default</button>
+        <button type="button" class="btn loading">Loading</button>
+        <button type="button" class="btn" disabled>Disabled</button>
+        <button type="button" class="btn btn-link">Link</button>
+    </Fragment>
 </Snippet>
 
 ## Variations
 
 <Snippet lang="html">
-  <button type="button" class="btn" style="--xii-button-background: red">Default</button>
-  <button type="button" class="btn" style="--xii-button-background: green">Default</button>
-  <button type="button" class="btn" style="--xii-button-background: blue">Default</button>
-  <button type="button" class="btn" style="--xii-button-background: silver">Default</button>
+    <Fragment slot="html">
+        <button type="button" class="btn" style="--xii-button-background: red">Default</button>
+        <button type="button" class="btn" style="--xii-button-background: green">Default</button>
+        <button type="button" class="btn" style="--xii-button-background: blue">Default</button>
+        <button type="button" class="btn" style="--xii-button-background: silver">Default</button>
+    </Fragment>
 </Snippet>
 
 ## Types
 
 <Snippet>
-  <a class="btn" href="#" role="button">Link</a>
-  <button class="btn" type="submit">Button</button>
-  <input class="btn" type="button" value="Input" />
-  <input class="btn" type="submit" value="Submit" />
-  <input class="btn" type="reset" value="Reset" />
+    <Fragment slot="html">
+        <a class="btn" href="#" role="button">Link</a>
+        <button class="btn" type="submit">Button</button>
+        <input class="btn" type="button" value="Input"/>
+        <input class="btn" type="submit" value="Submit"/>
+        <input class="btn" type="reset" value="Reset"/>
+    </Fragment>
 </Snippet>
 
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -41,7 +47,8 @@ xiigrid includes several predefined button styles, each serving its own semantic
     <path d="M17 7L6.75 17.25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12px" height="12px" viewBox="0 0 12 12" version="1.1">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12px" height="12px"
+     viewBox="0 0 12 12" version="1.1">
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Artboard" transform="translate(-209.000000, -19.000000)" stroke="#FFFFFF">
             <g id="Group" transform="translate(209.000000, 19.000000)">
@@ -54,23 +61,39 @@ xiigrid includes several predefined button styles, each serving its own semantic
 </svg>
 
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.464 8.68779H9.91255V7.48779H16.5125V14.0878H15.3125V9.53632L8.33681 16.5121L7.48828 15.6635L14.464 8.68779Z" fill="#E2E2E2"/>
+    <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M14.464 8.68779H9.91255V7.48779H16.5125V14.0878H15.3125V9.53632L8.33681 16.5121L7.48828 15.6635L14.464 8.68779Z"
+          fill="#E2E2E2"/>
 </svg>
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 9 15 4 20 9"></polyline><path d="M4 20h7a4 4 0 0 0 4-4V4"></path></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="10 9 15 4 20 9"></polyline>
+    <path d="M4 20h7a4 4 0 0 0 4-4V4"></path>
+</svg>
 
 <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M46 6.34483H0.264223V0H46V6.34483Z" fill="#FF2F2F"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M46 5.02299V45.2069H39.4663V5.02299L46 5.02299Z" fill="#FF2F2F"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M44.6388 7.13793L4.62001 46L0 41.5135L40.0188 2.65146L44.6388 7.13793Z" fill="#FF2F2F"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M46 6.34483H0.264223V0H46V6.34483Z" fill="#FF2F2F"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M46 5.02299V45.2069H39.4663V5.02299L46 5.02299Z" fill="#FF2F2F"/>
+    <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M44.6388 7.13793L4.62001 46L0 41.5135L40.0188 2.65146L44.6388 7.13793Z" fill="#FF2F2F"/>
 </svg>
 
-<svg width=".5em" height=".5em" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" data-arrow="2"><path d="M2.1573 18L15.1348 5.02247V17.5955L18 14.6966V0H3.33708L0.438203 2.89888H12.9775L0 15.8764L2.1573 18Z" fill="currentcolor"></path></svg>
+<svg width=".5em" height=".5em" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" data-arrow="2">
+    <path d="M2.1573 18L15.1348 5.02247V17.5955L18 14.6966V0H3.33708L0.438203 2.89888H12.9775L0 15.8764L2.1573 18Z"
+          fill="currentcolor"></path>
+</svg>
 
 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g opacity="0.8"><path d="M2 10L10 2M10 2H4.28571M10 2V7.71429" stroke="white" stroke-linecap="square" stroke-linejoin="round"></path></g>
+    <g opacity="0.8">
+        <path d="M2 10L10 2M10 2H4.28571M10 2V7.71429" stroke="white" stroke-linecap="square"
+              stroke-linejoin="round"></path>
+    </g>
 </svg>
 
-<svg width="22" height="22" viewBox="0 0 22 22"xmlns="http://www.w3.org/2000/svg">
-  <path d="M10.232 5.65c.357 0 .647.29.647.648v3.95c0 .966-.787 1.752-1.754 1.752H1.753A1.755 1.755 0 0 1 0 10.247V2.874c0-.967.786-1.753 1.753-1.753h3.95a.647.647 0 1 1 0 1.294h-3.95a.46.46 0 0 0-.46.46v7.372a.46.46 0 0 0 .46.459h7.372a.46.46 0 0 0 .46-.459v-3.95c0-.356.289-.646.647-.646zm1.72-5.27A.61.61 0 0 1 12 .615v3.693a.615.615 0 1 1-1.23 0V2.1L5.05 7.82a.614.614 0 0 1-.87 0 .615.615 0 0 1 0-.87L9.9 1.23H7.691a.615.615 0 1 1 0-1.23h3.693a.617.617 0 0 1 .568.38z" fill="#fff" fill-rule="evenodd"/>
+<svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+
+    <path
+        d="M10.232 5.65c.357 0 .647.29.647.648v3.95c0 .966-.787 1.752-1.754 1.752H1.753A1.755 1.755 0 0 1 0 10.247V2.874c0-.967.786-1.753 1.753-1.753h3.95a.647.647 0 1 1 0 1.294h-3.95a.46.46 0 0 0-.46.46v7.372a.46.46 0 0 0 .46.459h7.372a.46.46 0 0 0 .46-.459v-3.95c0-.356.289-.646.647-.646zm1.72-5.27A.61.61 0 0 1 12 .615v3.693a.615.615 0 1 1-1.23 0V2.1L5.05 7.82a.614.614 0 0 1-.87 0 .615.615 0 0 1 0-.87L9.9 1.23H7.691a.615.615 0 1 1 0-1.23h3.693a.617.617 0 0 1 .568.38z"
+        fill="#fff" fill-rule="evenodd"/>
 </svg>

@@ -3,18 +3,17 @@ import prettier from "prettier";
 import {getHighlighter} from "shiki";
 
 let slots = [];
-Object.keys(Astro.slots).forEach((element) =>
-    slots.push(Astro.slots.render(element)),
+Object.keys(Astro.slots).forEach((element) => {
+        if (element !== 'default') return slots.push(Astro.slots.render(element))
+    }
 );
 
 let props = await Promise.all(slots);
 
-console.log(props);
-
 // HTML
 const html_code_formatted =
     typeof props[0] !== "undefined"
-        ? await prettier.format(props[1], {
+        ? await prettier.format(props[0], {
             parser: "html",
         })
         : null;
@@ -22,7 +21,7 @@ const html_code_formatted =
 // SCSS
 const scss_code_formatted =
     typeof props[1] !== "undefined"
-        ? await prettier.format(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
+        ? await prettier.format(props[1].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
             parser: "scss",
         })
         : null;
