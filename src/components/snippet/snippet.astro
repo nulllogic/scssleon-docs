@@ -12,7 +12,7 @@ let props = await Promise.all(slots);
 
 // HTML
 const html_code_formatted =
-    typeof props[0] !== "undefined"
+    typeof props[0] !== "undefined" && props[0] !== null
         ? await prettier.format(props[0], {
             parser: "html",
         })
@@ -20,7 +20,7 @@ const html_code_formatted =
 
 // SCSS
 const scss_code_formatted =
-    typeof props[1] !== "undefined"
+    typeof props[1] !== "undefined" && props[0] !== null
         ? await prettier.format(props[1].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
             parser: "scss",
         })
@@ -184,6 +184,7 @@ const html_code_shiki = highlighter.codeToHtml(html_code_formatted.replace(/\n.*
     // clipboard.on('error', event => {
     //
     // })
+
 </script>
 
 <style lang="scss">
