@@ -11,57 +11,59 @@ const props = await Promise.all(slots);
 
 // HTML
 const html_code_formatted =
-  typeof props[0] !== "undefined" && props[0] !== null
+  typeof props[0] !== 'undefined' && props[0] !== null
     ? await prettier.format(props[0], {
-      parser: "html",
+      parser: 'html',
+      printWidth: 80,
+      htmlWhitespaceSensitivity: 'ignore' // <–– this option is making MDX HTML look good
     })
     : '';
 
 // SCSS
 const scss_code_formatted =
-  typeof props[1] !== "undefined" && props[1] !== null
+  typeof props[1] !== 'undefined' && props[1] !== null
     ? await prettier.format(props[1].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
-      parser: "scss",
+      parser: 'scss',
     })
     : '';
 
 // JS
 const js_code_formatted =
-  typeof props[2] !== "undefined" && props[2] !== null
+  typeof props[2] !== 'undefined' && props[2] !== null
     ? await prettier.format(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
-      parser: "babel",
+      parser: 'babel',
     })
     : '';
 
 // `getHighlighter` is async, it initializes the internal and
 // loads the themes and languages specified.
 const highlighter = await getHighlighter({
-  themes: ["vitesse-dark"],
-  langs: ["html", "javascript", "scss"],
+  themes: ['vitesse-dark'],
+  langs: ['html', 'javascript', 'scss'],
 });
 
 // Remove last line added by prettier using regex
 const html_code_shiki = highlighter.codeToHtml(
   html_code_formatted.replace(/\n.*$/, ""),
   {
-    lang: "html",
-    theme: "vitesse-dark",
+    lang: 'html',
+    theme: 'vitesse-dark',
   },
 );
 
 const scss_code_shiki = highlighter.codeToHtml(
   scss_code_formatted.replace(/\n.*$/, ""),
   {
-    lang: "scss",
-    theme: "vitesse-dark",
+    lang: 'scss',
+    theme: 'vitesse-dark',
   },
 );
 
 const js_code_shiki = highlighter.codeToHtml(
   js_code_formatted.replace(/\n.*$/, ""),
   {
-    lang: "javascript",
-    theme: "vitesse-dark",
+    lang: 'javascript',
+    theme: 'vitesse-dark',
   },
 );
 ---
