@@ -1,4 +1,4 @@
-.PHONY: help docs-build docs-watch
+.PHONY: help build watch
 
 CURRENT_DIR := $(PWD)
 # Configure path to SCSSleon directory here
@@ -7,11 +7,11 @@ SCSSLEON_DIR := ~/Developer/scssleon
 help:
 	@echo "[ENV SETUP]"
 
-docs-build:
+build:
 	@echo "[Building Docker image]"
 	docker build -t scssleon-docs .
 
-docs-watch:
+watch:
 	@echo "[Running Docker XII/Grid docs]"
 	docker run --rm -it -v ${CURRENT_DIR}/src:/app/src \
 		-v ${SCSSLEON_DIR}/scss:/app/src/styles/scss \
