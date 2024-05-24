@@ -14,6 +14,9 @@ export default defineConfig({
     markdown: {
         extendDefaultPlugins: true,
     },
+    security : {
+        checkOrigin: true
+    },
     vite : {
         css: {
             preprocessorOptions: {
