@@ -67,6 +67,8 @@ const js_code_shiki = highlighter.codeToHtml(
         theme: 'vitesse-dark',
     },
 );
+
+const {frame_url, preview} = Astro.props;
 ---
 
 <div class="snippet">
@@ -106,7 +108,7 @@ const js_code_shiki = highlighter.codeToHtml(
         {
             Astro.slots.has("html") && (
                         <div class="preview">
-                            <Preview />
+                            <Preview url={frame_url} />
                         </div>
             )
         }

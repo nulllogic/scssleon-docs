@@ -4,7 +4,7 @@ import preact from '@astrojs/preact';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
-import { lifecycleLogs } from './src/utils/integrations/docs'
+import {lifecycleLogs} from './src/utils/integrations/docs'
 
 export default defineConfig({
     site: 'https://example.com',
@@ -14,16 +14,17 @@ export default defineConfig({
     markdown: {
         extendDefaultPlugins: true,
     },
-    security : {
+    security: {
         checkOrigin: true
     },
-    vite : {
+    vite: {
         css: {
             preprocessorOptions: {
-                scss: {
-
-                },
+                scss: {},
             },
         }
+    },
+    devToolbar: {
+        enabled: false
     }
 });

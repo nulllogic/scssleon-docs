@@ -1,7 +1,7 @@
 ---
-
+const { url } = Astro.props;
 ---
-<iframe src="" class="preview-container" />
+<iframe src={url} class="preview-container" />
 
 <style lang="scss">
     .preview-container {

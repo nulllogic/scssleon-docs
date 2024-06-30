@@ -1,5 +1,5 @@
-export function onRequest (context, next) {
-    console.log(context, context.url);
+export function onRequest (req, next) {
+    console.log(req);
     // // intercept data from a request
     // // optionally, modify the properties in `locals`
     // context.locals.user.name = "John Wick";
