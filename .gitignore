@@ -7,5 +7,4 @@ target
 /dist
 /src/styles/scss
 node_modules
-package-lock.json
 .astro
