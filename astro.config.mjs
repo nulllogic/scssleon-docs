@@ -11,7 +11,8 @@ import sitemap from '@astrojs/sitemap';
 import {iframe} from './src/utils/integrations/iframe'
 
 export default defineConfig({
-    site: 'https://example.com',
+    site: 'https://nulllogic.github.io',
+    base: 'scssleon-docs',
     integrations: [mdx(), sitemap(), preact(), iframe()],
     compressHTML: true,
     output: 'static',
