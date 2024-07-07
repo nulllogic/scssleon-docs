@@ -1,0 +1,81 @@
+---
+import * as sass from 'sass';
+
+import path, { dirname } from 'path';
+
+const result = await sass.compileStringAsync(`
+@use "sass:list";
+@use "sass:meta";
+@use "sass:string";
+@use "sass:map";
+
+@use "~/src/styles/app.scss" as app;
+@use "~/src/styles/scss/mixins.scss" as mixins;
+@use "~/src/styles/scss/functions.scss" as functions;
+  
+$welcome-section: (
+    --padding: 105px 0,
+    text-align: center,
+    background: var(--background),
+    padding: var(--padding),
+    colors : (
+      dark : (
+        background: rgba(17, 23, 26, 1) radial-gradient(at 0 0, rgba(0, 62, 107, .4) 35%, #00000000 70%),
+      )
+    ),
+    subclasses : (
+      ".title" : (
+        display: inline-block,
+        font-size: 5rem,
+        font-weight: 700,
+        background-image: linear-gradient(143deg, rgb(126, 35, 246) 30%, rgb(253, 104, 253), rgb(126, 35, 246) 60%),
+        background-clip: text,
+        -webkit-background-clip: text,
+        -webkit-text-fill-color: transparent,
+        background-size: 500% 500%,
+        animation-duration: 3s,
+        animation-timing-function: linear,
+        animation-delay: 0s,
+        animation-iteration-count: infinite,
+        animation-direction: normal,
+        animation-fill-mode: none,
+        animation-play-state: running,
+        animation-name: dobza,
+      ),
+      ".latest-commit" : (
+        background: var(--background),
+        colors : (
+          dark : (
+            background: rgba(65, 52, 99, 0.4)
+          )
+        )
+      )
+    )
+  );
+
+  @include mixins.generate-component(
+      $welcome-section,
+      "welcome",
+      app.$config,
+      app.$theme
+  );
+
+`, {
+    importers: [{
+        // An importer that redirects relative URLs starting with "~" to
+        // `node_modules`.
+        findFileUrl(url) {
+            console.log(new URL(`file:///` + path.resolve(process.cwd()) + url.substring(1)));
+            if (!url.startsWith('~')) return null;
+            return new URL(`file:///` + path.resolve(process.cwd()) + url.substring(1));
+        }
+    }]
+});
+
+---
+
+<div class="welcome">
+    <p>123</p>
+</div>
+
+<style set:html={result.css}></style>

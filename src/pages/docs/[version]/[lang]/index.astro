@@ -1,10 +1,22 @@
 ---
+import {getCollection} from "astro:content";
 import Index from "src/layouts/index.astro";
 import Head from "src/components/head/index.astro";
+
+export async function getStaticPaths() {
+    return [
+        {
+            params: {
+                version: '1.0',
+                lang: 'en'
+            }
+        }
+    ]
+}
 ---
 
 <Index>
     <Head>
-        <meta http-equiv="refresh" content={`0;url=/docs/1.0/en/getting-started/introduction`} />
+        <meta http-equiv="refresh" content={`0;url=/docs/1.0/en/getting-started/introduction`}/>
     </Head>
 </Index>

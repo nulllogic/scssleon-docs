@@ -1,43 +1,119 @@
 ---
-import Docs from "~/layouts/docs.astro";
-import { Debug } from "astro/components";
-import Toc from "../../../../components/toc/index.astro";
+export const prerender = true;
 
-// import type { CollectionEntry } from 'astro:content';
-// interface Props {
-//     post: CollectionEntry<'docs'>;
+import {getCollection, getEntry} from 'astro:content';
+
+import Docs from '~/layouts/docs.astro';
+import Toc from '../../../../components/toc/index.astro';
+
+export async function getStaticPaths() {
+    const docsCollection = await getCollection('docs');
+    return docsCollection.map((doc) => {
+        const [version, lang, ...slug] = doc.slug.split('/');
+        console.log(version, lang, slug.join('/'));
+        return {
+            params: {
+                version: '1.0',
+                lang: 'en',
+                slug: slug.join('/'),
+            },
+            props: doc
+        }
+    })
+}
+
+const {slug} = Astro?.props;
+
+if (slug === undefined) {
+    throw new Error('Slug is required');
+}
+
+// 2. Query for the entry directly using the request slug
+const page = await getEntry('docs', slug);
+
+// 3. Redirect if the entry does not exist
+if (page === undefined) {
+    // return Astro.redirect("/404");
+}
+
+// export async function getStaticPaths() {
+//
+//     const allProducts = await getCollection('products');
+//
+//     return allProducts.map((product) => {
+//         return {
+//             params: {
+//                 slug: product.slug
+//             },
+//             props: {
+//                 title: product.data.title
+//             }
+//         };
+//     });
 // }
 
-import { getCollection, getEntry } from "astro:content";
-const docsCollection = await getCollection("docs");
-const page = await getEntry(
-  "docs",
-  Astro.params.version.replace(/\./g, "") +
-    "/" +
-    Astro.params.lang +
-    "/" +
-    Astro.params.slug,
-);
-const github_page =
-  "https://github.com/nulllogic/scssleon/blob/master/docs/" + page.id;
+// const {slug} = Astro?.params;
+//
+// const product_images = await Astro.glob('../../content/products/**/*-product.png');
+// const product_pdfs = await Astro.glob('../../content/products/**/*.pdf');
+//
+// const image = product_images.find(image => {
+//     return image.default.src.includes(slug.split('/').at(-1));
+// })
+//
+// const pdf = product_pdfs.find(pdf => {
+//     return pdf?.default?.includes(slug.split('/').at(-1))
+// })
+//
+// const categoryCollection = await getCollection('categories')
+// const category = categoryCollection.find((category) => category.slug === slug.split('/').slice(0, 1).join('/'));
+//
+// if (slug === undefined) {
+//     throw new Error("Slug is required");
+// }
+//
+// // 2. Query for the entry directly using the request slug
+// const entry = await getEntry('products', slug);
+//
+// // 3. Redirect if the entry does not exist
+// if (entry === undefined) {
+//     return Astro.redirect("/404");
+// }
+//
+// const {Content} = await entry.render();
 
-const { headings, Content } = await page.render();
+// const docsCollection = await getCollection("docs");
+// const page = await getEntry(
+//     "docs",
+//     Astro.params.version.replace(/\./g, "") +
+//     "/" +
+//     Astro.params.lang +
+//     "/" +
+//     Astro.params.slug,
+// );
+//
+// console.log(page);
+
+const github_page =
+    "https://github.com/nulllogic/scssleon/blob/master/docs/" + page.id;
+
+const {headings, Content} = await page.render();
 ---
 
 <Docs>
-  <div class="toc">
-    <Toc headings={headings} />
-  </div>
-  <div class="content">
-    <div class="intro">
-      <h1 class="title">{page?.data?.title}</h1>
-      <p class="subtitle">{page?.data?.description}</p>
+    <div class="toc">
+        <Toc headings={headings}/>
     </div>
-    <div class="flex justify-content-end">
-      <a href={github_page} class="btn" target="_blank"> View on GitHub </a>
+    <div class="content">
+        <div class="intro">
+            <h1 class="title">{page?.data?.title}</h1>
+            <p class="subtitle">{page?.data?.description}</p>
+        </div>
+        <div class="flex justify-content-end">
+            <a href={github_page} class="btn" target="_blank"> View on GitHub </a>
+        </div>
+        <Content/>
     </div>
-    <Content />
-  </div>
 </Docs>
 
 <style lang="scss">

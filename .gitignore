@@ -4,5 +4,8 @@ target
 .vscode/*.log
 .DS_Store
 .env
+/dist
+/src/styles/scss
 node_modules
 package-lock.json
+.astro

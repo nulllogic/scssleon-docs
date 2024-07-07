@@ -1,6 +1,7 @@
 ---
+console.log(Astro.params);
 import prettier from "prettier";
-import {getHighlighter} from "shiki";
+import {getSingletonHighlighter} from "shiki";
 import {Preview} from "../preview";
 
 let slots = [];
@@ -36,9 +37,9 @@ const js_code_formatted =
         })
         : '';
 
-// `getHighlighter` is async, it initializes the internal and
+// `getSingletonHighlighter` is async, it initializes the internal and
 // loads the themes and languages specified.
-const highlighter = await getHighlighter({
+const highlighter = await getSingletonHighlighter({
     themes: ['vitesse-dark'],
     langs: ['html', 'javascript', 'scss'],
 });

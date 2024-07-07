@@ -1,37 +1,42 @@
 ---
+
+// const component = Astro.url.searchParams.get('component') || '';
+// const id = Astro.url.searchParams.get('id') || '';
+//
+// import { getCollection, getEntry } from "astro:content";
+// const docsCollection = await getCollection("docs");
+// console.log(docsCollection)
+// const page = await getEntry(
+//     "docs",
+//     Astro.params.version.replace(/\./g, "") +
+//     "/" +
+//     Astro.params.lang +
+//     "/" +
+//     Astro.params.slug,
+// );
+
+import {getCollection, getEntry} from 'astro:content';
+
+export async function getStaticPaths() {
+    const docsCollection = await getCollection('docs');
+    return docsCollection.map((doc) => {
+        const [version, lang, ...slug] = doc.slug.split('/');
+        console.log(version, lang, slug.join('/'));
+        return {
+            params: {
+                version: '1.0',
+                lang: 'en',
+                slug: slug.join('/'),
+            },
+            props: doc
+        }
+    })
+}
+
+import { experimental_AstroContainer } from "astro/container";
+const container = await experimental_AstroContainer.create();
+import iFramePreview from "../../components/iframe_preview/index.astro";
+const result = await container.renderToResponse(iFramePreview);
+
 ---
-<!doctype html>
-<!--suppress HtmlUnknownTarget -->
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>Storybook</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script>
-        window.CONFIG_TYPE = '[CONFIG_TYPE HERE]';
-        window.LOGLEVEL = '[LOGLEVEL HERE]';
-        window.FRAMEWORK_OPTIONS = '[FRAMEWORK_OPTIONS HERE]';
-        window.CHANNEL_OPTIONS = '[CHANNEL_OPTIONS HERE]';
-        window.FEATURES = '[FEATURES HERE]';
-        window.STORIES = '[STORIES HERE]';
-        window.DOCS_OPTIONS = '[DOCS_OPTIONS HERE]';
-        window.TAGS_OPTIONS = '[TAGS_OPTIONS HERE]';
-
-        ('OTHER_GLOBLALS HERE');
-
-        // We do this so that "module && module.hot" etc. in Storybook source code
-        // doesn't fail (it will simply be disabled)
-        window.module = undefined;
-        window.global = window;
-    </script>
-    <!-- [HEAD HTML SNIPPET HERE] -->
-</head>
-
-<body>
-<!-- [BODY HTML SNIPPET HERE] -->
-<div id="storybook-root"></div>
-<div id="storybook-docs"></div>
-<script type="module" src="./sb-preview/runtime.js"></script>
-<script type="module" src="/virtual:/@storybook/builder-vite/vite-app.js"></script>
-</body>
-</html>
+<div set:html={result} />

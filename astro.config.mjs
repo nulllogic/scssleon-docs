@@ -1,16 +1,20 @@
 import {defineConfig} from 'astro/config';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 import preact from '@astrojs/preact';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
-import {lifecycleLogs} from './src/utils/integrations/docs'
+import {iframe} from './src/utils/integrations/iframe'
 
 export default defineConfig({
     site: 'https://example.com',
-    integrations: [mdx(), sitemap(), preact()],
+    integrations: [mdx(), sitemap(), preact(), iframe()],
     compressHTML: true,
-    output: 'server',
+    output: 'static',
     markdown: {
         extendDefaultPlugins: true,
     },
@@ -26,5 +30,10 @@ export default defineConfig({
     },
     devToolbar: {
         enabled: false
-    }
+    },
+    resolve: {
+        alias: {
+            '~': path.resolve(__dirname, './src')
+        }
+    },
 });

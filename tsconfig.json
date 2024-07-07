@@ -1,9 +1,12 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "target": "ESNext",
+  "module": "ESNext",
+  "moduleResolution": "node",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/layouts/*": ["/src/layouts/*"]
+      "~/*": ["/src/*"]
     }
   }
 }
