@@ -65,7 +65,7 @@ $welcome-section: (
         // An importer that redirects relative URLs starting with "~" to
         // `node_modules`.
         findFileUrl(url) {
-            console.log(new URL(`file:///` + path.resolve(process.cwd()) + url.substring(1)));
+            // console.log(new URL(`file:///` + path.resolve(process.cwd()) + url.substring(1)));
             if (!url.startsWith('~')) return null;
             return new URL(`file:///` + path.resolve(process.cwd()) + url.substring(1));
         }

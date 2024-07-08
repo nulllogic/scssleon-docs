@@ -9,17 +9,19 @@ import {generate_rel_link} from "~/utils/links";
             <div class="left">
                 <ul class="nav">
                     <li class="item">
-                        <a href={generate_rel_link(Astro, './')} class="link">
+                        <a href={generate_rel_link(Astro, './')} class="link" aria-label="Homepage">
                             <Logo/>
                         </a>
                     </li>
                     <li class="item">
-                        <a href={generate_rel_link(Astro, './docs/1.0/en/getting-started/introduction')} class="link" target="_self">
+                        <a href={generate_rel_link(Astro, './docs/1.0/en/getting-started/introduction')} class="link"
+                           target="_self" aria-label="Components">
                             Components
                         </a>
                     </li>
                     <li class="item">
-                        <a href={generate_rel_link(Astro, './examples/1.0/en/welcome')} class="link" target="_self">
+                        <a href={generate_rel_link(Astro, './examples/1.0/en/welcome')} class="link" target="_self"
+                           aria-label="Pre-built Sections">
                             Pre-built Sections
                         </a>
                     </li>

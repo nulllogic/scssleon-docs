@@ -5,10 +5,11 @@ category: components
 toc: true
 schema: true
 ---
-import {Snippet} from "/src/components/snippet"
+import {Snippet} from "~/components/snippet"
+import {generate_iframe_link} from "~/utils/links.js";
 
 ## Example
-<Snippet frame_url={'/iframe/components/accordion/1'} preview={true}>
+<Snippet frame_url={generate_iframe_link('components/accordion/1')} preview={true}>
     <Fragment slot="html">
         <div className="accordion">
             <div className="item">
