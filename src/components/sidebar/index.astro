@@ -3,161 +3,163 @@ import {getCollection} from "astro:content";
 const docsCollection = await getCollection("docs");
 
 const base_url = import.meta.env.PROD ?
-    import.meta.env.SITE + import.meta.env.BASE_URL :
+    import.meta.env.SITE + import.meta.env.BASE_URL + '/' :
     Astro.url.protocol + '//' + Astro.url.host + import.meta.env.BASE_URL;
 
 const gettingStartedCollection = docsCollection
-  .filter((doc) => {
-    if (doc?.data?.category) return doc?.data?.category.includes("getting-started");
-  })
-  .sort((a, b) => {
-    return b.slug
-      .replace(/.*\/(\w+)\/?$/, "$1")
-      .localeCompare(a.slug.replace(/.*\/(\w+)\/?$/, "$1"));
-  });
+    .filter((doc) => {
+        if (doc?.data?.category) return doc?.data?.category.includes("getting-started");
+    })
+    .sort((a, b) => {
+        return b.slug
+            .replace(/.*\/(\w+)\/?$/, "$1")
+            .localeCompare(a.slug.replace(/.*\/(\w+)\/?$/, "$1"));
+    });
 
 const componentsCollection = docsCollection
-  .filter((doc) => {
-    if (doc?.data?.category) return doc?.data?.category.includes("components");
-  })
-  .sort((a, b) => {
-    return a.slug
-      .replace(/.*\/(\w+)\/?$/, "$1")
-      .localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, "$1"));
-  });
+    .filter((doc) => {
+        if (doc?.data?.category) return doc?.data?.category.includes("components");
+    })
+    .sort((a, b) => {
+        return a.slug
+            .replace(/.*\/(\w+)\/?$/, "$1")
+            .localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, "$1"));
+    });
 
 const formsCollection = docsCollection
-  .filter((doc) => {
-    if (doc?.data?.category) return doc?.data?.category.includes("forms");
-  })
-  .sort((a, b) => {
-    return a.slug
-      .replace(/.*\/(\w+)\/?$/, "$1")
-      .localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, "$1"));
-  });
+    .filter((doc) => {
+        if (doc?.data?.category) return doc?.data?.category.includes("forms");
+    })
+    .sort((a, b) => {
+        return a.slug
+            .replace(/.*\/(\w+)\/?$/, "$1")
+            .localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, "$1"));
+    });
 
 const aboutCollection = docsCollection
-  .filter((doc) => {
-    if (doc?.data?.category) return doc?.data?.category.includes("about");
-  })
-  .sort((a, b) => {
-    return a.slug
-      .replace(/.*\/(\w+)\/?$/, "$1")
-      .localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, "$1"));
-  });
+    .filter((doc) => {
+        if (doc?.data?.category) return doc?.data?.category.includes("about");
+    })
+    .sort((a, b) => {
+        return a.slug
+            .replace(/.*\/(\w+)\/?$/, "$1")
+            .localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, "$1"));
+    });
 
 const pathname = new URL(Astro.request.url).pathname;
 const generate_class = (link) => {
-  let classes = ['link'];
-  let url = base_url + "/docs/" +
-    Astro.params.version +
-    "/" +
-    Astro.params.lang +
-    link.slug.replace(
-      Astro.params.version.replace(/\./g, "") +
-      "/" +
-      Astro.params.lang,
-      "",
-    );
+    let classes = ['link'];
+    let url = base_url + "/docs/" +
+        Astro.params.version +
+        "/" +
+        Astro.params.lang +
+        link.slug.replace(
+            Astro.params.version.replace(/\./g, "") +
+            "/" +
+            Astro.params.lang,
+            "",
+        );
 
-  if (pathname === url) {
-    classes.push('active');
-  }
+    if (pathname === url) {
+        classes.push('active');
+    }
 
-  return [classes]
+    return [classes]
 }
 
 const generate_link = (link) => {
-  return base_url + '/docs/' +
-    Astro.params.version +
-    "/" +
-    Astro.params.lang +
-    link.slug.replace(
-      Astro.params.version.replace(/\./g, "") +
-      "/" +
-      Astro.params.lang,
-      "",
-    )
+    return base_url + '/docs/' +
+        Astro.params.version +
+        "/" +
+        Astro.params.lang +
+        link.slug.replace(
+            Astro.params.version.replace(/\./g, "") +
+            "/" +
+            Astro.params.lang,
+            "",
+        )
 }
 ---
 
 <aside class="sidebar">
-  <nav>
-    <ul class="nav vertical">
-      <li class="item">
-        <h5 class="title">Getting started</h5>
+    <nav>
         <ul class="nav vertical">
-          {
-            gettingStartedCollection.map((doc, index) => {
-              return (
-                  <li class="item">
-                    <a
-                        class:list={generate_class(doc)}
-                        href={generate_link(doc)}
-                    >{doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}</a>
-                  </li>
-              );
-            })
-          }
+            <li class="item">
+                <h5 class="title">Getting started</h5>
+                <ul class="nav vertical">
+                    {
+                        gettingStartedCollection.map((doc, index) => {
+                            return (
+                                    <li class="item">
+                                        <a
+                                                class:list={generate_class(doc)}
+                                                href={generate_link(doc)}
+                                        >{doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}</a>
+                                    </li>
+                            );
+                        })
+                    }
+                </ul>
+            </li>
+            <li class="item">
+                <h5 class="title">Components</h5>
+                <ul class="nav vertical">
+                    {
+                        componentsCollection.map((doc, index) => {
+                            // console.log(doc)
+
+                            return (
+                                    <li class="item">
+                                        <a
+                                                class:list={generate_class(doc)}
+                                                href={generate_link(doc)}
+                                        >{doc.slug.replace(/.*\/(\w+)\/?$/, "$1").replace(/_/g, ' ')}</a>
+                                        {doc.data?.schema && <span class="badge">Schema</span>}
+                                    </li>
+                            );
+                        })
+                    }
+                </ul>
+            </li>
+            <li class="item">
+                <h5 class="title">Forms</h5>
+                <ul class="nav vertical">
+                    {
+                        formsCollection.map((doc, index) => {
+                            return (
+                                    <li class="item">
+                                        <a
+                                                class:list={generate_class(doc)}
+                                                href={generate_link(doc)}
+                                        >{doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}</a>
+                                    </li>
+                            );
+                        })
+                    }
+                </ul>
+            </li>
+            <li class="item">
+                <h5 class="title">About</h5>
+                <ul class="nav vertical">
+                    {
+                        aboutCollection.map((doc, index) => {
+                            return (
+                                    <li class="item">
+                                        <a
+                                                class:list={generate_class(doc)}
+                                                href={generate_link(doc)}
+                                        >{doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}</a>
+                                    </li>
+                            );
+                        })
+                    }
+                </ul>
+            </li>
         </ul>
-      </li>
-      <li class="item">
-        <h5 class="title">Components</h5>
-        <ul class="nav vertical">
-          {
-            componentsCollection.map((doc, index) => {
-              // console.log(doc)
-              return (
-                  <li class="item">
-                    <a
-                        class:list={generate_class(doc)}
-                        href={generate_link(doc)}
-                    >{doc.slug.replace(/.*\/(\w+)\/?$/, "$1").replace(/_/g, ' ')}</a>
-                    {doc.data?.schema && <span class="badge">Schema</span>}
-                  </li>
-              );
-            })
-          }
-        </ul>
-      </li>
-      <li class="item">
-        <h5 class="title">Forms</h5>
-        <ul class="nav vertical">
-          {
-            formsCollection.map((doc, index) => {
-              return (
-                  <li class="item">
-                    <a
-                        class:list={generate_class(doc)}
-                        href={generate_link(doc)}
-                    >{doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}</a>
-                  </li>
-              );
-            })
-          }
-        </ul>
-      </li>
-      <li class="item">
-        <h5 class="title">About</h5>
-        <ul class="nav vertical">
-          {
-            aboutCollection.map((doc, index) => {
-              return (
-                  <li class="item">
-                    <a
-                        class:list={generate_class(doc)}
-                        href={generate_link(doc)}
-                    >{doc.slug.replace(/.*\/(\w+)\/?$/, "$1")}</a>
-                  </li>
-              );
-            })
-          }
-        </ul>
-      </li>
-    </ul>
-  </nav>
-  <svg fill="#ffffff" height="15px" width="15px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-       viewBox="0 0 60 60" xml:space="preserve">
+    </nav>
+    <svg fill="#ffffff" height="15px" width="15px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         viewBox="0 0 60 60" xml:space="preserve">
 <path d="M53,41.069V29H31V19h7V3H22v16h7v10H7v12.069C3.06,41.564,0,44.928,0,49c0,4.411,3.589,8,8,8s8-3.589,8-8
 	c0-4.072-3.06-7.436-7-7.931V31h20v10.069c-3.94,0.495-7,3.859-7,7.931c0,4.411,3.589,8,8,8s8-3.589,8-8c0-4.072-3.06-7.436-7-7.931
 	V31h20v10.069c-3.94,0.495-7,3.859-7,7.931c0,4.411,3.589,8,8,8s8-3.589,8-8C60,44.928,56.94,41.564,53,41.069z M24,5h12v12H24V5z
@@ -177,62 +179,62 @@ const generate_link = (link) => {
   $nav: functions.get-theme(app.$theme, 'components.nav');
 
   $nav: map.deep-merge($nav, (
-    --grid-template-columns: auto auto,
-    margin: 0 0 8px 0,
-    subclasses : (
-      ".item" : (
-        subclasses: (
-          "&:first-child .title" : (
-            margin: 0 0 10px 0
-          ),
-          ".title" : (
-            font-size: 1.25rem,
-            font-weight: 500,
-            margin: 10px 0,
-          ),
+      --grid-template-columns: auto auto,
+      margin: 0 0 8px 0,
+      subclasses : (
           ".item" : (
-            subclasses: (
-              ".link" : (
-                border-left : 1px solid rgba(231, 231, 235, 0.2),
-                color: rgb(148, 163, 184),
-                padding: 5px 10px,
-                text-decoration: none,
-                text-transform: capitalize,
-                subclasses: (
-                  "&.active" : (
-                    color: rgba(26, 104, 45, 0.85),
-                    border-left : 1px solid rgba(26, 104, 45, 0.85),
+              subclasses: (
+                  "&:first-child .title" : (
+                      margin: 0 0 10px 0
                   ),
-                  "&:hover:not(.active)" : (
-                    color: rgb(230, 230, 230),
-                    border-left : 1px solid rgba(26, 104, 45, 0.35),
+                  ".title" : (
+                      font-size: 1.25rem,
+                      font-weight: 500,
+                      margin: 10px 0,
+                  ),
+                  ".item" : (
+                      subclasses: (
+                          ".link" : (
+                              border-left : 1px solid rgba(231, 231, 235, 0.2),
+                              color: rgb(148, 163, 184),
+                              padding: 5px 10px,
+                              text-decoration: none,
+                              text-transform: capitalize,
+                              subclasses: (
+                                  "&.active" : (
+                                      color: rgba(26, 104, 45, 0.85),
+                                      border-left : 1px solid rgba(26, 104, 45, 0.85),
+                                  ),
+                                  "&:hover:not(.active)" : (
+                                      color: rgb(230, 230, 230),
+                                      border-left : 1px solid rgba(26, 104, 45, 0.35),
+                                  )
+                              )
+                          )
+                      )
                   )
-                )
               )
-            )
           )
-        )
       )
-    )
   ));
 
   $sidebar-section: (
-    grid-area: sidebar,
-    display: block,
-    align-self: start,
-    colors : (
-      dark : (
+      grid-area: sidebar,
+      display: block,
+      align-self: start,
+      colors : (
+          dark : (
+          )
+      ),
+      subclasses : (
+          ".nav" : $nav
       )
-    ),
-    subclasses : (
-      ".nav" : $nav
-    )
   );
 
   @include mixins.generate-component(
-      $sidebar-section,
-      "sidebar",
-      app.$config,
-      app.$theme
+          $sidebar-section,
+          "sidebar",
+          app.$config,
+          app.$theme
   );
 </style>
