@@ -88,7 +88,7 @@ const white = true
   $logo-section: (
       display: inline-flex,
       align-items: center,
-      gap: 8px,
+      gap: 7px,
       height: 18px,
       position: relative,
       colors : (
@@ -104,10 +104,6 @@ const white = true
       subclasses : (
           "& > svg:first-child" : (
               opacity: 1,
-              transform: translateZ(0),
-              transition-duration: 0.1s,
-              transition-property: opacity,
-              transition-timing-function: ease-out,
           ),
           ".on_hover" : (
               position: absolute,
@@ -115,7 +111,7 @@ const white = true
               opacity: 0,
               transform: translateZ(0),
               transition-duration: 0.2s,
-              transition-property: transform opacity,
+              transition-property: transform,
               transition-timing-function: ease-out,
           ),
           "&:hover" : (
