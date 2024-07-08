@@ -2,6 +2,10 @@
 import {getCollection} from "astro:content";
 const docsCollection = await getCollection("docs");
 
+const base_url = import.meta.env.PROD ?
+    import.meta.env.SITE + import.meta.env.BASE_URL :
+    Astro.url.protocol + '//' + Astro.url.host + import.meta.env.BASE_URL;
+
 const gettingStartedCollection = docsCollection
   .filter((doc) => {
     if (doc?.data?.category) return doc?.data?.category.includes("getting-started");
@@ -45,7 +49,7 @@ const aboutCollection = docsCollection
 const pathname = new URL(Astro.request.url).pathname;
 const generate_class = (link) => {
   let classes = ['link'];
-  let url = "/docs/" +
+  let url = base_url + "/docs/" +
     Astro.params.version +
     "/" +
     Astro.params.lang +
@@ -64,7 +68,7 @@ const generate_class = (link) => {
 }
 
 const generate_link = (link) => {
-  return "/docs/" +
+  return base_url + '/docs/' +
     Astro.params.version +
     "/" +
     Astro.params.lang +

@@ -3,6 +3,10 @@ import {getCollection} from "astro:content";
 import Index from "src/layouts/index.astro";
 import Head from "src/components/head/index.astro";
 
+const base_url = import.meta.env.PROD ?
+    import.meta.env.SITE + import.meta.env.BASE_URL :
+    Astro.url.protocol + '//' + Astro.url.host + import.meta.env.BASE_URL + '/';
+
 export async function getStaticPaths() {
     return [
         {
@@ -17,6 +21,6 @@ export async function getStaticPaths() {
 
 <Index>
     <Head>
-        <meta http-equiv="refresh" content={`0;url=/docs/1.0/en/getting-started/introduction`}/>
+        <meta http-equiv="refresh" content={`0;url=${base_url}docs/1.0/en/getting-started/introduction`}/>
     </Head>
 </Index>
