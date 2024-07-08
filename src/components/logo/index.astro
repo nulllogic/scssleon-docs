@@ -103,7 +103,12 @@ const white = true
       ),
       subclasses : (
           "& > svg:first-child" : (
-              opacity: 1
+              opacity: 1,
+              transform: translateZ(0),
+              transition-duration: 0.2s,
+              transition-property: transform opacity,
+              transition-timing-function: ease-in-out,
+              animation-play-state: paused
           ),
           ".on_hover" : (
               position: absolute,
@@ -111,7 +116,7 @@ const white = true
               opacity: 0,
               transform: translateZ(0),
               transition-duration: 0.2s,
-              transition-property: transform,
+              transition-property: transform opacity,
               transition-timing-function: ease-in-out,
               animation-play-state: paused
           ),
@@ -119,6 +124,7 @@ const white = true
               subclasses: (
                   "& > svg:first-child" : (
                       opacity: 0,
+                      transform: translateX(4px) rotate(-2deg),
                   ),
                   ".on_hover" : (
                       opacity: 1,
