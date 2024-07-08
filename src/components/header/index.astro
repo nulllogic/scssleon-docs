@@ -1,8 +1,6 @@
 ---
 import Logo from '../logo/index.astro'
-const base_url = import.meta.env.PROD ?
-    import.meta.env.SITE + import.meta.env.BASE_URL + '/' :
-    Astro.url.protocol + '//' + Astro.url.host + import.meta.env.BASE_URL + '/';
+import {generate_rel_link} from "~/utils/links";
 ---
 
 <div class="header">
@@ -11,17 +9,17 @@ const base_url = import.meta.env.PROD ?
             <div class="left">
                 <ul class="nav">
                     <li class="item">
-                        <a href={base_url} class="link">
+                        <a href={generate_rel_link(Astro, '/')} class="link">
                             <Logo/>
                         </a>
                     </li>
                     <li class="item">
-                        <a href={new URL('./docs/1.0/en', base_url)} class="link" target="_self">
+                        <a href={generate_rel_link(Astro, './docs/1.0/en/getting-started/introduction')} class="link" target="_self">
                             Components
                         </a>
                     </li>
                     <li class="item">
-                        <a href={new URL('./examples', base_url)} class="link" target="_self">
+                        <a href={generate_rel_link(Astro, './examples/1.0/en/welcome')} class="link" target="_self">
                             Pre-built Sections
                         </a>
                     </li>

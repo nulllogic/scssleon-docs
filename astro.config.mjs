@@ -12,7 +12,8 @@ import {iframe} from './src/utils/integrations/iframe'
 
 export default defineConfig({
     site: 'https://nulllogic.github.io',
-    base: '/scssleon-docs',
+    // adding sub directory ( it's required for github pages )
+    base: import.meta.env.PROD ? '/scssleon-docs' : '',
     integrations: [mdx(), sitemap(), preact(), iframe()],
     compressHTML: true,
     output: 'static',
