@@ -131,6 +131,14 @@ const white = true
                       transform: translateX(4px) rotate(-2deg),
                   )
               )
+          ),
+          "& > svg:last-child" : (
+              display: none,
+              responsive : (
+                  md : (
+                      display: inherit
+                  )
+              ),
           )
       )
   );
