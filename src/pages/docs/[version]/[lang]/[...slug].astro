@@ -10,10 +10,11 @@ export async function getStaticPaths() {
     const docsCollection = await getCollection('docs');
     return docsCollection.map((doc) => {
         const [version, lang, ...slug] = doc.slug.split('/');
+
         return {
             params: {
-                version: '1.0',
-                lang: 'en',
+                version: version.split('').join('.'), // we receive "10" string, transforming to "1.0"
+                lang: lang,
                 slug: slug.join('/'),
             },
             props: doc
@@ -32,66 +33,8 @@ const page = await getEntry('docs', slug);
 
 // 3. Redirect if the entry does not exist
 if (page === undefined) {
-    // return Astro.redirect("/404");
+    return Astro.redirect("/404");
 }
-
-// export async function getStaticPaths() {
-//
-//     const allProducts = await getCollection('products');
-//
-//     return allProducts.map((product) => {
-//         return {
-//             params: {
-//                 slug: product.slug
-//             },
-//             props: {
-//                 title: product.data.title
-//             }
-//         };
-//     });
-// }
-
-// const {slug} = Astro?.params;
-//
-// const product_images = await Astro.glob('../../content/products/**/*-product.png');
-// const product_pdfs = await Astro.glob('../../content/products/**/*.pdf');
-//
-// const image = product_images.find(image => {
-//     return image.default.src.includes(slug.split('/').at(-1));
-// })
-//
-// const pdf = product_pdfs.find(pdf => {
-//     return pdf?.default?.includes(slug.split('/').at(-1))
-// })
-//
-// const categoryCollection = await getCollection('categories')
-// const category = categoryCollection.find((category) => category.slug === slug.split('/').slice(0, 1).join('/'));
-//
-// if (slug === undefined) {
-//     throw new Error("Slug is required");
-// }
-//
-// // 2. Query for the entry directly using the request slug
-// const entry = await getEntry('products', slug);
-//
-// // 3. Redirect if the entry does not exist
-// if (entry === undefined) {
-//     return Astro.redirect("/404");
-// }
-//
-// const {Content} = await entry.render();
-
-// const docsCollection = await getCollection("docs");
-// const page = await getEntry(
-//     "docs",
-//     Astro.params.version.replace(/\./g, "") +
-//     "/" +
-//     Astro.params.lang +
-//     "/" +
-//     Astro.params.slug,
-// );
-//
-// console.log(page);
 
 const github_page =
     "https://github.com/nulllogic/scssleon/blob/master/docs/" + page.id;

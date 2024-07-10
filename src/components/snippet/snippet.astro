@@ -3,6 +3,7 @@
 import prettier from "prettier";
 import {getSingletonHighlighter} from "shiki";
 import {Preview} from "../preview";
+import {generate_iframe_link} from "~/utils/links.js";
 
 let slots = [];
 Object.keys(Astro.slots).forEach((element) => {
@@ -109,7 +110,7 @@ const {frame_url, preview} = Astro.props;
         {
             Astro.slots.has("html") && (
                         <div class="preview">
-                            <Preview url={frame_url} />
+                            <Preview url={generate_iframe_link(frame_url)} />
                         </div>
             )
         }

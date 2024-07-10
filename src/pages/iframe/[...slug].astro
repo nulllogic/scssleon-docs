@@ -1,42 +1,76 @@
 ---
-
-// const component = Astro.url.searchParams.get('component') || '';
-// const id = Astro.url.searchParams.get('id') || '';
-//
-// import { getCollection, getEntry } from "astro:content";
-// const docsCollection = await getCollection("docs");
-// console.log(docsCollection)
-// const page = await getEntry(
-//     "docs",
-//     Astro.params.version.replace(/\./g, "") +
-//     "/" +
-//     Astro.params.lang +
-//     "/" +
-//     Astro.params.slug,
-// );
-
 import {getCollection, getEntry} from 'astro:content';
 
 export async function getStaticPaths() {
     const docsCollection = await getCollection('docs');
-    return docsCollection.map((doc) => {
-        const [version, lang, ...slug] = doc.slug.split('/');
-        console.log(version, lang, slug.join('/'));
+    const iframes = [];
+
+    for (let i = 0; i < docsCollection.length; i++) {
+
+        const regexp = new RegExp('(\\bframe_url\\b)={["\']?((?:.(?!["\']?\\s+(?:\\S+)=|\\s*\\/?[>"\']))+.)["\']}?', 'gi');
+        const matches = [...docsCollection[i].body.toString().matchAll(regexp)];
+
+        if (matches.length !== 0) {
+            // Check if we have multiply iframe inside document
+            if (matches.length > 1) {
+                for (let j = 0; j < matches.length; j++) {
+                    let temp_el = {...docsCollection[i]};
+                    temp_el.frame_url = matches[j]['2'];
+                    iframes.push(temp_el);
+                }
+            } else {
+                docsCollection[i].frame_url = matches[0]['2'];
+                iframes.push(docsCollection[i]);
+            }
+        }
+    }
+
+    return iframes.map((doc) => {
+
         return {
             params: {
-                version: '1.0',
-                lang: 'en',
-                slug: slug.join('/'),
+                slug: doc?.frame_url,
             },
             props: doc
         }
     })
 }
 
-import { experimental_AstroContainer } from "astro/container";
+import {experimental_AstroContainer} from "astro/container";
 const container = await experimental_AstroContainer.create();
 import iFramePreview from "../../components/iframe_preview/index.astro";
 const result = await container.renderToResponse(iFramePreview);
 
+const {slug} = Astro?.props;
+
+if (slug === undefined) {
+    throw new Error('Slug is required');
+}
+
+// 2. Query for the entry directly using the request slug
+const page = await getEntry('docs', slug);
+
+// 3. Redirect if the entry does not exist
+if (page === undefined) {
+    return Astro.redirect("/404");
+}
+
+const {headings, Content} = await page.render();
 ---
-<div set:html={result} />
+<div set:html={result}/>
+
+<style lang="scss" is:global>
+  @use "sass:list";
+  @use "sass:meta";
+  @use "../../styles/app.scss" as app;
+  @use "../../styles/scssleon/scss/functions.scss" as functions;
+
+  $modules: ("root", "reset", "base");
+
+  @each $module in $modules {
+    @include meta.load-css(
+            "../../styles/scssleon/scss/#{$module}",
+        $with: (config: app.$config, theme: app.$theme)
+    );
+  }
+</style>

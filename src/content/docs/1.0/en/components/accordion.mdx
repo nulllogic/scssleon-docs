@@ -6,10 +6,36 @@ toc: true
 schema: true
 ---
 import {Snippet} from "~/components/snippet"
-import {generate_iframe_link} from "~/utils/links.js";
 
 ## Example
-<Snippet frame_url={generate_iframe_link('components/accordion/1')} preview={true}>
+<Snippet frame_url={'components/accordion/1'} preview={true}>
+    <Fragment slot="html">
+        <div className="accordion">
+            <div className="item">
+                <div className="title">123</div>
+                <div className="content">333</div>
+            </div>
+        </div>
+    </Fragment>
+    <Fragment slot="scss">
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "../../styles/app.scss" as app;
+        @use "../../styles/scssleon/scss/mixins.scss" as mixins;
+        @use "../../styles/scssleon/scss/functions.scss" as functions;
+
+        $navbar: functions.get-theme(app.$theme, 'components.navbar');
+    </Fragment>
+    <Fragment slot="js">
+        console.log(123);
+    </Fragment>
+</Snippet>
+
+## Example 2
+<Snippet frame_url={'components/accordion/2'} preview={true}>
     <Fragment slot="html">
         <div className="accordion">
             <div className="item">
