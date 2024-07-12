@@ -20,6 +20,6 @@
   "devDependencies": {
     "prettier": "^3.3.2",
     "shiki": "^1.10.3",
-    "sass": "^1.77.6"
+    "sass": "^1.77.8"
   }
 }
