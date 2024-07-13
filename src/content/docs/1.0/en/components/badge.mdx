@@ -18,6 +18,27 @@ import {Snippet} from "/src/components/snippet"
         <h6>Example heading <span class="badge">New</span></h6>
         ```
     </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $badge: functions.get-theme(app.$theme, 'components.badge');
+
+        @include mixins.generate-component(
+        $badge,
+        "badge",
+        app.$config,
+        app.$theme
+        );
+        ```
+    </Fragment>
 </Snippet>
 
 ## Inside button
@@ -27,6 +48,27 @@ import {Snippet} from "/src/components/snippet"
         <button type="button" class="btn btn-primary">
             Notifications <span class="badge">4</span>
         </button>
+        ```
+    </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $badge: functions.get-theme(app.$theme, 'components.badge');
+
+        @include mixins.generate-component(
+        $badge,
+        "badge",
+        app.$config,
+        app.$theme
+        );
         ```
     </Fragment>
 </Snippet>
@@ -41,6 +83,27 @@ import {Snippet} from "/src/components/snippet"
         </button>
         ```
     </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $badge: functions.get-theme(app.$theme, 'components.badge');
+
+        @include mixins.generate-component(
+        $badge,
+        "badge",
+        app.$config,
+        app.$theme
+        );
+        ```
+    </Fragment>
 </Snippet>
 
 ## Outline
@@ -53,6 +116,27 @@ import {Snippet} from "/src/components/snippet"
         <h4>Example heading <span class="badge">New</span></h4>
         <h5>Example heading <span class="badge">New</span></h5>
         <h6>Example heading <span class="badge">New</span></h6>
+        ```
+    </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $badge: functions.get-theme(app.$theme, 'components.badge');
+
+        @include mixins.generate-component(
+        $badge,
+        "badge",
+        app.$config,
+        app.$theme
+        );
         ```
     </Fragment>
 </Snippet>
@@ -74,6 +158,27 @@ import {Snippet} from "/src/components/snippet"
         <h6>Example heading <span class="badge">New</span></h6>
         ```
     </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $badge: functions.get-theme(app.$theme, 'components.badge');
+
+        @include mixins.generate-component(
+        $badge,
+        "badge",
+        app.$config,
+        app.$theme
+        );
+        ```
+    </Fragment>
 </Snippet>
 
 ## Outline
@@ -86,6 +191,27 @@ import {Snippet} from "/src/components/snippet"
               style="--xii-badge-background: transparent; --xii-badge-color: green; --xii-badge-border: 1px solid green;">New</span>
         <span class="badge"
               style="--xii-badge-background: transparent; --xii-badge-color: yellow; --xii-badge-border: 1px solid yellow;">New</span>
+        ```
+    </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $badge: functions.get-theme(app.$theme, 'components.badge');
+
+        @include mixins.generate-component(
+        $badge,
+        "badge",
+        app.$config,
+        app.$theme
+        );
         ```
     </Fragment>
 </Snippet>
