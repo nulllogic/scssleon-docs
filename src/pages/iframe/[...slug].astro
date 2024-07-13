@@ -86,7 +86,12 @@ const js = fragment_matches['2'] && fragment_matches['2'].hasOwnProperty('1') ? 
 
 const {headings, Content} = await page.render();
 ---
+<!DOCTYPE html>
+<html>
+<head>
 
+</head>
+<body>
 <div set:html={html}/>
 
 <style lang="scss">
@@ -107,3 +112,5 @@ const {headings, Content} = await page.render();
 
 <style set:html={scss.css}/>
 <script is:inline type="text/javascript" set:html={js}/>
+</body>
+</html>
