@@ -1,6 +1,5 @@
 ---
 import * as sass from 'sass';
-
 import path, { dirname } from 'path';
 
 const result = await sass.compileStringAsync(`
@@ -67,7 +66,7 @@ $welcome-section: (
         findFileUrl(url) {
             // console.log(new URL(`file:///` + path.resolve(process.cwd()) + url.substring(1)));
             if (!url.startsWith('~')) return null;
-            return new URL(`file:///` + path.resolve(process.cwd()) + url.substring(1));
+            return new URL(`file://` + path.resolve(process.cwd()) + url.substring(1));
         }
     }]
 });

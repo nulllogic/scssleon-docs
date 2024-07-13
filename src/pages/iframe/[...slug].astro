@@ -1,4 +1,7 @@
 ---
+import * as sass from 'sass';
+import path, {dirname} from 'path';
+
 import {getCollection, getEntry} from 'astro:content';
 
 export async function getStaticPaths() {
@@ -36,9 +39,9 @@ export async function getStaticPaths() {
     })
 }
 
-import {experimental_AstroContainer} from "astro/container";
+import {experimental_AstroContainer} from 'astro/container';
 const container = await experimental_AstroContainer.create();
-import iFramePreview from "../../components/iframe_preview/index.astro";
+import iFramePreview from '~/components/iframe_preview/index.astro';
 const result = await container.renderToResponse(iFramePreview);
 
 const {slug} = Astro?.props;
@@ -52,14 +55,41 @@ const page = await getEntry('docs', slug);
 
 // 3. Redirect if the entry does not exist
 if (page === undefined) {
-    return Astro.redirect("/404");
+    return Astro.redirect('/404');
 }
+
+const page_content = page.body.toString();
+const frame_index = parseInt(Astro.props.frame_url.slice('/').at(-1));
+
+const snippet_regexp = new RegExp('<Snippet[^>]*>([^<]*(?:(?!<\\/?Snippet)<[^<]*)*)<\\/Snippet\\s*>', 'gi');
+const snippet_matches = [...page_content.matchAll(snippet_regexp)];
+
+
+// @TODO improve regex later
+const fragment_regexp = new RegExp('<Fragment[^>]*>([^<]*(?:(?!<\\/?Fragment)<[^<]*)*)<\\/Fragment\\s*>', 'gi');
+const fragment_matches = [...snippet_matches[(frame_index - 1).toString()]['0'].matchAll(fragment_regexp)];
+
+
+const html = fragment_matches['0'] && fragment_matches['0'].hasOwnProperty('1') ? fragment_matches['0']['1'] : '';
+const scss = await sass.compileStringAsync(fragment_matches['1'] && fragment_matches['1'].hasOwnProperty('1') ? fragment_matches['1']['1'] : '', {
+    importers: [{
+        // An importer that redirects relative URLs starting with "~" to
+        // `node_modules`.
+        findFileUrl(url) {
+            if (!url.startsWith('~')) return null;
+            return new URL(`file://` + path.resolve(process.cwd()) + url.substring(1));
+        }
+    }]
+});
+const js = fragment_matches['2'] && fragment_matches['2'].hasOwnProperty('1') ? fragment_matches['2']['1'] : '';
+
 
 const {headings, Content} = await page.render();
 ---
-<div set:html={result}/>
 
-<style lang="scss" is:global>
+<div set:html={html}/>
+
+<style lang="scss">
   @use "sass:list";
   @use "sass:meta";
   @use "../../styles/app.scss" as app;
@@ -74,3 +104,6 @@ const {headings, Content} = await page.render();
     );
   }
 </style>
+
+<style set:html={scss}/>
+<script is:inline type="text/javascript" set:html={js}/>
