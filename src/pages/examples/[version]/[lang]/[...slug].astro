@@ -6,7 +6,7 @@ export async function getStaticPaths() {
     const docsCollection = await getCollection('examples');
     return docsCollection.map((doc) => {
     const [version, lang, ...slug] = doc.slug.split('/');
-    console.log(version, lang, slug.join('/'));
+
     return {
         params: {
             version: '1.0',

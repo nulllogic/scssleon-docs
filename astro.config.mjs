@@ -1,12 +1,16 @@
 import {defineConfig} from 'astro/config';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path, {dirname} from 'path';
+import {fileURLToPath} from 'url';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 import preact from '@astrojs/preact';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+
+import rehypeSlug from 'rehype-slug';
+import remarkSmartypants from 'remark-smartypants';
 
 import {iframe} from './src/utils/integrations/iframe'
 
@@ -18,7 +22,21 @@ export default defineConfig({
     compressHTML: true,
     output: 'static',
     markdown: {
-        extendDefaultPlugins: true,
+        // Override with our own config
+        smartypants: true,
+        remarkPlugins: [
+            [remarkSmartypants, {dashes: false}],
+        ],
+        rehypePlugins: [
+            rehypeSlug,
+        ],
+        shikiConfig: {
+            theme: 'github-dark-default',
+            themes: {
+                dark: 'github-dark-default',
+                light: 'github-dark-default',
+            },
+        }
     },
     security: {
         checkOrigin: true

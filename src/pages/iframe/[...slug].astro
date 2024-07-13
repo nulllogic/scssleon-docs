@@ -64,14 +64,21 @@ const frame_index = parseInt(Astro.props.frame_url.slice('/').at(-1));
 const snippet_regexp = new RegExp('<Snippet[^>]*>([^<]*(?:(?!<\\/?Snippet)<[^<]*)*)<\\/Snippet\\s*>', 'gi');
 const snippet_matches = [...page_content.matchAll(snippet_regexp)];
 
-
+// @TODO add iframe preload later
 // @TODO improve regex later
 const fragment_regexp = new RegExp('<Fragment[^>]*>([^<]*(?:(?!<\\/?Fragment)<[^<]*)*)<\\/Fragment\\s*>', 'gi');
 const fragment_matches = [...snippet_matches[(frame_index - 1).toString()]['0'].matchAll(fragment_regexp)];
 
+//@todo find better solution
 
-const html = fragment_matches['0'] && fragment_matches['0'].hasOwnProperty('1') ? fragment_matches['0']['1'] : '';
-const scss = await sass.compileStringAsync(fragment_matches['1'] && fragment_matches['1'].hasOwnProperty('1') ? fragment_matches['1']['1'] : '', {
+const html = fragment_matches['0'] && fragment_matches['0'].hasOwnProperty('1') ? fragment_matches['0']['1']
+    .replace('```html', '')
+    .replace('```', '') : '';
+
+const scss = await sass.compileStringAsync(fragment_matches['1'] && fragment_matches['1'].hasOwnProperty('1') ?
+    fragment_matches['1']['1']
+        .replace('```scss', '')
+        .replace('```', '') : '', {
     importers: [{
         // An importer that redirects relative URLs starting with "~" to
         // `node_modules`.
@@ -81,10 +88,12 @@ const scss = await sass.compileStringAsync(fragment_matches['1'] && fragment_mat
         }
     }]
 });
-const js = fragment_matches['2'] && fragment_matches['2'].hasOwnProperty('1') ? fragment_matches['2']['1'] : '';
 
+const js = fragment_matches['2'] && fragment_matches['2'].hasOwnProperty('1') ?
+    fragment_matches['2']['1']
+        .replace('```js', '')
+        .replace('```', '') : '';
 
-const {headings, Content} = await page.render();
 ---
 <!DOCTYPE html>
 <html>

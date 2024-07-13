@@ -7,6 +7,10 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["/src/*"]
-    }
-  }
+    },
+    "exactOptionalPropertyTypes": false
+  },
+  "exclude": [
+    "dist"
+  ]
 }

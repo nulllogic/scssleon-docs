@@ -1,7 +1,4 @@
 ---
-// console.log(Astro.params);
-import prettier from "prettier";
-import {getSingletonHighlighter} from "shiki";
 import {Preview} from "../preview";
 import {generate_iframe_link} from "~/utils/links.js";
 
@@ -13,62 +10,18 @@ Object.keys(Astro.slots).forEach((element) => {
 const props = await Promise.all(slots);
 
 // HTML
-const html_code_formatted =
-    typeof props[0] !== 'undefined' && props[0] !== null
-        ? await prettier.format(props[0], {
-            parser: 'html',
-            printWidth: 80,
-            htmlWhitespaceSensitivity: 'ignore' // <–– this option is making MDX HTML look good
-        })
-        : '';
+const html_code_formatted = typeof props[0] !== 'undefined' && props[0] !== null
+    ? props[0]
+    : '';
 
 // SCSS
 const scss_code_formatted =
-    typeof props[1] !== 'undefined' && props[1] !== null
-        ? await prettier.format(props[1].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
-            parser: 'scss',
-        })
-        : '';
+    typeof props[1] !== 'undefined' && props[1] !== null ? props[1] : '';
 
 // JS
 const js_code_formatted =
-    typeof props[2] !== 'undefined' && props[2] !== null
-        ? await prettier.format(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""), {
-            parser: 'babel',
-        })
-        : '';
+    typeof props[2] !== 'undefined' && props[2] !== null ? props[2] : '';
 
-// `getSingletonHighlighter` is async, it initializes the internal and
-// loads the themes and languages specified.
-const highlighter = await getSingletonHighlighter({
-    themes: ['vitesse-dark'],
-    langs: ['html', 'javascript', 'scss'],
-});
-
-// Remove last line added by prettier using regex
-const html_code_shiki = highlighter.codeToHtml(
-    html_code_formatted.replace(/\n.*$/, ""),
-    {
-        lang: 'html',
-        theme: 'vitesse-dark',
-    },
-);
-
-const scss_code_shiki = highlighter.codeToHtml(
-    scss_code_formatted.replace(/\n.*$/, ""),
-    {
-        lang: 'scss',
-        theme: 'vitesse-dark',
-    },
-);
-
-const js_code_shiki = highlighter.codeToHtml(
-    js_code_formatted.replace(/\n.*$/, ""),
-    {
-        lang: 'javascript',
-        theme: 'vitesse-dark',
-    },
-);
 
 const {frame_url, preview} = Astro.props;
 ---
@@ -110,7 +63,7 @@ const {frame_url, preview} = Astro.props;
         {
             Astro.slots.has("html") && (
                         <div class="preview">
-                            <Preview url={generate_iframe_link(frame_url)} />
+                            <Preview url={generate_iframe_link(frame_url)}/>
                         </div>
             )
         }
@@ -118,21 +71,21 @@ const {frame_url, preview} = Astro.props;
             {
                 Astro.slots.has("html") && (
                             <div class="tab active">
-                                <div client:load class="code" set:html={html_code_shiki}/>
+                                <div client:load class="code" set:html={html_code_formatted}/>
                             </div>
                 )
             }
             {
                 Astro.slots.has("scss") && (
                             <div class="tab">
-                                <div client:load class="code" set:html={scss_code_shiki}/>
+                                <div client:load class="code" set:html={scss_code_formatted}/>
                             </div>
                 )
             }
             {
                 Astro.slots.has("js") && (
                             <div class="tab">
-                                <div class="code" set:html={js_code_shiki}/>
+                                <div class="code" set:html={js_code_formatted}/>
                             </div>
                 )
             }
@@ -241,10 +194,6 @@ const {frame_url, preview} = Astro.props;
     // })
 </script>
 
-<script define:vars={{props}}>
-    eval(props[2].replace(/(<p[^>]+?>|<p>|<\/p>)/gim, ""));
-</script>
-
 <style lang="scss" is:global>
   @use "sass:list";
   @use "sass:string";
@@ -258,121 +207,121 @@ const {frame_url, preview} = Astro.props;
   $nav: functions.get-theme(app.$theme, "components.nav");
 
   $nav: map.deep-merge(
-                  $nav,
-                  (
-                          subclasses: (
-                                  ".item": (
-                                          margin: 0 5px -1px 0,
-                                          subclasses: (
-                                                  "&.active": (
-                                                          subclasses: (
-                                                                  ".link": (
-                                                                          text-decoration: none,
-                                                                          background: #333,
-                                                                          color: rgb(125, 211, 252),
-                                                                  ),
-                                                                  "&:hover": (),
-                                                          ),
-                                                  ),
-                                                  ".link": (
-                                                          text-decoration: none,
-                                                          border: 1px solid red,
-                                                          border-radius: 5px 5px 0 0,
-                                                          font-size: 0.825em,
-                                                          subclasses: (
-                                                                  "&:hover": (
-                                                                          background: #333,
-                                                                  ),
-                                                          ),
-                                                  ),
-                                          ),
+          $nav,
+          (
+              subclasses: (
+                  ".item": (
+                      margin: 0 5px -1px 0,
+                      subclasses: (
+                          "&.active": (
+                              subclasses: (
+                                  ".link": (
+                                      text-decoration: none,
+                                      background: #333,
+                                      color: rgb(125, 211, 252),
                                   ),
+                                  "&:hover": (),
+                              ),
                           ),
-                  )
+                          ".link": (
+                              text-decoration: none,
+                              border: 1px solid red,
+                              border-radius: 5px 5px 0 0,
+                              font-size: 0.825em,
+                              subclasses: (
+                                  "&:hover": (
+                                      background: #333,
+                                  ),
+                              ),
+                          ),
+                      ),
+                  ),
+              ),
+          )
   );
 
   $nav-tabs: (
-          subclasses: (
-                  ".nav": $nav,
-          ),
+      subclasses: (
+          ".nav": $nav,
+      ),
   );
 
   $preview-container: (
-          subclasses: (
-                  ".preview": (
-                          position: relative,
-                          transition: 0.75s background-color,
-                          padding: 1rem,
-                          border: 1px solid red,
-                          border-bottom: none,
-                          border-radius: 5px 5px 0 0,
-                          subclasses: (
-                                  "h1, h2, h3, h4, h5, h6, p, dl, ol, ul, nav ul, blockquote, pre, table:not(:last-child)" : (
-                                          margin: 0
-                                  ),
-                                  "p" : (
-                                          padding: 0
-                                  ),
-                                  " > .btn" : (
-                                          margin: 0 10px 0 0
-                                  )
-                          )
+      subclasses: (
+          ".preview": (
+              position: relative,
+              transition: 0.75s background-color,
+              padding: 1rem,
+              border: 1px solid red,
+              border-bottom: none,
+              border-radius: 5px 5px 0 0,
+              subclasses: (
+                  "h1, h2, h3, h4, h5, h6, p, dl, ol, ul, nav ul, blockquote, pre, table:not(:last-child)" : (
+                      margin: 0
                   ),
-                  ".tab-content": (
-                          subclasses: (
-                                  ".tab": (
-                                          display: none,
-                                          subclasses: (
-                                                  "&.active": (
-                                                          display: block,
-                                                  ),
-                                                  ".code": (
-                                                          border: 1px solid red,
-                                                          border-top: none,
-                                                          border-radius: 0 0 5px 5px,
-                                                          display: block,
-                                                          margin-bottom: 0,
-                                                          width: 100%,
-                                                          position: relative,
-                                                          overflow: auto,
-                                                          subclasses: (
-                                                                  "pre": (
-                                                                          padding: 1rem,
-                                                                          subclasses: (
-                                                                                  "code": (
-                                                                                          word-break: normal,
-                                                                                          background: none,
-                                                                                          padding: 0,
-                                                                                          font-size: 0.875em,
-                                                                                  ),
-                                                                          ),
-                                                                  ),
-                                                          ),
-                                                  ),
-                                          ),
-                                  ),
-                          ),
+                  "p" : (
+                      padding: 0
                   ),
+                  " > .btn" : (
+                      margin: 0 10px 0 0
+                  )
+              )
           ),
+          ".tab-content": (
+              subclasses: (
+                  ".tab": (
+                      display: none,
+                      subclasses: (
+                          "&.active": (
+                              display: block,
+                          ),
+                          ".code": (
+                              border: 1px solid red,
+                              border-top: none,
+                              border-radius: 0 0 5px 5px,
+                              display: block,
+                              margin-bottom: 0,
+                              width: 100%,
+                              position: relative,
+                              overflow: auto,
+                              subclasses: (
+                                  "pre": (
+                                      padding: 1rem,
+                                      subclasses: (
+                                          "code": (
+                                              word-break: normal,
+                                              background: none,
+                                              padding: 0,
+                                              font-size: 0.875em,
+                                          ),
+                                      ),
+                                  ),
+                              ),
+                          ),
+                      ),
+                  ),
+              ),
+          ),
+      ),
   );
 
   $snippet: (
-          subclasses: (
-                  ".navtabs": (
-                          margin: 0 0 0 8px,
-                          subclasses: (
-                                  ".nav": $nav,
-                          ),
-                  ),
-                  ".preview-container": $preview-container,
+      subclasses: (
+          ".navtabs": (
+              margin: 0 0 0 8px,
+              subclasses: (
+                  ".nav": $nav,
+              ),
           ),
+          ".preview-container": $preview-container,
+      ),
   );
 
   @include mixins.generate-component(
-                  $snippet,
-                  "snippet",
-                  app.$config,
-                  app.$theme
+          $snippet,
+          "snippet",
+          app.$config,
+          app.$theme
   );
 </style>
 

@@ -10,14 +10,17 @@ import {Snippet} from "~/components/snippet"
 ## Example
 <Snippet frame_url={'components/accordion/1'} preview={true}>
     <Fragment slot="html">
+        ```html
         <div class="accordion">
             <div class="item">
                 <div class="title">123</div>
                 <div class="content">333</div>
             </div>
         </div>
+        ```
     </Fragment>
     <Fragment slot="scss">
+        ```scss
         @use "sass:list";
         @use "sass:string";
         @use "sass:meta";
@@ -28,23 +31,29 @@ import {Snippet} from "~/components/snippet"
         @use "~/src/styles/scssleon/scss/functions.scss" as functions;
 
         $navbar: functions.get-theme(app.$theme, 'components.navbar');
+        ```
     </Fragment>
     <Fragment slot="js">
+        ```js
         console.log(123);
+        ```
     </Fragment>
 </Snippet>
 
 ## Example 2
 <Snippet frame_url={'components/accordion/2'} preview={true}>
     <Fragment slot="html">
+        ```html
         <div class="accordion">
             <div class="item">
                 <div class="title">123</div>
                 <div class="content">333</div>
             </div>
         </div>
+        ```
     </Fragment>
     <Fragment slot="scss">
+        ```scss
         @use "sass:list";
         @use "sass:string";
         @use "sass:meta";
@@ -55,8 +64,15 @@ import {Snippet} from "~/components/snippet"
         @use "~/src/styles/scssleon/scss/functions.scss" as functions;
 
         $navbar: functions.get-theme(app.$theme, 'components.navbar');
+        ```
     </Fragment>
     <Fragment slot="js">
+        ```js
         console.log(123);
+        ```
     </Fragment>
 </Snippet>
+
+```html
+123123
+```
