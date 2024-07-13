@@ -30,7 +30,14 @@ import {Snippet} from "~/components/snippet"
         @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
         @use "~/src/styles/scssleon/scss/functions.scss" as functions;
 
-        $navbar: functions.get-theme(app.$theme, 'components.navbar');
+        $accordion: functions.get-theme(app.$theme, 'components.accordion');
+
+        @include mixins.generate-component(
+            $accordion,
+            "accordion",
+            app.$config,
+            app.$theme
+        );
         ```
     </Fragment>
     <Fragment slot="js">
@@ -63,7 +70,14 @@ import {Snippet} from "~/components/snippet"
         @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
         @use "~/src/styles/scssleon/scss/functions.scss" as functions;
 
-        $navbar: functions.get-theme(app.$theme, 'components.navbar');
+        $accordion: functions.get-theme(app.$theme, 'components.accordion');
+
+        @include mixins.generate-component(
+            $accordion,
+            "accordion",
+            app.$config,
+            app.$theme
+        );
         ```
     </Fragment>
     <Fragment slot="js">

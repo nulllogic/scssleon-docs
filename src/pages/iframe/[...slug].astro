@@ -39,11 +39,6 @@ export async function getStaticPaths() {
     })
 }
 
-import {experimental_AstroContainer} from 'astro/container';
-const container = await experimental_AstroContainer.create();
-import iFramePreview from '~/components/iframe_preview/index.astro';
-const result = await container.renderToResponse(iFramePreview);
-
 const {slug} = Astro?.props;
 
 if (slug === undefined) {
