@@ -11,7 +11,7 @@ import {Snippet} from "/src/components/snippet"
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet lang="html">
+<Snippet frame_url={'components/navbar/1'} preview={true}>
     <Fragment slot="html">
         ```html
         <nav class="navbar">
@@ -54,7 +54,7 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
 ## Centered navbar example
 
 
-<Snippet lang="html">
+<Snippet frame_url={'components/navbar/2'} preview={true}>
     <Fragment slot="html">
         ```html
         <nav class="navbar" style="--xii-navbar-grid-template-columns: 1fr 100px 1fr">
@@ -88,6 +88,27 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
                 </ul>
             </div>
         </nav>
+        ```
+    </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $navbar: functions.get-theme(app.$theme, 'components.navbar');
+
+        @include mixins.generate-component(
+            $navbar,
+            "navbar",
+            app.$config,
+            app.$theme
+        );
         ```
     </Fragment>
 </Snippet>

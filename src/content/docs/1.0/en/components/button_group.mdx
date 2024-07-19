@@ -10,7 +10,7 @@ import {Snippet} from "/src/components/snippet"
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet lang="html">
+<Snippet frame_url={'components/button_group/1'} preview={true}>
     <Fragment slot="html">
         ```html
         <div class="btn-group" role="group" aria-label="Basic example">
@@ -20,13 +20,34 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
         </div>
         ```
     </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $button_group: functions.get-theme(app.$theme, 'components.button-group');
+
+        @include mixins.generate-component(
+            $button_group,
+            "btn-group",
+            app.$config,
+            app.$theme
+        );
+        ```
+    </Fragment>
 </Snippet>
 
 ## Separated example
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet lang="html">
+<Snippet frame_url={'components/button_group/2'} preview={true}>
     <Fragment slot="html">
         ```html
         <div class="btn-group separated" role="group" aria-label="Basic example">

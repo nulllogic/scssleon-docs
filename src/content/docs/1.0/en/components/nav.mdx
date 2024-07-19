@@ -11,7 +11,7 @@ import {Snippet} from "/src/components/snippet"
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet lang="html">
+<Snippet frame_url={'components/nav/1'} preview={true}>
     <Fragment slot="html">
         ```html
         <ul class="nav">
@@ -28,6 +28,27 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
                 <a class="link disabled" aria-disabled="true">Disabled</a>
             </li>
         </ul>
+        ```
+    </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $nav: functions.get-theme(app.$theme, 'components.nav');
+
+        @include mixins.generate-component(
+            $nav,
+            "nav",
+            app.$config,
+            app.$theme
+        );
         ```
     </Fragment>
 </Snippet>

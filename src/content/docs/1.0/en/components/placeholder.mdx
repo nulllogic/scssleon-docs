@@ -13,7 +13,7 @@ Placeholders can be used to enhance the experience of your application. They're 
 ## Example
 
 In the example below, we take a typical card component and recreate it with placeholders applied to create a "loading card". Size and proportions are the same between the two.
-<Snippet>
+<Snippet frame_url={'components/placeholder/1'} preview={true}>
     <Fragment slot="html">
         ```html
         <div class="placeholder" aria-hidden="true">
@@ -25,11 +25,32 @@ In the example below, we take a typical card component and recreate it with plac
         </div>
         ```
     </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $placeholder: functions.get-theme(app.$theme, 'components.placeholder');
+
+        @include mixins.generate-component(
+            $placeholder,
+            "placeholder",
+            app.$config,
+            app.$theme
+        );
+        ```
+    </Fragment>
 </Snippet>
 ### Width
 
 You can change the `width` through grid column classes, width utilities, or inline styles.
-<Snippet>
+<Snippet frame_url={'components/placeholder/2'} preview={true}>
     <Fragment slot="html">
         ```html
         <div class="placeholder" aria-hidden="true">
@@ -39,26 +60,95 @@ You can change the `width` through grid column classes, width utilities, or inli
         </div>
         ```
     </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $placeholder: functions.get-theme(app.$theme, 'components.placeholder');
+
+        @include mixins.generate-component(
+            $placeholder,
+            "placeholder",
+            app.$config,
+            app.$theme
+        );
+        ```
+    </Fragment>
 </Snippet>
 ### Animation
 
 Animate placeholders with `.glow` or `.wave` to better convey the perception of something being _actively_ loaded.
-<Snippet>
+<Snippet frame_url={'components/placeholder/3'} preview={true}>
     <Fragment slot="html">
+        ```html
         <p class="placeholder glow">
             <span class="el"></span>
             <span class="el"></span>
             <span class="el"></span>
         </p>
+        ```
+    </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $placeholder: functions.get-theme(app.$theme, 'components.placeholder');
+
+        @include mixins.generate-component(
+            $placeholder,
+            "placeholder",
+            app.$config,
+            app.$theme
+        );
+        ```
     </Fragment>
 </Snippet>
-<Snippet>
+
+<Snippet frame_url={'components/placeholder/4'} preview={true}>
     <Fragment slot="html">
+        ```html
         <p class="placeholder wave">
             <span class="el"></span>
             <span class="el"></span>
             <span class="el"></span>
         </p>
+        ```
+    </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $placeholder: functions.get-theme(app.$theme, 'components.placeholder');
+
+        @include mixins.generate-component(
+            $placeholder,
+            "placeholder",
+            app.$config,
+            app.$theme
+        );
+        ```
     </Fragment>
 </Snippet>
+
 ## Sass

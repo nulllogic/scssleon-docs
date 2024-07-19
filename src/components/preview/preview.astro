@@ -1,12 +1,13 @@
 ---
-const { url } = Astro.props;
+const {url} = Astro.props;
 ---
-<iframe src={url} class="preview-container" seamless />
+<iframe src={url} class="preview-container" seamless
+        onload="this.style.height= this.contentWindow.document.body.scrollHeight + 'px';"/>
 
 <style lang="scss">
-    .preview-container {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-    }
+  .preview-container {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>

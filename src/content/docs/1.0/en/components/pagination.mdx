@@ -8,8 +8,8 @@ import {Snippet} from "/src/components/snippet"
 
 ## Default pagination
 
-<Snippet>
-    <Fragment slot="html">
+<Snippet frame_url={'components/pagination/1'} preview={true}>
+    <Fragment slot={'html'}>
         ```html
         <nav class="pagination" aria-label="Pagination"
              style="--xii-pagination-grid-template-columns: 1fr 1fr">
@@ -26,12 +26,33 @@ import {Snippet} from "/src/components/snippet"
         </nav>
         ```
     </Fragment>
+    <Fragment slot={'scss'}>
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $pagination: functions.get-theme(app.$theme, 'components.pagination');
+
+        @include mixins.generate-component(
+            $pagination,
+            "pagination",
+            app.$config,
+            app.$theme
+        );
+        ```
+    </Fragment>
 </Snippet>
 
 ## Pagination centered
 
-<Snippet>
-    <Fragment slot="html">
+<Snippet frame_url={'components/pagination/2'} preview={true}>
+    <Fragment slot={'html'}>
         ```html
         <nav class="pagination" aria-label="Pagination"
              style="--xii-pagination-grid-template-columns: 100px 1fr 100px">
@@ -51,13 +72,34 @@ import {Snippet} from "/src/components/snippet"
         </nav>
         ```
     </Fragment>
+    <Fragment slot={'scss'}>
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $pagination: functions.get-theme(app.$theme, 'components.pagination');
+
+        @include mixins.generate-component(
+            $pagination,
+            "pagination",
+            app.$config,
+            app.$theme
+        );
+        ```
+    </Fragment>
 </Snippet>
 
 
 ## SVG icons
 
-<Snippet>
-    <Fragment slot="html">
+<Snippet frame_url={'components/pagination/3'} preview={true}>
+    <Fragment slot={'html'}>
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li class="item">
@@ -103,12 +145,33 @@ import {Snippet} from "/src/components/snippet"
             </ul>
         </nav>
     </Fragment>
+    <Fragment slot={'scss'}>
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $pagination: functions.get-theme(app.$theme, 'components.pagination');
+
+        @include mixins.generate-component(
+            $pagination,
+            "pagination",
+            app.$config,
+            app.$theme
+        );
+        ```
+    </Fragment>
 </Snippet>
 
 ## Custom structure
 
-<Snippet>
-    <Fragment slot="html">
+<Snippet frame_url={'components/pagination/4'} preview={true}>
+    <Fragment slot={'html'}>
         <div class="flex align-items-center justify-content-between">
             <div>
                 Showing 1 to 10 of 42 results
@@ -121,5 +184,26 @@ import {Snippet} from "/src/components/snippet"
                 </ul>
             </div>
         </div>
+    </Fragment>
+    <Fragment slot={'scss'}>
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+
+        $pagination: functions.get-theme(app.$theme, 'components.pagination');
+
+        @include mixins.generate-component(
+            $pagination,
+            "pagination",
+            app.$config,
+            app.$theme
+        );
+        ```
     </Fragment>
 </Snippet>
