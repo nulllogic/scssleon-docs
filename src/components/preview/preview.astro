@@ -1,13 +1,55 @@
 ---
 const {url} = Astro.props;
 ---
-<iframe src={url} class="preview-container" seamless
-        onload="this.style.height= this.contentWindow.document.body.scrollHeight + 'px';"/>
+<div class="iframe-wrapper">
+    <iframe src={url} class="iframe" seamless
+            onload="this.style.height= this.contentWindow.document.body.scrollHeight + 'px';"/>
+    <svg class="background">
+        <defs>
+            <pattern
+                    id="pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001"
+                    x="0"
+                    y="0"
+                    width="10"
+                    height="10"
+                    patternUnits="userSpaceOnUse"
+            >
+                <path d="M-3 13 15-5M-5 5l18-18M-1 21 17 3"></path>
+            </pattern>
+        </defs>
+        <rect
+                stroke="none"
+                fill="url(#pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001)"
+                width="100%"
+                height="100%"></rect>
+    </svg>
+</div>
 
 <style lang="scss">
-  .preview-container {
-    margin: 0;
-    width: 100%;
-    height: 100%;
+
+  .iframe-wrapper {
+    position: relative;
+
+    .iframe {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      position: relative;
+      display: block;
+    }
+
+    .background {
+      stroke: rgba(40, 51, 56, 0.63);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+
+      -webkit-user-select: none;
+      user-select: none;
+    }
   }
 </style>

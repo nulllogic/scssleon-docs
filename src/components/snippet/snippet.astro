@@ -91,26 +91,6 @@ const {frame_url, preview} = Astro.props;
             }
         </div>
 
-        <svg class="background">
-            <defs>
-                <pattern
-                        id="pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001"
-                        x="0"
-                        y="0"
-                        width="10"
-                        height="10"
-                        patternUnits="userSpaceOnUse"
-                >
-                    <path d="M-3 13 15-5M-5 5l18-18M-1 21 17 3"></path>
-                </pattern>
-            </defs>
-            <rect
-                    stroke="none"
-                    fill="url(#pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001)"
-                    width="100%"
-                    height="100%"></rect>
-        </svg>
-
         <div class="resizer">
       <span class="drag">
         <span class="el"></span>
@@ -247,11 +227,11 @@ const {frame_url, preview} = Astro.props;
   );
 
   $preview-container: (
+      margin: 0 0 15px 0,
       subclasses: (
           ".preview": (
               position: relative,
               transition: 0.75s background-color,
-              padding: 1rem,
               border: 1px solid red,
               border-bottom: none,
               border-radius: 5px 5px 0 0,
