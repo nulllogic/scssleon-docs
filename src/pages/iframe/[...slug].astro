@@ -102,13 +102,13 @@ const js = fragment_matches['2'] && fragment_matches['2'].hasOwnProperty('1') ?
   @use "sass:list";
   @use "sass:meta";
   @use "../../styles/app.scss" as app;
-  @use "../../styles/scssleon/scss/functions.scss" as functions;
+  @use "../../styles/scss/functions.scss" as functions;
 
   $modules: ("root", "reset", "base");
 
   @each $module in $modules {
     @include meta.load-css(
-            "../../styles/scssleon/scss/#{$module}",
+            "../../styles/scss/#{$module}",
         $with: (config: app.$config, theme: app.$theme)
     );
   }

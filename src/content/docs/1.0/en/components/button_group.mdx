@@ -28,10 +28,10 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
         @use "sass:map";
 
         @use "~/src/styles/app.scss" as app;
-        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
-        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+        @use "~/src/styles/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scss/functions.scss" as functions;
 
-        $button_group: functions.get-theme(app.$theme, 'components.button-group');
+        $button_group: functions.get-theme(app.$theme, 'components.button_group');
 
         @include mixins.generate-component(
             $button_group,

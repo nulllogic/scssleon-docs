@@ -24,11 +24,11 @@ $theme: (
   )
 ) !default;
 
-@use "./scssleon/scss/_config.scss" as config with (
+@use "./scss/_config.scss" as config with (
   $config: $config
 );
 
-@use "./scssleon/scss/themes/_default.scss" as theme with (
+@use "./scss/themes/_default.scss" as theme with (
   $theme: $theme
 );
 

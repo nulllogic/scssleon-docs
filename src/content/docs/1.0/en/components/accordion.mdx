@@ -1,6 +1,6 @@
 ---
 title: Accordion
-description: Accordion
+description: A web component that expands and collapses content sections, much like an accordion's bellows, for a tidy and user-friendly experience
 category: components
 toc: true
 schema: true
@@ -9,7 +9,7 @@ import {Snippet} from "~/components/snippet"
 
 ## Example
 <Snippet frame_url={'components/accordion/1'} preview={true}>
-    <Fragment slot="html">
+    <Fragment slot={'html'}>
         ```html
         <div class="accordion">
             <div class="item">
@@ -19,7 +19,7 @@ import {Snippet} from "~/components/snippet"
         </div>
         ```
     </Fragment>
-    <Fragment slot="scss">
+    <Fragment slot={'scss'}>
         ```scss
         @use "sass:list";
         @use "sass:string";
@@ -27,8 +27,8 @@ import {Snippet} from "~/components/snippet"
         @use "sass:map";
 
         @use "~/src/styles/app.scss" as app;
-        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
-        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+        @use "~/src/styles/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scss/functions.scss" as functions;
 
         $accordion: functions.get-theme(app.$theme, 'components.accordion');
 
@@ -40,7 +40,7 @@ import {Snippet} from "~/components/snippet"
         );
         ```
     </Fragment>
-    <Fragment slot="js">
+    <Fragment slot={'js'}>
         ```js
         console.log(123);
         ```
@@ -49,7 +49,7 @@ import {Snippet} from "~/components/snippet"
 
 ## Example 2
 <Snippet frame_url={'components/accordion/2'} preview={true}>
-    <Fragment slot="html">
+    <Fragment slot={'html'}>
         ```html
         <div class="accordion">
             <div class="item">
@@ -59,7 +59,7 @@ import {Snippet} from "~/components/snippet"
         </div>
         ```
     </Fragment>
-    <Fragment slot="scss">
+    <Fragment slot={'scss'}>
         ```scss
         @use "sass:list";
         @use "sass:string";
@@ -67,8 +67,8 @@ import {Snippet} from "~/components/snippet"
         @use "sass:map";
 
         @use "~/src/styles/app.scss" as app;
-        @use "~/src/styles/scssleon/scss/mixins.scss" as mixins;
-        @use "~/src/styles/scssleon/scss/functions.scss" as functions;
+        @use "~/src/styles/scss/mixins.scss" as mixins;
+        @use "~/src/styles/scss/functions.scss" as functions;
 
         $accordion: functions.get-theme(app.$theme, 'components.accordion');
 
@@ -80,7 +80,7 @@ import {Snippet} from "~/components/snippet"
         );
         ```
     </Fragment>
-    <Fragment slot="js">
+    <Fragment slot={'js'}>
         ```js
         console.log(123);
         ```
