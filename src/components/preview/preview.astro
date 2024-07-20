@@ -3,7 +3,8 @@ const {url} = Astro.props;
 ---
 <div class="iframe-wrapper">
     <iframe src={url} class="iframe" seamless
-            onload="this.style.height= this.contentWindow.document.body.scrollHeight + 'px';"/>
+            onload="this.style.height= this.contentWindow.document.body.scrollHeight + 'px';this.style.visibility = 'visible';
+                "/>
     <svg class="background">
         <defs>
             <pattern
@@ -37,6 +38,9 @@ const {url} = Astro.props;
       z-index: 2;
       position: relative;
       display: block;
+      visibility: hidden;
+
+      border-radius: 5px;
     }
 
     .background {
