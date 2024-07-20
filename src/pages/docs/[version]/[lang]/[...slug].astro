@@ -45,15 +45,12 @@ const {headings, Content} = await page.render();
 
 <Docs>
     <div class="toc">
-        <Toc headings={headings}/>
+        <Toc headings={headings} github_page={github_page} />
     </div>
     <div class="content">
         <div class="intro">
             <h1 class="title">{page?.data?.title}</h1>
             <p class="subtitle">{page?.data?.description}</p>
-        </div>
-        <div class="flex justify-content-end">
-            <a href={github_page} class="btn" target="_blank"> View on GitHub </a>
         </div>
         <Content/>
     </div>

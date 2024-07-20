@@ -1,5 +1,5 @@
 ---
-const {headings} = Astro.props
+const {headings, github_page} = Astro.props
 ---
 <nav>
   <ul>
@@ -15,4 +15,11 @@ const {headings} = Astro.props
   </ul>
 
   <hr />
+  <ul>
+    <li>
+      <a href={github_page} target="_blank" rel="noopener noreferrer">
+        View on Github
+      </a>
+    </li>
+  </ul>
 </nav>
