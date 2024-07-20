@@ -88,15 +88,63 @@ const js = fragment_matches['2'] && fragment_matches['2'].hasOwnProperty('1') ?
     fragment_matches['2']['1']
         .replace('```js', '')
         .replace('```', '') : '';
-
 ---
 <!DOCTYPE html>
 <html>
 <head>
-
+    <style set:html={scss.css}/>
 </head>
 <body>
-<div set:html={html}/>
+
+<div class="wrapper">
+    <div class="iframe" set:html={html}/>
+    <svg class="background">
+        <defs>
+            <pattern
+                    id="pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001"
+                    x="0"
+                    y="0"
+                    width="10"
+                    height="10"
+                    patternUnits="userSpaceOnUse"
+            >
+                <path d="M-3 13 15-5M-5 5l18-18M-1 21 17 3"></path>
+            </pattern>
+        </defs>
+        <rect
+                stroke="none"
+                fill="url(#pattern-4d2f8758-2f66-4332-9b69-ca19e9dfc001)"
+                width="100%"
+                height="100%"></rect>
+    </svg>
+</div>
+
+<script is:inline type="text/javascript" set:html={js}/>
+</body>
+</html>
+
+<style lang="scss">
+    .wrapper {
+      position: relative;
+      .iframe {
+        padding: 1rem;
+        position: relative;
+        z-index: 2;
+      }
+      .background {
+        stroke: rgba(40, 51, 56, 0.63);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+
+        -webkit-user-select: none;
+        user-select: none;
+      }
+    }
+</style>
 
 <style lang="scss">
   @use "sass:list";
@@ -113,8 +161,3 @@ const js = fragment_matches['2'] && fragment_matches['2'].hasOwnProperty('1') ?
     );
   }
 </style>
-
-<style set:html={scss.css}/>
-<script is:inline type="text/javascript" set:html={js}/>
-</body>
-</html>
