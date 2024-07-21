@@ -13,8 +13,16 @@ import {Snippet} from "~/components/snippet"
         ```html
         <div class="accordion">
             <div class="item">
-                <div class="title">123</div>
-                <div class="content">333</div>
+                <button type="button" aria-expanded="false" aria-controls="accordion-panel-1" id="accordion-header-1"
+                        id="accordion1id">
+                        <span class="accordion-title">
+                          Personal Information
+                          <span class="accordion-icon"></span>
+                        </span>
+                </button>
+                <div class="content" id="accordion-panel-1"
+                     aria-labelledby="accordion-header-1"
+                     hidden>333</div>
             </div>
         </div>
         ```
@@ -33,10 +41,10 @@ import {Snippet} from "~/components/snippet"
         $accordion: functions.get-theme(app.$theme, 'components.accordion');
 
         @include mixins.generate-component(
-            $accordion,
-            "accordion",
-            app.$config,
-            app.$theme
+        $accordion,
+        "accordion",
+        app.$config,
+        app.$theme
         );
         ```
     </Fragment>
@@ -73,10 +81,10 @@ import {Snippet} from "~/components/snippet"
         $accordion: functions.get-theme(app.$theme, 'components.accordion');
 
         @include mixins.generate-component(
-            $accordion,
-            "accordion",
-            app.$config,
-            app.$theme
+        $accordion,
+        "accordion",
+        app.$config,
+        app.$theme
         );
         ```
     </Fragment>
