@@ -78,8 +78,15 @@ const scss = await sass.compileStringAsync(fragment_matches['1'] && fragment_mat
         // An importer that redirects relative URLs starting with "~" to
         // `node_modules`.
         findFileUrl(url) {
-            if (!url.startsWith('~')) return null;
-            return new URL(`file://` + path.resolve(process.cwd()) + url.substring(1));
+            console.warn('123');
+            if (url.startsWith('~')) {
+                return new URL(`file://` + path.resolve(process.cwd()) + url.substring(1));
+            }
+            if (url.startsWith('@')) {
+                return new URL(`file://` + path.resolve(process.cwd()) + '/node_modules/@' + url.substring(1));
+            }
+
+            return null;
         }
     }]
 });
@@ -98,7 +105,7 @@ const js = fragment_matches['2'] && fragment_matches['2'].hasOwnProperty('1') ?
 
 <div class="wrapper">
     <div class="iframe" set:html={html}/>
-    <div class="background" />
+    <div class="background"/>
 
 </div>
 
@@ -107,44 +114,58 @@ const js = fragment_matches['2'] && fragment_matches['2'].hasOwnProperty('1') ?
 </html>
 
 <style lang="scss">
-    .wrapper {
+  .wrapper {
+    position: relative;
+
+    .iframe {
+      padding: 1rem;
       position: relative;
-      .iframe {
-        padding: 1rem;
-        position: relative;
-        z-index: 2;
-      }
-      .background {
-
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: 1;
-
-        -webkit-user-select: none;
-        user-select: none;
-
-        background-color: rgba(19, 38, 81, 0.1);
-        background-image: linear-gradient(135deg, rgba(0, 95, 94, 0.45) 10%,rgba(0,0,0,0) 0,#0000 50%, rgba(0, 95, 94, 0.45) 0, rgba(0, 95, 94, 0.45) 60%,rgba(0,0,0,0) 0,rgba(0,0,0,0));
-        background-size: 7.07px 7.07px;
-      }
+      z-index: 2;
     }
+
+    .background {
+
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+
+      -webkit-user-select: none;
+      user-select: none;
+
+      background-color: rgba(19, 38, 81, 0.1);
+      background-image: linear-gradient(135deg, rgba(0, 95, 94, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(0, 95, 94, 0.45) 0, rgba(0, 95, 94, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0));
+      background-size: 7.07px 7.07px;
+    }
+  }
 </style>
 
 <style lang="scss">
   @use "sass:list";
   @use "sass:meta";
+
   @use "../../styles/app.scss" as app;
-  @use "../../styles/scss/functions.scss" as functions;
+  @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
-  $modules: ("root", "reset", "base");
+  // ↓ Root
+  @use "@nulllogic/scssleon/scss/root" with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
 
-  @each $module in $modules {
-    @include meta.load-css(
-            "../../styles/scss/#{$module}",
-        $with: (config: app.$config, theme: app.$theme)
-    );
-  }
+  // Great reset
+  @use "@nulllogic/scssleon/scss/reset" with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
+
+  // Base
+  // Special utility, that will dynamically generate CSS
+  // properties for HTML tags, specified in theme
+  @use "@nulllogic/scssleon/scss/base" with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
 </style>

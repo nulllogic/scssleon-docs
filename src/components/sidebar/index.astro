@@ -168,8 +168,8 @@ const generate_link = (link) => {
   @use "sass:map";
 
   @use "../../styles/app.scss" as app;
-  @use "../../styles/scss/mixins.scss" as mixins;
-  @use "../../styles/scss/functions.scss" as functions;
+  @use "@nulllogic/scssleon/scss//mixins.scss" as mixins;
+  @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
   $nav: functions.get-theme(app.$theme, 'components.nav');
 

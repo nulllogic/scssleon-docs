@@ -24,14 +24,15 @@ $theme: (
   )
 ) !default;
 
-@use "./scss/_config.scss" as config with (
+@use "@nulllogic/scssleon/scss/config.scss" as config with (
   $config: $config
 );
 
-@use "./scss/themes/_default.scss" as theme with (
+@use "@nulllogic/scssleon/scss/themes/default.scss" as theme with (
   $theme: $theme
 );
 
+@use "@nulllogic/scssleon/scss/config.scss" as mixins;
+
 $config: config.$config;
 $theme: theme.$theme;
-
