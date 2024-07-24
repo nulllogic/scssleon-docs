@@ -33,8 +33,8 @@ In the example below, we take a typical card component and recreate it with plac
         @use "sass:map";
 
         @use "~/src/styles/app.scss" as app;
-        @use "~/src/styles/scss/mixins.scss" as mixins;
-        @use "~/src/styles/scss/functions.scss" as functions;
+        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
         $placeholder: functions.get-theme(app.$theme, 'components.placeholder');
 
@@ -68,8 +68,8 @@ You can change the `width` through grid column classes, width utilities, or inli
         @use "sass:map";
 
         @use "~/src/styles/app.scss" as app;
-        @use "~/src/styles/scss/mixins.scss" as mixins;
-        @use "~/src/styles/scss/functions.scss" as functions;
+        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
         $placeholder: functions.get-theme(app.$theme, 'components.placeholder');
 
