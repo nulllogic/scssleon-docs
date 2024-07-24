@@ -37,8 +37,8 @@ Use an ordered or unordered list with linked list items to create a minimally st
         @use "sass:map";
 
         @use "~/src/styles/app.scss" as app;
-        @use "~/src/styles/scss/mixins.scss" as mixins;
-        @use "~/src/styles/scss/functions.scss" as functions;
+        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
         $breadcrumb: functions.get-theme(app.$theme, 'components.breadcrumb');
 
@@ -98,8 +98,8 @@ Dividers are automatically added in CSS through [`::before`](https://developer.m
         @use "sass:map";
 
         @use "~/src/styles/app.scss" as app;
-        @use "~/src/styles/scss/mixins.scss" as mixins;
-        @use "~/src/styles/scss/functions.scss" as functions;
+        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
         $breadcrumb: functions.get-theme(app.$theme, 'components.breadcrumb');
 
