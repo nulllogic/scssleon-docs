@@ -40,12 +40,11 @@ const github_page =
     "https://github.com/nulllogic/scssleon/blob/master/docs/" + page.id;
 
 const {headings, Content} = await page.render();
-
 ---
 
 <Docs>
     <div class="toc">
-        <Toc headings={headings} github_page={github_page} />
+        <Toc headings={headings} github_page={github_page}/>
     </div>
     <div class="content">
         <div class="intro">
@@ -56,7 +55,41 @@ const {headings, Content} = await page.render();
     </div>
 </Docs>
 
+<style lang="scss" is:global>
+  @use "sass:list";
+  @use "sass:string";
+  @use "sass:meta";
+  @use "sass:map";
+
+  @use "../../../../styles/app.scss" as app;
+
+  @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+  @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+  $card: functions.get-theme(app.$theme, 'components.card');
+
+  $card: map.deep-merge($card, (
+    --padding: 0,
+  ));
+
+  @include mixins.generate-component(
+      $card,
+      "card",
+      app.$config,
+      app.$theme
+  );
+
+</style>
+
 <style lang="scss">
+
+  /*body {*/
+  /*  // Demonstrate the vertical rhythm at 12px*/
+  /*  background-image: linear-gradient(rgba(122,122,122,0.5) 1px, transparent 1px);*/
+  /*  background-size: 100% 14px;*/
+
+  /*}*/
+
   .title {
     margin-bottom: 0.5rem;
   }

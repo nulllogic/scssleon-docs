@@ -84,5 +84,12 @@ const {title, description, image = "/placeholder-social.jpg"} = Astro.props;
     $config: $config,
     $theme: $theme
   );
+
+  // ↓ Nav
+  @use "@nulllogic/scssleon/scss/components/nav" with (
+    $config: $config,
+    $theme: $theme
+  );
+
 </style>
 

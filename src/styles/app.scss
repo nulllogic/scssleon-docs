@@ -32,7 +32,5 @@ $theme: (
   $theme: $theme
 );
 
-@use "@nulllogic/scssleon/scss/config.scss" as mixins;
-
 $config: config.$config;
 $theme: theme.$theme;

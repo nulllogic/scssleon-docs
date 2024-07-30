@@ -22,7 +22,8 @@ import {Snippet} from "~/components/snippet"
                 </button>
                 <div class="content" id="accordion-panel-1"
                      aria-labelledby="accordion-header-1"
-                     hidden>333</div>
+                     hidden>333
+                </div>
             </div>
         </div>
         ```
@@ -81,10 +82,10 @@ import {Snippet} from "~/components/snippet"
         $accordion: functions.get-theme(app.$theme, 'components.accordion');
 
         @include mixins.generate-component(
-        $accordion,
-        "accordion",
-        app.$config,
-        app.$theme
+            $accordion,
+            "accordion",
+            app.$config,
+            app.$theme
         );
         ```
     </Fragment>

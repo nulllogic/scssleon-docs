@@ -98,16 +98,17 @@ Dividers are automatically added in CSS through [`::before`](https://developer.m
         @use "sass:map";
 
         @use "~/src/styles/app.scss" as app;
+
         @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
         @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
         $breadcrumb: functions.get-theme(app.$theme, 'components.breadcrumb');
 
         @include mixins.generate-component(
-        $breadcrumb,
-        "breadcrumb",
-        app.$config,
-        app.$theme
+            $breadcrumb,
+            "breadcrumb",
+            app.$config,
+            app.$theme
         );
         ```
     </Fragment>

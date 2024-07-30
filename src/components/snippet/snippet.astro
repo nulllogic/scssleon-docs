@@ -59,7 +59,7 @@ const {frame_url, preview} = Astro.props;
         </ul>
     </div>
 
-    <div class="preview-container">
+    <div class="card preview-container">
         {
             Astro.slots.has("html") && (
                         <div class="preview">
@@ -201,7 +201,7 @@ const {frame_url, preview} = Astro.props;
                           ),
                           ".link": (
                               text-decoration: none,
-                              border: 1px solid red,
+                              /*border: 1px solid red,*/
                               border-radius: 5px 5px 0 0,
                               font-size: 0.825em,
                               subclasses: (
@@ -228,7 +228,7 @@ const {frame_url, preview} = Astro.props;
           ".preview": (
               position: relative,
               transition: 0.75s background-color,
-              border: 1px solid red,
+              /*border: 1px solid red,*/
               border-bottom: none,
               border-radius: 5px 5px 0 0,
               subclasses: (
@@ -252,7 +252,7 @@ const {frame_url, preview} = Astro.props;
                               display: block,
                           ),
                           ".code": (
-                              border: 1px solid red,
+                              /*border: 1px solid red,*/
                               border-top: none,
                               border-radius: 0 0 5px 5px,
                               display: block,
