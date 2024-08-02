@@ -30,22 +30,22 @@ import {Snippet} from "~/components/snippet"
     </Fragment>
     <Fragment slot={'scss'}>
         ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+        @use 'sass:list';
+        @use 'sass:string';
+        @use 'sass:meta';
+        @use 'sass:map';
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        @use '~/src/styles/app.scss' as app;
+        @use '@nulllogic/scssleon/scss/mixins.scss' as mixins;
+        @use '@nulllogic/scssleon/scss/functions.scss' as functions;
 
         $accordion: functions.get-theme(app.$theme, 'components.accordion');
 
         @include mixins.generate-component(
-        $accordion,
-        "accordion",
-        app.$config,
-        app.$theme
+            $accordion,
+            'accordion',
+            app.$config,
+            app.$theme
         );
         ```
     </Fragment>
@@ -70,20 +70,20 @@ import {Snippet} from "~/components/snippet"
     </Fragment>
     <Fragment slot={'scss'}>
         ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+        @use 'sass:list';
+        @use 'sass:string';
+        @use 'sass:meta';
+        @use 'sass:map';
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        @use '~/src/styles/app.scss' as app;
+        @use '@nulllogic/scssleon/scss/mixins.scss' as mixins;
+        @use '@nulllogic/scssleon/scss/functions.scss' as functions;
 
         $accordion: functions.get-theme(app.$theme, 'components.accordion');
 
         @include mixins.generate-component(
             $accordion,
-            "accordion",
+            'accordion',
             app.$config,
             app.$theme
         );
