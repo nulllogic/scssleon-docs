@@ -37,6 +37,24 @@ import {Snippet} from "/src/components/snippet"
         @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
         @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
+        $button: functions.get-theme(app.$theme, 'components.button');
+
+        @include mixins.generate-component(
+            $button,
+            "btn",
+            app.$config,
+            app.$theme
+        );
+
+        $button_group: functions.get-theme(app.$theme, 'components.button-group');
+
+        @include mixins.generate-component(
+            $button_group,
+            "btn-group",
+            app.$config,
+            app.$theme
+        );
+
         $pagination: functions.get-theme(app.$theme, 'components.pagination');
 
         @include mixins.generate-component(
@@ -82,6 +100,24 @@ import {Snippet} from "/src/components/snippet"
         @use "~/src/styles/app.scss" as app;
         @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
         @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+        $button: functions.get-theme(app.$theme, 'components.button');
+
+        @include mixins.generate-component(
+            $button,
+            "btn",
+            app.$config,
+            app.$theme
+        );
+
+        $button_group: functions.get-theme(app.$theme, 'components.button-group');
+
+        @include mixins.generate-component(
+            $button_group,
+            "btn-group",
+            app.$config,
+            app.$theme
+        );
 
         $pagination: functions.get-theme(app.$theme, 'components.pagination');
 
@@ -155,6 +191,24 @@ import {Snippet} from "/src/components/snippet"
         @use "~/src/styles/app.scss" as app;
         @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
         @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+        $button: functions.get-theme(app.$theme, 'components.button');
+
+        @include mixins.generate-component(
+            $button,
+            "btn",
+            app.$config,
+            app.$theme
+        );
+
+        $button_group: functions.get-theme(app.$theme, 'components.button-group');
+
+        @include mixins.generate-component(
+            $button_group,
+            "btn-group",
+            app.$config,
+            app.$theme
+        );
 
         $pagination: functions.get-theme(app.$theme, 'components.pagination');
 

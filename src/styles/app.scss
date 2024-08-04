@@ -1,5 +1,4 @@
-@use "sass:list";
-@use "./scss/config.scss" as config with (
+@use "@nulllogic/scssleon/scss/config.scss" as config with (
   $config: (
     prefix: "xii",
     enable: (
@@ -8,7 +7,7 @@
   )
 );
 
-@use "./scss/themes/default.scss" as theme with (
+@use "@nulllogic/scssleon/scss/themes/default.scss" as theme with (
   $theme: (
     html : (
       body : (

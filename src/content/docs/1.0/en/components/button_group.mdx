@@ -82,19 +82,19 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
         $button: functions.get-theme(app.$theme, 'components.button');
 
         @include mixins.generate-component(
-        $button,
-        "btn",
-        app.$config,
-        app.$theme
+            $button,
+            "btn",
+            app.$config,
+            app.$theme
         );
 
         $button_group: functions.get-theme(app.$theme, 'components.button-group');
 
         @include mixins.generate-component(
-        $button_group,
-        "btn-group",
-        app.$config,
-        app.$theme
+            $button_group,
+            "btn-group",
+            app.$config,
+            app.$theme
         );
         ```
     </Fragment>

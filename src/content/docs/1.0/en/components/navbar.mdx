@@ -49,6 +49,32 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
         </nav>
         ```
     </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "~/src/styles/app.scss" as app;
+
+        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+        $nav: functions.get-theme(app.$theme, 'components.nav');
+
+        @include mixins.generate-component(
+            $nav,
+            "nav",
+            app.$config,
+            app.$theme
+        );
+
+        $navbar: functions.get-theme(app.$theme, 'components.navbar');
+
+        @include mixins.generate-component(
+            $navbar,
+            "navbar",
+            app.$config,
+            app.$theme
+        );
+        ```
+    </Fragment>
 </Snippet>
 
 ## Centered navbar example
@@ -92,14 +118,19 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
     </Fragment>
     <Fragment slot="scss">
         ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
-
         @use "~/src/styles/app.scss" as app;
+
         @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
         @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+        $nav: functions.get-theme(app.$theme, 'components.nav');
+
+        @include mixins.generate-component(
+            $nav,
+            "nav",
+            app.$config,
+            app.$theme
+        );
 
         $navbar: functions.get-theme(app.$theme, 'components.navbar');
 
