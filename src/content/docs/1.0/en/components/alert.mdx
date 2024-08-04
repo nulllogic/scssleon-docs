@@ -12,7 +12,15 @@ import {Snippet} from "/src/components/snippet"
     <Fragment slot="html">
         ```html
         <div class="alert" role="alert">
-
+            <div class="left">
+                123
+            </div>
+            <div class="center">
+                123
+            </div>
+            <div class="right">
+                123
+            </div>
         </div>
         ```
     </Fragment>
@@ -24,8 +32,18 @@ import {Snippet} from "/src/components/snippet"
         @use "sass:map";
 
         @use "~/src/styles/app.scss" as app;
+
         @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
         @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+        $alert: functions.get-theme(app.$theme, 'components.alert');
+
+        @include mixins.generate-component(
+            $alert,
+            "alert",
+            app.$config,
+            app.$theme
+        );
         ```
     </Fragment>
 </Snippet>

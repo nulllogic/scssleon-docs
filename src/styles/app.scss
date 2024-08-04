@@ -1,35 +1,30 @@
 @use "sass:list";
+@use "./scss/config.scss" as config with (
+  $config: (
+    prefix: "xii",
+    enable: (
+      wrapper: false,
+    ),
+  )
+);
 
-$config: (
-  prefix: "xii",
-  enable: (
-    wrapper: false,
-  ),
-) !default;
-
-$theme: (
-  html : (
-    body : (
-      colors: (
-        light : (
-          background: '#fff',
-          color: '#ccc',
-        ),
-        dark : (
-          background : rgba(17, 23, 26, 1),
-          color: '#ccc'
+@use "./scss/themes/default.scss" as theme with (
+  $theme: (
+    html : (
+      body : (
+        colors: (
+          light : (
+            background: '#fff',
+            color: '#ccc',
+          ),
+          dark : (
+            background : rgba(17, 23, 26, 1),
+            color: '#ccc'
+          )
         )
       )
     )
   )
-) !default;
-
-@use "@nulllogic/scssleon/scss/config.scss" as config with (
-  $config: $config
-);
-
-@use "@nulllogic/scssleon/scss/themes/default.scss" as theme with (
-  $theme: $theme
 );
 
 $config: config.$config;

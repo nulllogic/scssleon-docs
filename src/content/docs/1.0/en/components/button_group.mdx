@@ -32,7 +32,16 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
         @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
         @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
-        $button_group: functions.get-theme(app.$theme, 'components.button_group');
+        $button: functions.get-theme(app.$theme, 'components.button');
+
+        @include mixins.generate-component(
+            $button,
+            "btn",
+            app.$config,
+            app.$theme
+        );
+
+        $button_group: functions.get-theme(app.$theme, 'components.button-group');
 
         @include mixins.generate-component(
             $button_group,
@@ -56,6 +65,37 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
             <button type="button" class="btn">Middle</button>
             <button type="button" class="btn">Right</button>
         </div>
+        ```
+    </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+
+        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+        $button: functions.get-theme(app.$theme, 'components.button');
+
+        @include mixins.generate-component(
+        $button,
+        "btn",
+        app.$config,
+        app.$theme
+        );
+
+        $button_group: functions.get-theme(app.$theme, 'components.button-group');
+
+        @include mixins.generate-component(
+        $button_group,
+        "btn-group",
+        app.$config,
+        app.$theme
+        );
         ```
     </Fragment>
 </Snippet>

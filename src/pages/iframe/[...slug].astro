@@ -78,12 +78,13 @@ const scss = await sass.compileStringAsync(fragment_matches['1'] && fragment_mat
         // An importer that redirects relative URLs starting with "~" to
         // `node_modules`.
         findFileUrl(url) {
-            console.warn('123');
             if (url.startsWith('~')) {
                 return new URL(`file://` + path.resolve(process.cwd()) + url.substring(1));
             }
             if (url.startsWith('@')) {
-                return new URL(`file://` + path.resolve(process.cwd()) + '/node_modules/@' + url.substring(1));
+                return !import.meta.env.PROD ?
+                    new URL(`file://` + path.resolve(process.cwd()) + '/node_modules/@' + url.substring(1)) :
+                    new URL(`file://` + path.resolve(process.cwd()) + '/src/styles/scss/' + url.substring(1).replace('nulllogic/scssleon/scss/', ''))
             }
 
             return null;
