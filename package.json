@@ -16,7 +16,7 @@
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.1.6",
     "@astrojs/preact": "^3.5.1",
-    "@nulllogic/scssleon" : "^1.0.35"
+    "@nulllogic/scssleon" : "^1.0.36"
   },
   "devDependencies": {
     "rehype-slug": "^6.0.0",
