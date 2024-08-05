@@ -2,6 +2,7 @@
 import {getCollection} from "astro:content";
 const docsCollection = await getCollection("docs");
 import {generate_rel_link} from "~/utils/links";
+import path from "path";
 
 const gettingStartedCollection = docsCollection
     .filter((doc) => {
@@ -56,7 +57,7 @@ const generate_class = (link) => {
             "",
         ))
 
-    if (pathname === url) {
+    if (pathname === url.pathname) {
         classes.push('active');
     }
 
@@ -174,62 +175,63 @@ const generate_link = (link) => {
   $nav: functions.get-theme(app.$theme, 'components.nav');
 
   $nav: map.deep-merge($nav, (
-      --grid-template-columns: auto auto,
-      margin: 0 0 8px 0,
-      subclasses : (
+    --grid-template-columns: auto auto,
+    margin: 0 0 8px 0,
+    subclasses : (
+      ".item" : (
+        subclasses: (
+          "&:first-child .title" : (
+            margin: 0 0 10px 0
+          ),
+          ".title" : (
+            font-size: 1.25rem,
+            font-weight: 500,
+            margin: 10px 0,
+          ),
           ".item" : (
-              subclasses: (
-                  "&:first-child .title" : (
-                      margin: 0 0 10px 0
+            subclasses: (
+              ".link" : (
+                border-left : 1px solid rgba(231, 231, 235, 0.2),
+                color: rgb(148, 163, 184),
+                padding: 5px 10px,
+                text-decoration: none,
+                text-transform: capitalize,
+                subclasses: (
+                  "&.active" : (
+                    color: rgba(255, 255, 255, 0.85),
+                    border-left : 1px solid rgba(255, 255, 255, 0.85),
+                    background: rgba(57, 119, 33, 0.6),
                   ),
-                  ".title" : (
-                      font-size: 1.25rem,
-                      font-weight: 500,
-                      margin: 10px 0,
-                  ),
-                  ".item" : (
-                      subclasses: (
-                          ".link" : (
-                              border-left : 1px solid rgba(231, 231, 235, 0.2),
-                              color: rgb(148, 163, 184),
-                              padding: 5px 10px,
-                              text-decoration: none,
-                              text-transform: capitalize,
-                              subclasses: (
-                                  "&.active" : (
-                                      color: rgba(26, 104, 45, 0.85),
-                                      border-left : 1px solid rgba(26, 104, 45, 0.85),
-                                  ),
-                                  "&:hover:not(.active)" : (
-                                      color: rgb(230, 230, 230),
-                                      border-left : 1px solid rgba(26, 104, 45, 0.35),
-                                  )
-                              )
-                          )
-                      )
+                  "&:hover:not(.active)" : (
+                    color: rgb(230, 230, 230),
+                    border-left : 1px solid rgba(26, 104, 45, 0.35),
                   )
+                )
               )
+            )
           )
+        )
       )
+    )
   ));
 
   $sidebar-section: (
-      grid-area: sidebar,
-      display: block,
-      align-self: start,
-      colors : (
-          dark : (
-          )
-      ),
-      subclasses : (
-          ".nav" : $nav
+    grid-area: sidebar,
+    display: block,
+    align-self: start,
+    colors : (
+      dark : (
       )
+    ),
+    subclasses : (
+      ".nav" : $nav
+    )
   );
 
   @include mixins.generate-component(
-          $sidebar-section,
-          "sidebar",
-          app.$config,
-          app.$theme
+      $sidebar-section,
+      "sidebar",
+      app.$config,
+      app.$theme
   );
 </style>

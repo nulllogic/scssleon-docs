@@ -91,5 +91,11 @@ const {title, description, image = "/placeholder-social.jpg"} = Astro.props;
     $theme: $theme
   );
 
+  // ↓ Badge
+  @use "@nulllogic/scssleon/scss/components/badge" with (
+    $config: $config,
+    $theme: $theme
+  );
+
 </style>
 
