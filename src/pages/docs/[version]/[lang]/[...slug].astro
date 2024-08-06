@@ -66,6 +66,12 @@ const {headings, Content} = await page.render();
   @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
   @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
+  // ↓ Amazing content
+  @use "../../../../styles/scss/content" with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
+
   $card: functions.get-theme(app.$theme, 'components.card');
 
   $card: map.deep-merge($card, (
@@ -87,17 +93,15 @@ const {headings, Content} = await page.render();
   /*  // Demonstrate the vertical rhythm at 12px*/
   /*  background-image: linear-gradient(rgba(122,122,122,0.5) 1px, transparent 1px);*/
   /*  background-size: 100% 14px;*/
-
   /*}*/
 
   .title {
-    margin-bottom: 0.5rem;
+
   }
 
   .subtitle {
     font-size: 1.5rem;
     font-weight: 300;
-    margin-bottom: 1rem;
     color: rgba(125, 133, 144, 1);
   }
 

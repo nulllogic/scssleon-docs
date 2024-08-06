@@ -13,13 +13,22 @@ import {Snippet} from "/src/components/snippet"
         ```html
         <div class="alert" role="alert">
             <div class="left">
-                123
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                     aria-label="Info">
+                    <path
+                        d="M8 0C3.58125 0 0 3.58125 0 8C0 12.4187 3.58125 16 8 16C12.4187 16 16 12.4187 16 8C16 3.58125 12.4187 0 8 0ZM8 14.5C4.41563 14.5 1.5 11.5841 1.5 8C1.5 4.41594 4.41563 1.5 8 1.5C11.5844 1.5 14.5 4.41594 14.5 8C14.5 11.5841 11.5844 14.5 8 14.5ZM9.25 10.5H8.75V7.75C8.75 7.3375 8.41563 7 8 7H7C6.5875 7 6.25 7.3375 6.25 7.75C6.25 8.1625 6.5875 8.5 7 8.5H7.25V10.5H6.75C6.3375 10.5 6 10.8375 6 11.25C6 11.6625 6.3375 12 6.75 12H9.25C9.66406 12 10 11.6641 10 11.25C10 10.8359 9.66563 10.5 9.25 10.5ZM8 6C8.55219 6 9 5.55219 9 5C9 4.44781 8.55219 4 8 4C7.44781 4 7 4.44687 7 5C7 5.55313 7.44687 6 8 6Z"></path>
+                </svg>
             </div>
             <div class="center">
-                123
+                <h4>
+                    Heads up!
+                </h4>
+                <p>
+                    You can add components to your app using the cli.
+                </p>
             </div>
             <div class="right">
-                123
+                <a href="#" class="close">x</a>
             </div>
         </div>
         ```
@@ -39,10 +48,56 @@ import {Snippet} from "/src/components/snippet"
         $alert: functions.get-theme(app.$theme, 'components.alert');
 
         @include mixins.generate-component(
-            $alert,
-            "alert",
-            app.$config,
-            app.$theme
+        $alert,
+        "alert",
+        app.$config,
+        app.$theme
+        );
+        ```
+    </Fragment>
+</Snippet>
+
+<Snippet frame_url={'components/alert/2'} preview={true}>
+    <Fragment slot="html">
+        ```html
+        <div class="alert" role="alert">
+            <div class="center">
+                <div class="Flash__StyledFlash-sc-hzrzfc-0 eIEwNA">
+                    <svg aria-hidden="true" focusable="false" role="img" class="Octicon-sc-9kayk9-0" viewBox="0 0 16 16"
+                         width="16" height="16" fill="currentColor"
+                         style="display: inline-block; vertical-align: text-bottom; overflow: visible;">
+                        <path
+                            d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path>
+                    </svg>
+                    To understand admin access, teams, issue assignments, and redirects after a repository is
+                    transferred, see <a data-inline="true"
+                                        href="#"
+                                        class="">Transferring a repository</a> in
+                    GitHub Help.
+                </div>
+            </div>
+        </div>
+        ```
+    </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+
+        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+        $alert: functions.get-theme(app.$theme, 'components.alert');
+
+        @include mixins.generate-component(
+        $alert,
+        "alert",
+        app.$config,
+        app.$theme
         );
         ```
     </Fragment>

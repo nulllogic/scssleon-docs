@@ -53,13 +53,13 @@ const {title, description, image = "/placeholder-social.jpg"} = Astro.props;
   $theme: app.$theme;
 
   // ↓ Root
-  @use "@nulllogic/scssleon/scss/root" with (
+  @use "~/styles/scss/root" with (
     $config: $config,
     $theme: $theme
   );
 
   // Great reset
-  @use "@nulllogic/scssleon/scss/reset" with (
+  @use "~/styles/scss/reset" with (
     $config: $config,
     $theme: $theme
   );
@@ -67,32 +67,25 @@ const {title, description, image = "/placeholder-social.jpg"} = Astro.props;
   // Base
   // Special utility, that will dynamically generate CSS
   // properties for HTML tags, specified in theme
-  @use "@nulllogic/scssleon/scss/base" with (
-    $config: $config,
-    $theme: $theme
-  );
-
-  // Amazing content
-  // Special class `.content` to allow formatting of the default html tags
-  @use "@nulllogic/scssleon/scss/content" with (
+  @use "~/styles/scss/base" with (
     $config: $config,
     $theme: $theme
   );
 
   // ↓ Container
-  @use "@nulllogic/scssleon/scss/components/container" with (
+  @use "~/styles/scss/components/container" with (
     $config: $config,
     $theme: $theme
   );
 
   // ↓ Nav
-  @use "@nulllogic/scssleon/scss/components/nav" with (
+  @use "~/styles/scss/components/nav" with (
     $config: $config,
     $theme: $theme
   );
 
   // ↓ Badge
-  @use "@nulllogic/scssleon/scss/components/badge" with (
+  @use "~/styles/scss/components/badge" with (
     $config: $config,
     $theme: $theme
   );

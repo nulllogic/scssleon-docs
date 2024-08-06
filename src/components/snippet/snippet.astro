@@ -91,7 +91,7 @@ const {frame_url, preview} = Astro.props;
             }
         </div>
 
-        <div class="resizer"><span class="drag"><span class="el" /></span></div>
+        <div class="resizer"><span class="drag"><span class="el"/></span></div>
     </div>
 </div>
 
@@ -183,121 +183,121 @@ const {frame_url, preview} = Astro.props;
   $nav: functions.get-theme(app.$theme, "components.nav");
 
   $nav: map.deep-merge(
-          $nav,
-          (
-              subclasses: (
-                  ".item": (
-                      margin: 0 5px -1px 0,
-                      subclasses: (
-                          "&.active": (
-                              subclasses: (
-                                  ".link": (
-                                      text-decoration: none,
-                                      background: #333,
-                                      color: rgb(125, 211, 252),
-                                  ),
-                                  "&:hover": (),
-                              ),
-                          ),
-                          ".link": (
-                              text-decoration: none,
-                              /*border: 1px solid red,*/
-                              border-radius: 5px 5px 0 0,
-                              font-size: 0.825em,
-                              subclasses: (
-                                  "&:hover": (
-                                      background: #333,
-                                  ),
-                              ),
-                          ),
-                      ),
+      $nav,
+      (
+        subclasses: (
+          ".item": (
+            margin: 0 5px -1px 0,
+            subclasses: (
+              "&.active": (
+                subclasses: (
+                  ".link": (
+                    text-decoration: none,
+                    background: #333,
+                    color: rgb(125, 211, 252),
                   ),
+                  "&:hover": (),
+                ),
               ),
-          )
+              ".link": (
+                text-decoration: none,
+                /*border: 1px solid red,*/
+                border-radius: 5px 5px 0 0,
+                font-size: 0.825em,
+                subclasses: (
+                  "&:hover": (
+                    background: #333,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      )
   );
 
   $nav-tabs: (
-      subclasses: (
-          ".nav": $nav,
-      ),
+    subclasses: (
+      ".nav": $nav,
+    ),
   );
 
   $preview-container: (
-      margin: 0 0 15px 0,
-      subclasses: (
-          ".preview": (
-              position: relative,
-              transition: 0.75s background-color,
-              /*border: 1px solid red,*/
-              border-bottom: none,
-              border-radius: 5px 5px 0 0,
-              subclasses: (
-                  "h1, h2, h3, h4, h5, h6, p, dl, ol, ul, nav ul, blockquote, pre, table:not(:last-child)" : (
-                      margin: 0
-                  ),
-                  "p" : (
-                      padding: 0
-                  ),
-                  " > .btn" : (
-                      margin: 0 10px 0 0
-                  )
-              )
+    margin: 0 0 15px 0,
+    subclasses: (
+      ".preview": (
+        position: relative,
+        transition: 0.75s background-color,
+        /*border: 1px solid red,*/
+        border-bottom: none,
+        border-radius: 5px 5px 0 0,
+        subclasses: (
+          "h1, h2, h3, h4, h5, h6, p, dl, ol, ul, nav ul, blockquote, pre, table:not(:last-child)" : (
+            margin: 0
           ),
-          ".tab-content": (
-              subclasses: (
-                  ".tab": (
-                      display: none,
-                      subclasses: (
-                          "&.active": (
-                              display: block,
-                          ),
-                          ".code": (
-                              /*border: 1px solid red,*/
-                              border-top: none,
-                              border-radius: 0 0 5px 5px,
-                              display: block,
-                              margin-bottom: 0,
-                              width: 100%,
-                              position: relative,
-                              overflow: auto,
-                              subclasses: (
-                                  "pre": (
-                                      padding: 1rem,
-                                      subclasses: (
-                                          "code": (
-                                              word-break: normal,
-                                              background: none,
-                                              padding: 0,
-                                              font-size: 0.875em,
-                                          ),
-                                      ),
-                                  ),
-                              ),
-                          ),
-                      ),
-                  ),
-              ),
+          "p" : (
+            padding: 0
           ),
+          " > .btn" : (
+            margin: 0 10px 0 0
+          )
+        )
       ),
+      ".tab-content": (
+        subclasses: (
+          ".tab": (
+            display: none,
+            subclasses: (
+              "&.active": (
+                display: block,
+              ),
+              ".code": (
+                /*border: 1px solid red,*/
+                border-top: none,
+                border-radius: 0 0 5px 5px,
+                display: block,
+                margin-bottom: 0,
+                width: 100%,
+                position: relative,
+                overflow: auto,
+                subclasses: (
+                  "pre": (
+                    padding: 1rem,
+                    subclasses: (
+                      "code": (
+                        word-break: normal,
+                        background: none,
+                        padding: 0,
+                        font-size: 0.875rem,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
   $snippet: (
-      subclasses: (
-          ".navtabs": (
-              margin: 0 0 0 8px,
-              subclasses: (
-                  ".nav": $nav,
-              ),
-          ),
-          ".preview-container": $preview-container,
+    subclasses: (
+      ".navtabs": (
+        margin: 0 0 0 8px,
+        subclasses: (
+          ".nav": $nav,
+        ),
       ),
+      ".preview-container": $preview-container,
+    ),
   );
 
   @include mixins.generate-component(
-          $snippet,
-          "snippet",
-          app.$config,
-          app.$theme
+      $snippet,
+      "snippet",
+      app.$config,
+      app.$theme
   );
 </style>
 
