@@ -3,6 +3,7 @@ title: Breadcrumb
 description: A breadcrumb is like a digital trail of crumbs, guiding users through the labyrinth of a website. It's a handy navigation tool that helps users keep track of their location within a site's hierarchy. With breadcrumbs, users can easily retrace their steps and find their way back to the homepage or a previous page.
 category: components
 toc: true
+schema: true
 ---
 
 import {Snippet} from "/src/components/snippet"
@@ -18,11 +19,11 @@ Use an ordered or unordered list with linked list items to create a minimally st
             <ul class="breadcrumb">
                 <li class="item"><a href="#" class="link">Home</a></li>
                 <li class="item">
-                    <svg-circle />
+                    <svg-circle/>
                 </li>
                 <li class="item"><a href="#" class="link">Library</a></li>
                 <li class="item">
-                    <svg-circle />
+                    <svg-circle/>
                 </li>
                 <li class="item active" aria-current="page">Data</li>
             </ul>
@@ -43,25 +44,25 @@ Use an ordered or unordered list with linked list items to create a minimally st
         $breadcrumb: functions.get-theme(app.$theme, 'components.breadcrumb');
 
         @include mixins.generate-component(
-            $breadcrumb,
-            "breadcrumb",
-            app.$config,
-            app.$theme
+        $breadcrumb,
+        "breadcrumb",
+        app.$config,
+        app.$theme
         );
         ```
     </Fragment>
     <Fragment slot={'js'}>
         ```js
         customElements.define("svg-circle", class extends HTMLElement {
-            connectedCallback() {
-                this.innerHTML = `<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+        connectedCallback() {
+        this.innerHTML = `<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                      fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd"
                           d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                           clip-rule="evenodd"/>
                 </svg>`;
-            }
-        });
+    }
+    });
         ```
     </Fragment>
 </Snippet>
@@ -105,11 +106,86 @@ Dividers are automatically added in CSS through [`::before`](https://developer.m
         $breadcrumb: functions.get-theme(app.$theme, 'components.breadcrumb');
 
         @include mixins.generate-component(
-            $breadcrumb,
-            "breadcrumb",
-            app.$config,
-            app.$theme
+        $breadcrumb,
+        "breadcrumb",
+        app.$config,
+        app.$theme
         );
+        ```
+    </Fragment>
+</Snippet>
+
+## Example with Schema
+
+Use an ordered or unordered list with linked list items to create a minimally styled breadcrumb. Use our utilities to add additional styles as desired.
+
+<Snippet frame_url={'components/breadcrumb/1'} preview={true}>
+    <Fragment slot={'html'}>
+        ```html
+        <nav aria-label="Breadcrumb">
+            <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li class="item" itemprop="itemListElement" itemscope
+                    itemtype="https://schema.org/ListItem">
+                    <a href="#" class="link" itemprop="item">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1"/>
+                </li>
+                <li class="item">
+                    <svg-circle/>
+                </li>
+                <li class="item" itemprop="itemListElement" itemscope
+                    itemtype="https://schema.org/ListItem">
+                    <a href="#" class="link" itemprop="item">
+                        <span itemprop="name">Library</span>
+                    </a>
+                    <meta itemprop="position" content="2"/>
+                </li>
+                <li class="item">
+                    <svg-circle/>
+                </li>
+                <li class="item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="https://schema.org/ListItem">
+                    <span itemprop="name">Award winners</span>
+                    <meta itemprop="position" content="3"/>
+                </li>
+            </ul>
+        </nav>
+        ```
+    </Fragment>
+    <Fragment slot={'scss'}>
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+        $breadcrumb: functions.get-theme(app.$theme, 'components.breadcrumb');
+
+        @include mixins.generate-component(
+        $breadcrumb,
+        "breadcrumb",
+        app.$config,
+        app.$theme
+        );
+        ```
+    </Fragment>
+    <Fragment slot={'js'}>
+        ```js
+        customElements.define("svg-circle", class extends HTMLElement {
+        connectedCallback() {
+        this.innerHTML = `<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                     fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                          clip-rule="evenodd"/>
+                </svg>`;
+    }
+    });
         ```
     </Fragment>
 </Snippet>
