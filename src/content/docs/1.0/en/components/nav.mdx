@@ -53,3 +53,50 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
         ```
     </Fragment>
 </Snippet>
+
+## Vertical example
+
+Wrap a series of buttons with `.btn` in `.btn-group`.
+
+<Snippet frame_url={'components/nav/2'} preview={true}>
+    <Fragment slot="html">
+        ```html
+        <ul class="nav vertical">
+            <li class="item">
+                <a class="link active" aria-current="page" href="#">Active</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#">Link</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#">Link</a>
+            </li>
+            <li class="item">
+                <a class="link disabled" aria-disabled="true">Disabled</a>
+            </li>
+        </ul>
+        ```
+    </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+
+        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+        $nav: functions.get-theme(app.$theme, 'components.nav');
+
+        @include mixins.generate-component(
+        $nav,
+        "nav",
+        app.$config,
+        app.$theme
+        );
+        ```
+    </Fragment>
+</Snippet>
