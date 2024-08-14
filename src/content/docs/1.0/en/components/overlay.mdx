@@ -6,24 +6,34 @@ toc: true
 ---
 import {Snippet} from "/src/components/snippet"
 
-<Snippet frame_url={'components/overlay/1'} preview={true}>
+<Snippet frame_url={'components/overlay/1'} preview={true} min_height={350}>
     <Fragment slot="html">
         ```html
-        <div class="alert" role="alert">
-
+        <div class="overlay">
+123
         </div>
         ```
     </Fragment>
     <Fragment slot="scss">
         ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+        @use 'sass:list';
+        @use 'sass:string';
+        @use 'sass:meta';
+        @use 'sass:map';
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        @use '~/src/styles/app.scss' as app;
+
+        @use '@nulllogic/scssleon/scss/mixins.scss' as mixins;
+        @use '@nulllogic/scssleon/scss/functions.scss' as functions;
+
+        $overlay: functions.get-theme(app.$theme, 'components.overlay');
+
+        @include mixins.generate-component(
+            $overlay,
+            'overlay',
+            app.$config,
+            app.$theme
+        );
         ```
     </Fragment>
 </Snippet>

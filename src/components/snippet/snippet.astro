@@ -3,6 +3,7 @@ import {Preview} from "../preview";
 import {generate_iframe_link} from "~/utils/links.js";
 
 let slots = [];
+
 Object.keys(Astro.slots).forEach((element) => {
     if (element !== "default") return slots.push(Astro.slots.render(element));
 });
@@ -63,7 +64,7 @@ const {frame_url, preview} = Astro.props;
         {
             Astro.slots.has("html") && (
                         <div class="preview">
-                            <Preview url={generate_iframe_link(frame_url)}/>
+                            <Preview url={generate_iframe_link(frame_url)} />
                         </div>
             )
         }
