@@ -110,10 +110,12 @@ import {generate_rel_link} from "~/utils/links";
 
   @use "../../styles/app.scss" as app;
 
-  @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-  @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+  @use "../../styles/scss/mixins.scss" as mixins;
+  @use "../../styles/scss/functions.scss" as functions;
 
   $navbar: functions.get-theme(app.$theme, 'components.navbar');
+
+  @debug $navbar;
 
   $navbar: map.deep-merge($navbar, (
     --grid-template-columns: auto auto,
