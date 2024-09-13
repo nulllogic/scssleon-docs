@@ -134,6 +134,27 @@ import {Snippet} from "~/components/snippet"
              // show_multiple : false,
              // on_click : () => {},
              // a11y : false
+            const defaults = {
+                headerClass:        '.js-badger-accordion-header',
+                panelClass:         '.js-badger-accordion-panel',
+                panelInnerClass:    '.js-badger-accordion-panel-inner',
+                hiddenClass:        '-ba-is-hidden',
+                activeClass:        '-ba-is-active',
+                get hidenClass() { return this.hiddenClass; },
+                initializedClass:    'badger-accordion--initialized',
+                get initalisedClass() { return this.initializedClass; },
+                headerDataAttr:     'data-badger-accordion-header-id',
+                openMultiplePanels: false,
+                openHeadersOnLoad:  [],
+                addListenersOnInit: true,
+                headerOpenLabel:    '',
+                headerCloseLabel:   '',
+                roles:              true
+                // toggleEl:            // If you want to use a different element to trigger the accordion
+            };
+
+            // Options
+            const settings = Object.assign({}, defaults, options);
         }
 
         accordion(document.querySelectorAll('.accordion'), {
