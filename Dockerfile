@@ -1,4 +1,4 @@
-FROM node:slim as astro
+FROM node:slim AS astro
 
 LABEL version="1.0.0"
 LABEL maintainer="Vladimir Lukyanov | vladimir@lukyanov.net"
