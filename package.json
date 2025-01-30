@@ -15,7 +15,7 @@
     "@astrojs/mdx": "^4.0.7",
     "@astrojs/rss": "^4.0.10",
     "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/preact": "^4.0.1",
+    "@astrojs/preact": "^4.0.3",
     "sharp": "^0.33.5",
     "@unpic/astro": "^1.0.0",
     "@nulllogic/scssleon": "^1.0.36"
