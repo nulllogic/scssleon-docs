@@ -1,5 +1,4 @@
 ---
-layout: ~/layouts/docs.astro
 title: Z-index
 description: z-indexes play an important part in how our components overlay and interact with one another.
 group: layout
