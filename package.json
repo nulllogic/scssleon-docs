@@ -11,11 +11,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.7.5",
-    "@astrojs/mdx": "^4.2.5",
+    "astro": "^5.7.12",
+    "@astrojs/mdx": "^4.2.6",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.3.1",
-    "@astrojs/preact": "^4.0.10",
+    "@astrojs/preact": "^4.0.11",
     "sharp": "^0.34.1",
     "@unpic/astro": "^1.0.0",
     "@nulllogic/scssleon": "^1.0.36"
