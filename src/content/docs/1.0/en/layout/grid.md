@@ -1,5 +1,4 @@
 ---
-layout: ~/layouts/docs.astro
 title: Grid system
 description: Use our powerful mobile-first flexbox grid to build layouts of all shapes and sizes thanks to a twenty-four system, six default responsive tiers, SCSS variables and mixins, and dozens of predefined classes.
 group: layout
