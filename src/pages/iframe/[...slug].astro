@@ -10,20 +10,23 @@ export async function getStaticPaths() {
 
     for (let i = 0; i < docsCollection.length; i++) {
 
+        // console.log(...docsCollection[i].body.toStri);
         const regexp = new RegExp('(\\bframe_url\\b)={["\']?((?:.(?!["\']?\\s+(?:\\S+)=|\\s*\\/?[>"\']))+.)["\']}?', 'gi');
-        const matches = [...docsCollection[i].body.toString().matchAll(regexp)];
+        if(docsCollection[i].body) {
+            const matches = [...docsCollection[i].body?.toString().matchAll(regexp)];
 
-        if (matches.length !== 0) {
-            // Check if we have multiply iframe inside document
-            if (matches.length > 1) {
-                for (let j = 0; j < matches.length; j++) {
-                    let temp_el = {...docsCollection[i]};
-                    temp_el.frame_url = matches[j]['2'];
-                    iframes.push(temp_el);
+            if (matches.length !== 0) {
+                // Check if we have multiply iframe inside document
+                if (matches.length > 1) {
+                    for (let j = 0; j < matches.length; j++) {
+                        let temp_el = {...docsCollection[i]};
+                        temp_el.frame_url = matches[j]['2'];
+                        iframes.push(temp_el);
+                    }
+                } else {
+                    docsCollection[i].frame_url = matches[0]['2'];
+                    iframes.push(docsCollection[i]);
                 }
-            } else {
-                docsCollection[i].frame_url = matches[0]['2'];
-                iframes.push(docsCollection[i]);
             }
         }
     }
