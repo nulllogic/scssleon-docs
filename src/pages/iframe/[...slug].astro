@@ -171,4 +171,12 @@ const js = fragment_matches['2'] && fragment_matches['2'].hasOwnProperty('1') ?
     $config: app.$config,
     $theme: app.$theme
   );
+
+  // Base
+  // Special utility, that will dynamically generate CSS
+  // properties for HTML tags, specified in theme
+  @use "../../styles/scss/content" with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
 </style>
