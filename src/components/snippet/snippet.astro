@@ -28,38 +28,6 @@ const {frame_url, preview} = Astro.props;
 ---
 
 <div class="snippet">
-    <div class="navtabs">
-        <ul class="nav">
-            {
-                Astro.slots.has("html") && (
-                            <li class="item active">
-                                <a class="link" href="#">
-                                    HTML
-                                </a>
-                            </li>
-                )
-            }
-            {
-                Astro.slots.has("scss") && (
-                            <li class="item">
-                                <a class="link" href="#">
-                                    SCSS
-                                </a>
-                            </li>
-                )
-            }
-            {
-                Astro.slots.has("js") && (
-                            <li class="item">
-                                <a class="link" href="#">
-                                    JS
-                                </a>
-                            </li>
-                )
-            }
-        </ul>
-    </div>
-
     <div class="card preview-container">
         {
             Astro.slots.has("html") && (
@@ -68,6 +36,39 @@ const {frame_url, preview} = Astro.props;
                         </div>
             )
         }
+
+        <div class="navtabs">
+            <ul class="nav">
+                {
+                    Astro.slots.has("html") && (
+                                <li class="item active">
+                                    <a class="link" href="#">
+                                        HTML
+                                    </a>
+                                </li>
+                    )
+                }
+                {
+                    Astro.slots.has("scss") && (
+                                <li class="item">
+                                    <a class="link" href="#">
+                                        SCSS
+                                    </a>
+                                </li>
+                    )
+                }
+                {
+                    Astro.slots.has("js") && (
+                                <li class="item">
+                                    <a class="link" href="#">
+                                        JS
+                                    </a>
+                                </li>
+                    )
+                }
+            </ul>
+        </div>
+
         <div class="tab-content">
             {
                 Astro.slots.has("html") && (
