@@ -12,16 +12,44 @@ import {Snippet} from "/src/components/snippet"
 <Snippet frame_url={'components/dropdown/1'} preview={true}>
     <Fragment slot="html">
         ```html
-        <div class="dropdown">
+        <div style="position: relative; display:inline-block; width: 200px;">
             <button class="btn toggle" type="button" aria-expanded="false">
                 Dropdown button
             </button>
-            <ul class="menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <ul class="dropdown">
+                <li>
+                    <a class="dropdown-item" href="#">Action</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">Another action</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </li>
             </ul>
         </div>
+        ```
+    </Fragment>
+    <Fragment slot="scss">
+        ```scss
+        @use "sass:list";
+        @use "sass:string";
+        @use "sass:meta";
+        @use "sass:map";
+
+        @use "~/src/styles/app.scss" as app;
+
+        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+        $dropdown: functions.get-theme(app.$theme, 'components.dropdown');
+
+        @include mixins.generate-component(
+            $dropdown,
+            "dropdown",
+            app.$config,
+            app.$theme
+        );
         ```
     </Fragment>
 </Snippet>
