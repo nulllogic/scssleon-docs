@@ -112,16 +112,19 @@ const {frame_url, preview} = Astro.props;
   $nav: map.deep-merge(
           $nav,
           (
+              padding: 5px 0,
+              // @TODO Fix later
+              // It's adding wrong name to prefix
+              // --gap => --xii-snippet-gap
               subclasses: (
                   ".item": (
-
                       subclasses: (
                           "&.active": (
                               subclasses: (
                                   ".link": (
                                       text-decoration: none,
-                                      color: rgb(125, 211, 252),
-                                      background: #0d1117,
+                                      color: white,
+                                      background: #656c7633,
                                   ),
                                   "&:hover": (),
                               ),
@@ -129,6 +132,8 @@ const {frame_url, preview} = Astro.props;
                           ".link": (
                               text-decoration: none,
                               padding: 8px,
+                              border-radius: 5px,
+                              color: #cccccc66,
                               subclasses: (
                                   "&:hover": (
                                       background: #0d1117,
