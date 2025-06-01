@@ -1,90 +1,117 @@
 ---
-import Index from "../layouts/index.astro";
-import {Snippet} from "../components/snippet";
+import Index from '../layouts/index.astro'
+import { Snippet } from '../components/snippet'
 
 //https://api.github.com/repos/nulllogic/scssleon/branches/master
 
 const response = await fetch(
-    "https://api.github.com/repos/nulllogic/scssleon/branches/master",
-);
-const data = await response.json();
+  'https://api.github.com/repos/nulllogic/scssleon/branches/master',
+)
+const data = await response.json()
 const commit_date =
-    typeof data.message === "undefined"
-        ? new Date(data.commit.commit.author.date)
-        : new Date();
+  typeof data.message === 'undefined'
+    ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+    })
+    : new Date()
 ---
 
 <Index>
-  <main>
-    <div class="welcome">
-      <div class="container xxl">
-        <h1 class="title">SCSS superpowers.</h1>
-        <h2 class="subtitle">Get ready to notice flaws in every product you use, and then reverse-engineer how experts
-          make stuff feel
-          <code>‘intuitive’</code> and <code>‘easy’</code>.
-        </h2>
-        <p class="latest-commit">
-          Latest Commit on GitHub: {
-            commit_date.toISOString().replace(/(.*)T(.*)\..*/, "$1 $2")
-        }
-        </p>
-      </div>
-    </div>
+    <main>
+        <div class="welcome">
+            <div class="container xxl">
+                <h1 class="title">
+                    <span class="first">SCSS</span>
+                    <span class="second">superpowers</span>
+                </h1>
 
-    <div class="customize">
-      <div class="container xxl">
-        <h2 class="title">Customize everything with SCSS</h2>
-        <p>SCSSleon utilizes Sass for a modular and customizable architecture. Import only the components you need,
-          enable global options like gradients and shadows, and write your own CSS with our variables, maps, functions,
-          and mixins.</p>
-        <div class="grid">
-          <div class="column">
-            <h3>Include all of SCSSleon’s parts</h3>
-            <p>Import one stylesheet and you're off to the races with every feature of our CSS.</p>
-            <Snippet>
-              // Variable overrides first
-            </Snippet>
-          </div>
-          <div class="column">
-            <h3>Include what you need</h3>
-            <Snippet>
-              // Variable overrides first
-            </Snippet>
-          </div>
-        </div>
-      </div>
-    </div>
+                <h2 class="subtitle">
+                    Ship higher-quality software faster. <br />Be the hero of your engineering teams.
+                </h2>
 
-    <div class="features">
-      <div class="container xxl">
-        <h2 class="title">Why SCSSLeon ?</h2>
-        <p>SCSSLeon understands the full frontend development journey in ways few other tools do.
-          Make any deployment simple, wherever you develop software.</p>
-        <div class="grid">
-          <div class="first">
-            <div class="card">
-              123
+                <p class="latest_commit">
+                    <span class="badge">Latest Commit on GitHub: {
+                        commit_date
+                    }</span>
+                </p>
             </div>
-          </div>
-          <div class="second">
-            <div class="card">
-              123
-            </div>
-          </div>
-          <div class="third">
-            <div class="card">
-              123
-            </div>
-          </div>
-          <div class="fourth">
-            <div class="card">
-              123
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </main>
+
+        <div class="customize">
+            <h2>Build software faster, together.</h2>
+            <p>The most complete developer experience.</p>
+
+            ---
+            <h2>Crafted for the most productive teams.</h2>
+            <p>Precision. Elegance. Performance.</p>
+
+            <div class="container xxl">
+
+                Cloud Development Environments
+                Start coding.
+                No setup required.
+                Dedicated, pre-configured cloud development environments
+                (Gitspaces™) connected to your favorite IDE. Ready to code.
+
+                <h2 class="title">Customize everything with SCSS</h2>
+                <p>SCSSleon utilizes Sass for a modular and customizable
+                    architecture. Import only the components you need,
+                    enable global options like gradients and shadows, and write
+                    your own CSS with our variables, maps, functions,
+                    and mixins.</p>
+                <div class="grid">
+                    <div class="column">
+                        <h3>Include all of SCSSleon’s parts</h3>
+                        <p>Import one stylesheet and you're off to the races
+                            with every feature of our CSS.</p>
+                        <Snippet>
+                            // Variable overrides first
+                        </Snippet>
+                    </div>
+                    <div class="column">
+                        <h3>Include what you need</h3>
+                        <Snippet>
+                            // Variable overrides first
+                        </Snippet>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="container xxl">
+                <h2 class="title">Why SCSSLeon ?</h2>
+                <p>SCSSLeon understands the full frontend development journey in
+                    ways few other tools do.
+                    Make any deployment simple, wherever you develop
+                    software.</p>
+                <div class="grid">
+                    <div class="first">
+                        <div class="card">
+                            123
+                        </div>
+                    </div>
+                    <div class="second">
+                        <div class="card">
+                            123
+                        </div>
+                    </div>
+                    <div class="third">
+                        <div class="card">
+                            123
+                        </div>
+                    </div>
+                    <div class="fourth">
+                        <div class="card">
+                            123
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </Index>
 
 <style lang="scss">
@@ -98,7 +125,7 @@ const commit_date =
   @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
   $welcome-section: (
-    --padding: 105px 0,
+    --padding: 3rem 0,
     text-align: center,
     background: var(--background),
     padding: var(--padding),
@@ -109,25 +136,38 @@ const commit_date =
     ),
     subclasses : (
       ".title" : (
-        display: inline-block,
-        font-size: 5rem,
-        font-weight: 700,
-        background-image: linear-gradient(143deg, rgb(126, 35, 246) 30%, rgb(253, 104, 253), rgb(126, 35, 246) 60%),
-        background-clip: text,
-        -webkit-background-clip: text,
-        -webkit-text-fill-color: transparent,
-        background-size: 500% 500%,
-        animation-duration: 3s,
-        animation-timing-function: linear,
-        animation-delay: 0s,
-        animation-iteration-count: infinite,
-        animation-direction: normal,
-        animation-fill-mode: none,
-        animation-play-state: running,
-        animation-name: dobza,
+        font-size: 4rem,
+        margin: 0 auto 15px auto,
+        text-align: center,
+        display: flex,
+        align-items: center,
+        flex-direction: column,
+        "subclasses" : (
+          ".first" : (
+            display: inline-block,
+            height: auto,
+            font-size: 9rem,
+          ),
+          ".second" : (
+            display: inline-block,
+            background-image: linear-gradient(135deg, color(display-p3 .6196078431 .4784313725 1/1) 0%, color(display-p3 .9960784314 .5450980392 .7333333333/1) 33.33%, color(display-p3 1 .7411764706 .4784313725/1) 66.67%, color(display-p3 .9725490196 .9176470588 .7647058824/1) 100%),
+            background-clip: text,
+            color: transparent,
+            -webkit-text-fill-color: transparent,
+            margin-top: -40px,
+          )
+        )
       ),
-      ".latest-commit" : (
-        background: var(--background),
+      ".subtitle" : (
+        margin: 0 0 20px 0,
+        font-size: 2rem,
+      ),
+      ".latest_commit" : (
+        "subclasses" : (
+            "span" : (
+              background: var(--background),
+            )
+        ),
         colors : (
           dark : (
             background: rgba(65, 52, 99, 0.4)
@@ -251,4 +291,16 @@ const commit_date =
       app.$config,
       app.$theme
   );
+
+  .sr-only {
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    overflow: hidden;
+  }
 </style>
