@@ -9,7 +9,7 @@ import {Snippet} from "/src/components/snippet"
 ## Example
 <Snippet frame_url={'components/badge/1'} preview={true}>
     <Fragment slot="html">
-        ```html title="tsconfig.json" "content"
+        ```html
         <div class="content">
             <h1>Example heading <span class="badge">New</span></h1>
             <h2>Example heading <span class="badge">New</span></h2>
@@ -34,10 +34,10 @@ import {Snippet} from "/src/components/snippet"
         $badge: functions.get-theme(app.$theme, 'components.badge');
 
         @include mixins.generate-component(
-        $badge,
-        "badge",
-        app.$config,
-        app.$theme
+            $badge,
+            "badge",
+            app.$config,
+            app.$theme
         );
         ```
     </Fragment>

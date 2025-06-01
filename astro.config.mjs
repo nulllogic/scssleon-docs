@@ -1,6 +1,6 @@
-import { defineConfig } from 'astro/config'
-import path, { dirname } from 'path'
-import { fileURLToPath } from 'url'
+import {defineConfig} from 'astro/config'
+import path, {dirname} from 'path'
+import {fileURLToPath} from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -12,46 +12,46 @@ import sitemap from '@astrojs/sitemap'
 import rehypeSlug from 'rehype-slug'
 import remarkSmartypants from 'remark-smartypants'
 
-import { iframe } from './src/utils/integrations/iframe'
+import {iframe} from './src/utils/integrations/iframe'
 
 export default defineConfig({
-  site: 'https://nulllogic.github.io',
-  // adding sub directory ( it's required for github pages )
-  base: import.meta.env.PROD ? '/scssleon-docs' : '',
-  integrations: [mdx(), sitemap(), preact(), iframe()],
-  compressHTML: true,
-  output: 'static',
-  markdown: {
-    // Override with our own config
-    smartypants: true,
-    remarkPlugins: [
-      [remarkSmartypants, { dashes: false }],
-    ],
-    rehypePlugins: [
-      rehypeSlug,
-    ],
-    shikiConfig: {
-      theme: 'github-dark-default',
-      themes: {
-        dark: 'github-dark-default',
-        light: 'github-dark-default',
-      },
+    site: 'https://nulllogic.github.io',
+    // adding sub directory ( it's required for github pages )
+    base: import.meta.env.PROD ? '/scssleon-docs' : '',
+    integrations: [mdx(), sitemap(), preact(), iframe()],
+    compressHTML: true,
+    output: 'static',
+    markdown: {
+        // Override with our own config
+        smartypants: true,
+        remarkPlugins: [
+            [remarkSmartypants, {dashes: false}],
+        ],
+        rehypePlugins: [
+            rehypeSlug,
+        ],
+        shikiConfig: {
+            theme: 'github-dark-default',
+            themes: {
+                dark: 'github-dark-default',
+                light: 'github-dark-default',
+            },
+        },
     },
-  },
-  security: {
-    checkOrigin: true,
-  },
-  vite: {
-    css: {
-      preprocessorOptions: {},
+    security: {
+        checkOrigin: true,
     },
-  },
-  devToolbar: {
-    enabled: false,
-  },
-  resolve: {
-    alias: {
-      '~': path.resolve(__dirname, './src'),
+    vite: {
+        css: {
+            preprocessorOptions: {},
+        },
     },
-  },
+    devToolbar: {
+        enabled: false,
+    },
+    resolve: {
+        alias: {
+            '~': path.resolve(__dirname, './src'),
+        },
+    },
 })
