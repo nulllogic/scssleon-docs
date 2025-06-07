@@ -9,3 +9,12 @@ title: Migration
 <svg data-v-28d2859c="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="star"><path data-v-28d2859c="" fill-rule="evenodd" d="M20.078 14.026L24.157 0l5.02 14.026 12.548-7.013-6.588 13.247L48 24.312l-12.863 4.675 6.588 12.78-13.803-7.481L24.157 48l-4.079-13.714-13.176 7.48 5.96-12.779L0 24l12.863-3.74-5.02-13.247 12.235 7.013z"></path></svg>
 
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy "><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="52" height="12" viewBox="0 0 52 12" fill="none">
+<circle cx="46" cy="6" r="6" fill="#5FCF65"/>
+<circle cx="26" cy="6" r="6" fill="#F8CE52"/>
+<circle cx="6" cy="6" r="6" fill="#F96057"/>
+<circle cx="6" cy="6" r="5.75" stroke="black" stroke-opacity="0.1" stroke-width="0.5" style="mix-blend-mode:luminosity"/>
+<circle cx="26" cy="6" r="5.75" stroke="black" stroke-opacity="0.1" stroke-width="0.5" style="mix-blend-mode:luminosity"/>
+<circle cx="46" cy="6" r="5.75" stroke="black" stroke-opacity="0.1" stroke-width="0.5" style="mix-blend-mode:luminosity"/>
+</svg>
