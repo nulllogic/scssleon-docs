@@ -123,32 +123,31 @@ const js = fragment_matches['2'] && fragment_matches['2'].hasOwnProperty('1') ?
 
 <script is:inline type="text/javascript" set:html={js}/>
 <script is:inline type="text/javascript">
-  const myCustomData = { foo: 'bar' }
-  const event = new CustomEvent('myEvent', { detail: myCustomData })
-  const html = document.documentElement
+    const myCustomData = { foo: 'bar' }
+    const event = new CustomEvent('myEvent', { detail: myCustomData })
+    const html = document.documentElement;
 
-  const debounce = (callback, wait) => {
-    let timeoutId = null
-    return (...args) => {
-      window.clearTimeout(timeoutId)
-      timeoutId = window.setTimeout(() => {
-        callback.apply(null, args)
-      }, wait)
+    const debounce = (callback, wait) => {
+        let timeoutId = null;
+        return (...args) => {
+            window.clearTimeout(timeoutId);
+            timeoutId = window.setTimeout(() => {
+                callback.apply(null, args);
+            }, wait);
+        };
     }
-  }
-  window.addEventListener('resize', function (e) {
-    debounce(window.parent.document.dispatchEvent(event), 100)
-  })
+    window.addEventListener('resize', function(e) {
+        // debounce(window.parent.document.dispatchEvent(event), 100);
+    });
 
 </script>
 </body>
 </html>
 
 <style lang="scss">
-  html {
-    height: 100%;
-  }
-
+    html {
+        height: 100%;
+    }
   .wrapper {
     position: relative;
 

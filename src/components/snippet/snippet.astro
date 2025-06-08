@@ -113,32 +113,40 @@ const { frame_url, preview } = Astro.props
   $snippet: (
     subclasses: (
       ".navtabs": (
+
         padding: 0 0 0 8px,
         background: rgb(23, 24, 28),
         border-top: 1px solid rgba(48, 54, 61, 0.75),
         border-bottom: 1px solid rgba(48, 54, 61, 0.75),
+
         subclasses: (
           ".nav": (
+
             --nav-gap: 5px,
             padding: 5px 0,
+
             subclasses: (
               ".item": (
                 subclasses: (
                   "&.active": (
                     subclasses: (
                       ".link": (
+
                         text-decoration: none,
                         color: white,
                         background: #656c7633,
+
                       ),
                       "&:hover": (),
                     ),
                   ),
                   ".link": (
+
                     text-decoration: none,
                     padding: 8px,
                     border-radius: 5px,
                     color: #cccccc66,
+
                     subclasses: (
                       "&:hover": (
                         background: #0d1117,
@@ -151,8 +159,11 @@ const { frame_url, preview } = Astro.props
           ),
         ),
       ),
+
       ".preview-container": (
+
         margin: 0 0 15px 0,
+
         subclasses: (
           ".preview": (
             position: relative,

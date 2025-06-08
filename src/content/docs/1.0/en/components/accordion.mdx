@@ -169,37 +169,48 @@ import {Snippet} from "~/components/snippet"
     </Fragment>
     <Fragment slot={'js'}>
         ```js
-
         const accordion = (elements, options) => {
-             // show_multiple : false,
-             // on_click : () => {},
-             // a11y : false
             const defaults = {
-                headerClass:        '.js-badger-accordion-header',
-                panelClass:         '.js-badger-accordion-panel',
-                panelInnerClass:    '.js-badger-accordion-panel-inner',
-                hiddenClass:        '-ba-is-hidden',
-                activeClass:        '-ba-is-active',
-                get hidenClass() { return this.hiddenClass; },
-                initializedClass:    'badger-accordion--initialized',
-                get initalisedClass() { return this.initializedClass; },
-                headerDataAttr:     'data-badger-accordion-header-id',
-                openMultiplePanels: false,
-                openHeadersOnLoad:  [],
-                addListenersOnInit: true,
-                headerOpenLabel:    '',
-                headerCloseLabel:   '',
-                roles:              true
-                // toggleEl:            // If you want to use a different element to trigger the accordion
+                show_multiply : false,
+                a11y : true
             };
 
             // Options
             const settings = Object.assign({}, defaults, options);
+
+            function render () {
+              console.log(11);
+              // attach classes to buttons and containers
+              [].forEach.call(elements,
+                function(element) {
+                  // item.classList.add(titleClass);
+                  // item.nextElementSibling.classList.add(contentClass);
+              });
+
+              // attach only one click listener
+              // element.addEventListener('click', onClick);
+
+              // accordion starts with all tabs closed
+              // closeAll();
+
+              // sets the open tab - if defined
+              // if (openTab) {
+                // open(openTab);
+              // }
+            }
+
+            render();
+
+            return ({
+              elements : elements,
+              open : () => {}
+            })
         }
 
-        accordion(document.querySelectorAll('.accordion'), {
-
+        const accords = accordion(document.querySelectorAll('.accordion'), {
         });
+
+        console.log(accords);
 
         ```
     </Fragment>
