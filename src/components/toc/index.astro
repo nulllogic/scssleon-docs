@@ -2,11 +2,11 @@
 const {headings, github_page} = Astro.props
 ---
 <nav>
-  <ul>
+  <ul class="nav vertical">
       {headings.map((heading) => {
           return (
-              <li>
-                <a href='#' onClick={(e) => {
+                  <li class="item">
+                <a href='#' class="link" onClick={(e) => {
                     e.preventDefault()
                 }}>{heading.text}</a>
               </li>
@@ -15,9 +15,9 @@ const {headings, github_page} = Astro.props
   </ul>
 
   <hr />
-  <ul>
-    <li>
-      <a href={github_page} target="_blank" rel="noopener noreferrer">
+  <ul class="nav vertical">
+    <li class="item">
+      <a href={github_page} target="_blank" rel="noopener noreferrer" class="link">
         View on Github
       </a>
     </li>
