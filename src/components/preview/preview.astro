@@ -1,11 +1,11 @@
 ---
-const {url} = Astro.props;
+const { url } = Astro.props
 ---
 <div class="iframe-wrapper">
     <iframe
             src={url}
             class="iframe"
-            onload="this.style.visibility = 'visible';"
+            onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';this.style.visibility = 'visible';"
             seamless
     />
 </div>
@@ -18,7 +18,7 @@ const {url} = Astro.props;
     .iframe {
       margin: 0;
       width: 100%;
-      /*!*height: auto;*!*/
+      /*height: auto;*/
       /*z-index: 2;*/
       /*position: relative;*/
       /*display: block;*/
