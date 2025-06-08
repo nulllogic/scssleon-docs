@@ -5,7 +5,7 @@ const {url} = Astro.props;
     <iframe
             src={url}
             class="iframe"
-            onload="this.style.height= this.contentWindow.document.body.scrollHeight + 'px';this.style.visibility = 'visible';"
+            onload="this.style.visibility = 'visible';"
             seamless
     />
 </div>
@@ -18,25 +18,26 @@ const {url} = Astro.props;
     .iframe {
       margin: 0;
       width: 100%;
-      height: 100%;
-      z-index: 2;
-      position: relative;
-      display: block;
-      visibility: hidden;
-      border-radius: 3px 3px 0 0;
+      /*!*height: auto;*!*/
+      /*z-index: 2;*/
+      /*position: relative;*/
+      /*display: block;*/
+
+      /*border-radius: 3px 3px 0 0;*/
+      /*overflow: scroll;*/
     }
 
-    .background {
-      stroke: rgba(40, 51, 56, 0.63);
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: 1;
+    /*.background {*/
+    /*  stroke: rgba(40, 51, 56, 0.63);*/
+    /*  position: absolute;*/
+    /*  width: 100%;*/
+    /*  height: 100%;*/
+    /*  top: 0;*/
+    /*  left: 0;*/
+    /*  z-index: 1;*/
 
-      -webkit-user-select: none;
-      user-select: none;
-    }
+    /*  -webkit-user-select: none;*/
+    /*  user-select: none;*/
+    /*}*/
   }
 </style>

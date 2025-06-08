@@ -29,6 +29,16 @@ import Footer from "../components/footer/index.astro";
 </body>
 </html>
 
+<script is:global>
+  window.document.addEventListener('myEvent', handleEvent, false)
+  function handleEvent(e) {
+    const iframes = document.querySelectorAll('iframe');
+    iframes.forEach(iframe => {
+      iframe.contentWindow.location.reload();
+    })
+  }
+</script>
+
 <style lang="scss">
   @use "sass:list";
   @use "sass:meta";
@@ -73,6 +83,16 @@ import Footer from "../components/footer/index.astro";
       font-style: var(--shiki-dark-font-style) !important;
       font-weight: var(--shiki-dark-font-weight) !important;
       text-decoration: var(--shiki-dark-text-decoration) !important;
+    }
+  }
+</style>
+
+<style lang="scss" is:global>
+  html {
+    &.dragging {
+      iframe {
+        pointer-events: none;
+      }
     }
   }
 </style>

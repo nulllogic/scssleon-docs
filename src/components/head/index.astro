@@ -1,5 +1,5 @@
 ---
-const {title, description, image = "/placeholder-social.jpg"} = Astro.props;
+const { title, description, image = '/placeholder-social.jpg' } = Astro.props
 ---
 
 <!-- |–––––––––––––––––––– SCSSLeon ϟ made with ♥ ––––-––––––––––––––––––––-| --><!-- Global Metadata -->
@@ -41,6 +41,12 @@ const {title, description, image = "/placeholder-social.jpg"} = Astro.props;
 
   // ↓ Container
   @use "~/styles/scss/components/container" with (
+    $config: $config,
+    $theme: $theme
+  );
+
+  // ↓ Navigation bar
+  @use "~/styles/scss/components/navbar" with (
     $config: $config,
     $theme: $theme
   );
