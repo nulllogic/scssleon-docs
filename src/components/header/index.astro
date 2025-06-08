@@ -1,6 +1,6 @@
 ---
 import Logo from '../logo/index.astro'
-import { generate_rel_link } from '~/utils/links'
+import {generate_rel_link} from '~/utils/links'
 ---
 
 <div class="header">
@@ -13,7 +13,7 @@ import { generate_rel_link } from '~/utils/links'
                     </li>
                     <li class="item">
                         <a href={generate_rel_link(Astro,
-                          './docs/1.0/en/getting-started/introduction')}
+                            './docs/1.0/en/getting-started/introduction')}
                            class="link"
                            target="_self" aria-label="Components">
                             Components
@@ -21,7 +21,7 @@ import { generate_rel_link } from '~/utils/links'
                     </li>
                     <li class="item">
                         <a href={generate_rel_link(Astro,
-                          './examples/1.0/en/welcome')} class="link"
+                            './examples/1.0/en/welcome')} class="link"
                            target="_self"
                            aria-label="Pre-built Sections">
                             Pre-built Sections
@@ -104,68 +104,68 @@ import { generate_rel_link } from '~/utils/links'
   $navbar: functions.get-theme(app.$theme, 'components.navbar');
 
   $navbar: map.deep-merge($navbar, (
-    --grid-template-columns: auto auto,
-    subclasses : (
-      ".item" : (
-        subclasses: (
-          "&:first-child .title" : (
-            padding: 0
-          ),
-        )
+      --grid-template-columns: auto auto,
+      subclasses : (
+          ".item" : (
+              subclasses: (
+                  "&:first-child .title" : (
+                      padding: 0
+                  ),
+              )
+          )
       )
-    )
   ));
 
   $header-section: (
-    padding: 5px 5px,
-    background: var(--background),
-    border-bottom: var(--border),
-    box-shadow: string.unquote("rgba(13, 13, 17, 0.4) 0px 5px 25px"),
-    top: 0,
-    position: relative,
-    z-index: 6,
-
-    colors : (
-      dark : (
-        background : string.unquote("linear-gradient(rgba(10, 34, 8, 0.85) 0%, rgba(28, 43, 31, 0.55) 100%)"),
-        border : 1px solid rgba(27, 60, 24, 1),
+      padding: 5px 5px,
+      background: var(--background),
+      border-bottom: var(--border),
+      box-shadow: string.unquote("rgba(13, 13, 17, 0.4) 0px 5px 25px"),
+      top: 0,
+      position: relative,
+      z-index: 6,
+      colors : (
+          dark : (
+              background : string.unquote("linear-gradient(rgba(10, 34, 8, 0.85) 0%, rgba(28, 43, 31, 0.55) 100%)"),
+              border : 1px solid rgba(27, 60, 24, 1),
+          )
+      ),
+      subclasses : (
+          ".navbar" : $navbar,
+          "&.sticky" : (
+              position: sticky,
+              -webkit-backdrop-filter: blur(10px),
+              backdrop-filter: blur(10px),
+          )
+      ),
+      responsive : (
+          md : (
+              padding: 5px 5px,
+          )
       )
-    ),
-    subclasses : (
-      ".navbar" : $navbar,
-      "&.sticky" : (
-        position: sticky,
-        -webkit-backdrop-filter: blur(10px),
-        backdrop-filter: blur(10px),
-      )
-    ),
-    responsive : (
-      md : (
-        padding: 5px 5px,
-      )
-    )
   );
 
   @include mixins.generate-component(
-      $header-section,
-      "header",
-      app.$config,
-      app.$theme
+          $header-section,
+          "header",
+          app.$config,
+          app.$theme,
+              ()
   );
 </style>
 
 <script type="text/javascript">
-  const nav = document.querySelector('.header')
-  const navTop = nav.offsetTop
+    const nav = document.querySelector('.header')
+    const navTop = nav.offsetTop
 
-  function stickyNavigation () {
-    if (window.scrollY > navTop) {
-      // nav offsetHeight = height of nav
-      nav.classList.add('sticky')
-    } else {
-      nav.classList.remove('sticky')
+    function stickyNavigation() {
+        if (window.scrollY > navTop) {
+            // nav offsetHeight = height of nav
+            nav.classList.add('sticky')
+        } else {
+            nav.classList.remove('sticky')
+        }
     }
-  }
 
-  window.addEventListener('scroll', stickyNavigation)
+    window.addEventListener('scroll', stickyNavigation)
 </script>

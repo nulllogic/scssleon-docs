@@ -163,75 +163,71 @@ const generate_link = (link) => {
 	S36,45.691,36,49z M52,55c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S55.309,55,52,55z"/>
 </svg>
 </aside>
-<style lang="scss" is:global>
+
+<style lang="scss">
   @use "sass:list";
   @use "sass:meta";
   @use "sass:map";
 
   @use "../../styles/app.scss" as app;
-  @use "@nulllogic/scssleon/scss//mixins.scss" as mixins;
-  @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
-  $nav: functions.get-theme(app.$theme, 'components.nav');
-
-  $nav: map.deep-merge($nav, (
-    --grid-template-columns: auto auto,
-    margin: 0 0 8px 0,
-    subclasses : (
-      ".item" : (
-        subclasses: (
-          "&:first-child .title" : (
-            margin: 0 0 10px 0
-          ),
-          ".title" : (
-            font-size: 1.25rem,
-            font-weight: 500,
-            margin: 10px 0,
-          ),
-          ".item" : (
-            subclasses: (
-              ".link" : (
-                border-left : 1px solid rgba(231, 231, 235, 0.2),
-                color: rgb(148, 163, 184),
-                padding: 5px 10px,
-                text-decoration: none,
-                text-transform: capitalize,
-                subclasses: (
-                  "&.active" : (
-                    color: rgba(255, 255, 255, 0.85),
-                    border-left : 1px solid rgba(255, 255, 255, 0.85),
-                    background: rgba(57, 119, 33, 0.6),
-                  ),
-                  "&:hover:not(.active)" : (
-                    color: rgb(230, 230, 230),
-                    border-left : 1px solid rgba(26, 104, 45, 0.35),
-                  )
-                )
-              )
-            )
-          )
-        )
-      )
-    )
-  ));
+  @use "../../styles/scss/mixins.scss" as mixins;
+  @use "../../styles/scss/functions.scss" as functions;
 
   $sidebar-section: (
-    grid-area: sidebar,
-    display: block,
-    align-self: start,
-    colors : (
-      dark : (
+
+      grid-area: sidebar,
+      display: block,
+      align-self: start,
+
+      subclasses : (
+          ".nav" : (
+              --nav-gap : 10px,
+              subclasses : (
+                  ".item" : (
+                      subclasses: (
+                          "&:first-child .title" : (
+                              margin: 0 0 10px 0
+                          ),
+                          ".title" : (
+                              font-size: 1.25rem,
+                              font-weight: 500,
+                              margin: 10px 0,
+                          ),
+                          ".item" : (
+                              subclasses: (
+                                  ".link" : (
+                                      border-left : 1px solid rgba(231, 231, 235, 0.2),
+                                      color: rgb(148, 163, 184),
+                                      padding: 5px 10px,
+                                      text-decoration: none,
+                                      text-transform: capitalize,
+                                      subclasses: (
+                                          "&.active" : (
+                                              color: rgba(255, 255, 255, 0.85),
+                                              border-left : 1px solid rgba(255, 255, 255, 0.85),
+                                              background: rgba(57, 119, 33, 0.6),
+                                          ),
+                                          "&:hover:not(.active)" : (
+                                              color: rgb(230, 230, 230),
+                                              border-left : 1px solid rgba(26, 104, 45, 0.35),
+                                          )
+                                      )
+                                  )
+                              )
+                          )
+                      )
+                  )
+              )
+          )
       )
-    ),
-    subclasses : (
-      ".nav" : $nav
-    )
   );
 
   @include mixins.generate-component(
-      $sidebar-section,
-      "sidebar",
-      app.$config,
-      app.$theme
+          $sidebar-section,
+          "sidebar",
+          app.$config,
+          app.$theme,
+          (add_pseudo_tag: false)
   );
 </style>

@@ -104,52 +104,53 @@ const {frame_url, preview} = Astro.props;
   @use "sass:map";
 
   @use "../../styles/app.scss" as app;
+
   @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
   @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
-  $nav: functions.get-theme(app.$theme, "components.nav");
+  /*$nav: functions.get-theme(app.$theme, "components.nav");*/
 
-  $nav: map.deep-merge(
-          $nav,
-          (
-              --gap: 5px,
-              padding: 5px 0,
-              // @TODO Fix later
-              // It's adding wrong name to prefix
-              // --gap => --xii-snippet-gap
-              subclasses: (
-                  ".item": (
-                      subclasses: (
-                          "&.active": (
-                              subclasses: (
-                                  ".link": (
-                                      text-decoration: none,
-                                      color: white,
-                                      background: #656c7633,
-                                  ),
-                                  "&:hover": (),
-                              ),
-                          ),
-                          ".link": (
-                              text-decoration: none,
-                              padding: 8px,
-                              border-radius: 5px,
-                              color: #cccccc66,
-                              subclasses: (
-                                  "&:hover": (
-                                      background: #0d1117,
-                                  ),
-                              ),
-                          ),
-                      ),
-                  ),
-              ),
-          )
-  );
+  /*$nav: map.deep-merge(*/
+  /*        $nav,*/
+  /*        (*/
+  /*            --gap: 5px,*/
+  /*            padding: 5px 0,*/
+  /*            // @TODO Fix later*/
+  /*            // It's adding wrong name to prefix*/
+  /*            // --gap => --xii-snippet-gap*/
+  /*            subclasses: (*/
+  /*                ".item": (*/
+  /*                    subclasses: (*/
+  /*                        "&.active": (*/
+  /*                            subclasses: (*/
+  /*                                ".link": (*/
+  /*                                    text-decoration: none,*/
+  /*                                    color: white,*/
+  /*                                    background: #656c7633,*/
+  /*                                ),*/
+  /*                                "&:hover": (),*/
+  /*                            ),*/
+  /*                        ),*/
+  /*                        ".link": (*/
+  /*                            text-decoration: none,*/
+  /*                            padding: 8px,*/
+  /*                            border-radius: 5px,*/
+  /*                            color: #cccccc66,*/
+  /*                            subclasses: (*/
+  /*                                "&:hover": (*/
+  /*                                    background: #0d1117,*/
+  /*                                ),*/
+  /*                            ),*/
+  /*                        ),*/
+  /*                    ),*/
+  /*                ),*/
+  /*            ),*/
+  /*        )*/
+  /*);*/
 
   $nav-tabs: (
       subclasses: (
-          ".nav": $nav,
+          /*".nav": $nav,*/
       ),
   );
 
@@ -220,7 +221,7 @@ const {frame_url, preview} = Astro.props;
               border-top: 1px solid rgba(48, 54, 61, 0.75),
               border-bottom: 1px solid rgba(48, 54, 61, 0.75),
               subclasses: (
-                  ".nav": $nav,
+                  /*".nav": $nav,*/
               ),
           ),
           ".preview-container": $preview-container,

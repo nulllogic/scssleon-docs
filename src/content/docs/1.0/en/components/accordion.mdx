@@ -13,7 +13,7 @@ import {Snippet} from "~/components/snippet"
         ```html
         <div class="accordion">
             <div class="item">
-                <h4 class="title">
+                <h4 class="question">
                     <button
                         type="button"
                         aria-expanded="true"
@@ -26,7 +26,7 @@ import {Snippet} from "~/components/snippet"
                         </svg>
                     </button>
                 </h4>
-                <div id="a1" class="content">
+                <div id="a1" class="answer">
                     <p>
                         Congress shall make no law respecting an establishment of religion, or
                         prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -36,7 +36,7 @@ import {Snippet} from "~/components/snippet"
                 </div>
             </div>
             <div class="item">
-                <h4 class="title">
+                <h4 class="question">
                     <button
                         type="button"
                         aria-expanded="true"
@@ -49,7 +49,7 @@ import {Snippet} from "~/components/snippet"
                         </svg>
                     </button>
                 </h4>
-                <div id="a1" class="content">
+                <div id="a1" class="answer">
                     <p>
                         Congress shall make no law respecting an establishment of religion, or
                         prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -78,7 +78,8 @@ import {Snippet} from "~/components/snippet"
             $accordion,
             'accordion',
             app.$config,
-            app.$theme
+            app.$theme,
+            ()
         );
         ```
     </Fragment>
@@ -95,10 +96,50 @@ import {Snippet} from "~/components/snippet"
         ```html
         <div class="accordion" itemscope itemtype="https://schema.org/FAQPage">
             <div class="item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
-                <div class="title" itemprop="name">123</div>
-                <div class="content" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                <h4 class="question">
+                    <button
+                        type="button"
+                        aria-expanded="true"
+                        aria-controls="a1"
+                        itemprop="name"
+                    >
+                        First Amendment
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </button>
+                </h4>
+                <div id="a1" class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
                     <p itemprop="text">
-                        123
+                        Congress shall make no law respecting an establishment of religion, or
+                        prohibiting the free exercise thereof; or abridging the freedom of speech,
+                        or of the press; or the right of the people peaceably to assemble, and to
+                        petition the Government for a redress of grievances.
+                    </p>
+                </div>
+            </div>
+            <div class="item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                <h4 class="question">
+                    <button
+                        type="button"
+                        aria-expanded="true"
+                        aria-controls="a1"
+                        itemprop="name"
+                    >
+                        First Amendment
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </button>
+                </h4>
+                <div id="a1" class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                    <p itemprop="text">
+                        Congress shall make no law respecting an establishment of religion, or
+                        prohibiting the free exercise thereof; or abridging the freedom of speech,
+                        or of the press; or the right of the people peaceably to assemble, and to
+                        petition the Government for a redress of grievances.
                     </p>
                 </div>
             </div>
@@ -123,7 +164,8 @@ import {Snippet} from "~/components/snippet"
             $accordion,
             'accordion',
             app.$config,
-            app.$theme
+            app.$theme,
+            ()
         );
         ```
     </Fragment>
