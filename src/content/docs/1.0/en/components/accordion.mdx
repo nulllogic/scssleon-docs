@@ -170,7 +170,13 @@ import {Snippet} from "~/components/snippet"
     <Fragment slot={'js'}>
         ```js
         const accordion = (elements, options) => {
+
             const defaults = {
+                accordion_item : ':scope > .item',
+                question_class : ':scope > .question',
+                answer_class : ':scope > .answer',
+                toggle_element : ':scope > .question > button',
+
                 show_multiply : false,
                 a11y : true
             };
@@ -178,13 +184,26 @@ import {Snippet} from "~/components/snippet"
             // Options
             const settings = Object.assign({}, defaults, options);
 
-            function render () {
-              console.log(11);
+            const _add_event_listeners = (question, answer, toggle_element) => {
+                toggle_element.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    answer.toggleAttribute('hidden');
+                })
+            }
+
+            const _init = () => {
+
               // attach classes to buttons and containers
-              [].forEach.call(elements,
-                function(element) {
-                  // item.classList.add(titleClass);
-                  // item.nextElementSibling.classList.add(contentClass);
+              [].forEach.call(elements, (accordion) => {
+                  let accordion_items = accordion.querySelectorAll(settings.accordion_item);
+                  if(accordion_items.length > 0) {
+                    [].forEach.call(accordion_items, (item) => {
+                        _add_event_listeners(
+                            item.querySelector(settings.question_class),
+                            item.querySelector(settings.answer_class),
+                            item.querySelector(settings.toggle_element));
+                    })
+                  }
               });
 
               // attach only one click listener
@@ -199,7 +218,10 @@ import {Snippet} from "~/components/snippet"
               // }
             }
 
-            render();
+            // Initiating the accordion
+            if(accordion) {
+                _init();
+            }
 
             return ({
               elements : elements,
