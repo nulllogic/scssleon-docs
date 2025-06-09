@@ -75,58 +75,58 @@ import {Snippet} from "~/components/snippet"
         $accordion: functions.get-theme(app.$theme, 'components.accordion');
 
         @include mixins.generate-component(
-            $accordion,
-            'accordion',
-            app.$config,
-            app.$theme
+        $accordion,
+        'accordion',
+        app.$config,
+        app.$theme
         );
         ```
     </Fragment>
     <Fragment slot={'js'}>
-      ```js
-      const accordion = (elements, options) => {
+        ```js
+        const accordion = (elements, options) => {
 
         const defaults = {
-          show_multiply : false,
-          a11y : true
-        };
+        show_multiply : false,
+        a11y : true
+    };
 
         const KEY_CODES = {
-          enter: 13,
-          space: 32,
-          pageUp: 33,
-          pageDown: 34,
-          end: 35,
-          home: 36,
-          up: 38,
-          down: 40,
-        };
+        enter: 13,
+        space: 32,
+        pageUp: 33,
+        pageDown: 34,
+        end: 35,
+        home: 36,
+        up: 38,
+        down: 40,
+    };
 
         // Options
         const settings = Object.assign({}, defaults, options);
 
         const tt = (c) => {
 
-        }
+    }
 
         function render () {
-          console.log(11);
-          // attach classes to buttons and containers
-          [].forEach.call(elements,
-          function(element) {
-            // item.classList.add(titleClass);
-            // item.nextElementSibling.classList.add(contentClass);
-        });
+        console.log(11);
+        // attach classes to buttons and containers
+        [].forEach.call(elements,
+        function(element) {
+        // item.classList.add(titleClass);
+        // item.nextElementSibling.classList.add(contentClass);
+    });
 
         function _makeId() {
-          return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
-            function (c) {
-              var r = (Math.random() * 16) | 0;
-              var v = c === 'x' ? r : (r & 0x3) | 0x8;
-              return v.toString(16);
-            },
-          );
-        }
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
+        function (c) {
+        var r = (Math.random() * 16) | 0;
+        var v = c === 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+    },
+        );
+    }
 
         // attach only one click listener
         // element.addEventListener('click', onClick);
@@ -138,22 +138,22 @@ import {Snippet} from "~/components/snippet"
         // if (openTab) {
         // open(openTab);
         // }
-        }
+    }
 
         render();
 
         return ({
-          elements : elements,
-          open : () => {}
-        })
-      }
+        elements : elements,
+        open : () => {}
+    })
+    }
 
-      const accords = accordion(document.querySelectorAll('.accordion'), {
+        const accords = accordion(document.querySelectorAll('.accordion'), {
 
-      });
+    });
 
-      console.log(accords);
-      ```
+        console.log(accords);
+        ```
     </Fragment>
 </Snippet>
 
@@ -172,13 +172,13 @@ import {Snippet} from "~/components/snippet"
                         itemprop="name"
                     >
                         First Amendment
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m6 9 6 6 6-6"></path>
+                        <svg class="icon" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 14.5L12 9.5L17 14.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
                 </h4>
-                <div id="answer1" class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" role="region" aria-labelledby="question1">
+                <div id="answer1" class="answer" itemprop="acceptedAnswer" itemscope
+                     itemtype="https://schema.org/Answer" role="region" aria-labelledby="question1">
                     <p itemprop="text">
                         Congress shall make no law respecting an establishment of religion, or
                         prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -197,13 +197,13 @@ import {Snippet} from "~/components/snippet"
                         itemprop="name"
                     >
                         First Amendment
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m6 9 6 6 6-6"></path>
+                        <svg class="icon" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 14.5L12 9.5L17 14.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
                 </h4>
-                <div id="answer2" class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" role="region" aria-labelledby="question2" hidden>
+                <div id="answer2" class="answer" itemprop="acceptedAnswer" itemscope
+                     itemtype="https://schema.org/Answer" role="region" aria-labelledby="question2" hidden>
                     <p itemprop="text">
                         Congress shall make no law respecting an establishment of religion, or
                         prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -230,10 +230,10 @@ import {Snippet} from "~/components/snippet"
         $accordion: functions.get-theme(app.$theme, 'components.accordion');
 
         @include mixins.generate-component(
-            $accordion,
-            'accordion',
-            app.$config,
-            app.$theme
+        $accordion,
+        'accordion',
+        app.$config,
+        app.$theme
         );
         ```
     </Fragment>
@@ -255,38 +255,37 @@ import {Snippet} from "~/components/snippet"
             const settings = Object.assign({}, defaults, options);
 
             const _add_event_listeners = (question, answer, toggle_element) => {
-                toggle_element.addEventListener('click', (e) => {
+                    toggle_element.addEventListener('click', (e) => {
                     e.preventDefault();
+                    question.classList.toggle('open');
                     answer.toggleAttribute('hidden');
                 })
             }
 
-            const _init = () => {
+            const _make_ID = () => {
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+                        /[xy]/g, (c) => {
+                        let r = (Math.random() * 16) | 0;
+                        let v = c === 'x' ? r : (r & 0x3) | 0x8;
+                        return v.toString(16);
+                    },
+                );
+            }
 
-              // attach classes to buttons and containers
-              [].forEach.call(elements, (accordion) => {
-                  let accordion_items = accordion.querySelectorAll(settings.accordion_item);
-                  if(accordion_items.length > 0) {
-                    [].forEach.call(accordion_items, (item) => {
-                        _add_event_listeners(
+            const _init = () => {
+                // attach classes to buttons and containers
+                [].forEach.call(elements, (accordion) => {
+                    let accordion_items = accordion.querySelectorAll(settings.accordion_item);
+                    if(accordion_items.length > 0) {
+                            [].forEach.call(accordion_items, (item) => {
+                            _add_event_listeners(
                             item.querySelector(settings.question_class),
                             item.querySelector(settings.answer_class),
                             item.querySelector(settings.toggle_element)
-                        );
-                    })
-                  }
-              });
-
-              // attach only one click listener
-              // element.addEventListener('click', onClick);
-
-              // accordion starts with all tabs closed
-              // closeAll();
-
-              // sets the open tab - if defined
-              // if (openTab) {
-                // open(openTab);
-              // }
+                            );
+                        })
+                    }
+                });
             }
 
             // Initiating the accordion
@@ -295,8 +294,8 @@ import {Snippet} from "~/components/snippet"
             }
 
             return ({
-              elements : elements,
-              open : () => {}
+                elements : elements,
+                open : () => {}
             })
         }
 
@@ -304,13 +303,36 @@ import {Snippet} from "~/components/snippet"
         });
 
         console.log(accords);
-
         ```
     </Fragment>
 </Snippet>
 
 ## Package
 
-<svg class="mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="15" height="16" fill="none" viewBox="0 0 15 16"> <path fill="url(#check__a)" d="m6.45 11.45 5.288-5.287-1.05-1.05L6.45 9.35 4.312 7.213l-1.05 1.05L6.45 11.45ZM7.5 15.5a7.3 7.3 0 0 1-2.925-.591 7.585 7.585 0 0 1-2.381-1.603A7.558 7.558 0 0 1 .59 10.925 7.32 7.32 0 0 1 0 8c0-1.037.197-2.012.591-2.925a7.591 7.591 0 0 1 1.603-2.381A7.563 7.563 0 0 1 4.575 1.09 7.306 7.306 0 0 1 7.5.5c1.037 0 2.011.197 2.925.591a7.563 7.563 0 0 1 2.381 1.603 7.602 7.602 0 0 1 1.604 2.381A7.26 7.26 0 0 1 15 8a7.354 7.354 0 0 1-.591 2.925 7.524 7.524 0 0 1-1.603 2.381 7.619 7.619 0 0 1-2.381 1.604 7.266 7.266 0 0 1-2.925.59Z"></path> <defs> <linearGradient id="check__a" x1="7.5" x2="7.5" y1=".5" y2="15.5" gradientUnits="userSpaceOnUse"> <stop stop-color="#00D67C"></stop> <stop offset="1" stop-color="#00BE6E"></stop> </linearGradient> </defs> </svg>
-<svg class="text-muted" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path fill="currentColor" d="M12 17a2 2 0 0 0 2-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5a5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"></path></svg>
-<svg class="mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 18 18"> <path fill="url(#ph-star-fill__a)" d="m16.474 8.076-3.165 2.73.964 4.083a1.153 1.153 0 0 1-1.722 1.253L9 13.957l-3.553 2.185a1.153 1.153 0 0 1-1.72-1.253l.967-4.083-3.164-2.73a1.157 1.157 0 0 1 .655-2.029l4.149-.335 1.6-3.872a1.15 1.15 0 0 1 2.128 0l1.6 3.872 4.148.335a1.157 1.157 0 0 1 .66 2.03l.004-.001Z"></path> <defs> <linearGradient id="ph-star-fill__a" x1="1.129" x2="19.105" y1="1.526" y2="2.261" gradientUnits="userSpaceOnUse"> <stop stop-color="#6100FF"></stop> <stop offset="1" stop-color="#FF00F0"></stop> </linearGradient> </defs> </svg>
+<svg class="mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="15" height="16" fill="none"
+     viewBox="0 0 15 16">
+    <path fill="url(#check__a)"
+          d="m6.45 11.45 5.288-5.287-1.05-1.05L6.45 9.35 4.312 7.213l-1.05 1.05L6.45 11.45ZM7.5 15.5a7.3 7.3 0 0 1-2.925-.591 7.585 7.585 0 0 1-2.381-1.603A7.558 7.558 0 0 1 .59 10.925 7.32 7.32 0 0 1 0 8c0-1.037.197-2.012.591-2.925a7.591 7.591 0 0 1 1.603-2.381A7.563 7.563 0 0 1 4.575 1.09 7.306 7.306 0 0 1 7.5.5c1.037 0 2.011.197 2.925.591a7.563 7.563 0 0 1 2.381 1.603 7.602 7.602 0 0 1 1.604 2.381A7.26 7.26 0 0 1 15 8a7.354 7.354 0 0 1-.591 2.925 7.524 7.524 0 0 1-1.603 2.381 7.619 7.619 0 0 1-2.381 1.604 7.266 7.266 0 0 1-2.925.59Z"></path>
+    <defs>
+        <linearGradient id="check__a" x1="7.5" x2="7.5" y1=".5" y2="15.5" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#00D67C"></stop>
+            <stop offset="1" stop-color="#00BE6E"></stop>
+        </linearGradient>
+    </defs>
+</svg>
+<svg class="text-muted" viewBox="0 0 24 24" width="1.2em" height="1.2em">
+    <path fill="currentColor"
+          d="M12 17a2 2 0 0 0 2-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5a5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"></path>
+</svg>
+<svg class="mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none"
+     viewBox="0 0 18 18">
+    <path fill="url(#ph-star-fill__a)"
+          d="m16.474 8.076-3.165 2.73.964 4.083a1.153 1.153 0 0 1-1.722 1.253L9 13.957l-3.553 2.185a1.153 1.153 0 0 1-1.72-1.253l.967-4.083-3.164-2.73a1.157 1.157 0 0 1 .655-2.029l4.149-.335 1.6-3.872a1.15 1.15 0 0 1 2.128 0l1.6 3.872 4.148.335a1.157 1.157 0 0 1 .66 2.03l.004-.001Z"></path>
+    <defs>
+        <linearGradient id="ph-star-fill__a" x1="1.129" x2="19.105" y1="1.526" y2="2.261"
+                        gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6100FF"></stop>
+            <stop offset="1" stop-color="#FF00F0"></stop>
+        </linearGradient>
+    </defs>
+</svg>
