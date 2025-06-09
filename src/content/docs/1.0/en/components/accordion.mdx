@@ -83,9 +83,77 @@ import {Snippet} from "~/components/snippet"
         ```
     </Fragment>
     <Fragment slot={'js'}>
-        ```js
-        123
-        ```
+      ```js
+      const accordion = (elements, options) => {
+
+        const defaults = {
+          show_multiply : false,
+          a11y : true
+        };
+
+        const KEY_CODES = {
+          enter: 13,
+          space: 32,
+          pageUp: 33,
+          pageDown: 34,
+          end: 35,
+          home: 36,
+          up: 38,
+          down: 40,
+        };
+
+        // Options
+        const settings = Object.assign({}, defaults, options);
+
+        const tt = (c) => {
+
+        }
+
+        function render () {
+          console.log(11);
+          // attach classes to buttons and containers
+          [].forEach.call(elements,
+          function(element) {
+            // item.classList.add(titleClass);
+            // item.nextElementSibling.classList.add(contentClass);
+        });
+
+        function _makeId() {
+          return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
+            function (c) {
+              var r = (Math.random() * 16) | 0;
+              var v = c === 'x' ? r : (r & 0x3) | 0x8;
+              return v.toString(16);
+            },
+          );
+        }
+
+        // attach only one click listener
+        // element.addEventListener('click', onClick);
+
+        // accordion starts with all tabs closed
+        // closeAll();
+
+        // sets the open tab - if defined
+        // if (openTab) {
+        // open(openTab);
+        // }
+        }
+
+        render();
+
+        return ({
+          elements : elements,
+          open : () => {}
+        })
+      }
+
+      const accords = accordion(document.querySelectorAll('.accordion'), {
+
+      });
+
+      console.log(accords);
+      ```
     </Fragment>
 </Snippet>
 
