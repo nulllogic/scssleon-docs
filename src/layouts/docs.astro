@@ -34,7 +34,7 @@ import Footer from "../components/footer/index.astro";
   function handleEvent(e) {
     const iframes = document.querySelectorAll('iframe');
     iframes.forEach(iframe => {
-      // iframe.contentWindow.location.reload();
+      iframe.style.height = iframe.style.height + Math.random(5) +  'px';
     })
   }
 </script>
@@ -83,6 +83,7 @@ import Footer from "../components/footer/index.astro";
       font-style: var(--shiki-dark-font-style) !important;
       font-weight: var(--shiki-dark-font-weight) !important;
       text-decoration: var(--shiki-dark-text-decoration) !important;
+      line-height: 1.25;
     }
   }
 </style>

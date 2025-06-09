@@ -163,7 +163,7 @@ import {Snippet} from "~/components/snippet"
         ```html
         <div class="accordion" itemscope itemtype="https://schema.org/FAQPage">
             <div class="item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
-                <h4 class="question">
+                <h4 class="question open">
                     <button
                         id="question1"
                         type="button"
@@ -240,7 +240,6 @@ import {Snippet} from "~/components/snippet"
     <Fragment slot={'js'}>
         ```js
         const accordion = (elements, options) => {
-
             const defaults = {
                 accordion_item : ':scope > .item',
                 question_class : ':scope > .question',

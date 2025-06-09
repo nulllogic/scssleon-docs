@@ -39,36 +39,55 @@ const { frame_url, preview } = Astro.props
         )
       }
 
-        <div class="navtabs">
-            <ul class="nav">
-              {
-                Astro.slots.has('html') && (
-                              <li class="item active">
-                                  <a class="link" href="#">
-                                      HTML
-                                  </a>
-                              </li>
-                )
-              }
-              {
-                Astro.slots.has('scss') && (
-                              <li class="item">
-                                  <a class="link" href="#">
-                                      SCSS
-                                  </a>
-                              </li>
-                )
-              }
-              {
-                Astro.slots.has('js') && (
-                              <li class="item">
-                                  <a class="link" href="#">
-                                      JS
-                                  </a>
-                              </li>
-                )
-              }
-            </ul>
+        <div class="navbar">
+            <div class="left">
+                <ul class="nav">
+                  {
+                    Astro.slots.has('html') && (
+                                  <li class="item active">
+                                      <a class="link" href="#">
+                                          HTML
+                                      </a>
+                                  </li>
+                    )
+                  }
+                  {
+                    Astro.slots.has('scss') && (
+                                  <li class="item">
+                                      <a class="link" href="#">
+                                          SCSS
+                                      </a>
+                                  </li>
+                    )
+                  }
+                  {
+                    Astro.slots.has('js') && (
+                                  <li class="item">
+                                      <a class="link" href="#">
+                                          JS
+                                      </a>
+                                  </li>
+                    )
+                  }
+                </ul>
+            </div>
+            <div class="right">
+                <ul class="nav">
+                    <li class="item">
+                        <a class="link" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                 height="16" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round"
+                                 class="lucide lucide-copy ">
+                                <rect width="14" height="14" x="8" y="8" rx="2"
+                                      ry="2"></rect>
+                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div class="tab-content">
@@ -112,41 +131,35 @@ const { frame_url, preview } = Astro.props
 
   $snippet: (
     subclasses: (
-      ".navtabs": (
+      ".navbar": (
+        --navbar-grid-template-columns : auto auto,
 
-        padding: 0 0 0 8px,
+        padding: 0 8px,
         background: rgb(23, 24, 28),
         border-top: 1px solid rgba(48, 54, 61, 0.75),
         border-bottom: 1px solid rgba(48, 54, 61, 0.75),
-
         subclasses: (
           ".nav": (
-
             --nav-gap: 5px,
             padding: 5px 0,
-
             subclasses: (
               ".item": (
                 subclasses: (
                   "&.active": (
                     subclasses: (
                       ".link": (
-
                         text-decoration: none,
                         color: white,
                         background: #656c7633,
-
                       ),
                       "&:hover": (),
                     ),
                   ),
                   ".link": (
-
                     text-decoration: none,
                     padding: 8px,
                     border-radius: 5px,
                     color: #cccccc66,
-
                     subclasses: (
                       "&:hover": (
                         background: #0d1117,
@@ -159,11 +172,8 @@ const { frame_url, preview } = Astro.props
           ),
         ),
       ),
-
       ".preview-container": (
-
         margin: 0 0 15px 0,
-
         subclasses: (
           ".preview": (
             position: relative,
@@ -386,8 +396,8 @@ const { frame_url, preview } = Astro.props
 
     // Tabs
     // Checking first, if element exist
-    if (snippet.querySelector('.navtabs')) {
-      const nav_items = snippet.querySelectorAll('.navtabs .nav .item')
+    if (snippet.querySelector('.navbar')) {
+      const nav_items = snippet.querySelectorAll('.navbar .nav .item')
       const tab_items = snippet.querySelectorAll('.tab-content .tab')
 
       nav_items.forEach((nav, index) => {
