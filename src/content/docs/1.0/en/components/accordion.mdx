@@ -165,9 +165,10 @@ import {Snippet} from "~/components/snippet"
             <div class="item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
                 <h4 class="question">
                     <button
+                        id="question1"
                         type="button"
                         aria-expanded="true"
-                        aria-controls="a1"
+                        aria-controls="answer1"
                         itemprop="name"
                     >
                         First Amendment
@@ -177,7 +178,7 @@ import {Snippet} from "~/components/snippet"
                         </svg>
                     </button>
                 </h4>
-                <div id="a1" class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                <div id="answer1" class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" role="region" aria-labelledby="question1">
                     <p itemprop="text">
                         Congress shall make no law respecting an establishment of religion, or
                         prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -189,9 +190,10 @@ import {Snippet} from "~/components/snippet"
             <div class="item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
                 <h4 class="question">
                     <button
+                        id="question2"
                         type="button"
                         aria-expanded="true"
-                        aria-controls="a1"
+                        aria-controls="answer2"
                         itemprop="name"
                     >
                         First Amendment
@@ -201,7 +203,7 @@ import {Snippet} from "~/components/snippet"
                         </svg>
                     </button>
                 </h4>
-                <div id="a1" class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                <div id="answer2" class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" role="region" aria-labelledby="question2" hidden>
                     <p itemprop="text">
                         Congress shall make no law respecting an establishment of religion, or
                         prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -269,7 +271,8 @@ import {Snippet} from "~/components/snippet"
                         _add_event_listeners(
                             item.querySelector(settings.question_class),
                             item.querySelector(settings.answer_class),
-                            item.querySelector(settings.toggle_element));
+                            item.querySelector(settings.toggle_element)
+                        );
                     })
                   }
               });
