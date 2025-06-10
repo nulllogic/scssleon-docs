@@ -1,25 +1,57 @@
 ---
 const {headings, github_page} = Astro.props
 ---
-<nav>
-  <ul class="nav vertical">
-      {headings.map((heading) => {
-          return (
-                  <li class="item">
-                <a href='#' class="link" onClick={(e) => {
-                    e.preventDefault()
-                }}>{heading.text}</a>
-              </li>
-          )
-      })}
-  </ul>
+<nav class="toc">
+    <ul class="nav vertical">
+        {headings.map((heading) => {
+            return (
+                    <li class="item">
+                        <a href='#' class="link" onClick={(e) => {
+                            e.preventDefault()
+                        }}>{heading.text}</a>
+                    </li>
+            )
+        })}
+    </ul>
 
-  <hr />
-  <ul class="nav vertical">
-    <li class="item">
-      <a href={github_page} target="_blank" rel="noopener noreferrer" class="link">
-        View on Github
-      </a>
-    </li>
-  </ul>
+    <hr/>
+    <ul class="nav vertical">
+        <li class="item">
+            <a href={github_page} target="_blank" rel="noopener noreferrer" class="link">
+                View on Github
+            </a>
+        </li>
+    </ul>
 </nav>
+
+<style lang="scss">
+  @use "sass:list";
+  @use "sass:meta";
+  @use "sass:map";
+
+  @use "../../styles/app.scss" as app;
+
+  @use "../../styles/scss/mixins.scss" as mixins;
+  @use "../../styles/scss/functions.scss" as functions;
+
+  $toc: (
+      --nav-item : --color,
+
+      colors : (
+          light : (
+              color: red,
+          ),
+          dark : (
+              color:red
+          )
+      )
+  );
+
+  @include mixins.generate-component(
+          $toc,
+          "toc",
+          app.$config,
+          app.$theme,
+          (add_pseudo_tag: false)
+  );
+</style>

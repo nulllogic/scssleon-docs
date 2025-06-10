@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use "sass:string";
+
 @use "./scss/config.scss" as config with (
   $config: (
     prefix: "xii",
@@ -13,8 +16,8 @@
       body : (
         colors: (
           light : (
-            background: '#fff',
-            color: '#ccc',
+            background : rgba(255,255,255, 1),
+            color: '#ccc'
           ),
           dark : (
             background : rgba(5, 17, 4, 1),

@@ -193,10 +193,18 @@ const generate_link = (link) => {
                 subclasses: (
                   ".link" : (
                     border-left : 1px solid rgba(231, 231, 235, 0.2),
-                    color: rgb(148, 163, 184),
+                    color: var(--link-color),
                     padding: 5px 10px,
                     text-decoration: none,
                     text-transform: capitalize,
+                    colors: (
+                        light: (
+                            link-color: rgb(148, 163, 184),
+                        ),
+                        dark: (
+                            link-color: rgb(148, 163, 184),
+                        )
+                    ),
                     subclasses: (
                       "&.active" : (
                         color: rgba(255, 255, 255, 0.85),
