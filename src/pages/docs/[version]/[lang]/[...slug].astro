@@ -75,19 +75,55 @@ const {headings, Content} = await page.render();
   $card: functions.get-theme(app.$theme, 'components.card');
 
   $card: map.deep-merge($card, (
-    --padding: 0,
+      --padding: 0,
   ));
 
   @include mixins.generate-component(
-      $card,
-      "card",
-      app.$config,
-      app.$theme
+          $card,
+          "card",
+          app.$config,
+          app.$theme
   );
 
 </style>
 
 <style lang="scss">
+
+  @use "sass:list";
+  @use "sass:string";
+  @use "sass:meta";
+  @use "sass:map";
+
+  @use "../../../../styles/app.scss" as app;
+
+  @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+  @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+  $intro: (
+      margin: 0 0 15px 0,
+      subclasses : (
+          '.title' : (
+              font-size: 3.75rem,
+              line-height: 1,
+              font-weight: 500,
+              margin: 0,
+              padding: 0 0 15px 0,
+          ),
+          '.subtitle' : (
+              font-size: 1.35rem,
+              font-weight: 300,
+              color: rgba(125, 133, 144, 1),
+              line-height: 1.778rem,
+          )
+      )
+  );
+
+  @include mixins.generate-component(
+          $intro,
+          "intro",
+          app.$config,
+          app.$theme
+  );
 
   /*body {*/
   /*  // Demonstrate the vertical rhythm at 12px*/

@@ -8,11 +8,26 @@ import {Snippet} from "/src/components/snippet"
 
 ## Basic example
 
-<Snippet frame_url={'components/sidecap/1'} preview={true}>
+<Snippet frame_url={'components/sidecap/1'} preview={true} min_height={450}>
     <Fragment slot={'html'}>
         ```html
-        <div role="dialog" aria-modal="true" tabindex="-1" class="sidecap">
-            123
+        <div class="overlay">
+          <div role="dialog" aria-modal="true" tabindex="-1" class="sidecap">
+              <div class="top">
+                <div>
+                  123
+                </div>
+                <div>
+                  [x]
+                </div>
+              </div>
+              <div class="middle">
+                444
+              </div>
+              <div class="bottom">
+                333
+              </div>
+          </div>
         </div>
         ```
     </Fragment>
@@ -23,13 +38,22 @@ import {Snippet} from "/src/components/snippet"
         @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
         @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
+        $overlay: functions.get-theme(app.$theme, 'components.overlay');
+
+        @include mixins.generate-component(
+            $overlay,
+            "overlay",
+            app.$config,
+            app.$theme
+        );
+
         $sidecap: functions.get-theme(app.$theme, 'components.sidecap');
 
         @include mixins.generate-component(
-            $sidecap,
-            "sidecap",
-            app.$config,
-            app.$theme
+          $sidecap,
+          "sidecap",
+          app.$config,
+          app.$theme
         );
         ```
     </Fragment>
