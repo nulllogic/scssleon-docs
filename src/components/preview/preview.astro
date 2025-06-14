@@ -1,13 +1,14 @@
 ---
-const { url } = Astro.props
+const {url, min_height} = Astro.props
 ---
 <div class="iframe-wrapper">
     <iframe
             src={url}
             class="iframe"
-            onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';this.style.visibility = 'visible';"
+            onload="iframe_onload(this)"
             frameBorder="1"
             seamless
+            data-min-height={min_height}
     />
 </div>
 
@@ -15,14 +16,16 @@ const { url } = Astro.props
 
   .iframe-wrapper {
     position: relative;
+    height: 100%;
 
     .iframe {
-        /*display: block;*/
+      /*display: block;*/
       width: 100%;
       visibility: hidden;
-    padding: 0;
-    margin: 0;
-    outline: 0;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      outline: 0;
       /*height: auto;*/
       /*z-index: 2;*/
       /*position: relative;*/

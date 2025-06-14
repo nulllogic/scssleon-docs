@@ -24,7 +24,7 @@ const js_code_formatted =
     typeof props[2] !== 'undefined' && props[2] !== null ? props[2] : ''
 
 
-const {frame_url, preview} = Astro.props
+const {frame_url, preview, min_height} = Astro.props
 ---
 
 <div class="snippet">
@@ -32,7 +32,7 @@ const {frame_url, preview} = Astro.props
         {
             Astro.slots.has('html') && (
                         <div class="preview">
-                            <Preview url={generate_iframe_link(frame_url)}/>
+                            <Preview url={generate_iframe_link(frame_url)} min_height={min_height}/>
                             <div class="resizer"><span class="drag"><span
                                     class="el"/></span></div>
                         </div>
@@ -418,10 +418,10 @@ const {frame_url, preview} = Astro.props
             nav_items_right.forEach((nav, index) => {
                 nav.querySelectorAll('.link').forEach(element => element.addEventListener('click', function (e) {
                     e.preventDefault()
-                    if(element.classList.contains('clipboard')) {
-                        navigator.clipboard.writeText("<empty clipboard>").then(function() {
+                    if (element.classList.contains('clipboard')) {
+                        navigator.clipboard.writeText("<empty clipboard>").then(function () {
                             /* clipboard successfully set */
-                        }, function() {
+                        }, function () {
                             /* clipboard write failed */
                         });
                     }
@@ -469,4 +469,15 @@ const {frame_url, preview} = Astro.props
             }
         }
     })
+</script>
+
+<script is:inline>
+    function iframe_onload(iframe) {
+        if(iframe.dataset.minHeight) {
+            iframe.contentWindow.document.querySelector('.iframe').style.minHeight = iframe.dataset.minHeight + 'px';
+        }
+
+        iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+        iframe.style.visibility = 'visible';
+    }
 </script>
