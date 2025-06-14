@@ -11,6 +11,7 @@ import {Snippet} from "/src/components/snippet"
 <Snippet frame_url={'components/sidecap/1'} preview={true} min_height={450}>
     <Fragment slot={'html'}>
         ```html
+        <a href="#">Toggle Sidecap component</a>
         <div class="overlay">
           <div role="dialog" aria-modal="true" tabindex="-1" class="sidecap">
               <div class="top">
@@ -56,5 +57,43 @@ import {Snippet} from "/src/components/snippet"
           app.$theme
         );
         ```
+    </Fragment>
+    <Fragment slot={'js'}>
+      ```js
+      const sidecap = (elements, options) => {
+
+        const defaults = {
+
+        };
+
+        // Options
+        const settings = Object.assign({}, defaults, options);
+
+        const _add_event_listeners = (toggle_element) => {
+            toggle_element.addEventListener('click', (e) => {
+              e.preventDefault();
+            })
+        }
+
+        const _init = () => {
+          console.log(123);
+        }
+
+        // Initiating the accordion
+        if(sidecap) {
+          _init();
+        }
+
+        return ({
+          elements : elements,
+          open : () => {}
+        })
+      }
+
+      const sidecaps = sidecap(document.querySelectorAll('.sidecap'), {
+      });
+
+      console.log(sidecaps);
+      ```
     </Fragment>
 </Snippet>
