@@ -11,14 +11,14 @@ import {Snippet} from "/src/components/snippet"
 <Snippet frame_url={'components/sidecap/1'} preview={true} min_height={450}>
     <Fragment slot={'html'}>
         ```html
-        <a href="#" onclick="event.preventDefault();sidecaps.open(sidecaps.elements[0])" >Toggle Sidecap component</a>
+        <a href="#" onclick="event.preventDefault();sidecaps.open(sidecaps.elements[0])">Toggle Sidecap component</a>
         <div role="dialog" aria-modal="true" tabindex="-1" class="sidecap">
           <div class="top">
             <div>
               123
             </div>
             <div>
-              [x]
+              <a href="#" onclick="event.preventDefault();sidecaps.close(sidecaps.elements[0])">[x]</a>
             </div>
           </div>
           <div class="middle">
@@ -112,6 +112,10 @@ import {Snippet} from "/src/components/snippet"
           open : (element) => {
             document.body.toggleAttribute('scroll-lock');
             _open(element);
+          },
+          close : (element) => {
+            document.body.toggleAttribute('scroll-lock');
+            _close(element);
           }
         })
       }
