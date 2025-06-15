@@ -11,23 +11,21 @@ import {Snippet} from "/src/components/snippet"
 <Snippet frame_url={'components/sidecap/1'} preview={true} min_height={450}>
     <Fragment slot={'html'}>
         ```html
-        <a href="#">Toggle Sidecap component</a>
-        <div class="overlay">
-          <div role="dialog" aria-modal="true" tabindex="-1" class="sidecap">
-              <div class="top">
-                <div>
-                  123
-                </div>
-                <div>
-                  [x]
-                </div>
-              </div>
-              <div class="middle">
-                444
-              </div>
-              <div class="bottom">
-                333
-              </div>
+        <a href="#" onclick="event.preventDefault();sidecaps.open(sidecaps.elements[0])" >Toggle Sidecap component</a>
+        <div role="dialog" aria-modal="true" tabindex="-1" class="sidecap">
+          <div class="top">
+            <div>
+              123
+            </div>
+            <div>
+              [x]
+            </div>
+          </div>
+          <div class="middle">
+            444
+          </div>
+          <div class="bottom">
+            333
           </div>
         </div>
         ```
@@ -66,13 +64,26 @@ import {Snippet} from "/src/components/snippet"
 
         };
 
+
+        // @TODO add scroll lock
+        // @TODO add ontransitionend
         // Options
         const settings = Object.assign({}, defaults, options);
+
+        const _close = (sidecap) => {
+          sidecap.classList.remove('open');
+        }
+
+        const _open = (sidecap) => {
+          sidecap.classList.add('open');
+        }
 
         const _add_event_listeners_dom = () => {
           document.addEventListener('keydown', event => {
             if (event.key === 'Escape' || event.keyCode === 27) {
-              console.log(123);
+              [].forEach.call(elements, (sidecap) => {
+                _close(sidecap);
+              })
             }
           });
         }
@@ -98,14 +109,15 @@ import {Snippet} from "/src/components/snippet"
 
         return ({
           elements : elements,
-          open : () => {}
+          open : (element) => {
+            document.body.toggleAttribute('scroll-lock');
+            _open(element);
+          }
         })
       }
 
       const sidecaps = sidecap(document.querySelectorAll('.sidecap'), {
       });
-
-      console.log(sidecaps);
       ```
     </Fragment>
 </Snippet>
