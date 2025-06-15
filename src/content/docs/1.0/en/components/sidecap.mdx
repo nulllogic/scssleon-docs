@@ -69,15 +69,27 @@ import {Snippet} from "/src/components/snippet"
         // Options
         const settings = Object.assign({}, defaults, options);
 
-        const _add_event_listeners = (toggle_element) => {
-            toggle_element.addEventListener('click', (e) => {
+        const _add_event_listeners_dom = () => {
+          document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' || event.keyCode === 27) {
+              console.log(123);
+            }
+          });
+        }
+
+        const _add_event_listeners = (sidecap) => {
+            sidecap.addEventListener('click', (e) => {
               e.preventDefault();
             })
         }
 
         const _init = () => {
-          console.log(123);
-        }
+          _add_event_listeners_dom();
+
+          [].forEach.call(elements, (sidecap) => {
+            _add_event_listeners(sidecap);
+          })
+        };
 
         // Initiating the accordion
         if(sidecap) {

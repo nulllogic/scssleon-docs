@@ -6,8 +6,9 @@ const {url, min_height} = Astro.props
             src={url}
             class="iframe"
             onload="iframe_onload(this)"
-            frameBorder="1"
+            frameborder="0"
             seamless
+            scrolling="yes"
             data-min-height={min_height}
     />
 </div>

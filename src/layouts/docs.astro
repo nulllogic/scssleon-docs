@@ -32,6 +32,7 @@ import Footer from "../components/footer/index.astro";
 <script is:global>
   window.document.addEventListener('myEvent', handleEvent, false)
   function handleEvent(e) {
+    console.log(e);
     const iframes = document.querySelectorAll('iframe');
     iframes.forEach(iframe => {
       iframe.style.height = iframe.style.height + Math.random(5) +  'px';
