@@ -460,9 +460,17 @@ const { frame_url, preview, min_height } = Astro.props
     // @TODO rewrite a bit code below to make it look nicer
 
     if (snippet.querySelector('.bottomnav .navbar')) {
+        const nav_items_top_left = snippet.querySelectorAll(
+          '.topnav .navbar .left .nav .item .link');
       const nav_items_left = snippet.querySelectorAll(
         '.bottomnav .navbar .left .nav .item')
       const tab_items = snippet.querySelectorAll('.tab-content .tab')
+
+        nav_items_top_left.forEach((link) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+            })
+        })
 
       nav_items_left.forEach((nav, index) => {
         nav.querySelectorAll('.link').
