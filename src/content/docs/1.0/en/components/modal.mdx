@@ -11,25 +11,27 @@ import { Snippet } from "/src/components/snippet"
 <Snippet frame_url={'components/modal/1'} preview={true} min_height={450}>
   <Fragment slot="html">
     ```html
-    <a href="#" onclick="event.preventDefault();modals.open(modals.elements[0])">Toggle Modal component</a>
-    <div class="modal" role="alert" tabindex="-1">
-      <div class="inner">
-        <div class="top">
-          <div>
-            title
+    <div class="overlay show">
+      <a href="#" onclick="event.preventDefault();modals.open(modals.elements[0])">Toggle Modal component</a>
+      <dialog class="modal" role="alert">
+        <div class="inner">
+          <div class="top">
+            <div>
+              title
+            </div>
+            <div>
+              <a href="#" onclick="event.preventDefault();modals.close(modals.elements[0])">[x]</a>
+            </div>
           </div>
-          <div>
-            <a href="#" onclick="event.preventDefault();modals.close(modals.elements[0])">[x]</a>
+          <div class="middle">
+            Use Instagram posts to share your products with millions of people. Let shoppers buy from your store without leaving Instagram.
+          </div>
+          <div class="bottom">
+            <button>1</button>
+            <button>2</button>
           </div>
         </div>
-        <div class="middle">
-          Use Instagram posts to share your products with millions of people. Let shoppers buy from your store without leaving Instagram.
-        </div>
-        <div class="bottom">
-          <button>1</button>
-          <button>2</button>
-        </div>
-      </div>
+      </dialog>
     </div>
     ```
   </Fragment>
@@ -47,19 +49,19 @@ import { Snippet } from "/src/components/snippet"
     $overlay: functions.get-theme(app.$theme, 'components.overlay');
 
     @include mixins.generate-component(
-    $overlay,
-    "overlay",
-    app.$config,
-    app.$theme
+      $overlay,
+      "overlay",
+      app.$config,
+      app.$theme
     );
 
     $modal: functions.get-theme(app.$theme, 'components.modal');
 
     @include mixins.generate-component(
-    $modal,
-    "modal",
-    app.$config,
-    app.$theme
+      $modal,
+      "modal",
+      app.$config,
+      app.$theme
     );
 
     ```
@@ -80,11 +82,11 @@ import { Snippet } from "/src/components/snippet"
     const settings = Object.assign({}, defaults, options);
 
     const _close = (modal) => {
-      modal.classList.remove('open');
+      modal.toggleAttribute('open');
     }
 
     const _open = (modal) => {
-      modal.classList.add('open');
+      modal.toggleAttribute('open');
     }
 
     const _add_event_listeners_dom = () => {

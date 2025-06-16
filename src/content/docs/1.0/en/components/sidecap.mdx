@@ -11,21 +11,23 @@ import {Snippet} from "/src/components/snippet"
 <Snippet frame_url={'components/sidecap/1'} preview={true} min_height={450}>
     <Fragment slot={'html'}>
         ```html
-        <a href="#" onclick="event.preventDefault();sidecaps.open(sidecaps.elements[0])">Toggle Sidecap component</a>
-        <div role="dialog" aria-modal="true" tabindex="-1" class="sidecap">
-          <div class="top">
-            <div>
-              123
+        <div class="overlay show">
+          <a href="#" onclick="event.preventDefault();sidecaps.open(sidecaps.elements[0])">Toggle Sidecap component</a>
+          <div role="dialog" aria-modal="true" tabindex="-1" class="sidecap">
+            <div class="top">
+              <div>
+                123
+              </div>
+              <div>
+                <a href="#" onclick="event.preventDefault();sidecaps.close(sidecaps.elements[0])">[x]</a>
+              </div>
             </div>
-            <div>
-              <a href="#" onclick="event.preventDefault();sidecaps.close(sidecaps.elements[0])">[x]</a>
+            <div class="middle">
+              444
             </div>
-          </div>
-          <div class="middle">
-            444
-          </div>
-          <div class="bottom">
-            333
+            <div class="bottom">
+              333
+            </div>
           </div>
         </div>
         ```

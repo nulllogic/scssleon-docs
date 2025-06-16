@@ -144,13 +144,13 @@ const commit_date =
     position: relative,
     z-index: 1,
 
-    colors : (
+    _colors: (
       dark : (
         background: rgba(5, 17, 4, 1) radial-gradient(at 0 0, rgba(16, 53, 13, 0.4) 35%, #00000000 70%),
       )
     ),
 
-    subclasses : (
+    _subclasses : (
       ".title" : (
         font-size: 4rem,
         margin: 0 auto 15px auto,
@@ -160,7 +160,7 @@ const commit_date =
         flex-direction: column,
         letter-spacing: -0.022em,
 
-        "subclasses" : (
+        "_subclasses" : (
           ".first" : (
             display: inline-block,
             height: auto,
@@ -217,12 +217,12 @@ const commit_date =
         font-size: 2rem,
       ),
       ".latest_commit" : (
-        "subclasses" : (
+        "_subclasses" : (
             "span" : (
               background: var(--background),
             )
         ),
-        colors : (
+        _colors: (
           dark : (
             background: rgba(65, 52, 99, 0.4)
           )
@@ -249,12 +249,12 @@ const commit_date =
 
   $customize-section: (
     background: var(--background),
-    colors: (
+    _colors: (
       dark: (
         background: rgba(5, 17, 4, 1)
       )
     ),
-    subclasses : (
+    _subclasses : (
       ".title" : (
         font-size: 3.25rem,
       ),
@@ -279,7 +279,7 @@ const commit_date =
     border: var(--border),
     background: var(--background),
     box-shadow: var(--box-shadow),
-    colors: (
+    _colors: (
       dark : (
         border: 1px solid rgba(74, 58, 118, .5),
         background: string.unquote("linear-gradient(165deg, rgb(29, 30, 37) -5%, rgb(22, 23, 29) 25%)"),
@@ -292,7 +292,7 @@ const commit_date =
     --padding: 35px 15px,
     background: var(--background),
     padding: var(--padding),
-    colors: (
+    _colors: (
       dark: (
         background: rgba(5, 17, 4, 1)
       )
@@ -305,7 +305,7 @@ const commit_date =
         --padding: 35px 5px,
       ),
     ),
-    subclasses : (
+    _subclasses : (
       ".grid" : (
         display: grid,
         width: 100%,
@@ -313,33 +313,33 @@ const commit_date =
         grid-auto-rows: 5rem,
         grid-gap: 1.25rem,
         position: relative,
-        subclasses : (
+        _subclasses : (
           ".first" : (
             grid-row: auto/span 5,
             grid-column: auto/span 7,
             grid-auto-flow: row,
-            subclasses : (
+            _subclasses : (
               ".card" : $card
             )
           ),
           ".second" : (
             grid-row: auto/span 5,
             grid-column: auto/span 5,
-            subclasses : (
+            _subclasses : (
               ".card" : $card
             )
           ),
           ".third" : (
             grid-row: auto/span 5,
             grid-column: auto/span 5,
-            subclasses : (
+            _subclasses : (
               ".card" : $card
             )
           ),
           ".fourth" : (
             grid-row: auto/span 5,
             grid-column: auto/span 7,
-            subclasses : (
+            _subclasses : (
               ".card" : $card
             )
           )

@@ -93,7 +93,7 @@ const white = true
       gap: 7px,
       position: relative,
       fill : var(--fill),
-      colors : (
+      _colors: (
           light : (
               fill : rgba(255, 255, 255, 1),
           ),
@@ -105,7 +105,7 @@ const white = true
           md : (
           )
       ),
-      subclasses : (
+      _subclasses : (
           "& > svg:first-child" : (
               opacity: 1,
               transform: translateZ(0),
@@ -125,7 +125,7 @@ const white = true
               animation-play-state: paused
           ),
           "&:hover" : (
-              subclasses: (
+              _subclasses: (
                   "& > svg:first-child" : (
                       opacity: 0,
                       transform: translateX(4px) rotate(-2deg),

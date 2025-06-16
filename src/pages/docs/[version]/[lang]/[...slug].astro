@@ -63,6 +63,9 @@ const {headings, Content} = await page.render();
 
   @use "../../../../styles/app.scss" as app;
 
+  /*@use "@nulllogic/scssleon/scss/mixins.scss" as mixins;*/
+  /*@use "@nulllogic/scssleon/scss/functions.scss" as functions;*/
+
   @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
   @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
@@ -101,7 +104,7 @@ const {headings, Content} = await page.render();
 
   $intro: (
       margin: 0 0 15px 0,
-      subclasses : (
+      _subclasses : (
           '.title' : (
               font-size: 3.75rem,
               line-height: 1,

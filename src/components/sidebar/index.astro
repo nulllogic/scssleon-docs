@@ -174,13 +174,13 @@ const generate_link = (link) => {
     display: block,
     align-self: start,
 
-    subclasses : (
+    _subclasses : (
       ".nav" : (
         --nav-gap : 0,
 
-        subclasses : (
+        _subclasses : (
           ".item" : (
-            subclasses: (
+            _subclasses: (
               "&:first-child .title" : (
                 margin: 0 0 10px 0
               ),
@@ -190,14 +190,14 @@ const generate_link = (link) => {
                 margin: 10px 0,
               ),
               ".item" : (
-                subclasses: (
+                _subclasses: (
                   ".link" : (
                     border-left : 1px solid rgba(231, 231, 235, 0.2),
                     color: var(--link-color),
                     padding: 5px 10px,
                     text-decoration: none,
                     text-transform: capitalize,
-                    colors: (
+                    _colors: (
                         light: (
                             link-color: rgb(148, 163, 184),
                         ),
@@ -205,7 +205,7 @@ const generate_link = (link) => {
                             link-color: rgb(148, 163, 184),
                         )
                     ),
-                    subclasses: (
+                    _subclasses: (
                       "&.active" : (
                         color: rgba(255, 255, 255, 0.85),
                         border-left : 1px solid rgba(255, 255, 255, 0.85),

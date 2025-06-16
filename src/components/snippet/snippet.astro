@@ -151,10 +151,10 @@ const { frame_url, preview, min_height } = Astro.props
   @use "../../styles/scss/functions.scss" as functions;
 
   $snippet: (
-    subclasses: (
+    _subclasses: (
       '.topnav' : (
 
-        subclasses: (
+        _subclasses: (
             '.navbar' : (
                 border-top: none,
                 border-radius : 5px 5px 0 0,
@@ -171,20 +171,20 @@ const { frame_url, preview, min_height } = Astro.props
         border-top: 1px solid rgba(48, 54, 61, 0.75),
         border-bottom: 1px solid rgba(48, 54, 61, 0.75),
 
-        subclasses: (
+        _subclasses: (
 
           '.nav': (
 
             --nav-gap: 5px,
             padding: 5px 0,
-            subclasses: (
+            _subclasses: (
 
               '.item': (
 
-                subclasses: (
+                _subclasses: (
                   '&.active': (
 
-                    subclasses: (
+                    _subclasses: (
                       '.link': (
                         text-decoration: none,
                         color: white,
@@ -202,7 +202,7 @@ const { frame_url, preview, min_height } = Astro.props
                     border-radius: 5px,
                     color: #cccccc66,
 
-                    subclasses: (
+                    _subclasses: (
                       '&:hover': (
                         background: #0d1117,
                       ),
@@ -219,7 +219,7 @@ const { frame_url, preview, min_height } = Astro.props
 
         margin: 0 0 15px 0,
 
-        subclasses: (
+        _subclasses: (
           '.preview': (
 
             position: relative,
@@ -228,7 +228,7 @@ const { frame_url, preview, min_height } = Astro.props
             border-bottom: none,
             /*border-radius: 5px 5px 0 0,*/
 
-            subclasses: (
+            _subclasses: (
               ".resizer" : (
 
                 display: inline-block,
@@ -239,7 +239,7 @@ const { frame_url, preview, min_height } = Astro.props
                 -webkit-user-select: none,
                 user-select: none,
 
-                subclasses: (
+                _subclasses: (
                   '.drag' : (
                     padding: 0.5rem,
                     touch-action: pan-y,
@@ -251,7 +251,7 @@ const { frame_url, preview, min_height } = Astro.props
                     transform: translate(-50%, -50%),
                     user-select: none,
 
-                    subclasses: (
+                    _subclasses: (
                       '.el' : (
                         background: rgba(100, 116, 139, 0.6),
                         border-radius: 10px,
@@ -268,12 +268,12 @@ const { frame_url, preview, min_height } = Astro.props
 
           '.tab-content': (
 
-            subclasses: (
+            _subclasses: (
               '.tab': (
 
                 display: none,
 
-                subclasses: (
+                _subclasses: (
                   '&.active': (
                     display: block,
                   ),
@@ -288,12 +288,12 @@ const { frame_url, preview, min_height } = Astro.props
                     position: relative,
                     overflow: auto,
 
-                    subclasses: (
+                    _subclasses: (
                       'pre': (
 
                         padding: 1rem,
 
-                        subclasses: (
+                        _subclasses: (
                           'code': (
 
                             word-break: normal,

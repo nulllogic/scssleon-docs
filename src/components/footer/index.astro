@@ -90,7 +90,8 @@ import Logo from '../logo/index.astro'
     background: var(--background),
     border-top: var(--border),
     padding: var(--padding),
-    responsive: (
+
+    _responsive: (
       md: (
         --padding: 35px 5px,
       ),
@@ -98,7 +99,8 @@ import Logo from '../logo/index.astro'
         --padding: 35px 5px,
       ),
     ),
-    colors: (
+
+    _colors: (
       light : (
         background: rgb(241, 241, 249),
         border : 1px solid rgb(211, 216, 223),
@@ -108,13 +110,15 @@ import Logo from '../logo/index.astro'
         border : 1px solid rgb(7, 39, 7),
       )
     ),
-    subclasses: (
+
+    _subclasses: (
       '.grid' : (
         --columns: "",
         display: grid,
         grid-template-columns: var(--columns),
         gap: 15px,
-        responsive: (
+
+        _responsive: (
           md: (
             --columns: auto 200px 200px,
           ),
@@ -122,9 +126,10 @@ import Logo from '../logo/index.astro'
             --columns: auto 200px 200px,
           ),
         ),
-        subclasses: (
+
+        _subclasses: (
             '.column' : (
-              subclasses : (
+              _subclasses : (
                   '.title' : (
                     font-size: 1.25rem,
                     margin: 0 0 0.5rem 0
