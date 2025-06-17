@@ -6,58 +6,187 @@ toc: true
 ---
 import {Snippet} from "/src/components/snippet"
 
-## Example
+## Basic &lt;input&gt;
 
 <Snippet frame_url={'components/forms/input/1'} preview={true}>
-    <Fragment slot="html">
-        <div>
-            <label for="input1" class="label">Email address</label>
-            <input type="email" class="input"
-                   id="input1" placeholder="name@example.com"/>
-        </div>
-        <div>
-            <label for="input2" class="label">Example textarea</label>
-            <textarea class="input" id="input2" rows="3"></textarea>
-        </div>
-        <div>
-            <input type="name" value="John Doe" class="input"/>
+  <Fragment slot="html">
+    ```html
+    <div class="form">
+      <div class="field">
+        <label for="input1" class="label">Email address</label>
+        <input type="email" class="input"
+               id="input1" placeholder="name@example.com"/>
+      </div>
+    </div>
+    ```
+  </Fragment>
+  <Fragment slot="scss">
+    ```scss
+    @use "sass:list";
+    @use "sass:string";
+    @use "sass:meta";
+    @use "sass:map";
 
-            <input type="email" value="john.doe@cirrus.io" class="input"/>
+    @use "~/src/styles/app.scss" as app;
 
-            <input type="url" value="https://spiderpig86.github.io/Cirrus" class="input"/>
+    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
-            <input type="search" placeholder="Search" class="input"/>
+    $form: functions.get-theme(app.$theme, 'components.form');
+    @include mixins.generate-component($form, 'form', app.$config, app.$theme);
+    ```
+  </Fragment>
+</Snippet>
 
-            <input type="tel" value="1-(800)-777-7777" class="input"/>
+## Basic &lt;textarea&gt;
 
-            <input type="password" value="password" class="input"/>
+<Snippet frame_url={'components/forms/input/2'} preview={true}>
+  <Fragment slot="html">
+    ```html
+    <div class="form">
+      <div class="field">
+        <label for="input2" class="label">Email address</label>
+        <textarea class="textarea" id="input2" rows="3"></textarea>
+      </div>
+    </div>
+    ```
+  </Fragment>
+  <Fragment slot="scss">
+    ```scss
+    @use "sass:list";
+    @use "sass:string";
+    @use "sass:meta";
+    @use "sass:map";
 
-            <input type="number" value="420" class="input"/>
+    @use "~/src/styles/app.scss" as app;
 
-            <input type="date" value="2017-3-21" class="input"/>
+    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
-            <input type="time" class="input"/>
+    $form: functions.get-theme(app.$theme, 'components.form');
+    @include mixins.generate-component($form, 'form', app.$config, app.$theme);
+    ```
+  </Fragment>
+</Snippet>
 
-            <input type="color" value="#f03d4d" class="input"/>
+## Advanced &lt;input&gt;
 
-            <input type="file" class="input"/>
+<Snippet frame_url={'components/forms/input/3'} preview={true}>
+  <Fragment slot="html">
+    ```html
+    <div class="form">
+      <div class="field">
+        <label for="input1" class="label">Name</label>
+        <input type="name" id="1" value="John Doe" class="input"/>
+      </div>
+      <div class="field">
+        <label for="input2" class="label">Email</label>
+        <input type="email" id="input2" value="john.doe@cirrus.io" class="input"/>
+      </div>
+      <div class="field">
+        <label for="input3" class="label">URL</label>
+        <input type="url" id="input3" value="https://spiderpig86.github.io/Cirrus" class="input"/>
+      </div>
+      <div class="field">
+        <label for="input4" class="label">Search</label>
+        <input type="search" id="input4" placeholder="Search" class="input"/>
+      </div>
+      <div class="field">
+        <label for="input5" class="label">Phone</label>
+        <input type="tel" id="input5" value="1-(800)-777-7777" class="input"/>
+      </div>
+      <div class="field">
+        <label for="input6" class="label">Password</label>
+        <input type="password" id="input6" value="password" class="input"/>
+      </div>
+      <div class="field">
+        <label for="input7" class="label">Number</label>
+        <input type="number" id="input7" value="420" class="input"/>
+      </div>
+      <div class="field">
+        <label for="input8" class="label">Date</label>
+        <input type="date" id="input8" value="2017-3-21" class="input"/>
+      </div>
+      <div class="field">
+        <label for="input9" class="label">Time</label>
+        <input type="time" id="input9" class="input"/>
+      </div>
+      <div class="field">
+        <label for="input10" class="label">Color</label>
+        <input type="color" id="input10" value="#f03d4d" class="input"/>
+      </div>
+      <div class="field">
+        <label for="input11" class="label">File</label>
+        <input type="file" id="input11" class="input"/>
+      </div>
+      <div class="field">
+        <label for="input12" class="label">Range</label>
+        <input type="range" id="input12" name="volume" min="0" max="11"/>
+      </div>
+    </div>
+    ```
+  </Fragment>
+  <Fragment slot="scss">
+    ```scss
+    @use "sass:list";
+    @use "sass:string";
+    @use "sass:meta";
+    @use "sass:map";
+
+    @use "~/src/styles/app.scss" as app;
+
+    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+    $form: functions.get-theme(app.$theme, 'components.form');
+    @include mixins.generate-component($form, 'form', app.$config, app.$theme);
+    ```
+  </Fragment>
+</Snippet>
+
+<Snippet frame_url={'components/forms/input/4'} preview={true}>
+  <Fragment slot="html">
+    ```html
+    <div>
+      <input type="name" value="John Doe" class="input"/>
+
+      <input type="email" value="john.doe@cirrus.io" class="input"/>
+
+      <input type="url" value="https://github.com/nulllogic/scssleon" class="input"/>
+
+      <input type="search" placeholder="Search" class="input"/>
+
+      <input type="tel" value="1-(800)-777-7777" class="input"/>
+
+      <input type="password" value="password" class="input"/>
+
+      <input type="number" value="420" class="input"/>
+
+      <input type="date" value="2017-3-21" class="input"/>
+
+      <input type="time" class="input"/>
+
+      <input type="color" value="#f03d4d" class="input"/>
+
+      <input type="file" class="input"/>
 
 
-            <select class="select" placeholder="Choose one">
-                <option>Shibe</option>
-                <option>Doggo</option>
-                <option>Pupper</option>
-            </select>
+      <select class="select" placeholder="Choose one">
+        <option>Shibe</option>
+        <option>Doggo</option>
+        <option>Pupper</option>
+      </select>
 
-            <select class="select" multiple>
-                <option>Shibe</option>
-                <option>Doggo</option>
-                <option>Pupper</option>
-            </select>
+      <select class="select" multiple>
+        <option>Shibe</option>
+        <option>Doggo</option>
+        <option>Pupper</option>
+      </select>
 
-            <input type="range" id="volume" name="volume" min="0" max="11"/>
-            <label htmlFor="volume">Volume</label>
-        </div>
-    </Fragment>
+      <input type="range" id="volume" name="volume" min="0" max="11"/>
+      <label htmlFor="volume">Volume</label>
+    </div>
+    ```
+  </Fragment>
 </Snippet>
 

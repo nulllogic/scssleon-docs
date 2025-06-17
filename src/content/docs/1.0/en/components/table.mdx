@@ -68,10 +68,10 @@ Using the most basic table markup, here's how `.table`-based tables look in xiig
     $table: functions.get-theme(app.$theme, 'components.table');
 
     @include mixins.generate-component(
-    $table,
-    "table",
-    app.$config,
-    app.$theme
+      $table,
+      "table",
+      app.$config,
+      app.$theme
     );
     ```
   </Fragment>
@@ -82,7 +82,7 @@ Using the most basic table markup, here's how `.table`-based tables look in xiig
 <Snippet frame_url={'components/table/2'} preview={true}>
   <Fragment slot="html">
     ```html
-    <table class="table stripe hover">
+    <table class="table stripe">
       <thead class="top">
       <tr>
         <th scope="col">#</th>
