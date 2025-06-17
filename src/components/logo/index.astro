@@ -101,12 +101,12 @@ const white = true
               fill : rgba(255, 255, 255, 1),
           )
       ),
-      responsive : (
+      _responsive : (
           md : (
           )
       ),
       _subclasses : (
-          "& > svg:first-child" : (
+          '& > svg:first-child' : (
               opacity: 1,
               transform: translateZ(0),
               transition-duration: 0.2s,
@@ -114,7 +114,7 @@ const white = true
               transition-timing-function: ease-in-out,
               animation-play-state: paused
           ),
-          ".on_hover" : (
+          '.on_hover' : (
               position: absolute,
               left:0,
               opacity: 0,
@@ -124,21 +124,21 @@ const white = true
               transition-timing-function: ease-in-out,
               animation-play-state: paused
           ),
-          "&:hover" : (
+          '&:hover' : (
               _subclasses: (
-                  "& > svg:first-child" : (
+                  '& > svg:first-child' : (
                       opacity: 0,
                       transform: translateX(4px) rotate(-2deg),
                   ),
-                  ".on_hover" : (
+                  '.on_hover' : (
                       opacity: 1,
                       transform: translateX(4px) rotate(-2deg),
                   )
               )
           ),
-          "& > svg:last-child" : (
+          '& > svg:last-child' : (
               display: none,
-              responsive : (
+              _responsive : (
                   md : (
                       display: inherit
                   )

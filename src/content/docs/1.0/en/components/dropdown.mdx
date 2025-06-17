@@ -12,23 +12,20 @@ import {Snippet} from "/src/components/snippet"
 <Snippet frame_url={'components/dropdown/1'} preview={true} min_height={250}>
     <Fragment slot="html">
         ```html
-        <div style="position: relative; display:inline-block; width: 200px;">
+        <div class="dropdown on-hover">
             <button class="btn toggle" type="button" aria-expanded="false">
                 Dropdown button <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
                 <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path>
             </svg>
             </button>
-            <ul class="dropdown">
-                <li>
-                    <a class="dropdown-item" href="#">Action</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">Another action</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-            </ul>
+            <div class="menu">
+              1 <br />
+              2 <br />
+              3 <br />
+              4 <br />
+              5 <br />
+              6 <br />
+            </div>
         </div>
         ```
     </Fragment>
