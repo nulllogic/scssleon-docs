@@ -13,58 +13,133 @@ Due to the widespread use of `<table>` elements across third-party widgets like 
 Using the most basic table markup, here's how `.table`-based tables look in xiigrid.
 
 <Snippet frame_url={'components/table/1'} preview={true}>
-    <Fragment slot="html">
-        ```html
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Twitter</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>T</td>
-                <td>B</td>
-                <td>@tbd</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>A</td>
-                <td>B</td>
-                <td>@abc</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Void</td>
-                <td>@nulllogic</td>
-            </tr>
-            </tbody>
-        </table>
-        ```
-    </Fragment>
-    <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+  <Fragment slot="html">
+    ```html
+    <table class="table">
+      <thead class="top">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Twitter</th>
+      </tr>
+      </thead>
+      <tbody class="middle">
+      <tr>
+        <td scope="row">1</td>
+        <td>T</td>
+        <td>B</td>
+        <td>@tbd</td>
+      </tr>
+      <tr>
+        <td scope="row">2</td>
+        <td>A</td>
+        <td>B</td>
+        <td>@abc</td>
+      </tr>
+      <tr>
+        <td scope="row">3</td>
+        <td colspan="2">Void</td>
+        <td>@nulllogic</td>
+      </tr>
+      </tbody>
+      <tfoot class="bottom">
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+      </tr>
+      </tfoot>
+    </table>
+    ```
+  </Fragment>
+  <Fragment slot="scss">
+    ```scss
+    @use "sass:list";
+    @use "sass:string";
+    @use "sass:meta";
+    @use "sass:map";
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+    @use "~/src/styles/app.scss" as app;
+    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
-        $table: functions.get-theme(app.$theme, 'components.table');
+    $table: functions.get-theme(app.$theme, 'components.table');
 
-        @include mixins.generate-component(
-            $table,
-            "table",
-            app.$config,
-            app.$theme
-        );
-        ```
-    </Fragment>
+    @include mixins.generate-component(
+    $table,
+    "table",
+    app.$config,
+    app.$theme
+    );
+    ```
+  </Fragment>
+</Snippet>
+
+## Table striped
+
+<Snippet frame_url={'components/table/2'} preview={true}>
+  <Fragment slot="html">
+    ```html
+    <table class="table stripe hover">
+      <thead class="top">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Twitter</th>
+      </tr>
+      </thead>
+      <tbody class="middle">
+      <tr>
+        <td scope="row">1</td>
+        <td>T</td>
+        <td>B</td>
+        <td>@tbd</td>
+      </tr>
+      <tr>
+        <td scope="row">2</td>
+        <td>A</td>
+        <td>B</td>
+        <td>@abc</td>
+      </tr>
+      <tr>
+        <td scope="row">3</td>
+        <td colspan="2">Void</td>
+        <td>@nulllogic</td>
+      </tr>
+      </tbody>
+      <tfoot class="bottom">
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+      </tr>
+      </tfoot>
+    </table>
+    ```
+  </Fragment>
+  <Fragment slot="scss">
+    ```scss
+    @use "sass:list";
+    @use "sass:string";
+    @use "sass:meta";
+    @use "sass:map";
+
+    @use "~/src/styles/app.scss" as app;
+    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+    $table: functions.get-theme(app.$theme, 'components.table');
+
+    @include mixins.generate-component(
+    $table,
+    "table",
+    app.$config,
+    app.$theme
+    );
+    ```
+  </Fragment>
 </Snippet>
