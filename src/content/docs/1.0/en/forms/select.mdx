@@ -7,18 +7,71 @@ toc: true
 import {Snippet} from "/src/components/snippet"
 
 ## Example
-
 <Snippet frame_url={'components/forms/select/1'} preview={true}>
-    <Fragment slot="html">
-        <div>
-            <label for="input1" class="label">Email address</label>
-            <select class="select" aria-label="Default select example" id="input1">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-        </div>
-    </Fragment>
+  <Fragment slot="html">
+    ```html
+    <div class="form">
+      <div class="field">
+        <label for="input1" class="label">Email address</label>
+        <select class="select" aria-label="Default select example" id="input1">
+          <option selected disabled>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+    ```
+  </Fragment>
+  <Fragment slot="scss">
+    ```scss
+    @use "sass:list";
+    @use "sass:string";
+    @use "sass:meta";
+    @use "sass:map";
+
+    @use "~/src/styles/app.scss" as app;
+
+    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+    $form: functions.get-theme(app.$theme, 'components.form');
+    @include mixins.generate-component($form, 'form', app.$config, app.$theme);
+    ```
+  </Fragment>
 </Snippet>
 
+## Multiple
+<Snippet frame_url={'components/forms/select/2'} preview={true}>
+  <Fragment slot="html">
+    ```html
+    <div class="form">
+      <div class="field">
+        <label for="input1" class="label">Email address</label>
+        <select class="select" aria-label="Default select example" id="input1" multiple>
+          <option selected disabled>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+    ```
+  </Fragment>
+  <Fragment slot="scss">
+    ```scss
+    @use "sass:list";
+    @use "sass:string";
+    @use "sass:meta";
+    @use "sass:map";
+
+    @use "~/src/styles/app.scss" as app;
+
+    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+    $form: functions.get-theme(app.$theme, 'components.form');
+    @include mixins.generate-component($form, 'form', app.$config, app.$theme);
+    ```
+  </Fragment>
+</Snippet>
