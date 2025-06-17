@@ -9,19 +9,37 @@ import {Snippet} from "/src/components/snippet"
 ## Example
 
 <Snippet frame_url={'components/forms/radio/1'} preview={true}>
-    <Fragment slot="html">
-        <div>
-            <input class="radio" type="radio" name="input1" id="input1"/>
-            <label class="label" for="input1">
-                Default radio
-            </label>
-        </div>
-        <div>
-            <input class="radio" type="radio" name="input1" id="input2" checked/>
-            <label class="label" for="input2">
-                Default checked radio
-            </label>
-        </div>
-    </Fragment>
+  <Fragment slot="html">
+    ```html
+    <div class="form">
+      <div class="field">
+        <input class="radio" type="radio" name="input1" id="input1"/>
+        <label class="label" for="input1">
+          Default radio
+        </label>
+        <input class="radio" type="radio" name="input1" id="input2" checked/>
+        <label class="label" for="input2">
+          Default checked radio
+        </label>
+      </div>
+    </div>
+    ```
+  </Fragment>
+  <Fragment slot="scss">
+    ```scss
+    @use "sass:list";
+    @use "sass:string";
+    @use "sass:meta";
+    @use "sass:map";
+
+    @use "~/src/styles/app.scss" as app;
+
+    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+    $form: functions.get-theme(app.$theme, 'components.form');
+    @include mixins.generate-component($form, 'form', app.$config, app.$theme);
+    ```
+  </Fragment>
 </Snippet>
 
