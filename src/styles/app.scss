@@ -11,6 +11,7 @@
 );
 
 @use "./scss/themes/default.scss" as theme with (
+  $config : config.$config,
   $theme: (
     html : (
       body : (
