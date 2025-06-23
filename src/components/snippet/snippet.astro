@@ -448,7 +448,8 @@ const {frame_url, preview, min_height} = Astro.props
                     }
 
                     if(link.classList.contains('dark_mode_toggle')) {
-
+                      const event = new Event('dark_mode_toggle')
+                      document.dispatchEvent(event);
                     }
                 })
             })

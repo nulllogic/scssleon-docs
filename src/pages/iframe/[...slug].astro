@@ -212,7 +212,7 @@ const outline = await sass.compileStringAsync(`
 `);
 ---
 <!DOCTYPE html>
-<html>
+<html data-color-scheme="">
 <head>
     <style set:html={scss.css}/>
 </head>
@@ -222,6 +222,7 @@ const outline = await sass.compileStringAsync(`
     <div class="iframe" set:html={html}/>
     <div class="background"/>
 </div>
+
 <script is:inline type="text/javascript">
 
     const myCustomData = {foo: ''}
@@ -260,6 +261,24 @@ const outline = await sass.compileStringAsync(`
             existingStyle.remove();
         }
     });
+</script>
+
+<script>
+  parent.document.addEventListener('dark_mode_toggle', (e) => {
+    const current_theme = document.documentElement.getAttribute('data-theme');
+    const new_theme = current_theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', new_theme);
+    localStorage.setItem('theme', new_theme);
+  })
+
+  // Apply saved theme or system preference on page load
+  const saved_theme = localStorage.getItem('theme');
+
+  if (saved_theme) {
+    document.documentElement.setAttribute('data-theme', saved_theme);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
 </script>
 
 <style lang="scss">
