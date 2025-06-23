@@ -249,7 +249,6 @@ const outline = await sass.compileStringAsync(`
 
 <script define:vars={{ outline : outline.css }}>
     parent.document.addEventListener('toggle_outline', (e) => {
-
         const existingStyle = document.getElementById('outline');
 
         if (!existingStyle) {
