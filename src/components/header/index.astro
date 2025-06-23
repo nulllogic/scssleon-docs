@@ -52,7 +52,7 @@ import {generate_rel_link} from '~/utils/links'
                             </svg>
                         </a>
                     </li>
-                    <li class="item">
+                    <li class="item toggle_mode">
                         <a
                                 href="https://github.com/nulllogic/xiigrid"
                                 class="link"
@@ -168,4 +168,16 @@ import {generate_rel_link} from '~/utils/links'
     }
 
     window.addEventListener('scroll', stickyNavigation)
+</script>
+
+<script>
+
+  document.querySelector('.toggle_mode').addEventListener('click', (e) => {
+    e.preventDefault();
+    const current_theme = document.documentElement.getAttribute('data-theme');
+    const new_theme = current_theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', new_theme);
+    localStorage.setItem('theme', new_theme);
+  })
+
 </script>
