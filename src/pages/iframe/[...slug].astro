@@ -268,7 +268,6 @@ const outline = await sass.compileStringAsync(`
     const current_theme = document.documentElement.getAttribute('data-theme');
     const new_theme = current_theme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', new_theme);
-    localStorage.setItem('theme', new_theme);
   })
 
   // Apply saved theme or system preference on page load
