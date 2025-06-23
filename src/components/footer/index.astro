@@ -83,7 +83,6 @@ import Logo from '../logo/index.astro'
   @use "sass:string";
 
   @use "../../styles/app.scss" as app;
-  @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
 
   $footer-component: (
     --padding: 35px 15px,
@@ -144,7 +143,7 @@ import Logo from '../logo/index.astro'
     ),
   );
 
-  @include mixins.generate-component(
+  @include app.generate-component(
       $footer-component,
       "footer",
       app.$config,

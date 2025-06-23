@@ -1,6 +1,9 @@
 @use 'sass:map';
 @use "sass:string";
 
+@forward "./scss/mixins";
+@forward "./scss/functions";
+
 @use "./scss/config.scss" as config with (
   $config: (
     prefix: "xii",
