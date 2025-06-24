@@ -11,34 +11,62 @@ import Footer from "../components/footer/index.astro";
 <!doctype html>
 <html lang="en">
 <head>
-  <Head title="SCSSLeon documentation" description="Desciption"/>
+    <Head title="SCSSLeon documentation" description="Desciption"/>
 </head>
 <body>
 <Header/>
 <div class="docs">
-  <div class="container xxl">
-    <div class="layout">
-      <Sidebar/>
-      <Main>
-        <slot/>
-      </Main>
+    <div class="container xxl">
+        <div class="layout">
+            <Sidebar/>
+            <Main>
+                <slot/>
+            </Main>
+        </div>
     </div>
-  </div>
 </div>
 <Footer/>
 </body>
 </html>
 
 <script is:global>
-  window.document.addEventListener('myEvent', handleEvent, false)
-  function handleEvent(e) {
-    console.log(e);
-    const iframes = document.querySelectorAll('iframe');
-    iframes.forEach(iframe => {
-      iframe.style.height = iframe.style.height + Math.random(5) +  'px';
-    })
-  }
+    window.document.addEventListener('myEvent', handleEvent, false)
+
+    function handleEvent(e) {
+        console.log(e);
+        const iframes = document.querySelectorAll('iframe');
+        iframes.forEach(iframe => {
+            iframe.style.height = iframe.style.height + Math.random(5) + 'px';
+        })
+    }
 </script>
+
+<style lang="scss">
+  @use "sass:list";
+  @use "sass:meta";
+
+  @use "../styles/app.scss" as app;
+  @use "~/styles/scss/mixins.scss" as mixins;
+
+  $docs_section: (
+      background: var(--background),
+      _colors: (
+          light: (
+              background: linear-gradient(rgba(38, 194, 44, 0.085), rgba(0, 0, 0, 0)),
+          ),
+          dark : (
+              background: linear-gradient(rgba(38, 194, 44, 0.085), rgba(0, 0, 0, 0)),
+          )
+      )
+  );
+
+  @include mixins.generate-component(
+          $docs_section,
+          'docs',
+          app.$config,
+          app.$theme
+  );
+</style>
 
 <style lang="scss">
   @use "sass:list";
@@ -48,29 +76,32 @@ import Footer from "../components/footer/index.astro";
   @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
 
   $layout-section: (
-    --padding: 2.5rem 0,
-    display: grid,
-    grid-template-areas: "sidebar main",
-    grid-template-columns: 1fr 5fr,
-    gap: 1rem,
-    padding: var(--padding),
-    _colors: (
-      dark : (
-        background: linear-gradient(71.93deg, #001b33 26.34%, #004887 56.72%, #273b49 94.79%)
+      --padding: 2.5rem 0,
+      display: grid,
+      grid-template-areas: "sidebar main",
+      grid-template-columns: 1fr 5fr,
+      gap: 1rem,
+      padding: var(--padding),
+    /*_colors: (*/
+    /*    light: (*/
+    /*        background: linear-gradient(rgba(249, 102, 83, 0.1), rgba(0, 0, 0, 0) 144px),*/
+    /*    ),*/
+    /*    dark : (*/
+    /*        background: linear-gradient(71.93deg, #001b33 26.34%, #004887 56.72%, #273b49 94.79%)*/
+    /*    )*/
+    /*),*/
+      _subclasses : (
+          ".title" : (
+              display: inline-block,
+          )
       )
-    ),
-    _subclasses : (
-      ".title" : (
-        display: inline-block,
-      )
-    )
   );
 
   @include mixins.generate-component(
-      $layout-section,
-      "layout",
-      app.$config,
-      app.$theme
+          $layout-section,
+          'layout',
+          app.$config,
+          app.$theme
   );
 </style>
 

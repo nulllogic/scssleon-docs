@@ -94,36 +94,41 @@ import {generate_rel_link} from '~/utils/links'
   @use "sass:meta";
   @use "sass:map";
 
-  @use "../../styles/app.scss" as app;
+  @use "~/styles/app.scss" as app;
 
-  @use "../../styles/scss/mixins.scss" as mixins;
-  @use "../../styles/scss/functions.scss" as functions;
+  @use "~/styles/scss/mixins.scss" as mixins;
+  @use "~/styles/scss/functions.scss" as functions;
 
   $header-section: (
+      background: var(--background),
+      box-shadow: var(--shadow),
+      border-bottom: var(--border),
+    /***/
       padding: 5px 5px,
-      background: var(--header-background),
-      border-bottom: var(--header-border),
-      box-shadow: string.unquote("rgba(13, 13, 17, 0.4) 0px 5px 25px"),
       top: 0,
       position: relative,
       z-index: 6,
-
+    /***/
       _colors: (
           light : (
-              header-background : string.unquote("linear-gradient(rgba(5, 43, 40, 0.85) 0%, rgba(28, 43, 31, 0.55) 100%)"),
-              header-border : 1px solid rgba(27, 60, 24, 1),
+              background : string.unquote("rgb(247, 244, 237) linear-gradient(rgba(5, 43, 40, 0.85) 0%, rgba(28, 43, 31, 0.55) 100%)"),
+              border : 1px solid rgb(177, 171, 160),
+              shadow: 0 1px 2px #00000026,
           ),
           dark : (
-              header-background : string.unquote("linear-gradient(rgba(10, 34, 8, 0.85) 0%, rgba(28, 43, 31, 0.55) 100%)"),
-              header-border : 1px solid rgba(27, 60, 24, 1),
+              background : string.unquote("linear-gradient(rgba(10, 34, 8, 0.85) 0%, rgba(28, 43, 31, 0.55) 100%)"),
+              border : 1px solid rgba(27, 60, 24, 1),
+              shadow : 0 1px 2px #00000026,
           )
       ),
-
+    /***/
       _subclasses : (
-          ".navbar" : (
+          '.navbar' : (
               --navbar-grid-template-columns: auto auto,
+            /***/
               _subclasses : (
-                  ".item" : (
+                  '.item' : (
+                    /***/
                       _subclasses: (
                           "&:first-child .title" : (
                               padding: 0
@@ -132,13 +137,14 @@ import {generate_rel_link} from '~/utils/links'
                   )
               )
           ),
-          "&.sticky" : (
+          '&.sticky' : (
               position: sticky,
               -webkit-backdrop-filter: blur(10px),
               backdrop-filter: blur(10px),
           )
       ),
-      responsive : (
+    /***/
+      _responsive : (
           md : (
               padding: 5px 5px,
           )
@@ -172,12 +178,12 @@ import {generate_rel_link} from '~/utils/links'
 
 <script>
 
-  document.querySelector('.toggle_mode').addEventListener('click', (e) => {
-    e.preventDefault();
-    const current_theme = document.documentElement.getAttribute('data-theme');
-    const new_theme = current_theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', new_theme);
-    localStorage.setItem('theme', new_theme);
-  })
+    document.querySelector('.toggle_mode').addEventListener('click', (e) => {
+        e.preventDefault();
+        const current_theme = document.documentElement.getAttribute('data-theme');
+        const new_theme = current_theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', new_theme);
+        localStorage.setItem('theme', new_theme);
+    })
 
 </script>
