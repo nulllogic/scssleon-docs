@@ -44,6 +44,7 @@ import Footer from "../components/footer/index.astro";
 <style lang="scss">
   @use "sass:list";
   @use "sass:meta";
+  @use "sass:string";
 
   @use "../styles/app.scss" as app;
   @use "~/styles/scss/mixins.scss" as mixins;
@@ -52,7 +53,7 @@ import Footer from "../components/footer/index.astro";
       background: var(--background),
       _colors: (
           light: (
-              background: transparent,
+              background: string.unquote('linear-gradient(#ece3d6, #eceddc)'),
           ),
           dark : (
               background: linear-gradient(rgba(38, 194, 44, 0.085), rgba(0, 0, 0, 0)),
