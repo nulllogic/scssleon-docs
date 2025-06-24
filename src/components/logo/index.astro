@@ -1,27 +1,30 @@
 ---
-import {generate_rel_link} from "../../utils/links";
-const {footer} = Astro.props
+import { generate_rel_link } from '../../utils/links'
+const { footer } = Astro.props
 
-const width = !footer ? '35px' : '25px';
-const height = !footer ? '35px' : '25px';
+const width = !footer ? '35px' : '25px'
+const height = !footer ? '35px' : '25px'
 const white = true
 ---
 
 <a href={generate_rel_link(Astro, './')} class="link" aria-label="Homepage">
 <span class="logo">
 
-    <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1372 1200">
+    <svg width={width} height={height} xmlns="http://www.w3.org/2000/svg"
+         x="0px" y="0px" viewBox="0 0 1372 1200">
     <path fill="currentColor"
           d="m881.84,755.43h-323.03l.2,114.46c84.15.03,293.64.41,374.77.2l25.96-.05c-11.43,16.82-23.32,33.29-37.34,47.64-121.01,123.9-270.42,123.61-269.47,123.07-131.44-5.93-176.68-53.6-185.78-154.86v-324.53h14.98c21.25,5.32,71.25,27.4,77.48,117.77h96.64v-118.94c1.36.23,3.04.56,4.98,1.03.18.05.36.08.55.13,19.89,4.99,79.51,19.78,77.48,117.77h94.48v-117.77h326.27c-15.96-232.46-173.63-425.98-387.28-494.8-.07-.02-.15-.05-.23-.07-25.55-7.61-52.35-14.07-80.45-19.41-12.87-2.12-25.91-3.8-39.08-5.01l2.79,175.35L467.35,55.61c-1.08.27-2.16.53-3.23.81C247.78,110.55,81.24,290.38,46.64,513.8c-4.36,28.22-6.64,57.11-6.64,86.54s2.27,58.32,6.64,86.54c.23,1.46.46,2.94.7,4.4,5.47,33.56,13.93,66.12,25.08,97.39,18,50.49,43.05,97.67,73.95,140.3,1.63,2.25,3.27,4.48,4.93,6.7,90.84,121.54,228.91,198.52,379.58,216.4,9.28,1.1,24.11,2.2,40.34,3.17,244.47,14.67,471.17-131.38,555.78-361.22,4.87-13.23,9.26-26.7,13.14-40.37-33.72.07-143.09.25-258.29.41v1.38Zm23.22-441.24c39.4,0,71.33,31.93,71.33,71.33s-31.93,71.33-71.33,71.33-71.33-31.93-71.33-71.33,31.93-71.33,71.33-71.33Z"/>
 </svg>
-<svg class="on_hover" width={width} height={height} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+<svg class="on_hover" width={width} height={height}
+     xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
      viewBox="0 0 1372 1200">
     <path fill="currentColor"
           d="m1153.2,527.87c-19.23-162.76-108.9-309.44-246.29-398.8-41.06-26.71-85.84-48.19-133.39-63.51-.07-.02-.15-.05-.23-.07-25.57-7.62-52.41-14.08-80.54-19.43-12.89-2.13-25.94-3.8-39.12-5.02l2.79,175.54L467.83,54.6c-1.08.27-2.16.53-3.24.81-92.58,23.15-176.04,69.3-243.96,132.04h247.06v74.73H152.96c-17.45,23.12-33.15,47.63-46.91,73.33h361.42v74.73H72.86c-8.78,24.44-15.91,49.67-21.24,75.56h416.07v74.73H41.36c-.9,13.02-1.36,26.15-1.36,39.41,0,10.36.28,20.67.85,30.9h246.35v74.73H49.93c4.63,24.39,10.86,48.24,18.57,71.41h220.36v74.73H99.5c13.6,27.07,29.34,52.89,46.98,77.22,1.63,2.26,3.29,4.48,4.95,6.71,90.94,121.67,229.15,198.74,380,216.64,8.88,1.05,22.83,2.1,38.22,3.04,233.01,14.24,452.16-116.37,545.92-330.16,10.15-23.14,18.78-47.1,25.77-71.75-33.76.07-143.25.25-258.58.42v1.38h-323.39l.2,114.58c84.24.03,293.96.42,375.18.2l25.99-.05c-11.44,16.84-23.35,33.33-37.38,47.69-121.14,124.03-270.71,123.75-269.77,123.2-131.59-5.93-176.87-53.65-185.99-155.04v-324.88h15c21.27,5.33,71.32,27.43,77.57,117.9h96.75v-119.07c1.36.23,3.04.56,4.98,1.03.18.05.37.08.55.13,19.91,5,79.59,19.81,77.57,117.9h94.59v-117.74h322.52l-3.92-33.2Zm-247.19-214.4c39.44,0,71.41,31.97,71.41,71.41s-31.97,71.41-71.41,71.41-71.41-31.97-71.41-71.41,31.97-71.41,71.41-71.41Z"/>
     <path fill="#cc3e3e"
           d="m1351.41,391.24h-101.25c6.06,25.96,5.02,46.51-3.09,57.34-8.64,11.52-25.67,12.42-30.69,12.42h-75.62c8.19,32.18,13.54,65.47,15.78,99.6h59.84c45.25,0,85.49-19.06,110.38-52.29,16.74-22.34,32.78-59.65,24.64-117.07Z"/>
 </svg>
-    <svg width="140px" height="18px" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 611.2 77.8">
+    <svg width="140px" height="18px" xmlns="http://www.w3.org/2000/svg" x="0px"
+         y="0px" viewBox="0 0 611.2 77.8">
     <path d="M8.5,60.5c1.2,2.5,2.9,4.4,4.9,5.9c2.1,1.5,4.6,2.5,7.5,3.2c2.9,0.6,5.9,1,9.2,1c1.9,0,3.9-0.3,6.1-0.8
 	c2.2-0.5,4.2-1.4,6.2-2.6c1.9-1.2,3.5-2.7,4.8-4.5c1.3-1.8,1.9-4,1.9-6.6c0-2-0.5-3.7-1.4-5.2c-0.9-1.5-2.1-2.7-3.5-3.7
 	c-1.4-1-3-1.8-4.8-2.5c-1.7-0.6-3.4-1.1-5.1-1.5l-15.9-3.9c-2.1-0.5-4.1-1.2-6-2c-2-0.8-3.7-1.9-5.2-3.2c-1.5-1.3-2.6-3-3.5-4.9
@@ -39,7 +42,8 @@ const white = true
 	c1.2-2.8,2-5.8,2.3-9h6.8c-0.5,4.4-1.5,8.4-3.1,11.9c-1.6,3.5-3.7,6.5-6.2,9c-2.5,2.5-5.5,4.4-8.9,5.7c-3.4,1.3-7.2,2-11.5,2
 	c-5.6,0-10.5-1-14.8-3.1c-4.2-2-7.8-4.8-10.5-8.1c-2.8-3.4-4.9-7.3-6.3-11.8c-1.4-4.5-2.1-9.2-2.1-14.1c0-4.9,0.7-9.6,2.1-14.1
 	c1.4-4.5,3.5-8.4,6.3-11.9C89.4,9.7,93,7,97.2,4.9c4.2-2,9.1-3.1,14.8-3.1c3.4,0,6.7,0.5,10,1.5c3.2,1,6.2,2.5,8.8,4.5
-	c2.6,2,4.8,4.4,6.6,7.2c1.8,2.9,2.9,6.2,3.4,9.9h-6.8C133.2,22.3,132.3,19.8,130.9,17.6z" fill="currentColor" />
+	c2.6,2,4.8,4.4,6.6,7.2c1.8,2.9,2.9,6.2,3.4,9.9h-6.8C133.2,22.3,132.3,19.8,130.9,17.6z"
+          fill="currentColor"/>
     <path d="M171.9,60.5c1.2,2.5,2.9,4.4,4.9,5.9c2.1,1.5,4.6,2.5,7.5,3.2c2.9,0.6,5.9,1,9.2,1c1.9,0,3.9-0.3,6.1-0.8
 	c2.2-0.5,4.2-1.4,6.2-2.6c1.9-1.2,3.5-2.7,4.8-4.5c1.3-1.8,1.9-4,1.9-6.6c0-2-0.5-3.7-1.4-5.2c-0.9-1.5-2.1-2.7-3.5-3.7
 	c-1.4-1-3-1.8-4.8-2.5c-1.7-0.6-3.4-1.1-5.1-1.5l-15.9-3.9c-2.1-0.5-4.1-1.2-6-2c-2-0.8-3.7-1.9-5.2-3.2c-1.5-1.3-2.6-3-3.5-4.9
@@ -63,7 +67,8 @@ const white = true
 	s-6.6,1.2-10.8,1.2c-4.2,0-8.1-0.5-11.7-1.5c-3.6-1-6.7-2.5-9.2-4.5c-2.5-2-4.5-4.6-5.9-7.7c-1.4-3.1-2-6.9-1.8-11.3h6.8
 	C248.2,55,248.7,58,249.9,60.5z" fill="currentColor"/>
     <path d="M329.8,3.4V69h40v5.8H323V3.4H329.8z" fill="currentColor"/>
-    <path d="M390.7,69h50.2v5.8l-50.2,0V69z M390.7,35h50.2v5.8h-50.2V35z M390.7,3.4h50.2v5.8h-50.2" fill="currentColor"/>
+    <path d="M390.7,69h50.2v5.8l-50.2,0V69z M390.7,35h50.2v5.8h-50.2V35z M390.7,3.4h50.2v5.8h-50.2"
+          fill="currentColor"/>
     <path d="M464.3,25c1.4-4.5,3.5-8.4,6.3-11.9c2.8-3.4,6.3-6.2,10.5-8.2c4.2-2,9.2-3.1,14.8-3.1c5.6,0,10.5,1,14.7,3.1
 	c4.2,2,7.7,4.8,10.5,8.2c2.8,3.4,4.9,7.4,6.3,11.9c1.4,4.5,2.1,9.2,2.1,14.1c0,4.9-0.7,9.6-2.1,14.1c-1.4,4.5-3.5,8.4-6.3,11.8
 	c-2.8,3.4-6.3,6.1-10.5,8.1c-4.2,2-9.1,3.1-14.7,3.1c-5.6,0-10.5-1-14.8-3.1c-4.2-2-7.8-4.8-10.5-8.1c-2.8-3.4-4.9-7.3-6.3-11.8
@@ -71,8 +76,9 @@ const white = true
 	c3.4,1.8,7.5,2.7,12.2,2.7c4.7,0,8.8-0.9,12.2-2.7c3.4-1.8,6.1-4.2,8.3-7.2c2.2-3,3.8-6.3,4.8-10.1c1-3.8,1.6-7.6,1.6-11.5
 	c0-3.9-0.5-7.8-1.6-11.5c-1-3.7-2.6-7.1-4.8-10c-2.2-3-4.9-5.3-8.3-7.2c-3.4-1.8-7.4-2.7-12.2-2.7c-4.7,0-8.8,0.9-12.2,2.7
 	c-3.4,1.8-6.2,4.2-8.4,7.2c-2.2,3-3.8,6.3-4.8,10c-1,3.7-1.5,7.6-1.5,11.5C469,43,469.5,46.8,470.6,50.5z"
-          fill="currentColor" />
-    <path d="M562.6,3.4l41.6,60.4h0.2V3.4h6.8v71.4h-7.6L562,14.4h-0.2v60.4H555V3.4H562.6z" fill="currentColor" />
+          fill="currentColor"/>
+    <path d="M562.6,3.4l41.6,60.4h0.2V3.4h6.8v71.4h-7.6L562,14.4h-0.2v60.4H555V3.4H562.6z"
+          fill="currentColor"/>
   </svg>
 </span>
 </a>
@@ -83,74 +89,81 @@ const white = true
   @use "sass:meta";
   @use "sass:map";
 
-  @use "../../styles/app.scss" as app;
-  @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-  @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+  @use "~/styles/app.scss" as app;
+
+  @use "~/styles/scss/mixins.scss" as mixins;
+  @use "~/styles/scss/functions.scss" as functions;
 
   $logo-section: (
-      display: inline-flex,
-      align-items: center,
-      gap: 7px,
-      position: relative,
-      fill : var(--fill),
-      _colors: (
+    display: inline-flex,
+    align-items: center,
+    gap: 7px,
+    position: relative,
+    /***/
+    _responsive : (
+      md : (
+      )
+    ),
+    /***/
+    _subclasses : (
+      /***/
+      'svg path' : (
+        fill : var(--fill),
+        /***/
+        _colors: (
           light : (
-              fill : rgba(255, 255, 255, 1),
+            fill : rgb(33, 33, 33),
           ),
           dark : (
-              fill : rgba(255, 255, 255, 1),
+            fill : rgba(255, 255, 255, 1),
           )
+        ),
       ),
-      _responsive : (
-          md : (
-          )
+      '& > svg:first-child' : (
+        opacity: 1,
+        transform: translateZ(0),
+        transition-duration: 0.2s,
+        transition-property: transform opacity,
+        transition-timing-function: ease-in-out,
+        animation-play-state: paused
       ),
-      _subclasses : (
+      '.on_hover' : (
+        position: absolute,
+        left:0,
+        opacity: 0,
+        transform: translateZ(0),
+        transition-duration: 0.2s,
+        transition-property: transform opacity,
+        transition-timing-function: ease-in-out,
+        animation-play-state: paused
+      ),
+      '&:hover' : (
+        _subclasses: (
           '& > svg:first-child' : (
-              opacity: 1,
-              transform: translateZ(0),
-              transition-duration: 0.2s,
-              transition-property: transform opacity,
-              transition-timing-function: ease-in-out,
-              animation-play-state: paused
+            opacity: 0,
+            transform: translateX(4px) rotate(-2deg),
           ),
           '.on_hover' : (
-              position: absolute,
-              left:0,
-              opacity: 0,
-              transform: translateZ(0),
-              transition-duration: 0.2s,
-              transition-property: transform opacity,
-              transition-timing-function: ease-in-out,
-              animation-play-state: paused
-          ),
-          '&:hover' : (
-              _subclasses: (
-                  '& > svg:first-child' : (
-                      opacity: 0,
-                      transform: translateX(4px) rotate(-2deg),
-                  ),
-                  '.on_hover' : (
-                      opacity: 1,
-                      transform: translateX(4px) rotate(-2deg),
-                  )
-              )
-          ),
-          '& > svg:last-child' : (
-              display: none,
-              _responsive : (
-                  md : (
-                      display: inherit
-                  )
-              ),
+            opacity: 1,
+            transform: translateX(4px) rotate(-2deg),
           )
+        )
+      ),
+      '& > svg:last-child' : (
+        display: none,
+        _responsive : (
+          md : (
+            display: inherit
+          )
+        ),
       )
+    )
   );
 
   @include mixins.generate-component(
-          $logo-section,
-          "logo",
-          app.$config,
-          app.$theme
+      $logo-section,
+      "logo",
+      app.$config,
+      app.$theme
   );
 </style>
