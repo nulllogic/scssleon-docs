@@ -10,7 +10,8 @@ import Logo from '../logo/index.astro'
                     <Logo footer/>
                 </div>
                 <p>
-                    Designed and built with all the love in the world by the NullLogic
+                    Designed and built with all the love in the world by the
+                    NullLogic
                     team with the help of our contributors.
                 </p>
                 <p>Currently v</p>
@@ -23,7 +24,8 @@ import Logo from '../logo/index.astro'
                         <a href="/" aria-label="Home" class="link">Home</a>
                     </li>
                     <li class="item">
-                        <a href="/docs/1.0/en/" target="_blank" aria-label="Docs" class="link">Docs</a>
+                        <a href="/docs/1.0/en/" target="_blank"
+                           aria-label="Docs" class="link">Docs</a>
                     </li>
                 </ul>
             </div>
@@ -32,16 +34,20 @@ import Logo from '../logo/index.astro'
                 <h5 class="title">Community</h5>
                 <ul class="nav vertical">
                     <li class="item">
-                        <a href="https://github.com/nulllogic/scssleon/issues" target="_blank" aria-label="Issues"
+                        <a href="https://github.com/nulllogic/scssleon/issues"
+                           target="_blank" aria-label="Issues"
                            class="link">Issues</a>
                     </li>
                     <li class="item">
-                        <a href="https://github.com/nulllogic/scssleon/discussions" target="_blank"
+                        <a href="https://github.com/nulllogic/scssleon/discussions"
+                           target="_blank"
                            aria-label="Discussions" class="link">Discussions</a>
                     </li>
                     <li class="item">
-                        <a href="https://stackoverflow.com/questions/tagged/scssleon" target="_blank"
-                           aria-label="Stack Overflow" class="link">Stack Overflow</a>
+                        <a href="https://stackoverflow.com/questions/tagged/scssleon"
+                           target="_blank"
+                           aria-label="Stack Overflow" class="link">Stack
+                            Overflow</a>
                     </li>
                 </ul>
             </div>
@@ -77,6 +83,18 @@ import Logo from '../logo/index.astro'
               fill="#fff"
               fill-rule="evenodd"></path>
     </svg>
+
+        <svg width="16" viewBox="0 0 24 24" fill="currentColor" role="presentation"
+             class="inline-block h-[1.2em] align-[-0.25em]"
+             data-toolkit-component="Icon"><path
+                d="M16.25 10.311l-4.793 4.793a1 1 0 01-1.414 0L7.75 12.811a.75.75 0 111.06-1.06l1.233 1.232a1 1 0 001.414 0L15.19 9.25a.749.749 0 111.06 1.061zM21 12a9 9 0 11-18 0 9 9 0 0118 0zm-1.5 0a7.5 7.5 0 10-15 0 7.5 7.5 0 0015 0z"></path></svg>
+
+        <svg width="16" viewBox="0 0 24 24" fill="currentColor" role="presentation"
+             class="inline-block h-[1.2em] align-[-0.25em]"
+             data-toolkit-component="Icon"><path
+                d="M10.233 12.707a1 1 0 000-1.414L8.465 9.525a.75.75 0 011.06-1.06l1.768 1.767a1 1 0 001.414 0l1.768-1.768a.75.75 0 011.06 1.06l-1.767 1.769a1 1 0 000 1.414l1.768 1.768a.75.75 0 01-1.06 1.06l-1.769-1.768a1 1 0 00-1.414 0l-1.768 1.768a.749.749 0 11-1.06-1.06l1.768-1.768zM12 21a9 9 0 110-18 9 9 0 010 18zm0-1.5a7.5 7.5 0 100-15 7.5 7.5 0 000 15z"></path></svg>
+
+        <svg width="16" viewBox="0 0 24 24" fill="currentColor" role="presentation" class="inline-block h-[1.2em] align-[-0.25em]" data-testid="security-lock" data-toolkit-component="Icon"><path d="M12 2.75A4.25 4.25 0 0116.25 7v.75a1 1 0 001 1H18A1.25 1.25 0 0119.25 10v10A1.25 1.25 0 0118 21.25H6A1.25 1.25 0 014.75 20V10A1.25 1.25 0 016 8.75h.75a1 1 0 001-1V7A4.25 4.25 0 0112 2.75zm1.75 6a1 1 0 001-1V7a2.75 2.75 0 10-5.5 0v.75a1 1 0 001 1h3.5zm-6.5 1.5a1 1 0 00-1 1v7.5a1 1 0 001 1h9.5a1 1 0 001-1v-7.5a1 1 0 00-1-1h-9.5z"></path></svg>
   </span>
 </footer>
 
@@ -88,69 +106,84 @@ import Logo from '../logo/index.astro'
   @use "../../styles/app.scss" as app;
 
   $footer-component: (
-      --padding: 35px 15px,
-      background: var(--background),
-      border-top: var(--border),
-      padding: var(--padding),
-      box-shadow: var(--box-shadow),
+    --padding: 35px 15px,
+    background: var(--background),
+    border-top: var(--border),
+    padding: var(--padding),
+    box-shadow: var(--box-shadow),
     /***/
-      _responsive: (
+    _responsive: (
+      md: (
+        --padding: 35px 5px,
+      ),
+      lg: (
+        --padding: 35px 5px,
+      ),
+    ),
+    /***/
+    _colors: (
+      light : (
+        background: rgb(241, 241, 249) string.unquote('linear-gradient(rgba(8, 9, 10, 0.03), rgba(8, 9, 10, 0.03)), linear-gradient(rgb(241, 241, 249), rgb(255, 255, 255))'),
+        border : 1px solid rgb(255, 255, 255),
+        box-shadow: string.unquote('rgba(34, 42, 53, 0.06) 0px 0px 24px, rgba(0, 0, 0, 0.05) 0px 1px 1px, rgba(34, 42, 53, 0.04) 0px 0px 0px 1px, rgba(34, 42, 53, 0.08) 0px 0px 4px, rgba(47, 48, 55, 0.05) 0px 16px 68px, rgba(255, 255, 255, 0.1) 0px 1px 0px inset'),
+      ),
+      dark: (
+        background : rgba(4, 21, 4, 1),
+        border : 1px solid rgb(7, 39, 7),
+        box-shadow:none,
+      )
+    ),
+    /***/
+    _subclasses: (
+      '.grid' : (
+        --columns: "",
+        display: grid,
+        grid-template-columns: var(--columns),
+        gap: 15px,
+        /***/
+        _responsive: (
           md: (
-              --padding: 35px 5px,
+            --columns: auto 200px 200px,
           ),
           lg: (
-              --padding: 35px 5px,
+            --columns: auto 200px 200px,
           ),
-      ),
-    /***/
-      _colors: (
-          light : (
-              background: rgb(241, 241, 249) string.unquote('linear-gradient(rgba(8, 9, 10, 0.03), rgba(8, 9, 10, 0.03)), linear-gradient(rgb(241, 241, 249), rgb(255, 255, 255))'),
-              border : 1px solid rgb(255, 255, 255),
-              box-shadow: string.unquote('rgba(34, 42, 53, 0.06) 0px 0px 24px, rgba(0, 0, 0, 0.05) 0px 1px 1px, rgba(34, 42, 53, 0.04) 0px 0px 0px 1px, rgba(34, 42, 53, 0.08) 0px 0px 4px, rgba(47, 48, 55, 0.05) 0px 16px 68px, rgba(255, 255, 255, 0.1) 0px 1px 0px inset'),
-          ),
-          dark: (
-              background : rgba(4, 21, 4, 1),
-              border : 1px solid rgb(7, 39, 7),
-              box-shadow:none,
-          )
-      ),
-    /***/
-      _subclasses: (
-          '.grid' : (
-              --columns: "",
-              display: grid,
-              grid-template-columns: var(--columns),
-              gap: 15px,
-              _responsive: (
-                  md: (
-                      --columns: auto 200px 200px,
-                  ),
-                  lg: (
-                      --columns: auto 200px 200px,
-                  ),
+        ),
+        /***/
+        _subclasses: (
+          /***/
+          '.column' : (
+            /***/
+            _subclasses : (
+              '.title' : (
+                font-size: 1.25rem,
+                margin: 0 0 0.5rem 0
               ),
-              _subclasses: (
-                  '.column' : (
-                      _subclasses : (
-                          '.title' : (
-                              font-size: 1.25rem,
-                              margin: 0 0 0.5rem 0
-                          ),
-                          '.logo' : (
-                              margin: 0 0 15px 0,
-                          )
-                      )
-                  )
+              '.logo' : (
+                margin: 0 0 15px 0,
               )
+            )
           )
-      ),
+        )
+      )
+    ),
   );
 
   @include app.generate-component(
-          $footer-component,
-          "footer",
-          app.$config,
-          app.$theme
+      $footer-component,
+      "footer",
+      app.$config,
+      app.$theme
   );
+</style>
+
+<style is:global>
+    html[data-theme='dark'] pre:has(code),
+    html[data-theme='dark'] pre:has(code) span {
+        color: var(--shiki-dark) !important;
+        background-color: var(--shiki-dark-bg) !important;
+        font-style: var(--shiki-dark-font-style) !important;
+        font-weight: var(--shiki-dark-font-weight) !important;
+        text-decoration: var(--shiki-dark-text-decoration) !important;
+    }
 </style>
