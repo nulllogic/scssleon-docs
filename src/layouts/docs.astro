@@ -78,10 +78,11 @@ import Footer from "../components/footer/index.astro";
 
   $layout-section: (
       --padding: 2.5rem 0,
+
       display: grid,
       grid-template-areas: "sidebar main",
       grid-template-columns: 1fr 5fr,
-      gap: 1rem,
+      gap: 1.5rem,
       padding: var(--padding),
     /*_colors: (*/
     /*    light: (*/
@@ -92,7 +93,7 @@ import Footer from "../components/footer/index.astro";
     /*    )*/
     /*),*/
       _subclasses : (
-          ".title" : (
+          '.title' : (
               display: inline-block,
           )
       )
@@ -105,7 +106,6 @@ import Footer from "../components/footer/index.astro";
           app.$theme
   );
 </style>
-
 
 
 <style lang="scss" is:global>
