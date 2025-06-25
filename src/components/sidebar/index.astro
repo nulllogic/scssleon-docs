@@ -1,68 +1,64 @@
 ---
-import { getCollection } from 'astro:content'
+import {getCollection} from 'astro:content'
 const docsCollection = await getCollection('docs')
-import { generate_rel_link } from '~/utils/links'
+import {generate_rel_link} from '~/utils/links'
 import path from 'path'
 
 const gettingStartedCollection = docsCollection.filter((doc) => {
-  if (doc?.data?.category) return doc?.data?.category.includes(
-    'getting-started')
+    if (doc?.data?.category) return doc?.data?.category.includes(
+        'getting-started')
 }).sort((a, b) => {
-  return b.slug.replace(/.*\/(\w+)\/?$/, '$1').
-    localeCompare(a.slug.replace(/.*\/(\w+)\/?$/, '$1'))
+    return b.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(a.slug.replace(/.*\/(\w+)\/?$/, '$1'))
 })
 
 const componentsCollection = docsCollection.filter((doc) => {
-  if (doc?.data?.category) return doc?.data?.category.includes('components')
+    if (doc?.data?.category) return doc?.data?.category.includes('components')
 }).sort((a, b) => {
-  return a.slug.replace(/.*\/(\w+)\/?$/, '$1').
-    localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
+    return a.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
 })
 
 const formsCollection = docsCollection.filter((doc) => {
-  if (doc?.data?.category) return doc?.data?.category.includes('forms')
+    if (doc?.data?.category) return doc?.data?.category.includes('forms')
 }).sort((a, b) => {
-  return a.slug.replace(/.*\/(\w+)\/?$/, '$1').
-    localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
+    return a.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
 })
 
 const aboutCollection = docsCollection.filter((doc) => {
-  if (doc?.data?.category) return doc?.data?.category.includes('about')
+    if (doc?.data?.category) return doc?.data?.category.includes('about')
 }).sort((a, b) => {
-  return a.slug.replace(/.*\/(\w+)\/?$/, '$1').
-    localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
+    return a.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
 })
 
 const pathname = new URL(Astro.request.url).pathname
 const generate_class = (link) => {
-  let classes = ['link']
-  let url = generate_rel_link(Astro, 'docs/' + Astro.params.version +
-    '/' +
-    Astro.params.lang +
-    link.slug.replace(
-      Astro.params.version.replace(/\./g, '') +
-      '/' +
-      Astro.params.lang,
-      '',
-    ))
+    let classes = ['link']
+    let url = generate_rel_link(Astro, 'docs/' + Astro.params.version +
+        '/' +
+        Astro.params.lang +
+        link.slug.replace(
+            Astro.params.version.replace(/\./g, '') +
+            '/' +
+            Astro.params.lang,
+            '',
+        ))
 
-  if (pathname === url.pathname) {
-    classes.push('active')
-  }
+    if (pathname === url.pathname) {
+        classes.push('active')
+    }
 
-  return [classes]
+    return [classes]
 }
 
 const generate_link = (link) => {
-  return generate_rel_link(Astro, 'docs/' + Astro.params.version +
-    '/' +
-    Astro.params.lang +
-    link.slug.replace(
-      Astro.params.version.replace(/\./g, '') +
-      '/' +
-      Astro.params.lang,
-      '',
-    ))
+    return generate_rel_link(Astro, 'docs/' + Astro.params.version +
+        '/' +
+        Astro.params.lang +
+        link.slug.replace(
+            Astro.params.version.replace(/\./g, '') +
+            '/' +
+            Astro.params.lang,
+            '',
+        ))
 }
 ---
 
@@ -99,8 +95,7 @@ const generate_link = (link) => {
                                             <a
                                                     class:list={generate_class(doc)}
                                                     href={generate_link(doc)}
-                                            >{doc.slug.replace(/.*\/(\w+)\/?$/, '$1').
-                                            replace(/_/g, ' ')}</a>
+                                            >{doc.slug.replace(/.*\/(\w+)\/?$/, '$1').replace(/_/g, ' ')}</a>
                                             {doc.data?.schema &&
                                                     <span class="badge">Schema</span>}
                                         </li>
@@ -169,70 +164,76 @@ const generate_link = (link) => {
   @use "../../styles/scss/functions.scss" as functions;
 
   $sidebar-section: (
-
-    --sidebar-section-width: 0,
-
-    grid-area: sidebar,
-    display: block,
-    align-self: start,
-
-    _subclasses : (
-      ".nav" : (
-        --nav-gap : 0,
-
-        _subclasses : (
-          ".item" : (
-            _subclasses: (
-              "&:first-child .title" : (
-                margin: 0 0 10px 0
-              ),
-              ".title" : (
-                font-size: 1.25rem,
-                font-weight: 500,
-                margin: 10px 0,
-              ),
-              ".item" : (
-                _subclasses: (
-                  ".link" : (
-                    border-left : 1px solid rgba(231, 231, 235, 0.2),
-                    color: var(--link-color),
-                    padding: 5px 10px,
-                    text-decoration: none,
-                    text-transform: capitalize,
-                    _colors: (
-                        light: (
-                            link-color: rgb(148, 163, 184),
-                        ),
-                        dark: (
-                            link-color: rgb(148, 163, 184),
-                        )
-                    ),
-                    _subclasses: (
-                      "&.active" : (
-                        color: rgba(255, 255, 255, 0.85),
-                        border-left : 1px solid rgba(255, 255, 255, 0.85),
-                        background: rgba(57, 119, 33, 0.6),
-                      ),
-                      "&:hover:not(.active)" : (
-                        color: rgb(230, 230, 230),
-                        border-left : 1px solid rgba(26, 104, 45, 0.35),
+      --sidebar-section-width: 0,
+      grid-area: sidebar,
+      display: block,
+      align-self: start,
+    /***/
+      _subclasses : (
+          '.nav' : (
+              --nav-gap : 1px,
+            /***/
+              _subclasses : (
+                  '.item' : (
+                    /***/
+                      _subclasses: (
+                          '&:first-child .title' : (
+                              margin: 0 0 10px 0
+                          ),
+                          '.title' : (
+                              font-size: 1.25rem,
+                              font-weight: 500,
+                              margin: 10px 0,
+                          ),
+                          '.item' : (
+                            /***/
+                              _subclasses: (
+                                  '.link' : (
+                                      color: var(--link-color),
+                                      padding: .1875rem .325rem,
+                                      text-decoration: none,
+                                      text-transform: capitalize,
+                                      border-radius: 0.25rem,
+                                      margin: 0 0 0 0.75rem,
+                                    /***/
+                                      _colors: (
+                                          light: (
+                                              link-color: rgb(148, 163, 184),
+                                              background: rgba(166, 166, 166, 0.6),
+                                              background-active-link : rgba(57, 119, 33, 0.6),
+                                          ),
+                                          dark: (
+                                              link-color: rgb(148, 163, 184),
+                                              background : rgba(57, 119, 33, 0.6),
+                                              background-active-link : rgba(57, 119, 33, 0.6),
+                                          )
+                                      ),
+                                    /***/
+                                      _subclasses: (
+                                          '&.active' : (
+                                              color: rgba(255, 255, 255, 0.85),
+                                              background: var(--background-active-link),
+                                          ),
+                                          '&:hover:not(.active)' : (
+                                              color: rgb(230, 230, 230),
+                                              background: var(--background),
+                                          )
+                                      )
+                                  )
+                              )
+                          )
                       )
-                    )
                   )
-                )
               )
-            )
           )
-        )
       )
-    )
   );
 
   @include mixins.generate-component(
-      $sidebar-section,
-      "sidebar",
-      app.$config,
-      app.$theme,
-      (add_pseudo_tag: false)
+          $sidebar-section,
+          "sidebar",
+          app.$config,
+          app.$theme,
+          (add_pseudo_tag: false)
   );
 </style>
