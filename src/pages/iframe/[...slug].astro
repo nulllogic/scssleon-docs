@@ -238,6 +238,7 @@ const outline = await sass.compileStringAsync(`
             }, wait)
         }
     }
+
     window.addEventListener('resize', function (e) {
         window.scrollTo(0, 0)
         debounce(window.parent.document.dispatchEvent(event), 100)
@@ -278,6 +279,12 @@ const outline = await sass.compileStringAsync(`
   } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.documentElement.setAttribute('data-theme', 'dark');
   }
+</script>
+
+<script>
+    parent.document.addEventListener('theme_change', (e) => {
+        document.documentElement.setAttribute('data-theme', e?.detail?.theme);
+    })
 </script>
 
 <style lang="scss">

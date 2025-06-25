@@ -208,6 +208,12 @@ import {generate_rel_link} from '~/utils/links'
         const new_theme = current_theme === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', new_theme);
         localStorage.setItem('theme', new_theme);
+        const event = new CustomEvent('theme_change', {
+            detail: {
+                theme: new_theme
+            }
+        });
+        document.dispatchEvent(event);
     })
 
 </script>
