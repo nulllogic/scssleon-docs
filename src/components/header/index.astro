@@ -131,8 +131,42 @@ import {generate_rel_link} from '~/utils/links'
                           "&:first-child .title" : (
                               padding: 0
                           ),
-                          '.link' : (
+                          '.link.toggle_mode' : (
+                              width: 22px,
+                              height: 22px,
+                              position: relative,
+
+                              _animations : (
+                                  'icon-enter' : (
+                                      '0%' : (
+                                          opacity: 0,
+                                          transform:rotate(180deg)
+                                      ),
+                                      '100%' : (
+                                          opacity: 1,
+                                          transform:rotate(0deg)
+                                      )
+                                  ),
+                              ),
                               _subclasses: (
+                                  '&.clicked' : (
+                                      _subclasses: (
+                                          '.white' : (
+                                              opacity: 0,
+                                              animation: icon-enter 0.2s forwards,
+                                          ),
+                                          '.dark' : (
+                                              opacity: 0,
+                                              animation: icon-enter 0.2s forwards,
+                                          )
+                                      )
+                                  ),
+                                  'svg' : (
+                                      transform: rotate(0),
+                                      opacity: 1,
+                                      position: absolute,
+                                      transition: string.unquote('transform 0.15s ease-in, opacity 0.2s ease-in'),
+                                  ),
                                   '.white' : (
                                       display: var(--icon-display),
                                       _colors: (
@@ -202,18 +236,25 @@ import {generate_rel_link} from '~/utils/links'
 
 <script>
 
-    document.querySelector('.toggle_mode').addEventListener('click', (e) => {
-        e.preventDefault();
-        const current_theme = document.documentElement.getAttribute('data-theme');
-        const new_theme = current_theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', new_theme);
-        localStorage.setItem('theme', new_theme);
-        const event = new CustomEvent('theme_change', {
-            detail: {
-                theme: new_theme
-            }
-        });
-        document.dispatchEvent(event);
-    })
+    const light_dark_toggler = document.querySelector('.toggle_mode');
+
+    if (light_dark_toggler) {
+        light_dark_toggler.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            light_dark_toggler.classList.add('clicked');
+
+            const current_theme = document.documentElement.getAttribute('data-theme');
+            const new_theme = current_theme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', new_theme);
+            localStorage.setItem('theme', new_theme);
+            const event = new CustomEvent('theme_change', {
+                detail: {
+                    theme: new_theme
+                }
+            });
+            document.dispatchEvent(event);
+        })
+    }
 
 </script>
