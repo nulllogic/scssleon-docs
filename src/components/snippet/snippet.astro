@@ -1,30 +1,30 @@
 ---
-import {Preview} from '../preview'
-import {generate_iframe_link} from '~/utils/links.js'
+import { Preview } from '../preview'
+import { generate_iframe_link } from '~/utils/links.js'
 
 let slots = []
 
 Object.keys(Astro.slots).forEach((element) => {
-    if (element !== 'default') return slots.push(Astro.slots.render(element))
+  if (element !== 'default') return slots.push(Astro.slots.render(element))
 })
 
 const props = await Promise.all(slots)
 
 // HTML
 const html_code_formatted = typeof props[0] !== 'undefined' && props[0] !== null
-    ? props[0]
-    : ''
+  ? props[0]
+  : ''
 
 // SCSS
 const scss_code_formatted =
-    typeof props[1] !== 'undefined' && props[1] !== null ? props[1] : ''
+  typeof props[1] !== 'undefined' && props[1] !== null ? props[1] : ''
 
 // JS
 const js_code_formatted =
-    typeof props[2] !== 'undefined' && props[2] !== null ? props[2] : ''
+  typeof props[2] !== 'undefined' && props[2] !== null ? props[2] : ''
 
 
-const {frame_url, preview, min_height} = Astro.props
+const { frame_url, preview, min_height } = Astro.props
 ---
 
 <div class="snippet">
@@ -36,7 +36,8 @@ const {frame_url, preview, min_height} = Astro.props
                         <ul class="nav">
                             <li class="item">
                                 <a class="link toggle_outline" href="#">
-                                    <svg width="14" height="14" viewBox="0 0 14 14"
+                                    <svg width="14" height="14"
+                                         viewBox="0 0 14 14"
                                          fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path d="M2 2.004v2H1v-2.5a.5.5 0 01.5-.5H4v1H2zM1 9.004v-4h1v4H1zM1 10.004v2.5a.5.5 0 00.5.5H4v-1H2v-2H1zM10 13.004h2.5a.5.5 0 00.5-.5v-2.5h-1v2h-2v1zM12 4.004h1v-2.5a.5.5 0 00-.5-.5H10v1h2v2zM9 12.004v1H5v-1h4zM9 1.004v1H5v-1h4zM13 9.004h-1v-4h1v4zM7 8.004a1 1 0 100-2 1 1 0 000 2z"
@@ -46,7 +47,8 @@ const {frame_url, preview, min_height} = Astro.props
                             </li>
                             <li class="item">
                                 <a class="link dark_mode_toggle" href="#">
-                                    <svg width="14" height="14" viewBox="0 0 14 14"
+                                    <svg width="14" height="14"
+                                         viewBox="0 0 14 14"
                                          fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path d="M2 2.004v2H1v-2.5a.5.5 0 01.5-.5H4v1H2zM1 9.004v-4h1v4H1zM1 10.004v2.5a.5.5 0 00.5.5H4v-1H2v-2H1zM10 13.004h2.5a.5.5 0 00.5-.5v-2.5h-1v2h-2v1zM12 4.004h1v-2.5a.5.5 0 00-.5-.5H10v1h2v2zM9 12.004v1H5v-1h4zM9 1.004v1H5v-1h4zM13 9.004h-1v-4h1v4zM7 8.004a1 1 0 100-2 1 1 0 000 2z"
@@ -58,60 +60,64 @@ const {frame_url, preview, min_height} = Astro.props
                     </div>
                 </div>
             </div>
-            {
-                Astro.slots.has('html') && (
-                            <div class="preview">
-                                <Preview url={generate_iframe_link(frame_url)}
-                                         min_height={min_height}/>
-                                <div class="resizer"><span class="drag"><span
-                                        class="el"/></span></div>
-                            </div>
-                )
-            }
+          {
+            Astro.slots.has('html') && (
+                          <div class="preview">
+                              <Preview url={generate_iframe_link(frame_url)}
+                                       min_height={min_height}/>
+                              <div class="resizer"><span class="drag"><span
+                                      class="el"/></span></div>
+                          </div>
+            )
+          }
 
             <div class="bottomnav">
                 <div class="navbar">
                     <div class="left">
                         <ul class="nav">
-                            {
-                                Astro.slots.has('html') && (
-                                            <li class="item active">
-                                                <a class="link" href="#">
-                                                    HTML
-                                                </a>
-                                            </li>
-                                )
-                            }
-                            {
-                                Astro.slots.has('scss') && (
-                                            <li class="item">
-                                                <a class="link" href="#">
-                                                    SCSS
-                                                </a>
-                                            </li>
-                                )
-                            }
-                            {
-                                Astro.slots.has('js') && (
-                                            <li class="item">
-                                                <a class="link" href="#">
-                                                    JS
-                                                </a>
-                                            </li>
-                                )
-                            }
+                          {
+                            Astro.slots.has('html') && (
+                                          <li class="item active">
+                                              <a class="link" href="#">
+                                                  HTML
+                                              </a>
+                                          </li>
+                            )
+                          }
+                          {
+                            Astro.slots.has('scss') && (
+                                          <li class="item">
+                                              <a class="link" href="#">
+                                                  SCSS
+                                              </a>
+                                          </li>
+                            )
+                          }
+                          {
+                            Astro.slots.has('js') && (
+                                          <li class="item">
+                                              <a class="link" href="#">
+                                                  JS
+                                              </a>
+                                          </li>
+                            )
+                          }
                         </ul>
                     </div>
                     <div class="right">
                         <ul class="nav">
                             <li class="item">
                                 <a class="link clipboard" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                         height="16" viewBox="0 0 24 24" fill="none"
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         width="16"
+                                         height="16" viewBox="0 0 24 24"
+                                         fill="none"
                                          stroke="currentColor" stroke-width="2"
-                                         stroke-linecap="round" stroke-linejoin="round"
+                                         stroke-linecap="round"
+                                         stroke-linejoin="round"
                                          class="lucide lucide-copy ">
-                                        <rect width="14" height="14" x="8" y="8" rx="2"
+                                        <rect width="14" height="14" x="8" y="8"
+                                              rx="2"
                                               ry="2"></rect>
                                         <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
                                     </svg>
@@ -123,29 +129,29 @@ const {frame_url, preview, min_height} = Astro.props
             </div>
 
             <div class="tab-content">
-                {
-                    Astro.slots.has('html') && (
-                                <div class="tab active">
-                                    <div client:load class="code"
-                                         set:html={html_code_formatted}/>
-                                </div>
-                    )
-                }
-                {
-                    Astro.slots.has('scss') && (
-                                <div class="tab">
-                                    <div client:load class="code"
-                                         set:html={scss_code_formatted}/>
-                                </div>
-                    )
-                }
-                {
-                    Astro.slots.has('js') && (
-                                <div class="tab">
-                                    <div class="code" set:html={js_code_formatted}/>
-                                </div>
-                    )
-                }
+              {
+                Astro.slots.has('html') && (
+                              <div class="tab active">
+                                  <div client:load class="code"
+                                       set:html={html_code_formatted}/>
+                              </div>
+                )
+              }
+              {
+                Astro.slots.has('scss') && (
+                              <div class="tab">
+                                  <div client:load class="code"
+                                       set:html={scss_code_formatted}/>
+                              </div>
+                )
+              }
+              {
+                Astro.slots.has('js') && (
+                              <div class="tab">
+                                  <div class="code" set:html={js_code_formatted}/>
+                              </div>
+                )
+              }
             </div>
         </div>
     </div>
@@ -163,186 +169,200 @@ const {frame_url, preview, min_height} = Astro.props
   @use "../../styles/scss/functions.scss" as functions;
 
   $snippet: (
-      margin: 0 0 1rem 0,
+    margin: 0 0 1rem 0,
     /***/
-      _subclasses: (
-          '.topnav' : (
-              border-top: none,
-              border-radius : 0.43rem 0.43rem 0 0,
-              background : var(--background),
-              border-bottom: var(--border),
-            /***/
-              _colors : (
-                  light : (
-                      background: rgb(239, 242, 232), // rgb(250, 248, 244) // rgb(234, 246, 237)
-                      border : 1px solid rgb(219, 219, 219),
-                  ),
-                  dark: (
-                      background : rgba(4, 21, 4, 1),
-                      border : 1px solid rgb(7, 39, 7),
-                  )
-              )
+    _subclasses: (
+      '.topnav' : (
+        border-top: none,
+        border-radius : 0.43rem 0.43rem 0 0,
+        background : var(--background),
+        border-bottom: var(--border),
+        /***/
+        _colors : (
+          light : (
+            background: rgb(239, 242, 232), // rgb(250, 248, 244) // rgb(234, 246, 237)
+            border : 1px solid rgb(219, 219, 219),
           ),
-          '.bottomnav' : (
-              border-radius : 5px 5px 0 0,
-              background : var(--background),
-              border-bottom: var(--border),
-              border-top: var(--border),
-            /***/
-              _colors : (
-                  light : (
-                      background: rgb(239, 242, 232),
-                      border : 1px solid rgb(237, 237, 237),
-                  ),
-                  dark: (
-                      background : rgba(4, 21, 4, 1),
-                      border : 1px solid rgb(7, 39, 7),
-                  )
-              )
-          ),
-          '.navbar': (
-              --navbar-grid-template-columns : auto auto,
-              padding: 0 8px,
-              background : transparent,
-            /***/
-              _subclasses: (
-                  '.nav': (
-                      --nav-gap: 5px,
-                      padding: 5px 0,
-                    /***/
-                      _subclasses: (
-                          '.item': (
-                            /***/
-                              _subclasses: (
-                                  '&.active': (
-                                    /***/
-                                      _subclasses: (
-                                          '.link': (
-                                              text-decoration: none,
-                                              color: white,
-                                              background: rgb(74, 109, 71),
-                                          ),
-                                          '&:hover': (),
-                                      ),
-                                  ),
-                                  '.link': (
-                                      text-decoration: none,
-                                      padding: 8px,
-                                      border-radius: 5px,
-                                      color: rgba(46, 67, 32, 0.7),
-                                      _subclasses: (
-                                          '&:hover': (
-                                              background: rgb(224, 227, 222),
-                                          ),
-                                      ),
-                                  ),
-                              ),
-                          ),
-                      ),
-                  ),
-              ),
-          ),
-          '.preview-container': (
-              border: var(--border),
-              border-radius: 0.5rem,
-            /***/
-              _colors : (
-                  light : (
-                      border : 1px solid rgb(219, 219, 219),
-                  ),
-                  dark: (
-                      border : 1px solid rgb(7, 39, 7),
-                  )
-              ),
-              _subclasses: (
-                  '.preview': (
-                      position: relative,
-                      transition: 0.75s background-color,
-                    /*border: 1px solid red,*/
-                      border-bottom: none,
-                    /*border-radius: 5px 5px 0 0,*/
-                      _subclasses: (
-                          '.resizer' : (
-                              display: inline-block,
-                              position: absolute,
-                              right: 0,
-                              top: 0,
-                              bottom: 0,
-                              -webkit-user-select: none,
-                              user-select: none,
-                              _subclasses: (
-                                  '.drag' : (
-                                      padding: 0.5rem,
-                                      touch-action: pan-y,
-                                      cursor: ew-resize,
-                                      display: block,
-                                      position: absolute,
-                                      top: 50%,
-                                      left: 0.75rem,
-                                      transform: translate(-50%, -50%),
-                                      user-select: none,
-                                      _subclasses: (
-                                          '.el' : (
-                                              background: rgba(100, 116, 139, 0.6),
-                                              border-radius: 10px,
-                                              width: 0.375rem,
-                                              height: 2rem,
-                                              display: block,
-                                          )
-                                      )
-                                  ),
-                              ),
-                          )
-                      ),
-                  ),
-                  '.tab-content': (
-                    /***/
-                      _subclasses: (
-                          '.tab': (
-                              display: none,
-                            /***/
-                              _subclasses: (
-                                  '&.active': (
-                                      display: block,
-                                  ),
-                                  '.code': (
-                                    /*border: 1px solid red,*/
-                                      border-top: none,
-                                      border-radius: 0 0 0.5rem 0.5rem,
-                                      display: block,
-                                      margin-bottom: 0,
-                                      width: 100%,
-                                      position: relative,
-                                      overflow: auto,
-                                    /***/
-                                      _subclasses: (
-                                          'pre': (
-                                              padding: 1rem,
-                                            /***/
-                                              _subclasses: (
-                                                  'code': (
-                                                      word-break: normal,
-                                                      background: none,
-                                                      padding: 0,
-                                                      font-size: 0.875rem,
-                                                  ),
-                                              ),
-                                          ),
-                                      ),
-                                  ),
-                              ),
-                          ),
-                      ),
-                  ),
-                  '.snippet' : (
-                      position: relative,
-                      margin-bottom: 2rem,
-                      border-radius: 5px,
-                      border: 1px solid rgb(58, 69, 82)
-                  ),
-              ),
-          ),
+          dark: (
+            background : rgba(4, 21, 4, 1),
+            border : 1px solid rgb(7, 39, 7),
+          )
+        )
       ),
+      '.bottomnav' : (
+        border-radius : 5px 5px 0 0,
+        background : var(--background),
+        border-bottom: var(--border),
+        border-top: var(--border),
+        /***/
+        _colors : (
+          light : (
+            background: rgb(239, 242, 232),
+            border : 1px solid rgb(237, 237, 237),
+          ),
+          dark: (
+            background : rgba(4, 21, 4, 1),
+            border : 1px solid rgb(7, 39, 7),
+          )
+        )
+      ),
+      '.navbar': (
+        --navbar-grid-template-columns : auto auto,
+        padding: 0 8px,
+        background : transparent,
+        /***/
+        _subclasses: (
+          '.nav': (
+            --nav-gap: 5px,
+            padding: 5px 0,
+            /***/
+            _subclasses: (
+              '.item': (
+                /***/
+                _subclasses: (
+                  '&.active': (
+                    /***/
+                    _subclasses: (
+                      '.link': (
+                        text-decoration: none,
+                        color: white,
+                        background: rgb(74, 109, 71),
+                      ),
+                      '&:hover': (
+                        background: inherit,
+                      ),
+                    ),
+                  ),
+                  '.link': (
+                    text-decoration: none,
+                    padding: .4rem,
+                    border-radius: 5px,
+                    color: rgba(46, 67, 32, 0.7),
+                    _subclasses: (
+                      '&:hover': (
+                        background: rgb(224, 227, 222),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      '.preview-container': (
+        border: var(--border),
+        border-radius: 0.5rem,
+        /***/
+        _colors : (
+          light : (
+            border : 1px solid rgb(219, 219, 219),
+          ),
+          dark: (
+            border : 1px solid rgb(7, 39, 7),
+          )
+        ),
+        _subclasses: (
+          '.preview': (
+            position: relative,
+            transition: 0.75s background-color,
+            /*border: 1px solid red,*/
+            border-bottom: none,
+            /*border-radius: 5px 5px 0 0,*/
+            _subclasses: (
+              '.resizer' : (
+                display: inline-block,
+                position: absolute,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                -webkit-user-select: none,
+                user-select: none,
+                _subclasses: (
+                  '.drag' : (
+                    padding: 0.5rem,
+                    touch-action: pan-y,
+                    cursor: ew-resize,
+                    display: block,
+                    position: absolute,
+                    top: 50%,
+                    left: 0.75rem,
+                    transform: translate(-50%, -50%),
+                    user-select: none,
+                    _subclasses: (
+                      '.el' : (
+                        background: rgba(100, 116, 139, 0.6),
+                        border-radius: 10px,
+                        width: 0.375rem,
+                        height: 2rem,
+                        display: block,
+                      )
+                    )
+                  ),
+                ),
+              )
+            ),
+          ),
+          '.tab-content': (
+            /***/
+            _subclasses: (
+              '.tab': (
+                display: none,
+                /***/
+                _subclasses: (
+                  '&.active': (
+                    display: block,
+                  ),
+                  '.code': (
+                    /*border: 1px solid red,*/
+                    border-top: none,
+                    border-radius: 0 0 0.5rem 0.5rem,
+                    display: block,
+                    margin-bottom: 0,
+                    width: 100%,
+                    position: relative,
+                    overflow: auto,
+                    /***/
+                    _subclasses: (
+                      '.astro-code' : (
+                        background: var(--xii-snippet-astro-code-background) !important, // 😭 // 🥲
+                        line-height: 1.1,
+                        _colors: (
+                          light : (
+                            astro-code-background : rgb(248, 249, 250),
+                          ),
+                          dark : (
+                            astro-code-background : rgb(13, 17, 23) // github-dark
+                          )
+                        )
+                      ),
+                      'pre': (
+                        padding: 1rem,
+                        /***/
+                        _subclasses: (
+                          'code': (
+                            word-break: normal,
+                            background: none,
+                            padding: 0,
+                            font-size: 0.875rem,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          '.snippet' : (
+            position: relative,
+            margin-bottom: 2rem,
+            border-radius: 5px,
+            border: 1px solid rgb(58, 69, 82)
+          ),
+        ),
+      ),
+    ),
   );
 
   @include mixins.generate-component($snippet, "snippet", app.$config, app.$theme, (add_pseudo_tag: false));
@@ -476,118 +496,121 @@ const {frame_url, preview, min_height} = Astro.props
 
 <script>
 
-    document.querySelectorAll('.snippet').forEach((snippet) => {
+  document.querySelectorAll('.snippet').forEach((snippet) => {
 
-        // Tabs
-        // Checking first, if element exist
-        if (snippet.querySelector('.topnav .navbar')) {
-            const nav_items_top_left = snippet.querySelectorAll(
-                '.topnav .navbar .left .nav .item .link');
+    // Tabs
+    // Checking first, if element exist
+    if (snippet.querySelector('.topnav .navbar')) {
+      const nav_items_top_left = snippet.querySelectorAll(
+        '.topnav .navbar .left .nav .item .link')
 
-            nav_items_top_left.forEach((link) => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (link.classList.contains('toggle_outline')) {
-                        const event = new Event('toggle_outline')
-                        document.dispatchEvent(event);
-                    }
+      nav_items_top_left.forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault()
+          if (link.classList.contains('toggle_outline')) {
+            const event = new Event('toggle_outline')
+            document.dispatchEvent(event)
+          }
 
-                    if (link.classList.contains('dark_mode_toggle')) {
-                        const event = new Event('dark_mode_toggle')
-                        document.dispatchEvent(event);
-                    }
+          if (link.classList.contains('dark_mode_toggle')) {
+            const event = new Event('dark_mode_toggle')
+            document.dispatchEvent(event)
+          }
+        })
+      })
+    }
+
+    // @TODO rewrite a bit code below to make it look nicer
+
+    if (snippet.querySelector('.bottomnav .navbar')) {
+      const nav_items_left = snippet.querySelectorAll(
+        '.bottomnav .navbar .left .nav .item')
+      const tab_items = snippet.querySelectorAll('.tab-content .tab')
+
+      nav_items_left.forEach((nav, index) => {
+        nav.querySelectorAll('.link').
+          forEach(element => element.addEventListener('click', function (e) {
+            e.preventDefault()
+
+            nav_items_left.forEach(
+              element => element.classList.remove('active'))
+            nav.classList.add('active')
+
+            tab_items.forEach(element => element.classList.remove('active'))
+            tab_items[index].classList.add('active')
+          }))
+      })
+
+      const nav_items_right = snippet.querySelectorAll(
+        '.navbar .right .nav .item')
+      nav_items_right.forEach((nav, index) => {
+        nav.querySelectorAll('.link').
+          forEach(element => element.addEventListener('click', function (e) {
+            e.preventDefault()
+            if (element.classList.contains('clipboard')) {
+              navigator.clipboard.writeText('<empty clipboard>').
+                then(function () {
+                  /* clipboard successfully set */
+                }, function () {
+                  /* clipboard write failed */
                 })
-            })
-        }
-
-        // @TODO rewrite a bit code below to make it look nicer
-
-        if (snippet.querySelector('.bottomnav .navbar')) {
-            const nav_items_left = snippet.querySelectorAll(
-                '.bottomnav .navbar .left .nav .item')
-            const tab_items = snippet.querySelectorAll('.tab-content .tab')
-
-            nav_items_left.forEach((nav, index) => {
-                nav.querySelectorAll('.link').forEach(element => element.addEventListener('click', function (e) {
-                    e.preventDefault()
-
-                    nav_items_left.forEach(
-                        element => element.classList.remove('active'))
-                    nav.classList.add('active')
-
-                    tab_items.forEach(element => element.classList.remove('active'))
-                    tab_items[index].classList.add('active')
-                }))
-            })
-
-            const nav_items_right = snippet.querySelectorAll(
-                '.navbar .right .nav .item')
-            nav_items_right.forEach((nav, index) => {
-                nav.querySelectorAll('.link').forEach(element => element.addEventListener('click', function (e) {
-                    e.preventDefault()
-                    if (element.classList.contains('clipboard')) {
-                        navigator.clipboard.writeText('<empty clipboard>').then(function () {
-                            /* clipboard successfully set */
-                        }, function () {
-                            /* clipboard write failed */
-                        })
-                    }
-                }))
-            })
-
-        }
-
-        const preview = snippet.querySelector('.preview')
-
-        if (preview) {
-            // Proceed, if preview is enabled
-
-            const resizer = snippet.querySelector('.preview .resizer .drag')
-            if (resizer) {
-                const container_limit = Math.round(preview.clientWidth / 1.5)
-
-                resizer.onmousedown = (event) => {
-                    event.preventDefault()
-
-                    const original_margin = parseFloat(
-                        isNaN(preview.style.marginRight) ? preview.style.marginRight : 0,
-                    )
-                    const original_mouse_x = event.pageX
-
-                    const event_drag_start_handler = (event) => {
-                        const width = original_margin - (event.pageX - original_mouse_x)
-                        if (width < container_limit && width > 0) {
-                            preview.style.marginRight = width + 'px'
-                        } else if (width < 0) {
-                            preview.style.marginRight = 0 + 'px'
-                        }
-                    }
-
-                    const event_drag_end_handler = (event) => {
-                        document.documentElement.classList.remove('dragging')
-                        document.removeEventListener('mousemove', event_drag_start_handler)
-                        document.removeEventListener('mouseup', event_drag_end_handler)
-                    }
-
-                    document.documentElement.classList.add('dragging')
-                    document.addEventListener('mousemove', event_drag_start_handler)
-                    document.addEventListener('mouseup', event_drag_end_handler,
-                        {once: true})
-                }
             }
+          }))
+      })
+
+    }
+
+    const preview = snippet.querySelector('.preview')
+
+    if (preview) {
+      // Proceed, if preview is enabled
+
+      const resizer = snippet.querySelector('.preview .resizer .drag')
+      if (resizer) {
+        const container_limit = Math.round(preview.clientWidth / 1.5)
+
+        resizer.onmousedown = (event) => {
+          event.preventDefault()
+
+          const original_margin = parseFloat(
+            isNaN(preview.style.marginRight) ? preview.style.marginRight : 0,
+          )
+          const original_mouse_x = event.pageX
+
+          const event_drag_start_handler = (event) => {
+            const width = original_margin - (event.pageX - original_mouse_x)
+            if (width < container_limit && width > 0) {
+              preview.style.marginRight = width + 'px'
+            } else if (width < 0) {
+              preview.style.marginRight = 0 + 'px'
+            }
+          }
+
+          const event_drag_end_handler = (event) => {
+            document.documentElement.classList.remove('dragging')
+            document.removeEventListener('mousemove', event_drag_start_handler)
+            document.removeEventListener('mouseup', event_drag_end_handler)
+          }
+
+          document.documentElement.classList.add('dragging')
+          document.addEventListener('mousemove', event_drag_start_handler)
+          document.addEventListener('mouseup', event_drag_end_handler,
+            { once: true })
         }
-    })
+      }
+    }
+  })
 </script>
 
 <script is:inline>
-    function iframe_onload(iframe) {
-        if (iframe.dataset.minHeight) {
-            iframe.contentWindow.document.querySelector(
-                '.iframe').style.minHeight = iframe.dataset.minHeight + 'px'
-        }
-
-        iframe.style.height = iframe.contentWindow.document.body.scrollHeight +
-            'px'
-        iframe.style.visibility = 'visible'
+  function iframe_onload (iframe) {
+    if (iframe.dataset.minHeight) {
+      iframe.contentWindow.document.querySelector(
+        '.iframe').style.minHeight = iframe.dataset.minHeight + 'px'
     }
+
+    iframe.style.height = iframe.contentWindow.document.body.scrollHeight +
+      'px'
+    iframe.style.visibility = 'visible'
+  }
 </script>
