@@ -31,27 +31,23 @@ const {headings, github_page} = Astro.props
 
   @use "../../styles/app.scss" as app;
 
-  @use "../../styles/scss/mixins.scss" as mixins;
-  @use "../../styles/scss/functions.scss" as functions;
-
   $toc: (
-      --nav-item : --color,
-
-      _colors: (
-          light : (
-              color: red,
-          ),
-          dark : (
-              color:red
-          )
+    --nav-item : --color,
+    _colors: (
+      light : (
+        color: red,
+      ),
+      dark : (
+        color:red
       )
+    )
   );
 
-  @include mixins.generate-component(
-          $toc,
-          "toc",
-          app.$config,
-          app.$theme,
-          (add_pseudo_tag: false)
+  @include app.generate-component(
+      $toc,
+      "toc",
+      app.$config,
+      app.$theme,
+      (add_pseudo_tag: false)
   );
 </style>

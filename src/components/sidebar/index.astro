@@ -160,82 +160,79 @@ const generate_link = (link) => {
 
   @use "../../styles/app.scss" as app;
 
-  @use "../../styles/scss/mixins.scss" as mixins;
-  @use "../../styles/scss/functions.scss" as functions;
-
   $sidebar-section: (
-      --sidebar-section-width: 0,
-      grid-area: sidebar,
-      display: block,
-      align-self: start,
+    --sidebar-section-width: 0,
+    grid-area: sidebar,
+    display: block,
+    align-self: start,
     /***/
-      _subclasses : (
-          '.nav' : (
-              --nav-gap : 1px,
+    _subclasses : (
+      '.nav' : (
+        --nav-gap : 1px,
+        /***/
+        _subclasses : (
+          '.item' : (
             /***/
-              _subclasses : (
-                  '.item' : (
+            _subclasses: (
+              '&:first-child .title' : (
+                margin: 0 0 10px 0
+              ),
+              '.title' : (
+                font-size: 1.25rem,
+                font-weight: 500,
+                margin: 10px 0,
+              ),
+              '.item' : (
+                /***/
+                _subclasses: (
+                  '.link' : (
+                    color: var(--link-color),
+                    padding: .4rem,
+                    text-decoration: none,
+                    text-transform: capitalize,
+                    border-radius: 0.25rem,
+                    margin: 0 0 0 0.75rem,
                     /***/
-                      _subclasses: (
-                          '&:first-child .title' : (
-                              margin: 0 0 10px 0
-                          ),
-                          '.title' : (
-                              font-size: 1.25rem,
-                              font-weight: 500,
-                              margin: 10px 0,
-                          ),
-                          '.item' : (
-                            /***/
-                              _subclasses: (
-                                  '.link' : (
-                                      color: var(--link-color),
-                                      padding: .4rem,
-                                      text-decoration: none,
-                                      text-transform: capitalize,
-                                      border-radius: 0.25rem,
-                                      margin: 0 0 0 0.75rem,
-                                    /***/
-                                      _colors: (
-                                          light: (
-                                              link-color: rgb(148, 163, 184),
-                                              hover-color: rgba(43, 57, 10, 0.7),
-                                              background: #e0e3de,
-                                              background-active-link : rgb(74, 109, 71),
-                                          ),
-                                          dark: (
-                                              link-color: rgb(148, 163, 184),
-                                              hover-color: #fff,
-                                              background : rgb(148, 163, 184),
-                                              background-active-link : rgba(57, 119, 33, 0.6),
-                                          )
-                                      ),
-                                    /***/
-                                      _subclasses: (
-                                          '&.active' : (
-                                              color: rgb(238, 246, 220),
-                                              background: var(--background-active-link),
-                                          ),
-                                          '&:hover:not(.active)' : (
-                                              color: var(--hover-color),
-                                              background: var(--background),
-                                          )
-                                      )
-                                  )
-                              )
-                          )
+                    _colors: (
+                      light: (
+                        link-color: rgb(148, 163, 184),
+                        hover-color: rgba(43, 57, 10, 0.7),
+                        background: #e0e3de,
+                        background-active-link : rgb(74, 109, 71),
+                      ),
+                      dark: (
+                        link-color: rgb(148, 163, 184),
+                        hover-color: #fff,
+                        background : rgb(148, 163, 184),
+                        background-active-link : rgba(57, 119, 33, 0.6),
                       )
+                    ),
+                    /***/
+                    _subclasses: (
+                      '&.active' : (
+                        color: rgb(238, 246, 220),
+                        background: var(--background-active-link),
+                      ),
+                      '&:hover:not(.active)' : (
+                        color: var(--hover-color),
+                        background: var(--background),
+                      )
+                    )
                   )
+                )
               )
+            )
           )
+        )
       )
+    )
   );
 
-  @include mixins.generate-component(
-          $sidebar-section,
-          "sidebar",
-          app.$config,
-          app.$theme,
-          (add_pseudo_tag: false)
+  @include app.generate-component(
+      $sidebar-section,
+      'sidebar',
+      app.$config,
+      app.$theme,
+      (add_pseudo_tag: false)
   );
 </style>

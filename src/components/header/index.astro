@@ -91,9 +91,6 @@ import { generate_rel_link } from '~/utils/links'
 
   @use "~/styles/app.scss" as app;
 
-  @use "~/styles/scss/mixins.scss" as mixins;
-  @use "~/styles/scss/functions.scss" as functions;
-
   $header-section: (
     background: var(--background),
     box-shadow: var(--shadow),
@@ -214,7 +211,7 @@ import { generate_rel_link } from '~/utils/links'
     ),
   );
 
-  @include mixins.generate-component(
+  @include app.generate-component(
       $header-section,
       'header',
       app.$config,

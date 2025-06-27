@@ -91,9 +91,6 @@ const white = true
 
   @use "~/styles/app.scss" as app;
 
-  @use "~/styles/scss/mixins.scss" as mixins;
-  @use "~/styles/scss/functions.scss" as functions;
-
   $logo-section: (
     display: inline-flex,
     align-items: center,
@@ -160,7 +157,7 @@ const white = true
     )
   );
 
-  @include mixins.generate-component(
+  @include app.generate-component(
       $logo-section,
       "logo",
       app.$config,

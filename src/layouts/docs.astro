@@ -47,25 +47,24 @@ import Footer from "../components/footer/index.astro";
   @use "sass:string";
 
   @use "../styles/app.scss" as app;
-  @use "~/styles/scss/mixins.scss" as mixins;
 
   $docs_section: (
-      background: var(--background),
-      _colors: (
-          light: (
-              background: string.unquote('linear-gradient(rgba(55, 241, 14, 0.09), rgba(0, 0, 0, 0) 32.77%), linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)'),
-          ),
-          dark : (
-              background: string.unquote('linear-gradient(rgba(38, 194, 44, 0.085), rgba(0, 0, 0, 0) 32.77%)'),
-          )
+    background: var(--background),
+    _colors: (
+      light: (
+        background: string.unquote('linear-gradient(rgba(55, 241, 14, 0.09), rgba(0, 0, 0, 0) 32.77%), linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)'),
+      ),
+      dark : (
+        background: string.unquote('linear-gradient(rgba(38, 194, 44, 0.085), rgba(0, 0, 0, 0) 32.77%)'),
       )
+    )
   );
 
-  @include mixins.generate-component(
-          $docs_section,
-          'docs',
-          app.$config,
-          app.$theme
+  @include app.generate-component(
+      $docs_section,
+      'docs',
+      app.$config,
+      app.$theme
   );
 </style>
 
@@ -74,16 +73,14 @@ import Footer from "../components/footer/index.astro";
   @use "sass:meta";
 
   @use "../styles/app.scss" as app;
-  @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
 
   $layout-section: (
-      --padding: 2.5rem 0,
-
-      display: grid,
-      grid-template-areas: "sidebar main",
-      grid-template-columns: 1fr 5fr,
-      gap: 1.5rem,
-      padding: var(--padding),
+    --padding: 2.5rem 0,
+    display: grid,
+    grid-template-areas: "sidebar main",
+    grid-template-columns: 1fr 5fr,
+    gap: 1.5rem,
+    padding: var(--padding),
     /*_colors: (*/
     /*    light: (*/
     /*        background: linear-gradient(rgba(249, 102, 83, 0.1), rgba(0, 0, 0, 0) 144px),*/
@@ -92,18 +89,18 @@ import Footer from "../components/footer/index.astro";
     /*        background: linear-gradient(71.93deg, #001b33 26.34%, #004887 56.72%, #273b49 94.79%)*/
     /*    )*/
     /*),*/
-      _subclasses : (
-          '.title' : (
-              display: inline-block,
-          )
+    _subclasses : (
+      '.title' : (
+        display: inline-block,
       )
+    )
   );
 
-  @include mixins.generate-component(
-          $layout-section,
-          'layout',
-          app.$config,
-          app.$theme
+  @include app.generate-component(
+      $layout-section,
+      'layout',
+      app.$config,
+      app.$theme
   );
 </style>
 

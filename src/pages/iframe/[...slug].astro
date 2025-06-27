@@ -295,9 +295,6 @@ const outline = await sass.compileStringAsync(`
 
   @use "../../styles/app.scss" as app;
 
-  @use "../../styles/scss/mixins.scss" as mixins;
-  @use "../../styles/scss/functions.scss" as functions;
-
   $wrapper: (
     position: relative,
     /***/
@@ -334,7 +331,7 @@ const outline = await sass.compileStringAsync(`
     )
   );
 
-  @include mixins.generate-component($wrapper, 'wrapper', app.$config, app.$theme);
+  @include app.generate-component($wrapper, 'wrapper', app.$config, app.$theme);
 </style>
 
 <style is:global lang="scss">

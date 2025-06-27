@@ -86,9 +86,6 @@ const {headings, Content} = await page.render();
 
   @use "../../../../styles/app.scss" as app;
 
-  @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-  @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
   $intro: (
       margin: 0 0 15px 0,
       _subclasses : (
@@ -108,9 +105,9 @@ const {headings, Content} = await page.render();
       )
   );
 
-  @include mixins.generate-component(
+  @include app.generate-component(
           $intro,
-          "intro",
+          'intro',
           app.$config,
           app.$theme
   );

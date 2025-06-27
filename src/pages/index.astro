@@ -131,9 +131,6 @@ const commit_date =
 
   @use "../styles/app.scss" as app;
 
-  @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-  @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
   $welcome-section: (
       --padding: 3rem 0,
       text-align: center,
@@ -235,9 +232,9 @@ const commit_date =
       )
   );
 
-  @include mixins.generate-component(
+  @include app.generate-component(
           $welcome-section,
-          "welcome",
+          'welcome',
           app.$config,
           app.$theme
   );
@@ -261,14 +258,14 @@ const commit_date =
       )
   );
 
-  @include mixins.generate-component(
+  @include app.generate-component(
           $customize-section,
-          "customize",
+          'customize',
           app.$config,
           app.$theme
   );
 
-  $card: functions.get-theme(app.$theme, 'components.card');
+  $card: app.get-theme(app.$theme, 'components.card');
 
   $card: map.deep-merge($card, (
       border: var(--border),
@@ -343,9 +340,9 @@ const commit_date =
       )
   );
 
-  @include mixins.generate-component(
+  @include app.generate-component(
           $features-section,
-          "features",
+          'features',
           app.$config,
           app.$theme
   );

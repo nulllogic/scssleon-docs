@@ -1,30 +1,30 @@
 ---
-import { Preview } from '../preview'
-import { generate_iframe_link } from '~/utils/links.js'
+import {Preview} from '../preview'
+import {generate_iframe_link} from '~/utils/links.js'
 
 let slots = []
 
 Object.keys(Astro.slots).forEach((element) => {
-  if (element !== 'default') return slots.push(Astro.slots.render(element))
+    if (element !== 'default') return slots.push(Astro.slots.render(element))
 })
 
 const props = await Promise.all(slots)
 
 // HTML
 const html_code_formatted = typeof props[0] !== 'undefined' && props[0] !== null
-  ? props[0]
-  : ''
+    ? props[0]
+    : ''
 
 // SCSS
 const scss_code_formatted =
-  typeof props[1] !== 'undefined' && props[1] !== null ? props[1] : ''
+    typeof props[1] !== 'undefined' && props[1] !== null ? props[1] : ''
 
 // JS
 const js_code_formatted =
-  typeof props[2] !== 'undefined' && props[2] !== null ? props[2] : ''
+    typeof props[2] !== 'undefined' && props[2] !== null ? props[2] : ''
 
 
-const { frame_url, preview, min_height } = Astro.props
+const {frame_url, preview, min_height} = Astro.props
 ---
 
 <div class="snippet">
@@ -60,48 +60,48 @@ const { frame_url, preview, min_height } = Astro.props
                     </div>
                 </div>
             </div>
-          {
-            Astro.slots.has('html') && (
-                          <div class="preview">
-                              <Preview url={generate_iframe_link(frame_url)}
-                                       min_height={min_height}/>
-                              <div class="resizer"><span class="drag"><span
-                                      class="el"/></span></div>
-                          </div>
-            )
-          }
+            {
+                Astro.slots.has('html') && (
+                            <div class="preview">
+                                <Preview url={generate_iframe_link(frame_url)}
+                                         min_height={min_height}/>
+                                <div class="resizer"><span class="drag"><span
+                                        class="el"/></span></div>
+                            </div>
+                )
+            }
 
             <div class="bottomnav">
                 <div class="navbar">
                     <div class="left">
                         <ul class="nav">
-                          {
-                            Astro.slots.has('html') && (
-                                          <li class="item active">
-                                              <a class="link" href="#">
-                                                  HTML
-                                              </a>
-                                          </li>
-                            )
-                          }
-                          {
-                            Astro.slots.has('scss') && (
-                                          <li class="item">
-                                              <a class="link" href="#">
-                                                  SCSS
-                                              </a>
-                                          </li>
-                            )
-                          }
-                          {
-                            Astro.slots.has('js') && (
-                                          <li class="item">
-                                              <a class="link" href="#">
-                                                  JS
-                                              </a>
-                                          </li>
-                            )
-                          }
+                            {
+                                Astro.slots.has('html') && (
+                                            <li class="item active">
+                                                <a class="link" href="#">
+                                                    HTML
+                                                </a>
+                                            </li>
+                                )
+                            }
+                            {
+                                Astro.slots.has('scss') && (
+                                            <li class="item">
+                                                <a class="link" href="#">
+                                                    SCSS
+                                                </a>
+                                            </li>
+                                )
+                            }
+                            {
+                                Astro.slots.has('js') && (
+                                            <li class="item">
+                                                <a class="link" href="#">
+                                                    JS
+                                                </a>
+                                            </li>
+                                )
+                            }
                         </ul>
                     </div>
                     <div class="right">
@@ -129,29 +129,29 @@ const { frame_url, preview, min_height } = Astro.props
             </div>
 
             <div class="tab-content">
-              {
-                Astro.slots.has('html') && (
-                              <div class="tab active">
-                                  <div client:load class="code"
-                                       set:html={html_code_formatted}/>
-                              </div>
-                )
-              }
-              {
-                Astro.slots.has('scss') && (
-                              <div class="tab">
-                                  <div client:load class="code"
-                                       set:html={scss_code_formatted}/>
-                              </div>
-                )
-              }
-              {
-                Astro.slots.has('js') && (
-                              <div class="tab">
-                                  <div class="code" set:html={js_code_formatted}/>
-                              </div>
-                )
-              }
+                {
+                    Astro.slots.has('html') && (
+                                <div class="tab active">
+                                    <div client:load class="code"
+                                         set:html={html_code_formatted}/>
+                                </div>
+                    )
+                }
+                {
+                    Astro.slots.has('scss') && (
+                                <div class="tab">
+                                    <div client:load class="code"
+                                         set:html={scss_code_formatted}/>
+                                </div>
+                    )
+                }
+                {
+                    Astro.slots.has('js') && (
+                                <div class="tab">
+                                    <div class="code" set:html={js_code_formatted}/>
+                                </div>
+                    )
+                }
             </div>
         </div>
     </div>
@@ -164,9 +164,6 @@ const { frame_url, preview, min_height } = Astro.props
   @use "sass:map";
 
   @use "../../styles/app.scss" as app;
-
-  @use "../../styles/scss/mixins.scss" as mixins;
-  @use "../../styles/scss/functions.scss" as functions;
 
   $snippet: (
     margin: 0 0 1rem 0,
@@ -365,7 +362,7 @@ const { frame_url, preview, min_height } = Astro.props
     ),
   );
 
-  @include mixins.generate-component($snippet, "snippet", app.$config, app.$theme, (add_pseudo_tag: false));
+  @include app.generate-component($snippet, 'snippet', app.$config, app.$theme, (add_pseudo_tag: false));
 
 </style>
 
@@ -496,121 +493,118 @@ const { frame_url, preview, min_height } = Astro.props
 
 <script>
 
-  document.querySelectorAll('.snippet').forEach((snippet) => {
+    document.querySelectorAll('.snippet').forEach((snippet) => {
 
-    // Tabs
-    // Checking first, if element exist
-    if (snippet.querySelector('.topnav .navbar')) {
-      const nav_items_top_left = snippet.querySelectorAll(
-        '.topnav .navbar .left .nav .item .link')
+        // Tabs
+        // Checking first, if element exist
+        if (snippet.querySelector('.topnav .navbar')) {
+            const nav_items_top_left = snippet.querySelectorAll(
+                '.topnav .navbar .left .nav .item .link')
 
-      nav_items_top_left.forEach((link) => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault()
-          if (link.classList.contains('toggle_outline')) {
-            const event = new Event('toggle_outline')
-            document.dispatchEvent(event)
-          }
+            nav_items_top_left.forEach((link) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault()
+                    if (link.classList.contains('toggle_outline')) {
+                        const event = new Event('toggle_outline')
+                        document.dispatchEvent(event)
+                    }
 
-          if (link.classList.contains('dark_mode_toggle')) {
-            const event = new Event('dark_mode_toggle')
-            document.dispatchEvent(event)
-          }
-        })
-      })
-    }
-
-    // @TODO rewrite a bit code below to make it look nicer
-
-    if (snippet.querySelector('.bottomnav .navbar')) {
-      const nav_items_left = snippet.querySelectorAll(
-        '.bottomnav .navbar .left .nav .item')
-      const tab_items = snippet.querySelectorAll('.tab-content .tab')
-
-      nav_items_left.forEach((nav, index) => {
-        nav.querySelectorAll('.link').
-          forEach(element => element.addEventListener('click', function (e) {
-            e.preventDefault()
-
-            nav_items_left.forEach(
-              element => element.classList.remove('active'))
-            nav.classList.add('active')
-
-            tab_items.forEach(element => element.classList.remove('active'))
-            tab_items[index].classList.add('active')
-          }))
-      })
-
-      const nav_items_right = snippet.querySelectorAll(
-        '.navbar .right .nav .item')
-      nav_items_right.forEach((nav, index) => {
-        nav.querySelectorAll('.link').
-          forEach(element => element.addEventListener('click', function (e) {
-            e.preventDefault()
-            if (element.classList.contains('clipboard')) {
-              navigator.clipboard.writeText('<empty clipboard>').
-                then(function () {
-                  /* clipboard successfully set */
-                }, function () {
-                  /* clipboard write failed */
+                    if (link.classList.contains('dark_mode_toggle')) {
+                        const event = new Event('dark_mode_toggle')
+                        document.dispatchEvent(event)
+                    }
                 })
-            }
-          }))
-      })
-
-    }
-
-    const preview = snippet.querySelector('.preview')
-
-    if (preview) {
-      // Proceed, if preview is enabled
-
-      const resizer = snippet.querySelector('.preview .resizer .drag')
-      if (resizer) {
-        const container_limit = Math.round(preview.clientWidth / 1.5)
-
-        resizer.onmousedown = (event) => {
-          event.preventDefault()
-
-          const original_margin = parseFloat(
-            isNaN(preview.style.marginRight) ? preview.style.marginRight : 0,
-          )
-          const original_mouse_x = event.pageX
-
-          const event_drag_start_handler = (event) => {
-            const width = original_margin - (event.pageX - original_mouse_x)
-            if (width < container_limit && width > 0) {
-              preview.style.marginRight = width + 'px'
-            } else if (width < 0) {
-              preview.style.marginRight = 0 + 'px'
-            }
-          }
-
-          const event_drag_end_handler = (event) => {
-            document.documentElement.classList.remove('dragging')
-            document.removeEventListener('mousemove', event_drag_start_handler)
-            document.removeEventListener('mouseup', event_drag_end_handler)
-          }
-
-          document.documentElement.classList.add('dragging')
-          document.addEventListener('mousemove', event_drag_start_handler)
-          document.addEventListener('mouseup', event_drag_end_handler,
-            { once: true })
+            })
         }
-      }
-    }
-  })
+
+        // @TODO rewrite a bit code below to make it look nicer
+
+        if (snippet.querySelector('.bottomnav .navbar')) {
+            const nav_items_left = snippet.querySelectorAll(
+                '.bottomnav .navbar .left .nav .item')
+            const tab_items = snippet.querySelectorAll('.tab-content .tab')
+
+            nav_items_left.forEach((nav, index) => {
+                nav.querySelectorAll('.link').forEach(element => element.addEventListener('click', function (e) {
+                    e.preventDefault()
+
+                    nav_items_left.forEach(
+                        element => element.classList.remove('active'))
+                    nav.classList.add('active')
+
+                    tab_items.forEach(element => element.classList.remove('active'))
+                    tab_items[index].classList.add('active')
+                }))
+            })
+
+            const nav_items_right = snippet.querySelectorAll(
+                '.navbar .right .nav .item')
+            nav_items_right.forEach((nav, index) => {
+                nav.querySelectorAll('.link').forEach(element => element.addEventListener('click', function (e) {
+                    e.preventDefault()
+                    if (element.classList.contains('clipboard')) {
+                        navigator.clipboard.writeText('<empty clipboard>').then(function () {
+                            /* clipboard successfully set */
+                        }, function () {
+                            /* clipboard write failed */
+                        })
+                    }
+                }))
+            })
+
+        }
+
+        const preview = snippet.querySelector('.preview')
+
+        if (preview) {
+            // Proceed, if preview is enabled
+
+            const resizer = snippet.querySelector('.preview .resizer .drag')
+            if (resizer) {
+                const container_limit = Math.round(preview.clientWidth / 1.5)
+
+                resizer.onmousedown = (event) => {
+                    event.preventDefault()
+
+                    const original_margin = parseFloat(
+                        isNaN(preview.style.marginRight) ? preview.style.marginRight : 0,
+                    )
+                    const original_mouse_x = event.pageX
+
+                    const event_drag_start_handler = (event) => {
+                        const width = original_margin - (event.pageX - original_mouse_x)
+                        if (width < container_limit && width > 0) {
+                            preview.style.marginRight = width + 'px'
+                        } else if (width < 0) {
+                            preview.style.marginRight = 0 + 'px'
+                        }
+                    }
+
+                    const event_drag_end_handler = (event) => {
+                        document.documentElement.classList.remove('dragging')
+                        document.removeEventListener('mousemove', event_drag_start_handler)
+                        document.removeEventListener('mouseup', event_drag_end_handler)
+                    }
+
+                    document.documentElement.classList.add('dragging')
+                    document.addEventListener('mousemove', event_drag_start_handler)
+                    document.addEventListener('mouseup', event_drag_end_handler,
+                        {once: true})
+                }
+            }
+        }
+    })
 </script>
 
 <script is:inline>
-  function iframe_onload (iframe) {
-    if (iframe.dataset.minHeight) {
-      iframe.contentWindow.document.querySelector(
-        '.iframe').style.minHeight = iframe.dataset.minHeight + 'px'
-    }
+    function iframe_onload(iframe) {
+        if (iframe.dataset.minHeight) {
+            iframe.contentWindow.document.querySelector(
+                '.iframe').style.minHeight = iframe.dataset.minHeight + 'px'
+        }
 
-    iframe.style.height = iframe.contentWindow.document.body.scrollHeight +
-      'px'
-    iframe.style.visibility = 'visible'
-  }
+        iframe.style.height = iframe.contentWindow.document.body.scrollHeight +
+            'px'
+        iframe.style.visibility = 'visible'
+    }
 </script>
