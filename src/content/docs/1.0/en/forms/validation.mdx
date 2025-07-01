@@ -4,3 +4,37 @@ description: Give textual form controls like `<input>`s and `<textarea>`s an upg
 category: forms
 toc: true
 ---
+
+import {Snippet} from "/src/components/snippet"
+
+## Basic &lt;input&gt;
+
+<Snippet frame_url={'components/forms/validation/1'} preview={true}>
+  <Fragment slot="html">
+    ```html
+    <div class="form">
+      <div class="field">
+        <label for="input1" class="label">Email address:</label>
+        <input type="email" class="input"
+               id="input1" placeholder="name@example.com"/>
+      </div>
+    </div>
+    ```
+  </Fragment>
+  <Fragment slot="scss">
+    ```scss
+    @use "sass:list";
+    @use "sass:string";
+    @use "sass:meta";
+    @use "sass:map";
+
+    @use "~/src/styles/app.scss" as app;
+
+    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
+    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+
+    $form: functions.get-theme(app.$theme, 'components.form');
+    @include mixins.generate-component($form, 'form', app.$config, app.$theme);
+    ```
+  </Fragment>
+</Snippet>
