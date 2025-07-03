@@ -49,17 +49,7 @@ const generate_class = (link) => {
     return [classes]
 }
 
-const generate_link = (link) => {
-    return generate_rel_link(Astro, 'docs/' + Astro.params.version +
-        '/' +
-        Astro.params.lang +
-        link.slug.replace(
-            Astro.params.version.replace(/\./g, '') +
-            '/' +
-            Astro.params.lang,
-            '',
-        ))
-}
+import {generate_link} from '~/utils/links';
 ---
 
 <aside class="sidebar">
@@ -75,7 +65,7 @@ const generate_link = (link) => {
                                         <li class="item">
                                             <a
                                                     class:list={generate_class(doc)}
-                                                    href={generate_link(doc)}
+                                                    href={generate_link(Astro, doc, 'docs')}
                                             >{doc.slug.replace(/.*\/(\w+)\/?$/, '$1')}</a>
                                         </li>
                                 )
@@ -94,7 +84,7 @@ const generate_link = (link) => {
                                         <li class="item">
                                             <a
                                                     class:list={generate_class(doc)}
-                                                    href={generate_link(doc)}
+                                                    href={generate_link(Astro, doc, 'docs')}
                                             >{doc.slug.replace(/.*\/(\w+)\/?$/, '$1').replace(/_/g, ' ')}</a>
                                             {doc.data?.schema &&
                                                     <span class="badge">Schema</span>}
@@ -113,7 +103,7 @@ const generate_link = (link) => {
                                         <li class="item">
                                             <a
                                                     class:list={generate_class(doc)}
-                                                    href={generate_link(doc)}
+                                                    href={generate_link(Astro, doc, 'docs')}
                                             >{doc.slug.replace(/.*\/(\w+)\/?$/, '$1')}</a>
                                         </li>
                                 )
@@ -130,7 +120,7 @@ const generate_link = (link) => {
                                         <li class="item">
                                             <a
                                                     class:list={generate_class(doc)}
-                                                    href={generate_link(doc)}
+                                                    href={generate_link(Astro, doc, 'docs')}
                                             >{doc.slug.replace(/.*\/(\w+)\/?$/, '$1')}</a>
                                         </li>
                                 )

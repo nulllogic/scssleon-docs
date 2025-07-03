@@ -2,6 +2,7 @@
 import {getCollection, getEntry} from "astro:content";
 import { Image } from 'astro:assets';
 import Examples from "~/layouts/sections.astro";
+import {generate_link} from '~/utils/links.ts';
 
 export async function getStaticPaths() {
     const sectionsCollection = await getCollection('sections');
@@ -39,9 +40,7 @@ const sections = await getCollection('sections')
 const categories = await getCollection('categories');
 
 const sections_filtered = categories.flatMap((category) => {
-    // console.log(category);
     return sections.filter((section) => {
-        // console.log(category);
         return section.data.categories ? section.data.categories.some(cat => cat === category.slug) : false;
     });
 });
@@ -59,7 +58,7 @@ const {headings, Content} = await page.render();
                     {category.data.description}
                     {sections_filtered.map(section => {
                         return (
-                            <a href={section.slug} title={section.data.title}>
+                            <a href={generate_link(Astro, section, 'sections')} title={section.data.title}>
                                 {section.data.title}
                                 <Image src={Object.entries(images).filter((image) => {
                                     return image[0].includes(section.data.image.url.replace('./', ''));

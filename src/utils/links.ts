@@ -1,3 +1,15 @@
+export function generate_link(Astro, link, slug) {
+    return generate_rel_link(Astro, slug + '/' + Astro.params.version +
+        '/' +
+        Astro.params.lang +
+        link.slug.replace(
+            Astro.params.version.replace(/\./g, '') +
+            '/' +
+            Astro.params.lang,
+            '',
+        ))
+}
+
 export function generate_rel_link(Astro, url: string) {
     return new URL(url, import.meta.env.PROD ?
         import.meta.env.SITE + import.meta.env.BASE_URL + '/' :
