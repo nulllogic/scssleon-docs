@@ -1,24 +1,38 @@
 ---
+export interface Props {
+    title: string;
+}
+
 const {title} = Astro.props;
 
-import Head from "../components/head/index.astro";
-import Header from "../components/header/index.astro";
+import Head from '../components/head/index.astro';
+import Header from '../components/header/index.astro';
 import Sidebar from "../components/sidebar/index.astro";
 import Main from "../components/main.astro";
 import Footer from "../components/footer/index.astro";
+
+import {getCollection} from 'astro:content';
+const sectionsCollection = await getCollection('sections');
+
+const sectionsCollectionModified = sectionsCollection.filter((doc) => {
+//   if (doc?.data?.group) return doc?.data?.group.includes('components')
+}).sort((a, b) => {
+//    return a.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
+})
+
+// console.log(sectionsCollection)
 ---
 
 <!doctype html>
 <html lang="en">
 <head>
-    <Head title="SCSSLeon documentation" description="Desciption"/>
+    <Head title="SCSSLeon docs" description="Desciption"/>
 </head>
 <body>
 <Header/>
-<div class="docs">
+<div class="sections">
     <div class="container xxl">
         <div class="layout">
-            <Sidebar/>
             <Main>
                 <slot/>
             </Main>
@@ -29,18 +43,6 @@ import Footer from "../components/footer/index.astro";
 </body>
 </html>
 
-<script is:global>
-    window.document.addEventListener('myEvent', handleEvent, false)
-
-    function handleEvent(e) {
-        console.log(e);
-        const iframes = document.querySelectorAll('iframe');
-        iframes.forEach(iframe => {
-            iframe.style.height = iframe.style.height + Math.random(5) + 'px';
-        })
-    }
-</script>
-
 <style lang="scss">
   @use "sass:list";
   @use "sass:meta";
@@ -48,7 +50,7 @@ import Footer from "../components/footer/index.astro";
 
   @use "../styles/app.scss" as app;
 
-  $docs_section: (
+  $sections: (
     background: var(--background),
     _colors: (
       light: (
@@ -61,8 +63,8 @@ import Footer from "../components/footer/index.astro";
   );
 
   @include app.generate-component(
-      $docs_section,
-      'docs',
+      $sections,
+      'sections',
       app.$config,
       app.$theme
   );
@@ -76,10 +78,10 @@ import Footer from "../components/footer/index.astro";
 
   $layout-section: (
     --padding: 2.5rem 0,
-    display: grid,
-    grid-template-areas: "sidebar main",
-    grid-template-columns: 1fr 5fr,
-    gap: 1.5rem,
+    /*display: grid,*/
+    /*grid-template-areas: "sidebar main",*/
+    /*grid-template-columns: 1fr 5fr,*/
+    /*gap: 1.5rem,*/
     padding: var(--padding),
     /*_colors: (*/
     /*    light: (*/
@@ -102,14 +104,4 @@ import Footer from "../components/footer/index.astro";
       app.$config,
       app.$theme
   );
-</style>
-
-<style lang="scss" is:global>
-  html {
-    &.dragging {
-      iframe {
-        pointer-events: none;
-      }
-    }
-  }
 </style>
