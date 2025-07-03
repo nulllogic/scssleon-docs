@@ -21,11 +21,6 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
     </Fragment>
     <Fragment slot="scss">
         ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
-
         @use "~/src/styles/app.scss" as app;
 
         @include app.generate-component(
@@ -51,22 +46,13 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
     </Fragment>
     <Fragment slot="scss">
         ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
-
         @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
-        $button: functions.get-theme(app.$theme, 'components.button');
-
-        @include mixins.generate-component(
-            $button,
-            "btn",
-            app.$config,
-            app.$theme
+        @include app.generate-component(
+          app.get-theme(app.$theme, 'components.button'),
+          'btn',
+          app.$config,
+          app.$theme
         );
         ```
     </Fragment>
@@ -86,22 +72,13 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
     </Fragment>
     <Fragment slot="scss">
         ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
-
         @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
-        $button: functions.get-theme(app.$theme, 'components.button');
-
-        @include mixins.generate-component(
-            $button,
-            "btn",
-            app.$config,
-            app.$theme
+        @include app.generate-component(
+          app.get-theme(app.$theme, 'components.button'),
+          'btn',
+          app.$config,
+          app.$theme
         );
         ```
     </Fragment>
