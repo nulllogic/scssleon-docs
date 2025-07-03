@@ -12,14 +12,18 @@ import {Snippet} from "/src/components/snippet"
     ```html
     <div class="form">
       <div class="field">
-        <input class="checkbox" type="checkbox" id="input1" value=""/>
-        <label class="label" for="input1">
-          Default checkbox
-        </label>
-        <input class="checkbox" type="checkbox" id="input2" checked/>
-        <label class="label" for="input2">
-          Default checked checkbox
-        </label>
+        <div class="inline">
+          <input class="checkbox" type="checkbox" id="input1" value=""/>
+          <label class="label" for="input1">
+            Default checkbox
+          </label>
+        </div>
+        <div class="inline">
+          <input class="checkbox" type="checkbox" id="input2" checked/>
+          <label class="label" for="input2">
+            Default checked checkbox
+          </label>
+        </div>
       </div>
     </div>
     ```
@@ -48,10 +52,12 @@ import {Snippet} from "/src/components/snippet"
     ```html
     <div class="form">
       <div class="field">
-        <input class="checkbox" type="checkbox" id="input1" value="" />
-        <label class="label" for="input1">
-          Default checkbox
-        </label>
+        <div class="inline">
+          <input class="checkbox" type="checkbox" id="input1" value=""/>
+          <label class="label" for="input1">
+            Default checkbox
+          </label>
+        </div>
         <p class="text-muted-foreground text-sm">By clicking this checkbox, you agree to the terms and conditions.</p>
       </div>
     </div>
@@ -70,10 +76,10 @@ import {Snippet} from "/src/components/snippet"
     @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
     @include mixins.generate-component(
-      functions.get-theme(app.$theme, 'components.form'),
-      'form',
-      app.$config,
-      app.$theme
+    functions.get-theme(app.$theme, 'components.form'),
+    'form',
+    app.$config,
+    app.$theme
     );
     ```
   </Fragment>
