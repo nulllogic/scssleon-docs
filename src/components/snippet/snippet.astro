@@ -169,6 +169,16 @@ const {frame_url, preview, min_height} = Astro.props
   $snippet: (
     margin: 0 0 1rem 0,
     border-radius: 0.5rem,
+    background: var(--background),
+
+    _colors: (
+      light : (
+        background : rgb(248, 249, 250),
+      ),
+      dark : (
+        background : rgb(13, 17, 23) // github-dark
+      )
+    ),
     /***/
     _subclasses: (
       '.topnav' : (
@@ -330,6 +340,7 @@ const {frame_url, preview, min_height} = Astro.props
             /*border: 1px solid red,*/
             border-bottom: none,
             /*border-radius: 5px 5px 0 0,*/
+
             _subclasses: (
               '.resizer' : (
                 display: inline-block,
