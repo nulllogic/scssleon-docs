@@ -63,14 +63,8 @@ const {headings, Content} = await page.render();
 
   @use "~/styles/app.scss" as app;
 
-  /*@use "@nulllogic/scssleon/scss/mixins.scss" as mixins;*/
-  /*@use "@nulllogic/scssleon/scss/functions.scss" as functions;*/
-
-  @use "~/styles/scss/mixins.scss" as mixins;
-  @use "~/styles/scss/functions.scss" as functions;
-
   // ↓ Amazing content
-  @use "../../../../styles/scss/content" with (
+  @use "~/styles/scss/content" with (
     $config: app.$config,
     $theme: app.$theme
   );

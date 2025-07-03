@@ -1,6 +1,6 @@
 ---
 import {getCollection, getEntry} from "astro:content";
-import Examples from "~/layouts/sections.astro";
+import Sections from "~/layouts/sections.astro";
 
 export async function getStaticPaths() {
     const sectionsCollection = await getCollection('sections');
@@ -35,37 +35,24 @@ if (page === undefined) {
 const {headings, Content} = await page.render();
 ---
 
-<Examples>
+<Sections>
     <div class="content">
         <Content/>
     </div>
-</Examples>
+</Sections>
 
-<style lang="scss">
-  .title {
-    margin-bottom: 0.5rem;
-  }
+<style lang="scss" is:global>
+  @use "sass:list";
+  @use "sass:string";
+  @use "sass:meta";
+  @use "sass:map";
 
-  .subtitle {
-    font-size: 1.35rem;
-    font-weight: 300;
-    margin-bottom: 1rem;
-    color: rgba(125, 133, 144, 1);
-  }
+  @use "~/styles/app.scss" as app;
 
-  .toc {
-    grid-area: toc;
+  // ↓ Amazing content
+  @use "~/styles/scss/content" with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
 
-    position: sticky;
-    top: 0;
-    right: 0;
-    z-index: 2;
-
-    align-self: start;
-  }
-
-  .content {
-    grid-area: content;
-    min-width: 1px;
-  }
 </style>
