@@ -1,8 +1,6 @@
 ---
 import {getCollection, getEntry} from "astro:content";
-import { Image } from 'astro:assets';
 import Examples from "~/layouts/sections.astro";
-import {generate_link} from '~/utils/links.ts';
 
 export async function getStaticPaths() {
     const sectionsCollection = await getCollection('sections');
@@ -34,41 +32,12 @@ if (page === undefined) {
     // return Astro.redirect("/404");
 }
 
-const images = import.meta.glob('/src/content/sections/**/*.{jpeg,jpg,png,gif}');
-
-const sections = await getCollection('sections')
-const categories = await getCollection('categories');
-
-const sections_filtered = categories.flatMap((category) => {
-    return sections.filter((section) => {
-        return section.data.categories ? section.data.categories.some(cat => cat === category.slug) : false;
-    });
-});
-
 const {headings, Content} = await page.render();
 ---
 
 <Examples>
     <div class="content">
         <Content/>
-        {categories.map(category => {
-            return (
-                <>
-                    {category.data.title}
-                    {category.data.description}
-                    {sections_filtered.map(section => {
-                        return (
-                            <a href={generate_link(Astro, section, 'sections')} title={section.data.title}>
-                                {section.data.title}
-                                <Image src={Object.entries(images).filter((image) => {
-                                    return image[0].includes(section.data.image.url.replace('./', ''));
-                                })[0][1]()} width={250} alt={category.data.title} />
-                            </a>
-                        )
-                    })}
-                </>
-            )
-        })}
     </div>
 </Examples>
 
@@ -100,13 +69,3 @@ const {headings, Content} = await page.render();
     min-width: 1px;
   }
 </style>
-
-<!--return (-->
-<!--<a href={category.id} title={category.data.title}>-->
-<!--    {category.data?.title}-->
-<!--    <p>{category.data?.description}</p>-->
-<!--    <Image src={Object.entries(images).filter((image) => {-->
-<!--        return image[0].includes(category.data.image.url.replace('./', ''));-->
-<!--    })[0][1]()} alt={category.data?.image.alt} width={200} />-->
-<!--</a>-->
-<!--)-->

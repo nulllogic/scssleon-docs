@@ -1,0 +1,98 @@
+---
+import {getCollection} from 'astro:content';
+import {Image} from 'astro:assets';
+import {generate_link} from '~/utils/links.ts';
+
+
+const sections = await getCollection('sections')
+const categories = await getCollection('categories');
+
+const images = import.meta.glob('/src/content/sections/**/*.{jpeg,jpg,png,gif}');
+
+const sections_filtered = categories.flatMap((category) => {
+    return sections.filter((section) => {
+        return section.data.categories ? section.data.categories.some(cat => cat === category.slug) : false;
+    });
+});
+---
+
+{categories.map(category => {
+    return (
+    <div class="section_categories">
+        <div class="title">
+            <h2>{category.data.title}</h2>
+        </div>
+        <div class="description">
+            <p>{category.data.description}</p>
+        </div>
+        <div class="grid">
+            {sections_filtered.map(section => {
+                return (
+                        <div class="card">
+                            <a href={generate_link(Astro, section, 'sections')} title={section.data.title} class="item">
+                                <Image class="image" src={Object.entries(images).filter((image) => {
+                                    return image[0].includes(section.data.image.url.replace('./', ''));
+                                })[0][1]()} width={250} alt={category.data.title}/>
+                                <span class="title">{section.data.title}</span>
+                            </a>
+                        </div>
+                )
+            })}
+        </div>
+    </div>
+        )
+    })}
+
+<style lang="scss">
+  @use "sass:list";
+  @use "sass:meta";
+  @use "sass:map";
+
+  @use "~/styles/app.scss" as app;
+
+  $section-categories: (
+    _subclasses : (
+      '.title' : (
+        margin: 0 0 1rem 0,
+      ),
+      '.description' : (
+        margin: 0 0 1rem 0,
+      ),
+      '.grid' : (
+        display : grid,
+        gap: 1rem,
+        grid-template-columns : repeat(2, minmax(0, 1fr)),
+        _responsive : (
+          md : (
+            grid-template-columns : repeat(3, minmax(0, 1fr)),
+          ),
+          lg : (
+            grid-template-columns : repeat(4, minmax(0, 1fr)),
+          )
+        ),
+        _subclasses : (
+          '.item' : (
+            _subclasses : (
+              '.image' : (
+                border-radius: .5rem,
+                margin: 0 0 1rem 0,
+              ),
+              '.title' : (
+                display: block,
+                margin: 0,
+              )
+            )
+          )
+        )
+      )
+    )
+  );
+
+  @include app.generate-component(
+      $section-categories,
+      'section_categories',
+      app.$config,
+      app.$theme,
+      (add_pseudo_tag: false)
+  );
+</style>
