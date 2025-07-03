@@ -27,6 +27,7 @@ const sections_filtered = categories.flatMap((category) => {
         </div>
         <div class="grid">
             {sections_filtered.map(section => {
+                console.log(section);
                 return (
                         <div class="card">
                             <a href={generate_link(Astro, section, 'sections')} title={section.data.title} class="item">
