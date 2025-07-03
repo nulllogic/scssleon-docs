@@ -27,14 +27,10 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
         @use "sass:map";
 
         @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
 
-        $button: functions.get-theme(app.$theme, 'components.button');
-
-        @include mixins.generate-component(
-            $button,
-            "btn",
+        @include app.generate-component(
+            app.get-theme(app.$theme, 'components.button'),
+            'btn',
             app.$config,
             app.$theme
         );
@@ -44,7 +40,7 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
 
 ## Variations
 
-<Snippet frame_url={'components/breadcrumb/2'} preview={true}>
+<Snippet frame_url={'components/button/2'} preview={true}>
     <Fragment slot="html">
         ```html
         <button type="button" class="btn" style="--xii-button-background: red">Default</button>

@@ -168,6 +168,7 @@ const {frame_url, preview, min_height} = Astro.props
 
   $snippet: (
     margin: 0 0 1rem 0,
+    border-radius: 0.5rem,
     /***/
     _subclasses: (
       '.topnav' : (
@@ -183,12 +184,11 @@ const {frame_url, preview, min_height} = Astro.props
           ),
           dark: (
             background : rgb(22, 27, 34),
-            border : 1px solid rgb(7, 39, 7),
+            border : 1px solid rgba(61, 68, 77, 0.45),
           )
         )
       ),
       '.bottomnav' : (
-        border-radius : 5px 5px 0 0,
         background : var(--background),
         border-bottom: var(--border),
         border-top: var(--border),
@@ -196,11 +196,11 @@ const {frame_url, preview, min_height} = Astro.props
         _colors : (
           light : (
             background: rgb(232, 237, 222),
-            border : 1px solid rgb(237, 237, 237),
+            border : 1px solid rgb(219, 219, 219),
           ),
           dark: (
             background : rgb(22, 27, 34),
-            border : 1px solid rgb(7, 39, 7),
+            border : 1px solid rgba(61, 68, 77, 0.45),
           )
         )
       ),
