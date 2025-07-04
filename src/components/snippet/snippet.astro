@@ -437,7 +437,7 @@ const {frame_url, preview, min_height} = Astro.props
     ),
   );
 
-  @include app.generate-component($snippet, 'snippet', app.$config, app.$theme, (add_pseudo_tag: false));
+  @include app.generate-component($snippet, 'snippet', app.$config, app.$theme, (add_variable_prefix: false));
 
 </style>
 
