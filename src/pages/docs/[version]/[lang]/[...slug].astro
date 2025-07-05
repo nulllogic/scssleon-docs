@@ -78,32 +78,32 @@ const {headings, Content} = await page.render();
   @use "sass:meta";
   @use "sass:map";
 
-  @use "../../../../styles/app.scss" as app;
+  @use "~/styles/app.scss" as app;
 
   $intro: (
-      margin: 0 0 15px 0,
-      _subclasses : (
-          '.title' : (
-              font-size: 3.75rem,
-              line-height: 1,
-              font-weight: 500,
-              margin: 0,
-              padding: 0 0 15px 0,
-          ),
-          '.subtitle' : (
-              font-size: 1.35rem,
-              font-weight: 300,
-              color: rgba(125, 133, 144, 1),
-              line-height: 1.778rem,
-          )
+    margin: 0 0 15px 0,
+    _subclasses : (
+      '.title' : (
+        font-size: 3.75rem,
+        line-height: 1,
+        font-weight: 500,
+        margin: 0,
+        padding: 0 0 15px 0,
+      ),
+      '.subtitle' : (
+        font-size: 1.35rem,
+        font-weight: 300,
+        color: rgba(125, 133, 144, 1),
+        line-height: 1.778rem,
       )
+    )
   );
 
   @include app.generate-component(
-          $intro,
-          'intro',
-          app.$config,
-          app.$theme
+      $intro,
+      'intro',
+      app.$config,
+      app.$theme
   );
 
   /*body {*/

@@ -32,7 +32,7 @@ if (page === undefined) {
     // return Astro.redirect("/404");
 }
 
-const {title} = Astro?.props?.data;
+const {title, description} = Astro?.props?.data;
 const {headings, Content} = await page.render();
 ---
 
@@ -69,6 +69,10 @@ const {headings, Content} = await page.render();
         </nav>
     </div>
     <div class="content">
+        <div class="intro">
+            <h1 class="title">{title}</h1>
+            <p class="subtitle">{description}</p>
+        </div>
         <Content/>
     </div>
 </Sections>
@@ -93,4 +97,40 @@ const {headings, Content} = await page.render();
     $theme: app.$theme
   );
 
+</style>
+
+<style lang="scss">
+
+  @use "sass:list";
+  @use "sass:string";
+  @use "sass:meta";
+  @use "sass:map";
+
+  @use "~/styles/app.scss" as app;
+
+  $intro: (
+    margin: 0 0 15px 0,
+    _subclasses : (
+      '.title' : (
+        font-size: 3.75rem,
+        line-height: 1,
+        font-weight: 500,
+        margin: 0,
+        padding: 0 0 15px 0,
+      ),
+      '.subtitle' : (
+        font-size: 1.35rem,
+        font-weight: 300,
+        color: rgba(125, 133, 144, 1),
+        line-height: 1.778rem,
+      )
+    )
+  );
+
+  @include app.generate-component(
+      $intro,
+      'intro',
+      app.$config,
+      app.$theme
+  );
 </style>
