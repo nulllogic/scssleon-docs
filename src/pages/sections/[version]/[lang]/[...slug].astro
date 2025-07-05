@@ -32,8 +32,6 @@ if (page === undefined) {
     // return Astro.redirect("/404");
 }
 
-console.log(Astro?.props);
-
 const {title} = Astro?.props?.data;
 const {headings, Content} = await page.render();
 ---

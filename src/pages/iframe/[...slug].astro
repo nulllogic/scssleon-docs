@@ -1,113 +1,140 @@
 ---
 import * as sass from 'sass'
-import path, { dirname } from 'path'
+import path, {dirname} from 'path'
 
-import { getCollection, getEntry } from 'astro:content'
+import {getCollection, getEntry} from 'astro:content'
 
-export async function getStaticPaths () {
-  const docsCollection = await getCollection('docs')
-  const iframes = []
+export async function getStaticPaths() {
+    const docsCollection = await getCollection('docs')
+    const sectionsCollection = await getCollection('sections')
 
-  for (let i = 0; i < docsCollection.length; i++) {
+    const iframes = []
 
-    // console.log(...docsCollection[i].body.toStri);
-    const regexp = new RegExp(
-      '(\\bframe_url\\b)={["\']?((?:.(?!["\']?\\s+(?:\\S+)=|\\s*\\/?[>"\']))+.)["\']}?',
-      'gi')
-    if (docsCollection[i].body) {
-      const matches = [...docsCollection[i].body?.toString().matchAll(regexp)]
+    for (let i = 0; i < docsCollection.length; i++) {
 
-      if (matches.length !== 0) {
-        // Check if we have multiply iframe inside document
-        if (matches.length > 1) {
-          for (let j = 0; j < matches.length; j++) {
-            let temp_el = { ...docsCollection[i] }
-            temp_el.frame_url = matches[j]['2']
-            iframes.push(temp_el)
-          }
-        } else {
-          docsCollection[i].frame_url = matches[0]['2']
-          iframes.push(docsCollection[i])
+        // console.log(...docsCollection[i].body.toStri);
+        const regexp = new RegExp(
+            '(\\bframe_url\\b)={["\']?((?:.(?!["\']?\\s+(?:\\S+)=|\\s*\\/?[>"\']))+.)["\']}?',
+            'gi')
+        if (docsCollection[i].body) {
+            const matches = [...docsCollection[i].body?.toString().matchAll(regexp)]
+
+            if (matches.length !== 0) {
+                // Check if we have multiply iframe inside document
+                if (matches.length > 1) {
+                    for (let j = 0; j < matches.length; j++) {
+                        let temp_el = {...docsCollection[i]}
+                        temp_el.frame_url = matches[j]['2']
+                        iframes.push(temp_el)
+                    }
+                } else {
+                    docsCollection[i].frame_url = matches[0]['2']
+                    iframes.push(docsCollection[i])
+                }
+            }
         }
-      }
     }
-  }
 
-  return iframes.map((doc) => {
+    for (let i = 0; i < sectionsCollection.length; i++) {
 
-    return {
-      params: {
-        slug: doc?.frame_url,
-      },
-      props: doc,
+        // console.log(...docsCollection[i].body.toStri);
+        const regexp = new RegExp(
+            '(\\bframe_url\\b)={["\']?((?:.(?!["\']?\\s+(?:\\S+)=|\\s*\\/?[>"\']))+.)["\']}?',
+            'gi')
+        if (sectionsCollection[i].body) {
+            const matches = [...sectionsCollection[i].body?.toString().matchAll(regexp)]
+
+            if (matches.length !== 0) {
+                // Check if we have multiply iframe inside document
+                if (matches.length > 1) {
+                    for (let j = 0; j < matches.length; j++) {
+                        let temp_el = {...sectionsCollection[i]}
+                        temp_el.frame_url = matches[j]['2']
+                        iframes.push(temp_el)
+                    }
+                } else {
+                    sectionsCollection[i].frame_url = matches[0]['2']
+                    iframes.push(sectionsCollection[i])
+                }
+            }
+        }
     }
-  })
+
+    return iframes.map((doc) => {
+
+        return {
+            params: {
+                slug: doc?.frame_url,
+            },
+            props: doc,
+        }
+    })
 }
 
-const { slug } = Astro?.props
+const {slug, collection} = Astro?.props
 
 if (slug === undefined) {
-  throw new Error('Slug is required')
+    throw new Error('Slug is required')
 }
 
 // 2. Query for the entry directly using the request slug
-const page = await getEntry('docs', slug)
+const page = await getEntry(collection, slug)
 
 // 3. Redirect if the entry does not exist
 if (page === undefined) {
-  return Astro.redirect('/404')
+    return Astro.redirect('/404')
 }
 
 const page_content = page.body.toString()
 const frame_index = parseInt(Astro.props.frame_url.slice('/').at(-1))
 
 const snippet_regexp = new RegExp(
-  '<Snippet[^>]*>([^<]*(?:(?!<\\/?Snippet)<[^<]*)*)<\\/Snippet\\s*>', 'gi')
+    '<Snippet[^>]*>([^<]*(?:(?!<\\/?Snippet)<[^<]*)*)<\\/Snippet\\s*>', 'gi')
 const snippet_matches = [...page_content.matchAll(snippet_regexp)]
 
 // @TODO add iframe preload later
 // @TODO improve regex later
 const fragment_regexp = new RegExp(
-  '<Fragment[^>]*>([^<]*(?:(?!<\\/?Fragment)<[^<]*)*)<\\/Fragment\\s*>', 'gi')
+    '<Fragment[^>]*>([^<]*(?:(?!<\\/?Fragment)<[^<]*)*)<\\/Fragment\\s*>', 'gi')
 const fragment_matches = [
-  ...snippet_matches[(frame_index - 1).toString()]['0'].matchAll(
-    fragment_regexp)]
+    ...snippet_matches[(frame_index - 1).toString()]['0'].matchAll(
+        fragment_regexp)]
 
 //@todo find better solution
 
 const html = fragment_matches['0'] && fragment_matches['0'].hasOwnProperty('1')
-  ? fragment_matches['0']['1'].replace('```html', '').replace('```', '')
-  : ''
+    ? fragment_matches['0']['1'].replace('```html', '').replace('```', '')
+    : ''
 
 const scss = await sass.compileStringAsync(
-  fragment_matches['1'] && fragment_matches['1'].hasOwnProperty('1') ?
-    fragment_matches['1']['1'].replace('```scss', '').replace('```', '') : '', {
-    importers: [
-      {
-        // An importer that redirects relative URLs starting with "~" to
-        // `node_modules`.
-        findFileUrl (url) {
-          if (url.startsWith('~')) {
-            return new URL(
-              `file://` + path.resolve(process.cwd()) + url.substring(1))
-          }
-          if (url.startsWith('@')) {
-            return import.meta.env.PROD ?
-              new URL(
-                `file://` + path.resolve(process.cwd()) + '/node_modules/@' +
-                url.substring(1)) :
-              new URL(
-                `file://` + path.resolve(process.cwd()) + '/src/styles/scss/' +
-                url.substring(1).replace('nulllogic/scssleon/scss/', ''))
-          }
+    fragment_matches['1'] && fragment_matches['1'].hasOwnProperty('1') ?
+        fragment_matches['1']['1'].replace('```scss', '').replace('```', '') : '', {
+        importers: [
+            {
+                // An importer that redirects relative URLs starting with "~" to
+                // `node_modules`.
+                findFileUrl(url) {
+                    if (url.startsWith('~')) {
+                        return new URL(
+                            `file://` + path.resolve(process.cwd()) + url.substring(1))
+                    }
+                    if (url.startsWith('@')) {
+                        return import.meta.env.PROD ?
+                            new URL(
+                                `file://` + path.resolve(process.cwd()) + '/node_modules/@' +
+                                url.substring(1)) :
+                            new URL(
+                                `file://` + path.resolve(process.cwd()) + '/src/styles/scss/' +
+                                url.substring(1).replace('nulllogic/scssleon/scss/', ''))
+                    }
 
-          return null
-        },
-      }],
-  })
+                    return null
+                },
+            }],
+    })
 
 const js = fragment_matches['2'] && fragment_matches['2'].hasOwnProperty('1') ?
-  fragment_matches['2']['1'].replace('```js', '').replace('```', '') : ''
+    fragment_matches['2']['1'].replace('```js', '').replace('```', '') : ''
 
 const outline = await sass.compileStringAsync(`
   body { outline: 1px solid #2980b9 !important; }
@@ -225,66 +252,66 @@ const outline = await sass.compileStringAsync(`
 
 <script is:inline type="text/javascript">
 
-  const myCustomData = { foo: '' }
-  const event = new CustomEvent('myEvent', { detail: myCustomData })
-  const html = document.documentElement
+    const myCustomData = {foo: ''}
+    const event = new CustomEvent('myEvent', {detail: myCustomData})
+    const html = document.documentElement
 
-  const debounce = (callback, wait) => {
-    let timeoutId = null
-    return (...args) => {
-      window.clearTimeout(timeoutId)
-      timeoutId = window.setTimeout(() => {
-        callback.apply(null, args)
-      }, wait)
+    const debounce = (callback, wait) => {
+        let timeoutId = null
+        return (...args) => {
+            window.clearTimeout(timeoutId)
+            timeoutId = window.setTimeout(() => {
+                callback.apply(null, args)
+            }, wait)
+        }
     }
-  }
 
-  window.addEventListener('resize', function (e) {
-    window.scrollTo(0, 0)
-    debounce(window.parent.document.dispatchEvent(event), 100)
-  })
+    window.addEventListener('resize', function (e) {
+        window.scrollTo(0, 0)
+        debounce(window.parent.document.dispatchEvent(event), 100)
+    })
 
 </script>
 <script is:inline type="text/javascript" set:html={js}/>
 </body>
 </html>
 
-<script define:vars={{ outline: outline.css }}>
-  parent.document.addEventListener('toggle_outline', (e) => {
-    const existingStyle = document.getElementById('outline')
+<script define:vars={{outline: outline.css}}>
+    parent.document.addEventListener('toggle_outline', (e) => {
+        const existingStyle = document.getElementById('outline')
 
-    if (!existingStyle) {
-      const style = document.createElement('style')
-      style.setAttribute('id', 'outline')
-      style.innerHTML = outline
-      document.head.appendChild(style)
-    } else {
-      existingStyle.remove()
+        if (!existingStyle) {
+            const style = document.createElement('style')
+            style.setAttribute('id', 'outline')
+            style.innerHTML = outline
+            document.head.appendChild(style)
+        } else {
+            existingStyle.remove()
+        }
+    })
+</script>
+
+<script>
+    parent.document.addEventListener('dark_mode_toggle', (e) => {
+        const current_theme = document.documentElement.getAttribute('data-theme')
+        const new_theme = current_theme === 'dark' ? 'light' : 'dark'
+        document.documentElement.setAttribute('data-theme', new_theme)
+    })
+
+    // Apply saved theme or system preference on page load
+    const saved_theme = localStorage.getItem('theme')
+
+    if (saved_theme) {
+        document.documentElement.setAttribute('data-theme', saved_theme)
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark')
     }
-  })
 </script>
 
 <script>
-  parent.document.addEventListener('dark_mode_toggle', (e) => {
-    const current_theme = document.documentElement.getAttribute('data-theme')
-    const new_theme = current_theme === 'dark' ? 'light' : 'dark'
-    document.documentElement.setAttribute('data-theme', new_theme)
-  })
-
-  // Apply saved theme or system preference on page load
-  const saved_theme = localStorage.getItem('theme')
-
-  if (saved_theme) {
-    document.documentElement.setAttribute('data-theme', saved_theme)
-  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', 'dark')
-  }
-</script>
-
-<script>
-  parent.document.addEventListener('theme_change', (e) => {
-    document.documentElement.setAttribute('data-theme', e?.detail?.theme)
-  })
+    parent.document.addEventListener('theme_change', (e) => {
+        document.documentElement.setAttribute('data-theme', e?.detail?.theme)
+    })
 </script>
 
 <style lang="scss">
