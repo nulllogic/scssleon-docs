@@ -32,10 +32,44 @@ if (page === undefined) {
     // return Astro.redirect("/404");
 }
 
+console.log(Astro?.props);
+
+const {title} = Astro?.props?.data;
 const {headings, Content} = await page.render();
 ---
 
 <Sections>
+    <div>
+        <nav aria-label="Breadcrumb">
+            <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li class="item" itemprop="itemListElement" itemscope
+                    itemtype="https://schema.org/ListItem">
+                    <a href="#" class="link" itemprop="item">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1"/>
+                </li>
+                <li class="item">
+                    <svg-circle/>
+                </li>
+                <li class="item" itemprop="itemListElement" itemscope
+                    itemtype="https://schema.org/ListItem">
+                    <a href="#" class="link" itemprop="item">
+                        <span itemprop="name">Library</span>
+                    </a>
+                    <meta itemprop="position" content="2"/>
+                </li>
+                <li class="item">
+                    <svg-circle/>
+                </li>
+                <li class="item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="https://schema.org/ListItem">
+                    <span itemprop="name">{title}</span>
+                    <meta itemprop="position" content="3"/>
+                </li>
+            </ul>
+        </nav>
+    </div>
     <div class="content">
         <Content/>
     </div>
@@ -51,6 +85,12 @@ const {headings, Content} = await page.render();
 
   // ↓ Amazing content
   @use "~/styles/scss/content" with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
+
+  // ↓ Breadcrumbs
+  @use '~/styles/scss/components/breadcrumb' with (
     $config: app.$config,
     $theme: app.$theme
   );

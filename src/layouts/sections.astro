@@ -33,9 +33,7 @@ const sectionsCollectionModified = sectionsCollection.filter((doc) => {
 <div class="sections">
     <div class="container xxl">
         <div class="layout">
-            <Main>
-                <slot/>
-            </Main>
+            <slot/>
         </div>
     </div>
 </div>
@@ -48,7 +46,7 @@ const sectionsCollectionModified = sectionsCollection.filter((doc) => {
   @use "sass:meta";
   @use "sass:string";
 
-  @use "../styles/app.scss" as app;
+  @use "~/styles/app.scss" as app;
 
   $sections: (
     background: var(--background),
