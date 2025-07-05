@@ -246,7 +246,6 @@ const {frame_url, preview, min_height} = Astro.props
                     padding: .4rem,
                     border-radius: 5px,
                     color: var(--link-color),
-
                     _colors: (
                       light : (
                         link-color: rgba(46, 67, 32, 0.7),
@@ -255,7 +254,6 @@ const {frame_url, preview, min_height} = Astro.props
                         link-color: rgba(250, 250, 250, 0.7)
                       )
                     ),
-
                     _subclasses: (
                       '&:hover': (
                         background: rgb(224, 227, 222),
@@ -340,34 +338,39 @@ const {frame_url, preview, min_height} = Astro.props
             /*border: 1px solid red,*/
             border-bottom: none,
             /*border-radius: 5px 5px 0 0,*/
-
             _subclasses: (
+              '&.is_resizing' : (
+                pointer-events: none,
+              ),
               '.resizer' : (
-                display: inline-block,
                 position: absolute,
-                right: 0,
+                left: 100%,
                 top: 0,
                 bottom: 0,
                 -webkit-user-select: none,
                 user-select: none,
+                display: flex,
+                height: 100%,
+                align-items: center,
                 _subclasses: (
                   '.drag' : (
                     padding: 0.5rem,
                     touch-action: pan-y,
                     cursor: ew-resize,
                     display: block,
-                    position: absolute,
-                    top: 50%,
-                    left: 0.45rem,
-                    transform: translate(-50%, -50%),
                     user-select: none,
                     _subclasses: (
+                      '&:hover .el' : (
+                        transform: scale(1.25),
+                        background: rgba(109, 120, 135, 0.75),
+                      ),
                       '.el' : (
                         background: rgba(100, 116, 139, 0.6),
                         border-radius: 10px,
                         width: 0.375rem,
                         height: 2rem,
                         display: block,
+                        transition: string.unquote('0.25s background-color, 0.25s transform'),
                       )
                     )
                   ),
@@ -637,10 +640,10 @@ const {frame_url, preview, min_height} = Astro.props
 
             const resizer = snippet.querySelector('.preview .resizer .drag')
             if (resizer) {
-                const container_limit = Math.round(preview.clientWidth / 1.5)
+                const container_limit = Math.round(preview.clientWidth / 1.5);
 
                 resizer.onmousedown = (event) => {
-                    event.preventDefault()
+                    event.preventDefault();
 
                     const original_margin = parseFloat(
                         isNaN(preview.style.marginRight) ? preview.style.marginRight : 0,
@@ -658,11 +661,13 @@ const {frame_url, preview, min_height} = Astro.props
 
                     const event_drag_end_handler = (event) => {
                         document.documentElement.classList.remove('dragging')
+                        preview.classList.remove('is_resizing');
                         document.removeEventListener('mousemove', event_drag_start_handler)
                         document.removeEventListener('mouseup', event_drag_end_handler)
                     }
 
                     document.documentElement.classList.add('dragging')
+                    preview.classList.add('is_resizing');
                     document.addEventListener('mousemove', event_drag_start_handler)
                     document.addEventListener('mouseup', event_drag_end_handler,
                         {once: true})
