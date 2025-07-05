@@ -16,29 +16,43 @@ import {Snippet} from "/src/components/snippet"
   <Fragment slot="html">
     ```html
     <div class="form">
-      <div class="field">
-        <label for="input1" class="label">Name:</label>
-        <input type="name" id="1" value="John Doe" class="input"/>
-      </div>
-      <div class="field">
-        <label for="input2" class="label">Email:</label>
-        <input type="email" id="input2" value="john.doe@cirrus.io" class="input"/>
-      </div>
-      <div class="field">
-        <label for="input3" class="label">URL:</label>
-        <input type="url" id="input3" value="https://spiderpig86.github.io/Cirrus" class="input"/>
-      </div>
-      <div class="field">
-        <label for="input4" class="label">Search:</label>
-        <input type="search" id="input4" placeholder="Search" class="input"/>
-      </div>
-      <div class="field">
-        <label for="input5" class="label">Phone:</label>
-        <input type="tel" id="input5" value="1-(800)-777-7777" class="input"/>
-      </div>
-      <div class="field">
-        <label for="input6" class="label">Password:</label>
-        <input type="password" id="input6" value="password" class="input"/>
+      <div class="grid">
+        <div class="section">
+          <div class="field">
+            <label for="input1" class="label">Name:</label>
+            <input type="name" id="input1" value="John Doe" class="input"/>
+          </div>
+        </div>
+        <div class="section">
+          <div class="field">
+            <label for="input2" class="label">Email:</label>
+            <input type="email" id="input2" value="john.doe@cirrus.io" class="input"/>
+          </div>
+        </div>
+        <div class="section">
+          <div class="field">
+            <label for="input3" class="label">URL:</label>
+            <input type="url" id="input3" value="https://spiderpig86.github.io/Cirrus" class="input"/>
+          </div>
+        </div>
+        <div class="section">
+          <div class="field">
+            <label for="input4" class="label">Phone:</label>
+            <input type="tel" id="input4" value="1-(800)-777-7777" class="input"/>
+          </div>
+        </div>
+        <div class="section">
+          <div class="field">
+            <label for="input5" class="label">Phone:</label>
+            <input type="tel" id="input5" value="1-(800)-777-7777" class="input"/>
+          </div>
+        </div>
+        <div class="section">
+          <div class="field">
+            <label for="input6" class="label">Phone:</label>
+            <input type="tel" id="input6" value="1-(800)-777-7777" class="input"/>
+          </div>
+        </div>
       </div>
     </div>
     ```
@@ -55,6 +69,45 @@ import {Snippet} from "/src/components/snippet"
     @include app.generate-component(
       app.get-theme(app.$theme, 'components.form'),
       'form',
+      app.$config,
+      app.$theme
+    );
+
+    $grid : (
+      display: grid,
+      row-gap : 1rem,
+      column-gap : 1rem,
+      grid-template-columns: repeat(6,minmax(0,1fr)),
+      _subclasses : (
+        '.section' : (
+          _subclasses : (
+            '&:nth-child(1)' : (
+              grid-column: span 3/span 3,
+            ),
+            '&:nth-child(2)' : (
+              grid-column: span 3/span 3,
+            ),
+            '&:nth-child(3)' : (
+              grid-column: span 4/span 4,
+            ),
+            '&:nth-child(4)' : (
+              grid-column: span 2/span 2,
+              grid-column-start : 1,
+            ),
+            '&:nth-child(5)' : (
+              grid-column: span 2/span 2,
+            ),
+            '&:nth-child(6)' : (
+              grid-column: span 2/span 2,
+            )
+          )
+        )
+      )
+    );
+
+    @include app.generate-component(
+      $grid,
+      'grid',
       app.$config,
       app.$theme
     );

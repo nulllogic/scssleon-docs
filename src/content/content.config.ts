@@ -15,7 +15,7 @@ const docs = defineCollection({
 
 const categories = defineCollection({
   loader: glob({base: './src/content/categories', pattern: '**/*.*'}),
-  schema: z.object({
+    schema: ({image}) => z.object({
     name: z.string(),
     description: z.string().optional(),
     image: z
@@ -28,7 +28,7 @@ const categories = defineCollection({
 
 const sections = defineCollection({
   loader: glob({base: './src/content/sections', pattern: '**/*.*'}),
-  schema: z.object({
+    schema: ({image}) => z.object({
     title: z.string(),
     description: z.string().optional(),
     categories: z.array(reference('categories')).optional(),
