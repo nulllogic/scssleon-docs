@@ -1,6 +1,7 @@
 ---
 import {getCollection, getEntry} from "astro:content";
 import Sections from "~/layouts/sections.astro";
+import Link from '~/components/link.astro'
 
 export async function getStaticPaths() {
     const sectionsCollection = await getCollection('sections');
@@ -73,7 +74,7 @@ const {headings, Content} = await page.render();
             <h1 class="title">{title}</h1>
             <p class="subtitle">{description}</p>
         </div>
-        <Content/>
+        <Content components={{a: Link}}/>
     </div>
 </Sections>
 
