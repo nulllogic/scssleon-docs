@@ -1,5 +1,6 @@
 ---
-import Logo from '../logo/index.astro'
+import Logo from '~/components/logo/index.astro'
+import Link from '~/components/link.astro'
 ---
 
 <footer class="footer">
@@ -21,11 +22,13 @@ import Logo from '../logo/index.astro'
                 <h5 class="title">Links</h5>
                 <ul class="nav vertical">
                     <li class="item">
-                        <a href="/" aria-label="Home" class="link">Home</a>
+                        <Link href="/" aria-label="Home" title="Home">Home</Link>
                     </li>
                     <li class="item">
-                        <a href="/docs/1.0/en/" target="_blank"
-                           aria-label="Docs" class="link">Docs</a>
+                        <Link href="/docs/1.0/en/" aria-label="Components" title="Components">Components</Link>
+                    </li>
+                    <li class="item">
+                        <Link href="/sections/1.0/en/welcome" aria-label="Sections" title="Sections">Sections</Link>
                     </li>
                 </ul>
             </div>
@@ -34,20 +37,19 @@ import Logo from '../logo/index.astro'
                 <h5 class="title">Community</h5>
                 <ul class="nav vertical">
                     <li class="item">
-                        <a href="https://github.com/nulllogic/scssleon/issues"
-                           target="_blank" aria-label="Issues"
-                           class="link">Issues</a>
+                        <Link href="https://github.com/nulllogic/scssleon/issues" aria-label="Issues" title="Issues">
+                            Issues
+                        </Link>
                     </li>
                     <li class="item">
-                        <a href="https://github.com/nulllogic/scssleon/discussions"
-                           target="_blank"
-                           aria-label="Discussions" class="link">Discussions</a>
+                        <Link href="https://github.com/nulllogic/scssleon/discussions" aria-label="Discussions"
+                              title="Discussions">Discussions
+                        </Link>
                     </li>
                     <li class="item">
-                        <a href="https://stackoverflow.com/questions/tagged/scssleon"
-                           target="_blank"
-                           aria-label="Stack Overflow" class="link">Stack
-                            Overflow</a>
+                        <Link href="https://stackoverflow.com/questions/tagged/scssleon" aria-label="Stack Overflow"
+                              title="Stack Overflow">Stack Overflow
+                        </Link>
                     </li>
                 </ul>
             </div>
@@ -112,11 +114,14 @@ import Logo from '../logo/index.astro'
              stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
              class="lucide lucide-moon"><path
                 d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
-        <svg aria-label="This component is Ready" class="AiB gUZ U9O kVc" height="16" role="img" viewBox="0 0 16 16" width="16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M4.24 7.74a.83.83 0 0 1 1.18 0L7 9.31l3.58-3.57a.83.83 0 0 1 1.18 1.18L7 11.67 4.24 8.92a.83.83 0 0 1 0-1.18"></path></svg>
+        <svg aria-label="This component is Ready" class="AiB gUZ U9O kVc" height="16" role="img" viewBox="0 0 16 16"
+             width="16"><path
+                d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M4.24 7.74a.83.83 0 0 1 1.18 0L7 9.31l3.58-3.57a.83.83 0 0 1 1.18 1.18L7 11.67 4.24 8.92a.83.83 0 0 1 0-1.18"></path></svg>
         <svg width="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
-        <svg width="15" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <svg width="15" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path
+                stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
   </span>
 </footer>
 
