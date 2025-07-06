@@ -3,7 +3,7 @@ import {defineCollection, reference, z} from 'astro:content';
 import {glob} from 'astro/loaders';
 
 const docs = defineCollection({
-  loader: glob({base: './src/content/docs', pattern: '**/*.*'}),
+  loader: glob({base: './src/content/docs', pattern: '**/*.mdx'}),
   schema: ({image}) => z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -14,20 +14,21 @@ const docs = defineCollection({
 });
 
 const categories = defineCollection({
-  loader: glob({base: './src/content/categories', pattern: '**/*.*'}),
+  loader: glob({base: './src/content/categories', pattern: '**/*.mdx'}),
     schema: ({image}) => z.object({
-    name: z.string(),
+    title: z.string(),
     description: z.string().optional(),
     image: z
         .object({
           url: image(),
           alt: z.string(),
         })
+        .optional(),
   })
 });
 
 const sections = defineCollection({
-  loader: glob({base: './src/content/sections', pattern: '**/*.*'}),
+  loader: glob({base: './src/content/sections', pattern: '**/*.mdx'}),
     schema: ({image}) => z.object({
     title: z.string(),
     description: z.string().optional(),

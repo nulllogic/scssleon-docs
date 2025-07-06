@@ -1,6 +1,6 @@
 ---
 export const prerender = true;
-import {getCollection, getEntry} from 'astro:content';
+import {getCollection, getEntry, render} from 'astro:content';
 
 import Docs from '~/layouts/docs.astro';
 import Toc from '~/components/toc/index.astro';
@@ -9,8 +9,7 @@ import Link from '~/components/link.astro'
 export async function getStaticPaths() {
     const docsCollection = await getCollection('docs');
     return docsCollection.map((doc) => {
-        const [version, lang, ...slug] = doc.slug.split('/');
-
+        const [version, lang, ...slug] = doc.id.split('/');
         return {
             params: {
                 version: version.split('').join('.'), // we receive "10" string, transforming to "1.0"
@@ -22,14 +21,14 @@ export async function getStaticPaths() {
     })
 }
 
-const {slug} = Astro?.props;
+const {id} = Astro?.props;
 
-if (slug === undefined) {
-    throw new Error('Slug is required');
+if (id === undefined) {
+    throw new Error('ID is required');
 }
 
 // 2. Query for the entry directly using the request slug
-const page = await getEntry('docs', slug);
+const page = await getEntry('docs', id);
 
 // 3. Redirect if the entry does not exist
 if (page === undefined) {
@@ -39,7 +38,7 @@ if (page === undefined) {
 const github_page =
     "https://github.com/nulllogic/scssleon/blob/master/docs/" + page.id;
 
-const {headings, Content} = await page.render();
+const {headings, Content} = await render(page);
 ---
 
 <Docs>

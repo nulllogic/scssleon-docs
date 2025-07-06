@@ -5,6 +5,7 @@ import path, {dirname} from 'path'
 import {getCollection, getEntry} from 'astro:content'
 
 export async function getStaticPaths() {
+
     const docsCollection = await getCollection('docs')
     const sectionsCollection = await getCollection('sections')
 
@@ -71,14 +72,14 @@ export async function getStaticPaths() {
     })
 }
 
-const {slug, collection} = Astro?.props
+const {id, collection} = Astro?.props
 
-if (slug === undefined) {
+if (id === undefined) {
     throw new Error('Slug is required')
 }
 
 // 2. Query for the entry directly using the request slug
-const page = await getEntry(collection, slug)
+const page = await getEntry(collection, id)
 
 // 3. Redirect if the entry does not exist
 if (page === undefined) {

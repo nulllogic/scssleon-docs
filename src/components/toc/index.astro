@@ -1,5 +1,6 @@
 ---
 const {headings, github_page} = Astro.props
+import Link from '~/components/link.astro'
 ---
 <nav class="toc">
     <ul class="nav vertical">
@@ -17,9 +18,9 @@ const {headings, github_page} = Astro.props
     <hr/>
     <ul class="nav vertical">
         <li class="item">
-            <a href={github_page} target="_blank" rel="noopener noreferrer" class="link">
+            <Link href={github_page} target="_blank" rel="noopener noreferrer" class="link">
                 View on Github
-            </a>
+            </Link>
         </li>
     </ul>
 </nav>

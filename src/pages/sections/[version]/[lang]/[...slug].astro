@@ -1,17 +1,17 @@
 ---
-import {getCollection, getEntry} from "astro:content";
+import {getCollection, getEntry, render} from "astro:content";
 import Sections from "~/layouts/sections.astro";
 import Link from '~/components/link.astro'
 
 export async function getStaticPaths() {
     const sectionsCollection = await getCollection('sections');
     return sectionsCollection.map((section) => {
-        const [version, lang, ...slug] = section.slug.split('/');
+        const [version, lang, ...slug] = section.id.split('/');
 
         return {
             params: {
-                version: '1.0',
-                lang: 'en',
+                version: version.split('').join('.'), // we receive "10" string, transforming to "1.0"
+                lang: lang,
                 slug: slug.join('/'),
             },
             props: section
@@ -19,14 +19,14 @@ export async function getStaticPaths() {
     })
 }
 
-const {slug} = Astro?.props;
+const {id} = Astro?.props;
 
-if (slug === undefined) {
-    throw new Error('Slug is required');
+if (id === undefined) {
+    throw new Error('ID is required');
 }
 
 // 2. Query for the entry directly using the request slug
-const page = await getEntry('sections', slug);
+const page = await getEntry('sections', id);
 
 // 3. Redirect if the entry does not exist
 if (page === undefined) {
@@ -34,7 +34,7 @@ if (page === undefined) {
 }
 
 const {title, description} = Astro?.props?.data;
-const {headings, Content} = await page.render();
+const {headings, Content} = await render(page);
 ---
 
 <Sections>

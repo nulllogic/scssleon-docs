@@ -28,7 +28,9 @@ import {Snippet} from "/src/components/snippet"
                 </p>
             </div>
             <div>
-                <a href="#" class="close">x</a>
+                <a href="#" class="btn btn-link">
+                  <svg width="18" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-astro-cid-w3eo3aef=""><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" data-astro-cid-w3eo3aef=""></path></svg>
+                </a>
             </div>
         </div>
         ```
@@ -42,8 +44,21 @@ import {Snippet} from "/src/components/snippet"
 
         @use "~/src/styles/app.scss" as app;
 
+        // Load default button component
+        @use '~/src/styles/scss/components/button' with (
+          $config: app.$config,
+          $theme: app.$theme
+        );
+
+        // Load alert component
         @include app.generate-component(
-          app.get-theme(app.$theme, 'components.alert'),
+          map.deep-merge(app.get-theme(app.$theme, 'components.alert'), (
+            _subclasses : (
+              '> div:nth-child(1)' : (
+                align-self: start
+              )
+            )
+          )),
           'alert',
           app.$config,
           app.$theme
