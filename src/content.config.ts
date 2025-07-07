@@ -13,8 +13,23 @@ const docs = defineCollection({
   }),
 });
 
-const categories = defineCollection({
-  loader: glob({base: './src/content/categories', pattern: '**/*.mdx'}),
+const sections = defineCollection({
+    loader: glob({base: './src/content/sections', pattern: '**/*.mdx'}),
+    schema: ({image}) => z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        categories: z.array(reference('section_category')).optional(),
+        image: z
+            .object({
+                url: image(),
+                alt: z.string(),
+            })
+            .optional(),
+    })
+});
+
+const section_category = defineCollection({
+  loader: glob({base: './src/content/category/sections', pattern: '**/*.mdx'}),
     schema: ({image}) => z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -42,20 +57,4 @@ const components_category = defineCollection({
     })
 });
 
-const sections = defineCollection({
-  loader: glob({base: './src/content/sections', pattern: '**/*.mdx'}),
-    schema: ({image}) => z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    categories: z.array(reference('categories')).optional(),
-
-    image: z
-        .object({
-          url: image(),
-          alt: z.string(),
-        })
-        .optional(),
-  })
-});
-
-export const collections = {docs, sections, categories, components_category};
+export const collections = {docs, sections, section_category, components_category};
