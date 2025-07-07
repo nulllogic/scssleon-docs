@@ -6,7 +6,7 @@ import {generate_link} from '~/utils/links.ts';
 const sections = await getCollection('sections')
 const categories = await getCollection('section_category');
 ---
-<div class="section_categories">
+<div class="sections">
     {categories.map(category => {
         return (
                 <div class="category">
@@ -16,11 +16,25 @@ const categories = await getCollection('section_category');
                     <div class="description">
                         <p>{category.data.description}</p>
                     </div>
-                    {
-                        category.data?.image?.url &&
-                            <Image class="image" src={category.data.image.url} width={250}
-                                   alt={category.data.image.alt}/>
-                    }
+                    <div class="items">
+                        {sections.filter((section) => {
+                            if (section.data.categories) {
+                                return section.data.categories.some(cat => cat.id === category.id)
+                            } else {
+                                return false;
+                            }
+                        }).map((section) => {
+                            return (
+                                    <a href={generate_link(Astro, section, 'sections')} class="item" title={section.data.title}>
+                                        {section.data.image &&
+                                                <Image width={400} src={section.data.image.url}
+                                                       alt={section.data.image.alt}/>
+                                        }
+                                        {section.data.title}
+                                    </a>
+                            )
+                        })}
+                    </div>
                 </div>
         )
     })}
@@ -33,20 +47,7 @@ const categories = await getCollection('section_category');
 
   @use "~/styles/app.scss" as app;
 
-  $section-categories: (
-    margin: 0 0 1rem 0,
-    display : grid,
-    gap: 1rem,
-    grid-template-columns : repeat(2, minmax(0, 1fr)),
-    /***/
-    _responsive : (
-      md : (
-        grid-template-columns : repeat(3, minmax(0, 1fr)),
-      ),
-      lg : (
-        grid-template-columns : repeat(4, minmax(0, 1fr)),
-      ),
-    ),
+  $sections: (
     /***/
     _subclasses : (
       '.category' : (
@@ -61,6 +62,21 @@ const categories = await getCollection('section_category');
             margin: 0,
           ),
           '.image' : (
+          ),
+          '.items' : (
+            margin: 0 0 1rem 0,
+            display : grid,
+            gap: 1rem,
+            grid-template-columns : repeat(2, minmax(0, 1fr)),
+            /***/
+            _responsive : (
+              md : (
+                grid-template-columns : repeat(3, minmax(0, 1fr)),
+              ),
+              lg : (
+                grid-template-columns : repeat(4, minmax(0, 1fr)),
+              ),
+            ),
           )
         )
       ),
@@ -68,8 +84,8 @@ const categories = await getCollection('section_category');
   );
 
   @include app.generate-component(
-      $section-categories,
-      'section_categories',
+      $sections,
+      'sections',
       app.$config,
       app.$theme,
       (add_variable_prefix: false)

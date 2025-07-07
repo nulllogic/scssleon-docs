@@ -166,7 +166,7 @@ const {frame_url, preview, min_height} = Astro.props
 
   @use "../../styles/app.scss" as app;
 
-  $schema_color_switcher : (
+  $schema_color_switcher: (
     _subclasses: (
       '&.clicked' : (
         _subclasses: (
@@ -219,7 +219,7 @@ const {frame_url, preview, min_height} = Astro.props
     )
   );
 
-  $snippet-navbar-nav : (
+  $snippet-navbar-nav: (
     --nav-gap: 5px,
     _subclasses: (
       '.item': (
@@ -264,7 +264,7 @@ const {frame_url, preview, min_height} = Astro.props
     ),
   );
 
-  $snippet-topnav : (
+  $snippet-topnav: (
     border-top: none,
     border-radius : 0.43rem 0.43rem 0 0,
     background : var(--background),
@@ -296,7 +296,7 @@ const {frame_url, preview, min_height} = Astro.props
     )
   );
 
-  $snippet-bottomnav : (
+  $snippet-bottomnav: (
     background : var(--background),
     border-bottom: var(--border),
     border-top: var(--border),
@@ -318,16 +318,16 @@ const {frame_url, preview, min_height} = Astro.props
         --navbar-grid-template-columns : auto auto,
         /***/
         _subclasses : (
-            ':nth-child(2)' : (
-                justify-self: end,
-            ),
-            '.nav' : $snippet-navbar-nav,
+          ':nth-child(2)' : (
+            justify-self: end,
+          ),
+          '.nav' : $snippet-navbar-nav,
         )
       )
     )
   );
 
-  $preview-resizer-dragging-element : (
+  $preview-resizer-dragging-element: (
     position: absolute,
     left: 100%,
     top: 0,
@@ -362,7 +362,7 @@ const {frame_url, preview, min_height} = Astro.props
     ),
   );
 
-  $snippet-content : (
+  $snippet-content: (
     /***/
     _subclasses: (
       '.tab': (
@@ -404,6 +404,12 @@ const {frame_url, preview, min_height} = Astro.props
                     background: none,
                     padding: 0,
                     font-size: 0.875rem,
+                    /***/
+                    _subclasses: (
+                      'span' : (
+                        line-height: 1.25
+                      )
+                    )
                   ),
                 ),
               ),

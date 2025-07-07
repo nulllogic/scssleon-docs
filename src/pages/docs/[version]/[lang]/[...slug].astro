@@ -83,14 +83,14 @@ const {headings, Content} = await render(page);
     margin: 0 0 15px 0,
     _subclasses : (
       '.title' : (
-        font-size: 2.7469761342rem,
+        font-size: clamp(2.0273rem, 1.8053rem + 0.8833vw, 2.5341rem),
         line-height: 1,
         font-weight: 500,
         margin: 0,
         padding: 0 0 15px 0,
       ),
       '.subtitle' : (
-        font-size: 1.35rem,
+        font-size: clamp(1.125rem, 1.0634rem + 0.2451vw, 1.2656rem),
         font-weight: 300,
         color: rgba(125, 133, 144, 1),
         line-height: 1.778rem,
