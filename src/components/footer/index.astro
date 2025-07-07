@@ -132,19 +132,49 @@ import Link from '~/components/link.astro'
 
   @use "../../styles/app.scss" as app;
 
-  $footer-component: (
-    --padding: 35px 15px,
-    background: var(--background),
-    border-top: var(--border),
-    padding: var(--padding),
-    box-shadow: var(--box-shadow),
+  $footer_grid : (
+    --columns: "",
+    display: grid,
+    grid-template-columns: var(--columns),
+    gap: 15px,
     /***/
     _responsive: (
       md: (
-        --padding: 35px 5px,
+        --columns: auto 200px 200px,
       ),
       lg: (
-        --padding: 35px 5px,
+        --columns: auto 200px 200px,
+      ),
+    ),
+    /***/
+    _subclasses: (
+      /***/
+      '.column' : (
+        /***/
+        _subclasses : (
+          '.title' : (
+            font-size: 1.25rem,
+            margin: 0 0 0.5rem 0
+          ),
+          '.logo' : (
+            margin: 0 0 15px 0,
+          )
+        )
+      )
+    )
+  );
+
+  $footer-component: (
+    padding-inline: var(global(--padding-inline)),
+    padding-block: 35px,
+
+    background: var(--background),
+    border-top: var(--border),
+    box-shadow: var(--box-shadow),
+    /***/
+    _responsive: (
+      lg: (
+        padding-block: 35px,
       ),
     ),
     /***/
@@ -162,37 +192,7 @@ import Link from '~/components/link.astro'
     ),
     /***/
     _subclasses: (
-      '.grid' : (
-        --columns: "",
-        display: grid,
-        grid-template-columns: var(--columns),
-        gap: 15px,
-        /***/
-        _responsive: (
-          md: (
-            --columns: auto 200px 200px,
-          ),
-          lg: (
-            --columns: auto 200px 200px,
-          ),
-        ),
-        /***/
-        _subclasses: (
-          /***/
-          '.column' : (
-            /***/
-            _subclasses : (
-              '.title' : (
-                font-size: 1.25rem,
-                margin: 0 0 0.5rem 0
-              ),
-              '.logo' : (
-                margin: 0 0 15px 0,
-              )
-            )
-          )
-        )
-      )
+      '.grid' : $footer_grid
     ),
   );
 

@@ -16,6 +16,14 @@
 @use "./scss/themes/default.scss" as theme with (
   $config : config.$config,
   $theme: (
+    root : (
+      --padding-inline: 1rem 1rem,
+      _responsive : (
+        xl: (
+          --padding-inline: 0,
+        )
+      )
+    ),
     html : (
       body : (
         _colors: (

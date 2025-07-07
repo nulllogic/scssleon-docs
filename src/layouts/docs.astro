@@ -49,7 +49,10 @@ import Footer from "../components/footer/index.astro";
   @use "../styles/app.scss" as app;
 
   $docs_section: (
+    padding-inline: var(global(--padding-inline)),
+
     background: var(--background),
+    /***/
     _colors: (
       light: (
         background: string.unquote('linear-gradient(rgba(55, 241, 14, 0.09), rgba(0, 0, 0, 0) 32.77%), linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)'),
@@ -57,7 +60,7 @@ import Footer from "../components/footer/index.astro";
       dark : (
         background: string.unquote('linear-gradient(rgba(38, 194, 44, 0.085), rgba(0, 0, 0, 0) 32.77%)'),
       )
-    )
+    ),
   );
 
   @include app.generate-component(

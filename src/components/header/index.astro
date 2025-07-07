@@ -6,7 +6,7 @@ import { generate_rel_link } from '~/utils/links'
 <div class="header">
     <div class="container xxl">
         <header class="navbar">
-            <div class="left">
+            <div>
                 <ul class="nav horizontal">
                     <li class="item">
                         <Logo class="link"/>
@@ -29,7 +29,7 @@ import { generate_rel_link } from '~/utils/links'
                     </li>
                 </ul>
             </div>
-            <div class="right">
+            <div>
                 <ul class="nav horizonatal">
                     <li class="item">
                         <a
@@ -91,15 +91,102 @@ import { generate_rel_link } from '~/utils/links'
 
   @use "~/styles/app.scss" as app;
 
+  $scheme_color_switcher : (
+    width: 22px,
+    height: 22px,
+    position: relative,
+
+    _animations : (
+      'icon-enter' : (
+        '0%' : (
+          opacity: 0,
+          transform:rotate(180deg)
+        ),
+        '100%' : (
+          opacity: 1,
+          transform:rotate(0deg)
+        )
+      ),
+    ),
+
+    _subclasses: (
+      '&:hover' : (
+        transform: scale(1.15),
+      ),
+      '&.clicked' : (
+        _subclasses: (
+          '.white' : (
+            opacity: 0,
+            animation: icon-enter 0.2s forwards,
+          ),
+          '.dark' : (
+            opacity: 0,
+            animation: icon-enter 0.2s forwards,
+          )
+        )
+      ),
+      'svg' : (
+        transform: rotate(0),
+        opacity: 1,
+        position: absolute,
+        transition: string.unquote('transform 0.15s ease-in, opacity 0.2s ease-in'),
+      ),
+      '.white' : (
+        display: var(--icon-display),
+        _colors: (
+          light : (
+            icon-display: none,
+          ),
+          dark : (
+            icon-display: inline-block
+          )
+        )
+      ),
+      '.dark' : (
+        display: var(--icon-display),
+        _colors: (
+          light : (
+            icon-display: inline-block
+          ),
+          dark : (
+            icon-display: none,
+          )
+        )
+      ),
+    )
+  );
+
+  $navbar : (
+    --navbar-grid-template-columns: auto auto,
+    _subclasses : (
+      ':nth-child(1)' : (
+        _subclasses : (
+            '.nav' : (
+              --nav-gap : 15px,
+            )
+        )
+      ),
+      ':nth-child(2)' : (
+        justify-self: end,
+        _subclasses : (
+            '.nav' : (
+              --nav-gap : .825rem,
+            )
+        )
+      )
+    )
+  );
+
   $header-section: (
     background: var(--background),
     box-shadow: var(--shadow),
     border-bottom: var(--border),
     /***/
-    padding: 5px 5px,
+    padding-inline: var(global(--padding-inline)),
+    padding-block: 5px 5px,
     top: 0,
     position: relative,
-    z-index: 6,
+    z-index: app.get-config(app.$config, 'z-index.header'),
     /***/
     _colors: (
       light : (
@@ -115,98 +202,20 @@ import { generate_rel_link } from '~/utils/links'
     ),
     /***/
     _subclasses : (
-      '.navbar' : (
-        --navbar-grid-template-columns: auto auto,
-        /***/
-        _subclasses : (
-          '.left .nav' :(
-            --nav-gap : 15px,
-          ),
-          '.right .nav' : (
-            --nav-gap : .825rem,
-          ),
-          '.item' : (
-            /***/
-            _subclasses: (
-              "&:first-child .title" : (
-                padding: 0
-              ),
-              '.link.toggle_mode' : (
-                width: 22px,
-                height: 22px,
-                position: relative,
-                _animations : (
-                  'icon-enter' : (
-                    '0%' : (
-                      opacity: 0,
-                      transform:rotate(180deg)
-                    ),
-                    '100%' : (
-                      opacity: 1,
-                      transform:rotate(0deg)
-                    )
-                  ),
-                ),
-                _subclasses: (
-                  '&:hover' : (
-                    transform: scale(1.15),
-                  ),
-                  '&.clicked' : (
-                    _subclasses: (
-                      '.white' : (
-                        opacity: 0,
-                        animation: icon-enter 0.2s forwards,
-                      ),
-                      '.dark' : (
-                        opacity: 0,
-                        animation: icon-enter 0.2s forwards,
-                      )
-                    )
-                  ),
-                  'svg' : (
-                    transform: rotate(0),
-                    opacity: 1,
-                    position: absolute,
-                    transition: string.unquote('transform 0.15s ease-in, opacity 0.2s ease-in'),
-                  ),
-                  '.white' : (
-                    display: var(--icon-display),
-                    _colors: (
-                      light : (
-                        icon-display: none,
-                      ),
-                      dark : (
-                        icon-display: inline-block
-                      )
-                    )
-                  ),
-                  '.dark' : (
-                    display: var(--icon-display),
-                    _colors: (
-                      light : (
-                        icon-display: inline-block
-                      ),
-                      dark : (
-                        icon-display: none,
-                      )
-                    )
-                  ),
-                )
-              )
-            )
-          )
-        )
-      ),
+      '.navbar' : $navbar,
+
       '&.sticky' : (
         position: sticky,
         -webkit-backdrop-filter: blur(10px),
         backdrop-filter: blur(10px),
-      )
+      ),
+
+      '.link.toggle_mode' : $scheme_color_switcher,
     ),
     /***/
     _responsive : (
       md : (
-        padding: 5px 5px,
+        padding-block: 5px 5px,
       )
     ),
   );
@@ -260,3 +269,4 @@ import { generate_rel_link } from '~/utils/links'
   }
 
 </script>
+
