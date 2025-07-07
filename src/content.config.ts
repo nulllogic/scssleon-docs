@@ -7,7 +7,7 @@ const docs = defineCollection({
   schema: ({image}) => z.object({
     title: z.string(),
     description: z.string().optional(),
-
+    category: z.string(reference('categories')),
     published_date: z.date().optional(),
     updated_date: z.date().optional(),
   }),
@@ -27,6 +27,21 @@ const categories = defineCollection({
   })
 });
 
+const components_category = defineCollection({
+    loader: glob({base: './src/content/category/components', pattern: '**/*.mdx'}),
+    schema: ({image}) => z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        position: z.number(),
+        image: z
+            .object({
+                url: image(),
+                alt: z.string(),
+            })
+            .optional(),
+    })
+});
+
 const sections = defineCollection({
   loader: glob({base: './src/content/sections', pattern: '**/*.mdx'}),
     schema: ({image}) => z.object({
@@ -43,4 +58,4 @@ const sections = defineCollection({
   })
 });
 
-export const collections = {docs, sections, categories};
+export const collections = {docs, sections, categories, components_category};

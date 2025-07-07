@@ -2,7 +2,7 @@ export function generate_link(Astro, link, slug) {
     return generate_rel_link(Astro, slug + '/' + Astro.params.version +
         '/' +
         Astro.params.lang +
-        link.slug.replace(
+        link.id.replace(
             Astro.params.version.replace(/\./g, '') +
             '/' +
             Astro.params.lang,

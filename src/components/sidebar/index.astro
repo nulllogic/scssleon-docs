@@ -1,33 +1,9 @@
 ---
 import {getCollection} from 'astro:content'
-const docsCollection = await getCollection('docs')
 import {generate_rel_link} from '~/utils/links'
-import path from 'path'
 
-const gettingStartedCollection = docsCollection.filter((doc) => {
-    if (doc?.data?.category) return doc?.data?.category.includes(
-        'getting-started')
-}).sort((a, b) => {
-    return b.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(a.slug.replace(/.*\/(\w+)\/?$/, '$1'))
-})
-
-const componentsCollection = docsCollection.filter((doc) => {
-    if (doc?.data?.category) return doc?.data?.category.includes('components')
-}).sort((a, b) => {
-    return a.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
-})
-
-const formsCollection = docsCollection.filter((doc) => {
-    if (doc?.data?.category) return doc?.data?.category.includes('forms')
-}).sort((a, b) => {
-    return a.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
-})
-
-const aboutCollection = docsCollection.filter((doc) => {
-    if (doc?.data?.category) return doc?.data?.category.includes('about')
-}).sort((a, b) => {
-    return a.slug.replace(/.*\/(\w+)\/?$/, '$1').localeCompare(b.slug.replace(/.*\/(\w+)\/?$/, '$1'))
-})
+const components_category = await getCollection('components_category');
+const docs = await getCollection('docs');
 
 const pathname = new URL(Astro.request.url).pathname
 const generate_class = (link) => {
@@ -35,7 +11,7 @@ const generate_class = (link) => {
     let url = generate_rel_link(Astro, 'docs/' + Astro.params.version +
         '/' +
         Astro.params.lang +
-        link.slug.replace(
+        link.id.replace(
             Astro.params.version.replace(/\./g, '') +
             '/' +
             Astro.params.lang,
@@ -56,78 +32,29 @@ import {generate_link} from '~/utils/links';
     <div class="card">
         <nav>
             <ul class="nav vertical">
-                <li class="item">
-                    <h5 class="title">Getting started</h5>
-                    <ul class="nav vertical">
-                        {
-                            gettingStartedCollection.map((doc, index) => {
-                                return (
-                                        <li class="item">
-                                            <a
-                                                    class:list={generate_class(doc)}
-                                                    href={generate_link(Astro, doc, 'docs')}
-                                            >{doc.slug.replace(/.*\/(\w+)\/?$/, '$1')}</a>
-                                        </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </li>
-                <li class="item">
-                    <h5 class="title">Components</h5>
-                    <ul class="nav vertical">
-                        {
-                            componentsCollection.map((doc, index) => {
-                                // console.log(doc)
-
-                                return (
-                                        <li class="item">
-                                            <a
-                                                    class:list={generate_class(doc)}
-                                                    href={generate_link(Astro, doc, 'docs')}
-                                            >{doc.slug.replace(/.*\/(\w+)\/?$/, '$1').replace(/_/g, ' ')}</a>
-                                            {doc.data?.schema &&
-                                                    <span class="badge">Schema</span>}
-                                        </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </li>
-                <li class="item">
-                    <h5 class="title">Forms</h5>
-                    <ul class="nav vertical">
-                        {
-                            formsCollection.map((doc, index) => {
-                                return (
-                                        <li class="item">
-                                            <a
-                                                    class:list={generate_class(doc)}
-                                                    href={generate_link(Astro, doc, 'docs')}
-                                            >{doc.slug.replace(/.*\/(\w+)\/?$/, '$1')}</a>
-                                        </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </li>
-                <li class="item">
-                    <h5 class="title">About</h5>
-                    <ul class="nav vertical">
-                        {
-                            aboutCollection.map((doc, index) => {
-                                return (
-                                        <li class="item">
-                                            <a
-                                                    class:list={generate_class(doc)}
-                                                    href={generate_link(Astro, doc, 'docs')}
-                                            >{doc.slug.replace(/.*\/(\w+)\/?$/, '$1')}</a>
-                                        </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </li>
+                {components_category.sort((a, b) => a?.data?.position - b?.data?.position).map((category) => {
+                    return (
+                            <li class="item">
+                                <h5 class="title">{category.data.title}</h5>
+                                <ul class="nav vertical">
+                                    {
+                                        docs.filter((doc) => doc.data.category === category.id)
+                                            .sort((a, b) => a?.data?.title.localeCompare(b?.data?.title))
+                                            .map((doc) => {
+                                            return (
+                                                    <li class="item">
+                                                        <a
+                                                                class:list={generate_class(doc)}
+                                                                href={generate_link(Astro, doc, 'docs')}
+                                                        >{doc.data.title}</a>
+                                                    </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </li>
+                    )
+                })}
             </ul>
         </nav>
     </div>
