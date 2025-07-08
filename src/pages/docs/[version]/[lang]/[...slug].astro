@@ -68,6 +68,11 @@ const {headings, Content} = await render(page);
     $theme: app.$theme
   );
 
+  @use "~/styles/scss/components/accordion" with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
+
 </style>
 
 <style lang="scss">
@@ -138,3 +143,82 @@ const {headings, Content} = await render(page);
     min-width: 1px;
   }
 </style>
+
+<script>
+  const accordion = (elements, options) => {
+    const defaults = {
+      accordion_item : ':scope > .item',
+      question_class : ':scope > .question',
+      answer_class : ':scope > .answer',
+      toggle_element : ':scope > .question > button',
+
+      show_multiply : false,
+      a11y : true
+    };
+
+    // Options
+    const settings = Object.assign({}, defaults, options);
+
+    // @TODO Add transitions
+    // @Add keycodes
+
+    const _a11y_checker = () => {
+      // @TODO Add aria-expanded check
+      // @TODO Add IDs
+    }
+
+    const _add_event_listeners = (question, answer, toggle_element) => {
+      toggle_element.addEventListener('click', (e) => {
+        e.preventDefault();
+        question.classList.toggle('open');
+        answer.toggleAttribute('hidden');
+
+        if(toggle_element.getAttribute('aria-expanded') !== 'true') {
+          toggle_element.setAttribute('aria-expanded', 'true');
+        } else {
+          toggle_element.setAttribute('aria-expanded', 'false');
+        }
+
+      })
+    }
+
+    const _make_ID = () => {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+        /[xy]/g, (c) => {
+          let r = (Math.random() * 16) | 0;
+          let v = c === 'x' ? r : (r & 0x3) | 0x8;
+          return v.toString(16);
+        },
+      );
+    }
+
+    const _init = () => {
+      // attach classes to buttons and containers
+      [].forEach.call(elements, (accordion) => {
+        let accordion_items = accordion.querySelectorAll(settings.accordion_item);
+        if(accordion_items.length > 0) {
+          [].forEach.call(accordion_items, (item) => {
+            _add_event_listeners(
+              item.querySelector(settings.question_class),
+              item.querySelector(settings.answer_class),
+              item.querySelector(settings.toggle_element)
+            );
+          })
+        }
+      });
+    }
+
+    // Initiating the accordion
+    if(accordion) {
+      _init();
+    }
+
+    return ({
+      elements : elements,
+      open : () => {}
+    })
+  }
+
+  const accords = accordion(document.querySelectorAll('.accordion'), {
+  });
+</script>

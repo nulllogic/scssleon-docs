@@ -388,9 +388,8 @@ const outline = await sass.compileStringAsync(`
     $theme: app.$theme
   );
 
-  // Base
-  // Special utility, that will dynamically generate CSS
-  // properties for HTML tags, specified in theme
+  // ↓ Amazing content
+  // Special class `.content` to allow formatting of the default html tags
   @use "../../styles/scss/content" with (
     $config: app.$config,
     $theme: app.$theme
