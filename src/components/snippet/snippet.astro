@@ -718,12 +718,9 @@ const {frame_url, preview, min_height} = Astro.props
             iframe.contentWindow.document.querySelector(
                 '.iframe').style.minHeight = iframe.dataset.minHeight + 'px'
         }
-
         iframe.style.height = iframe.contentWindow.document.body.scrollHeight +
             'px'
-
-        // Adding setTimeout function here as a temporary fix to bypass bug with animation inside iframe
-        setTimeout(() => iframe.style.visibility = 'visible', 300)
+        iframe.style.visibility = 'visible'
 
     }
 </script>
