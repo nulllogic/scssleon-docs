@@ -46,9 +46,9 @@ import Link from '~/components/link.astro'
 
   @include app.generate-component(
       $toc,
-      "toc",
+      'toc',
       app.$config,
       app.$theme,
-      (add_variable_prefix: false)
+      ( variable: (exclude : ('nav')) )
   );
 </style>

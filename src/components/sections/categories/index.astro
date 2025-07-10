@@ -1,43 +1,46 @@
 ---
-import {getCollection} from 'astro:content';
-import {Image} from 'astro:assets';
-import {generate_link} from '~/utils/links.ts';
+import { getCollection } from 'astro:content'
+import { Image } from 'astro:assets'
+import { generate_link } from '~/utils/links.ts'
 
 const sections = await getCollection('sections')
-const categories = await getCollection('section_category');
+const categories = await getCollection('section_category')
 ---
 <div class="sections">
-    {categories.map(category => {
-        return (
-                <div class="category">
-                    <div class="title">
-                        <h2>{category.data.title}</h2>
-                    </div>
-                    <div class="description">
-                        <p>{category.data.description}</p>
-                    </div>
-                    <div class="items">
-                        {sections.filter((section) => {
-                            if (section.data.categories) {
-                                return section.data.categories.some(cat => cat.id === category.id)
-                            } else {
-                                return false;
-                            }
-                        }).map((section) => {
-                            return (
-                                    <a href={generate_link(Astro, section, 'sections')} class="item" title={section.data.title}>
-                                        {section.data.image &&
-                                                <Image width={400} src={section.data.image.url}
-                                                       alt={section.data.image.alt}/>
-                                        }
-                                        {section.data.title}
-                                    </a>
-                            )
-                        })}
-                    </div>
+  {categories.map(category => {
+    return (
+            <div class="category">
+                <div class="title">
+                    <h2>{category.data.title}</h2>
                 </div>
-        )
-    })}
+                <div class="description">
+                    <p>{category.data.description}</p>
+                </div>
+                <div class="items">
+                  {sections.filter((section) => {
+                    if (section.data.categories) {
+                      return section.data.categories.some(
+                        cat => cat.id === category.id)
+                    } else {
+                      return false
+                    }
+                  }).map((section) => {
+                    return (
+                            <a href={generate_link(Astro, section, 'sections')}
+                               class="item" title={section.data.title}>
+                              {section.data.image &&
+                                      <Image width={400}
+                                             src={section.data.image.url}
+                                             alt={section.data.image.alt}/>
+                              }
+                              {section.data.title}
+                            </a>
+                    )
+                  })}
+                </div>
+            </div>
+    )
+  })}
 </div>
 
 <style lang="scss">
@@ -87,7 +90,6 @@ const categories = await getCollection('section_category');
       $sections,
       'sections',
       app.$config,
-      app.$theme,
-      (add_variable_prefix: false)
+      app.$theme
   );
 </style>
