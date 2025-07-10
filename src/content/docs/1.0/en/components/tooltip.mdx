@@ -8,11 +8,23 @@ toc: true
 import {Snippet} from "/src/components/snippet"
 
 ## Examples
-<Snippet frame_url={'components/tooltip/1'} preview={true}>
+<Snippet frame_url={'components/tooltip/1'} preview={true} min_height={150}>
   <Fragment slot="html">
     ```html
-    <div class="tooltip">
-      <span>test</span>
+    <div style="display: flex;gap: 15px;padding: 15px;">
+      <a href="#" class="has-tooltip">
+        Tooltip
+        <span class="tooltip">
+          <span>test</span>
+        </span>
+      </a>
+
+      <a href="#" class="has-tooltip">
+        ?
+        <span class="tooltip">
+          <span>test</span>
+        </span>
+      </a>
     </div>
     ```
   </Fragment>
@@ -28,7 +40,7 @@ import {Snippet} from "/src/components/snippet"
     // Load alert component
     @include app.generate-component(
       app.get-theme(app.$theme, 'components.tooltip'),
-      'tooltip',
+      'has-tooltip',
       app.$config,
       app.$theme
     );
