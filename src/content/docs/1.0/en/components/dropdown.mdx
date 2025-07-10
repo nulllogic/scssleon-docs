@@ -12,13 +12,13 @@ import {Snippet} from "/src/components/snippet"
 <Snippet frame_url={'components/dropdown/1'} preview={true} min_height={250}>
     <Fragment slot="html">
         ```html
-        <div class="dropdown on-hover">
+        <div class="has-dropdown on-hover">
             <button class="btn toggle" type="button" aria-expanded="false">
                 Dropdown button <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
                 <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"></path>
             </svg>
             </button>
-            <div class="menu">
+            <div class="dropdown">
               1 <br />
               2 <br />
               3 <br />
@@ -30,25 +30,22 @@ import {Snippet} from "/src/components/snippet"
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      ```scss
+      @use "sass:list";
+      @use "sass:string";
+      @use "sass:meta";
+      @use "sass:map";
 
-        @use "~/src/styles/app.scss" as app;
+      @use "~/src/styles/app.scss" as app;
 
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-        $dropdown: functions.get-theme(app.$theme, 'components.dropdown');
-
-        @include mixins.generate-component(
-            $dropdown,
-            "dropdown",
-            app.$config,
-            app.$theme
-        );
-        ```
+      // Load dropdown component
+      @include app.generate-component(
+        app.get-theme(app.$theme, 'components.dropdown'),
+        'has-dropdown',
+        app.$config,
+        app.$theme,
+        ( property: (name : 'dropdown') )
+      );
+      ```
     </Fragment>
 </Snippet>
