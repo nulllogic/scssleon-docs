@@ -1,27 +1,27 @@
 ---
 import Index from '../layouts/index.astro'
-import {Snippet} from '../components/snippet'
+import { Snippet } from '../components/snippet'
 
 //https://api.github.com/repos/nulllogic/scssleon/branches/master
 
 const response = await fetch(
-    'https://api.github.com/repos/nulllogic/scssleon/branches/master',
+  'https://api.github.com/repos/nulllogic/scssleon/branches/master',
 )
 const data = await response.json()
 const commit_date =
-    typeof data.message === 'undefined'
-        ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
-        })
-        : new Date()
+  typeof data.message === 'undefined'
+    ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    })
+    : new Date()
 ---
 
 <Index>
     <main>
 
-        <div class="welcome">
+        <section class="welcome">
             <div class="top_bg_glow"/>
             <div class="container xxl">
                 <h1 class="title">
@@ -34,18 +34,19 @@ const commit_date =
                 </h1>
 
                 <h2 class="subtitle">
-                    Ship higher-quality software faster. <br/>Be the hero of your engineering teams.
+                    Ship higher-quality software faster. <br/>Be the hero of
+                    your engineering teams.
                 </h2>
 
                 <p class="latest_commit">
                     <span class="badge">Latest Commit on GitHub: {
-                        commit_date
+                      commit_date
                     }</span>
                 </p>
             </div>
-        </div>
+        </section>
 
-        <div class="customize">
+        <section class="customize">
             <h2>Build software faster, together.</h2>
             <p>The most complete developer experience.</p>
 
@@ -82,7 +83,7 @@ const commit_date =
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <div class="features">
             <div class="container xxl">
@@ -119,6 +120,21 @@ const commit_date =
         Transform your developer experience
         Drive developer adoption and accelerate product growth with SCSSLeon.
 
+        <section class="get_started">
+            <div class="container xxl">
+                <h3 class="title">Get Started</h3>
+                <p>Improve security with flexible deployment options.</p>
+                <div class="grid">
+                    <div>
+                        1
+                    </div>
+                    <div>
+                        2
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 </Index>
 
@@ -132,219 +148,243 @@ const commit_date =
   @use "../styles/app.scss" as app;
 
   $welcome-section: (
-      --padding: 3rem 0,
-      text-align: center,
-      background: var(--background),
-      padding: var(--padding),
-      position: relative,
-      z-index: 1,
-      _colors: (
-          dark : (
-              background: rgba(5, 17, 4, 1) radial-gradient(at 0 0, rgba(16, 53, 13, 0.4) 35%, #00000000 70%),
-          )
+    --padding: 3rem 0,
+
+    background: var(--background),
+    padding: var(--padding),
+
+    text-align: center,
+    position: relative,
+
+    z-index: 1,
+
+    _colors: (
+      light : (
+        background: linear-gradient(rgb(242, 246, 234), rgb(229, 246, 237)),
       ),
-      _subclasses : (
-          '.title' : (
-              font-size: 4rem,
-              margin: 0 auto 15px auto,
-              text-align: center,
-              display: inline-flex,
-              align-items: center,
-              flex-direction: column,
-              letter-spacing: -0.022em,
-              _subclasses : (
-                  ".first" : (
-                      display: inline-block,
-                      height: auto,
-                      font-size: 8.6rem,
-                      background-clip: text,
-                      background-image: radial-gradient(89.470001% 51.040001% at 44.27% 50%, rgb(226, 227, 233) 0px, rgb(212, 214, 222) 52.73%, rgb(61, 63, 76) 100%),
-                      color: transparent
-                  ),
-                  ".second" : (
-                      display: inline-block,
-                      background-image: linear-gradient(135deg, color(display-p3 .6196078431 .4784313725 1/1) 0%, color(display-p3 .9960784314 .5450980392 .7333333333/1) 33.33%, color(display-p3 1 .7411764706 .4784313725/1) 66.67%, color(display-p3 .9725490196 .9176470588 .7647058824/1) 100%),
-                      background-clip: text,
-                      color: transparent,
-                      -webkit-text-fill-color: transparent,
-                    /*text-transform: uppercase,*/
-                    /*margin-top: -40px,*/
-                  ),
-                  ".line1" : (
-                      filter: blur(4px),
-                      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(27, 138, 27), rgba(0, 0, 0, 0)),
-                      height: 2px,
-                      display: block,
-                      width: 100%
-                  ),
-                  ".line2" : (
-                      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(30, 129, 23, 0.45), rgba(0, 0, 0, 0)),
-                      height: 1px,
-                      display: block,
-                      width: 100%,
-                      margin-top: -2px,
-                  ),
-                  ".line3" : (
-                      filter: blur(4px),
-                      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(35, 145, 24, 0.4), rgba(0, 0, 0, 0)),
-                      height: 5px,
-                      display: block,
-                      width: 100%,
-                      margin-top: -1px,
-                      max-width: 200px
-                  ),
-                  ".line4" : (
-                      filter: blur(4px),
-                      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(28, 188, 42), rgba(0, 0, 0, 0)),
-                      height: 1px,
-                      display: block,
-                      width: 100%,
-                      margin-top: -5px,
-                      max-width: 160px
-                  ),
-              )
-          ),
-          ".subtitle" : (
-              margin: 0 0 20px 0,
-              font-size: 2rem,
-          ),
-          ".latest_commit" : (
-              "_subclasses" : (
-                  "span" : (
-                      background: var(--background),
-                  )
-              ),
-              _colors: (
-                  dark : (
-                      background: rgba(65, 52, 99, 0.4)
-                  )
-              )
-          ),
-          ".top_bg_glow" : (
-              position: absolute,
-              top:0,
-              left:0,
-              width: 100%,
-              height: 100%,
-              background: radial-gradient(20% 80% at 50% -20%, rgba(94, 170, 146, 0.3), rgba(255, 255, 255, 0)),
-              pointer-events: none,
-          )
+      dark : (
+        background: rgba(5, 17, 4, 1) radial-gradient(at 0 0, rgba(16, 53, 13, 0.4) 35%, #00000000 70%),
       )
+    ),
+
+    _subclasses : (
+      '.title' : (
+
+        font-size: 4rem,
+        margin: 0 auto 15px auto,
+        text-align: center,
+        display: inline-flex,
+        align-items: center,
+        flex-direction: column,
+        letter-spacing: -0.022em,
+
+        _subclasses : (
+          '.first' : (
+
+            display: inline-block,
+            height: auto,
+            font-size: 8.6rem,
+            background-clip: text,
+            background-image: radial-gradient(89.470001% 51.040001% at 44.27% 50%, rgb(226, 227, 233) 0px, rgb(212, 214, 222) 52.73%, rgb(61, 63, 76) 100%),
+            color: transparent
+
+          ),
+          '.second' : (
+
+            display: inline-block,
+            background-image: linear-gradient(135deg, color(display-p3 .6196078431 .4784313725 1/1) 0%, color(display-p3 .9960784314 .5450980392 .7333333333/1) 33.33%, color(display-p3 1 .7411764706 .4784313725/1) 66.67%, color(display-p3 .9725490196 .9176470588 .7647058824/1) 100%),
+            background-clip: text,
+            color: transparent,
+            -webkit-text-fill-color: transparent,
+            /*text-transform: uppercase,*/
+            /*margin-top: -40px,*/
+          ),
+          '.line1' : (
+
+            filter: blur(4px),
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(27, 138, 27), rgba(0, 0, 0, 0)),
+            height: 2px,
+            display: block,
+            width: 100%
+
+          ),
+          '.line2' : (
+
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(30, 129, 23, 0.45), rgba(0, 0, 0, 0)),
+            height: 1px,
+            display: block,
+            width: 100%,
+            margin-top: -2px,
+
+          ),
+          '.line3' : (
+
+            filter: blur(4px),
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(35, 145, 24, 0.4), rgba(0, 0, 0, 0)),
+            height: 5px,
+            display: block,
+            width: 100%,
+            margin-top: -1px,
+            max-width: 200px
+
+          ),
+          '.line4' : (
+
+            filter: blur(4px),
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(28, 188, 42), rgba(0, 0, 0, 0)),
+            height: 1px,
+            display: block,
+            width: 100%,
+            margin-top: -5px,
+            max-width: 160px
+
+          ),
+        )
+      ),
+
+      '.subtitle' : (
+        margin: 0 0 20px 0,
+        font-size: 2rem,
+      ),
+      '.latest_commit' : (
+        _subclasses : (
+          'span' : (
+            background: var(--background),
+          )
+        ),
+        _colors: (
+          dark : (
+            background: rgba(65, 52, 99, 0.4)
+          )
+        )
+      ),
+      '.top_bg_glow' : (
+
+        position: absolute,
+        top:0,
+        left:0,
+        width: 100%,
+        height: 100%,
+        background: radial-gradient(20% 80% at 50% -20%, rgba(94, 170, 146, 0.3), rgba(255, 255, 255, 0)),
+        pointer-events: none,
+
+      )
+    )
   );
 
   @include app.generate-component(
-          $welcome-section,
-          'welcome',
-          app.$config,
-          app.$theme
+      $welcome-section,
+      'welcome',
+      app.$config,
+      app.$theme
   );
 
   $customize-section: (
-      background: var(--background),
-      _colors: (
-          dark: (
-              background: rgba(5, 17, 4, 1)
-          )
-      ),
-      _subclasses : (
-          ".title" : (
-              font-size: 3.25rem,
-          ),
-          ".grid" : (
-              display: grid,
-              grid-template-columns: 1fr 1fr,
-              grid-gap: 1.5rem
-          )
+    background: var(--background),
+    _colors: (
+      dark: (
+        background: rgba(5, 17, 4, 1)
       )
+    ),
+    _subclasses : (
+      '.title' : (
+        font-size: 3.25rem,
+      ),
+      '.grid' : (
+        display: grid,
+        grid-template-columns: 1fr 1fr,
+        grid-gap: 1.5rem
+      )
+    )
   );
 
   @include app.generate-component(
-          $customize-section,
-          'customize',
-          app.$config,
-          app.$theme
+      $customize-section,
+      'customize',
+      app.$config,
+      app.$theme
   );
 
   $card: app.get-theme(app.$theme, 'components.card');
 
   $card: map.deep-merge($card, (
-      border: var(--border),
-      background: var(--background),
-      box-shadow: var(--box-shadow),
-      _colors: (
-          dark : (
-              border: 1px solid rgba(74, 58, 118, .5),
-              background: string.unquote("linear-gradient(165deg, rgb(29, 30, 37) -5%, rgb(22, 23, 29) 25%)"),
-              box-shadow: 0 0 10px rgba(0, 0, 0, .3)
-          )
+    border: var(--border),
+    background: var(--background),
+    box-shadow: var(--box-shadow),
+    _colors: (
+      dark : (
+        border: 1px solid rgba(74, 58, 118, .5),
+        background: string.unquote("linear-gradient(165deg, rgb(29, 30, 37) -5%, rgb(22, 23, 29) 25%)"),
+        box-shadow: 0 0 10px rgba(0, 0, 0, .3)
       )
+    )
   ));
 
   $features-section: (
-      --padding: 35px 15px,
-      background: var(--background),
-      padding: var(--padding),
-      _colors: (
-          dark: (
-              background: rgba(5, 17, 4, 1)
-          )
-      ),
-      responsive: (
-          md: (
-              --padding: 35px 5px,
-          ),
-          lg: (
-              --padding: 35px 5px,
-          ),
-      ),
-      _subclasses : (
-          ".grid" : (
-              display: grid,
-              width: 100%,
-              grid-template-columns: repeat(12, minmax(0, 1fr)),
-              grid-auto-rows: 5rem,
-              grid-gap: 1.25rem,
-              position: relative,
-              _subclasses : (
-                  ".first" : (
-                      grid-row: auto/span 5,
-                      grid-column: auto/span 7,
-                      grid-auto-flow: row,
-                      _subclasses : (
-                          ".card" : $card
-                      )
-                  ),
-                  ".second" : (
-                      grid-row: auto/span 5,
-                      grid-column: auto/span 5,
-                      _subclasses : (
-                          ".card" : $card
-                      )
-                  ),
-                  ".third" : (
-                      grid-row: auto/span 5,
-                      grid-column: auto/span 5,
-                      _subclasses : (
-                          ".card" : $card
-                      )
-                  ),
-                  ".fourth" : (
-                      grid-row: auto/span 5,
-                      grid-column: auto/span 7,
-                      _subclasses : (
-                          ".card" : $card
-                      )
-                  )
-              )
-          )
+    --padding: 35px 15px,
+    background: var(--background),
+    padding: var(--padding),
+    _colors: (
+      dark: (
+        background: rgba(5, 17, 4, 1)
       )
+    ),
+    responsive: (
+      md: (
+        --padding: 35px 5px,
+      ),
+      lg: (
+        --padding: 35px 5px,
+      ),
+    ),
+    _subclasses : (
+      '.grid' : (
+        display: grid,
+        width: 100%,
+        grid-template-columns: repeat(12, minmax(0, 1fr)),
+        grid-auto-rows: 5rem,
+        grid-gap: 1.25rem,
+        position: relative,
+        _subclasses : (
+          '.first' : (
+            grid-row: auto/span 5,
+            grid-column: auto/span 7,
+            grid-auto-flow: row,
+            _subclasses : (
+              '.card' : $card
+            )
+          ),
+          '.second' : (
+            grid-row: auto/span 5,
+            grid-column: auto/span 5,
+            _subclasses : (
+              '.card' : $card
+            )
+          ),
+          '.third' : (
+            grid-row: auto/span 5,
+            grid-column: auto/span 5,
+            _subclasses : (
+              '.card' : $card
+            )
+          ),
+          '.fourth' : (
+            grid-row: auto/span 5,
+            grid-column: auto/span 7,
+            _subclasses : (
+              '.card' : $card
+            )
+          )
+        )
+      )
+    )
   );
 
   @include app.generate-component(
-          $features-section,
-          'features',
-          app.$config,
-          app.$theme
+      $features-section,
+      'features',
+      app.$config,
+      app.$theme
   );
 
   .sr-only {
@@ -358,4 +398,35 @@ const commit_date =
     position: absolute;
     overflow: hidden;
   }
+
+  $get_started: (
+    background: var(--background),
+    padding: 3rem,
+
+    _colors: (
+      light: (
+        background: string.unquote('linear-gradient(rgba(1, 142, 245, 0.15), rgba(247, 247, 247, 0.5))'),
+      ),
+      dark: (
+        background: rgba(5, 17, 4, 1)
+      )
+    ),
+    _subclasses : (
+      '.title' : (
+        font-size: clamp(1.6018rem, 1.5141rem + 0.349vw, 1.802rem),
+      ),
+      '.grid' : (
+        display: grid,
+        grid-template-columns: 1fr 1fr,
+        grid-gap: 1.5rem
+      )
+    )
+  );
+
+  @include app.generate-component(
+      $get_started,
+      'get_started',
+      app.$config,
+      app.$theme
+  );
 </style>

@@ -1,44 +1,44 @@
 ---
-export const prerender = true;
-import {getCollection, getEntry, render} from 'astro:content';
+export const prerender = true
+import { getCollection, getEntry, render } from 'astro:content'
 
-import Docs from '~/layouts/docs.astro';
-import Toc from '~/components/toc/index.astro';
+import Docs from '~/layouts/docs.astro'
+import Toc from '~/components/toc/index.astro'
 import Link from '~/components/link.astro'
 
-export async function getStaticPaths() {
-    const docsCollection = await getCollection('docs');
-    return docsCollection.map((doc) => {
-        const [version, lang, ...slug] = doc.id.split('/');
-        return {
-            params: {
-                version: version.split('').join('.'), // we receive "10" string, transforming to "1.0"
-                lang: lang,
-                slug: slug.join('/'),
-            },
-            props: doc
-        }
-    })
+export async function getStaticPaths () {
+  const docsCollection = await getCollection('docs')
+  return docsCollection.map((doc) => {
+    const [version, lang, ...slug] = doc.id.split('/')
+    return {
+      params: {
+        version: version.split('').join('.'), // we receive "10" string, transforming to "1.0"
+        lang: lang,
+        slug: slug.join('/'),
+      },
+      props: doc,
+    }
+  })
 }
 
-const {id} = Astro?.props;
+const { id } = Astro?.props
 
 if (id === undefined) {
-    throw new Error('ID is required');
+  throw new Error('ID is required')
 }
 
 // 2. Query for the entry directly using the request slug
-const page = await getEntry('docs', id);
+const page = await getEntry('docs', id)
 
 // 3. Redirect if the entry does not exist
 if (page === undefined) {
-    return Astro.redirect("/404");
+  return Astro.redirect('/404')
 }
 
 const github_page =
-    "https://github.com/nulllogic/scssleon/blob/master/docs/" + page.id;
+  'https://github.com/nulllogic/scssleon/blob/master/docs/' + page.id
 
-const {headings, Content} = await render(page);
+const { headings, Content } = await render(page)
 ---
 
 <Docs>
@@ -50,7 +50,15 @@ const {headings, Content} = await render(page);
             <h1 class="title">{page?.data?.title}</h1>
             <p class="subtitle">{page?.data?.description}</p>
         </div>
-        <Content components={{a: Link}}/>
+        <Content components={{ a: Link }}/>
+        <a href="#" class="btn btn-link">
+            <svg aria-hidden="true" class="astro-s727lrur astro-vtqsyavv"
+                 width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+                 style="--sl-icon-size: 1.2em;">
+                <path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"></path>
+            </svg>
+            Edit page ✨
+        </a>
     </div>
 </Docs>
 
@@ -147,17 +155,17 @@ const {headings, Content} = await render(page);
 <script>
   const accordion = (elements, options) => {
     const defaults = {
-      accordion_item : ':scope > .item',
-      question_class : ':scope > .question',
-      answer_class : ':scope > .answer',
-      toggle_element : ':scope > .question > button',
+      accordion_item: ':scope > .item',
+      question_class: ':scope > .question',
+      answer_class: ':scope > .answer',
+      toggle_element: ':scope > .question > button',
 
-      show_multiply : false,
-      a11y : true
-    };
+      show_multiply: false,
+      a11y: true,
+    }
 
     // Options
-    const settings = Object.assign({}, defaults, options);
+    const settings = Object.assign({}, defaults, options)
 
     // @TODO Add transitions
     // @Add keycodes
@@ -169,14 +177,14 @@ const {headings, Content} = await render(page);
 
     const _add_event_listeners = (question, answer, toggle_element) => {
       toggle_element.addEventListener('click', (e) => {
-        e.preventDefault();
-        question.classList.toggle('open');
-        answer.toggleAttribute('hidden');
+        e.preventDefault()
+        question.classList.toggle('open')
+        answer.toggleAttribute('hidden')
 
-        if(toggle_element.getAttribute('aria-expanded') !== 'true') {
-          toggle_element.setAttribute('aria-expanded', 'true');
+        if (toggle_element.getAttribute('aria-expanded') !== 'true') {
+          toggle_element.setAttribute('aria-expanded', 'true')
         } else {
-          toggle_element.setAttribute('aria-expanded', 'false');
+          toggle_element.setAttribute('aria-expanded', 'false')
         }
 
       })
@@ -185,40 +193,40 @@ const {headings, Content} = await render(page);
     const _make_ID = () => {
       return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
         /[xy]/g, (c) => {
-          let r = (Math.random() * 16) | 0;
-          let v = c === 'x' ? r : (r & 0x3) | 0x8;
-          return v.toString(16);
+          let r = (Math.random() * 16) | 0
+          let v = c === 'x' ? r : (r & 0x3) | 0x8
+          return v.toString(16)
         },
-      );
+      )
     }
 
     const _init = () => {
       // attach classes to buttons and containers
       [].forEach.call(elements, (accordion) => {
-        let accordion_items = accordion.querySelectorAll(settings.accordion_item);
-        if(accordion_items.length > 0) {
+        let accordion_items = accordion.querySelectorAll(
+          settings.accordion_item)
+        if (accordion_items.length > 0) {
           [].forEach.call(accordion_items, (item) => {
             _add_event_listeners(
               item.querySelector(settings.question_class),
               item.querySelector(settings.answer_class),
-              item.querySelector(settings.toggle_element)
-            );
+              item.querySelector(settings.toggle_element),
+            )
           })
         }
-      });
+      })
     }
 
     // Initiating the accordion
-    if(accordion) {
-      _init();
+    if (accordion) {
+      _init()
     }
 
     return ({
-      elements : elements,
-      open : () => {}
+      elements: elements,
+      open: () => {},
     })
   }
 
-  const accords = accordion(document.querySelectorAll('.accordion'), {
-  });
+  const accords = accordion(document.querySelectorAll('.accordion'), {})
 </script>
