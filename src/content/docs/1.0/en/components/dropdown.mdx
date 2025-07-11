@@ -19,12 +19,40 @@ import {Snippet} from "/src/components/snippet"
             </svg>
             </a>
             <div class="dropdown">
-              1 <br />
-              2 <br />
-              3 <br />
-              4 <br />
-              5 <br />
-              6 <br />
+              <ul class="nav vertical" style="--xii-nav-gap: 1rem;">
+                <li class="item">
+                  <a class="link active" aria-current="page" href="#">Active</a>
+                </li>
+                <li class="item">
+                  <div class="has-dropdown on-hover" style="width:100%">
+                    <a class="link" href="#">Link</a>
+                    <div class="dropdown to-right">
+                      <ul class="nav vertical" style="--xii-nav-gap: 1rem;">
+                        <li class="item">
+                          <a class="link active" aria-current="page" href="#">Active</a>
+                        </li>
+                        <li class="item">
+                          <div class="has-dropdown on-hover">
+                            <a class="link" href="#">Link</a>
+                          </div>
+                        </li>
+                        <li class="item">
+                          <a class="link" href="#">Link</a>
+                        </li>
+                        <li class="item">
+                          <a class="link disabled" aria-disabled="true">Disabled</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="item">
+                  <a class="link" href="#">Link</a>
+                </li>
+                <li class="item">
+                  <a class="link disabled" aria-disabled="true">Disabled</a>
+                </li>
+              </ul>
             </div>
         </div>
         ```
@@ -39,12 +67,20 @@ import {Snippet} from "/src/components/snippet"
       @use "~/src/styles/app.scss" as app;
 
       // Load dropdown component
-      @include app.generate-component(
-        app.get-theme(app.$theme, 'components.dropdown'),
-        'has-dropdown',
-        app.$config,
-        app.$theme,
-        ( property: (name : 'dropdown', exclude : ('nav') ))
+      @include app.generate-components(
+        $components : (
+          (
+            app.get-theme(app.$theme, 'components.dropdown'),
+            'has-dropdown',
+            ( property: (name : 'dropdown', exclude : ('nav') ))
+          ),
+          (
+            app.get-theme(app.$theme, 'components.nav'),
+            'nav',
+          )
+        ),
+        $config : app.$config,
+        $theme : app.$theme,
       );
       ```
     </Fragment>
