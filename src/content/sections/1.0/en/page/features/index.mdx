@@ -1,0 +1,131 @@
+---
+title: Features
+description: bla bla bla
+categories:
+- page
+image :
+  url : './features.jpg'
+  alt : 'Form layout'
+---
+
+import {Snippet} from "/src/components/snippet"
+
+## Form example
+
+<Snippet frame_url={'sections/page/features/1'} preview={true}>
+  <Fragment slot="html">
+    ```html
+    <div class="features">
+      <div class="item">
+        <span class="number">01</span>
+        <span class="title">
+          Set up your account
+        </span>
+        <p class="description">
+          Submit your details, connect your accounting software and request credit if needed. Receive your offer as soon
+          as your account is approved.
+        </p>
+      </div>
+      <div class="item">
+        <span class="number">02</span>
+        <span class="title">
+          Set up workflows
+        </span>
+        <p class="description">
+          Invite your team, set up approval flows, and batch invoices into efficient pay runs that work the way you need them to.
+        </p>
+      </div>
+      <div class="item">
+        <span class="number">03</span>
+        <span class="title">
+          Get control
+        </span>
+        <p class="description">
+          With all payments in one place, you’ll always know when cash is tight – and when to put your credit to work.
+        </p>
+      </div>
+    </div>
+    ```
+  </Fragment>
+  <Fragment slot="scss">
+    ```scss
+    @use "sass:list";
+    @use "sass:string";
+    @use "sass:meta";
+    @use "sass:map";
+
+    @use "~/src/styles/app.scss" as app;
+
+    $features : (
+
+      display: grid,
+      row-gap : 1rem,
+      column-gap : 1rem,
+      grid-template-columns: 1fr,
+      /***/
+      _responsive : (
+        md: (
+          grid-template-columns: 1fr 1fr 1fr,
+        )
+      ),
+      _colors : (
+        light : (
+          number : rgb(5, 161, 5),
+          title: rgb(15, 15, 15),
+          description: rgb(108, 117, 116)
+        ),
+        dark: (
+          number : rgb(5, 161, 5),
+          title: rgb(215, 215, 215),
+          description: rgb(108, 117, 116)
+        )
+      ),
+      /***/
+      _subclasses : (
+        '.item' : (
+          position: relative,
+          padding: 0 0.75rem,
+          /***/
+          _subclasses : (
+            '&:not(:first-child):before' : (
+              content : '',
+              display: block,
+              height: 100%,
+              width: 1px,
+              left: -10px,
+              top: 0,
+              background: #ccc,
+              position: absolute,
+            ),
+            '.number' : (
+              display: block,
+              width: 100%,
+              margin: 0 0 15px 0,
+              color: var(--number),
+              position: relative,
+            ),
+            '.title' : (
+              display: block,
+              width: 100%,
+              margin: 0 0 15px 0,
+              font-size: 1.225rem,
+              color: var(--title),
+              font-weight: 600,
+            ),
+            '.description' : (
+              color: var(--description),
+            )
+          )
+        )
+      )
+    );
+
+    @include app.generate-component(
+      $features,
+      'features',
+      app.$config,
+      app.$theme
+    );
+    ```
+  </Fragment>
+</Snippet>

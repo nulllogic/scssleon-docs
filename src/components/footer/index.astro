@@ -12,7 +12,7 @@ import Link from '~/components/link.astro'
                 </div>
                 <p>
                     Designed and built with all the love in the world by the
-                    NullLogic
+                    <Link href="https://nulllogic.net" aria-label="Home" title="Home">NullLogic</Link>
                     team with the help of our contributors.
                 </p>
                 <p>Currently v</p>
@@ -159,3 +159,67 @@ import Link from '~/components/link.astro'
         }
     });
 </script>
+
+<style is:global>
+    .spinner {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center
+    }
+
+    .spinner-circle {
+        transform-origin: center;
+        animation:spinner-circle-animate 1s step-start infinite
+    }
+
+    rect {
+        fill:rgb(161, 161, 161);
+    }
+
+    @keyframes spinner-circle-animate {
+        0% {
+            transform:rotate(0)
+        }
+
+        10% {
+            transform:rotate(36deg)
+        }
+
+        20% {
+            transform:rotate(72deg)
+        }
+
+        30% {
+            transform:rotate(108deg)
+        }
+
+        40% {
+            transform:rotate(144deg)
+        }
+
+        50% {
+            transform:rotate(180deg)
+        }
+
+        60% {
+            transform:rotate(216deg)
+        }
+
+        70% {
+            transform:rotate(252deg)
+        }
+
+        80% {
+            transform:rotate(288deg)
+        }
+
+        90% {
+            transform:rotate(324deg)
+        }
+
+        to {
+            transform:rotate(360deg)
+        }
+    }
+</style>

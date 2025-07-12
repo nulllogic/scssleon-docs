@@ -1,21 +1,21 @@
 ---
 import Index from '../layouts/index.astro'
-import { Snippet } from '../components/snippet'
+import {Snippet} from '../components/snippet'
 
 //https://api.github.com/repos/nulllogic/scssleon/branches/master
 
 const response = await fetch(
-  'https://api.github.com/repos/nulllogic/scssleon/branches/master',
+    'https://api.github.com/repos/nulllogic/scssleon/branches/master',
 )
 const data = await response.json()
 const commit_date =
-  typeof data.message === 'undefined'
-    ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    })
-    : new Date()
+    typeof data.message === 'undefined'
+        ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+        })
+        : new Date()
 ---
 
 <Index>
@@ -38,23 +38,36 @@ const commit_date =
                     your engineering teams.
                 </h2>
 
+                <div class="grid" style="display:grid;grid-template-columns: 1fr 1fr;max-width:300px;margin: 0 auto;">
+                    <div>
+                        <code>npm i test</code>
+                    </div>
+                    <div>
+                        <a href="/docs/1.0/en/getting-started/introduction" class="btn">Get started</a>
+                    </div>
+                </div>
+
+                <div>
+                    Currently v0.0.1
+                </div>
+
                 <p class="latest_commit">
                     <span class="badge">Latest Commit on GitHub: {
-                      commit_date
+                        commit_date
                     }</span>
                 </p>
             </div>
         </section>
 
         <section class="customize">
-            <h2>Build software faster, together.</h2>
-            <p>The most complete developer experience.</p>
-
-            ---
-            <h2>Crafted for the most productive teams.</h2>
-            <p>Precision. Elegance. Performance.</p>
-
             <div class="container xxl">
+
+                <h2>Build software faster, together.</h2>
+                <p>The most complete developer experience.</p>
+
+                ---
+                <h2>Crafted for the most productive teams.</h2>
+                <p>Precision. Elegance. Performance.</p>
 
 
                 Start coding.
@@ -71,8 +84,12 @@ const commit_date =
                         <h3>Include all of SCSSLeon’s parts</h3>
                         <p>Import one stylesheet and you're off to the races
                             with every feature of our CSS.</p>
-                        <Snippet>
-                            // Variable overrides first
+                        <Snippet preview={true}>
+                            <Fragment slot={'html'}>
+                                ```html
+                                ## Include all of SCSSLeon
+                                ```
+                            </Fragment>
                         </Snippet>
                     </div>
                     <div class="column">
@@ -135,16 +152,16 @@ const commit_date =
 
         <section class="get_started">
             <div class="container xxl">
-                <h3 class="title">Get started</h3>
-                <p>Improve security with flexible deployment options.</p>
-                <p>Start building your
-                    website today</p>
-                <div class="grid">
-                    <div>
-                        1
-                    </div>
-                    <div>
-                        Read the docs
+                <div style="margin: 0 auto; display: inline-block;">
+                    <h3 class="title">Ready for more productive development?</h3>
+                    <p>Try SCSSLeon for a few sessions and start building your product today</p>
+                    <div class="grid">
+                        <div>
+                            Ready. Code. Ship.
+                        </div>
+                        <div>
+                            <a href="#" class="btn">Read the docs</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -160,80 +177,87 @@ const commit_date =
   @use "sass:string";
   @use "sass:map";
 
-  @use "../styles/app.scss" as app;
+  @use "~/styles/app.scss" as app;
+
+  // ↓ Buttons
+  @use '~/styles/scss/components/button' with (
+      $config: app.$config,
+      $theme: app.$theme
+  );
 
   $welcome-section: (
     --padding: 3rem 0,
-
     background: var(--background),
     padding: var(--padding),
-
     text-align: center,
     position: relative,
-
     z-index: 1,
-
     _colors: (
       light : (
-        background: string.unquote('linear-gradient(rgb(242, 246, 234), rgb(229, 246, 237))'),
+        background: string.unquote('radial-gradient(at 53% 78%, rgba(255, 255, 0, 0.3) 0px, transparent 50%), radial-gradient(at 71% 91%, rgba(51, 255, 0, 0.3) 0px, transparent 50%), radial-gradient(at 31% 91%, rgba(255, 128, 0, 0.17) 0px, transparent 50%)'),
       ),
       dark : (
         background: rgba(5, 17, 4, 1) radial-gradient(at 0 0, rgba(16, 53, 13, 0.4) 35%, #00000000 70%),
       )
     ),
-
     _subclasses : (
       '.title' : (
-
         font-size: 4rem,
         margin: 0 auto 15px auto,
         text-align: center,
         display: inline-flex,
         align-items: center,
         flex-direction: column,
-        letter-spacing: -0.022em,
-
         _subclasses : (
           '.first' : (
-
             display: inline-block,
             height: auto,
             font-size: 8.6rem,
             background-clip: text,
-            background-image: radial-gradient(89.470001% 51.040001% at 44.27% 50%, rgb(226, 227, 233) 0px, rgb(212, 214, 222) 52.73%, rgb(61, 63, 76) 100%),
-            color: transparent
-
+            background-image: var(--title-gradient),
+            color: transparent,
+            _colors: (
+              light: (
+                title-gradient: radial-gradient(89.470001% 51.040001% at 44.27% 50%, rgb(1, 105, 8), rgb(28, 111, 26) 52.73%, rgb(0, 33, 11)),
+              ),
+              dark: (
+                title-gradient: radial-gradient(89.470001% 51.040001% at 44.27% 50%, rgb(226, 227, 233) 0px, rgb(212, 214, 222) 52.73%, rgb(61, 63, 76) 100%),
+              )
+            ),
           ),
           '.second' : (
-
             display: inline-block,
-            background-image: linear-gradient(135deg, color(display-p3 .6196078431 .4784313725 1/1) 0%, color(display-p3 .9960784314 .5450980392 .7333333333/1) 33.33%, color(display-p3 1 .7411764706 .4784313725/1) 66.67%, color(display-p3 .9725490196 .9176470588 .7647058824/1) 100%),
+            // hsl(47deg 100% 53%)
+            background-image: var(--subtitle-gradient),
             background-clip: text,
             color: transparent,
             -webkit-text-fill-color: transparent,
             /*text-transform: uppercase,*/
             /*margin-top: -40px,*/
+            _colors : (
+              light: (
+                subtitle-gradient : string.unquote('linear-gradient(#fff3, #fff3), linear-gradient(90deg, #fb9191 25%, #f3e56b 75%)'),
+              ),
+              dark : (
+                subtitle-gradient : linear-gradient(135deg, color(display-p3 .6196078431 .4784313725 1/1) 0%, color(display-p3 .9960784314 .5450980392 .7333333333/1) 33.33%, color(display-p3 1 .7411764706 .4784313725/1) 66.67%, color(display-p3 .9725490196 .9176470588 .7647058824/1) 100%),
+              )
+            )
           ),
           '.line1' : (
-
             filter: blur(4px),
             background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(27, 138, 27), rgba(0, 0, 0, 0)),
             height: 2px,
             display: block,
             width: 100%
-
           ),
           '.line2' : (
-
             background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(30, 129, 23, 0.45), rgba(0, 0, 0, 0)),
             height: 1px,
             display: block,
             width: 100%,
             margin-top: -2px,
-
           ),
           '.line3' : (
-
             filter: blur(4px),
             background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(35, 145, 24, 0.4), rgba(0, 0, 0, 0)),
             height: 5px,
@@ -241,10 +265,8 @@ const commit_date =
             width: 100%,
             margin-top: -1px,
             max-width: 200px
-
           ),
           '.line4' : (
-
             filter: blur(4px),
             background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(28, 188, 42), rgba(0, 0, 0, 0)),
             height: 1px,
@@ -252,11 +274,9 @@ const commit_date =
             width: 100%,
             margin-top: -5px,
             max-width: 160px
-
           ),
         )
       ),
-
       '.subtitle' : (
         margin: 0 0 20px 0,
         font-size: 2rem,
@@ -274,15 +294,21 @@ const commit_date =
         )
       ),
       '.top_bg_glow' : (
-
         position: absolute,
         top:0,
         left:0,
         width: 100%,
         height: 100%,
-        background: radial-gradient(20% 80% at 50% -20%, rgba(94, 170, 146, 0.3), rgba(255, 255, 255, 0)),
+        background: var(--top-glow),
         pointer-events: none,
-
+        _colors : (
+          light: (
+            top-glow: radial-gradient(20% 80% at 50% -20%, rgba(223, 213, 9, 0.52), rgba(255, 255, 255, 0))
+          ),
+          dark : (
+            top-glow: radial-gradient(20% 80% at 50% -20%, rgba(94, 170, 146, 0.3), rgba(255, 255, 255, 0))
+          )
+        )
       )
     )
   );
@@ -295,6 +321,7 @@ const commit_date =
   );
 
   $customize-section: (
+    box-shadow: string.unquote('0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset'),
     background: var(--background),
     _colors: (
       dark: (
@@ -417,7 +444,7 @@ const commit_date =
   $get_started: (
     background: var(--background),
     padding: 3rem,
-
+    text-align: center,
     _colors: (
       light: (
         background: string.unquote('linear-gradient(rgba(1, 142, 245, 0.15), rgba(247, 247, 247, 0.5))'),
