@@ -96,8 +96,13 @@ const {headings, Content} = await render(page)
 
   $main: (
     display: grid,
-    grid-template-columns: minmax(0,1fr) 18rem,
+    grid-template-columns: minmax(0,1fr),
     grid-gap: 1.5rem,
+    _responsive : (
+      lg: (
+        grid-template-columns: minmax(0,1fr) 15rem,
+      )
+    )
   );
 
   @include app.generate-component(

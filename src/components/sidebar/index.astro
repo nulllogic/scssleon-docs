@@ -1,62 +1,71 @@
 ---
-import {getCollection} from 'astro:content'
-import {generate_rel_link} from '~/utils/links'
+import { getCollection } from 'astro:content'
+import { generate_rel_link } from '~/utils/links'
 
-const components_category = await getCollection('components_category');
-const docs = await getCollection('docs');
+const components_category = await getCollection('components_category')
+const docs = await getCollection('docs')
 
 const pathname = new URL(Astro.request.url).pathname
 const generate_class = (link) => {
-    let classes = ['link']
-    let url = generate_rel_link(Astro, 'docs/' + Astro.params.version +
-        '/' +
-        Astro.params.lang +
-        link.id.replace(
-            Astro.params.version.replace(/\./g, '') +
-            '/' +
-            Astro.params.lang,
-            '',
-        ))
+  let classes = ['link']
+  let url = generate_rel_link(Astro, 'docs/' + Astro.params.version +
+    '/' +
+    Astro.params.lang +
+    link.id.replace(
+      Astro.params.version.replace(/\./g, '') +
+      '/' +
+      Astro.params.lang,
+      '',
+    ))
 
-    if (pathname === url.pathname) {
-        classes.push('active')
-    }
+  if (pathname === url.pathname) {
+    classes.push('active')
+  }
 
-    return [classes]
+  return [classes]
 }
 
 const { class: className, ...rest } = Astro.props
 
-import {generate_link} from '~/utils/links';
+import { generate_link } from '~/utils/links'
 ---
 
 <aside class:list={['sidebar', className]} {...rest}>
-    <div style="position: sticky; top: 60px;left: 0;height: auto;overflow-y: auto;max-height: calc(100dvh - 60px); padding-bottom: 60px;">
+    <div style="position: sticky; top: 60px;left: 0;height: auto;overflow-y: auto;max-height: calc(100dvh - 60px); padding-bottom: 60px;padding-right: 15px;">
         <div class="card">
             <nav>
                 <ul class="nav vertical">
-                    {components_category.sort((a, b) => a?.data?.position - b?.data?.position).map((category) => {
-                        return (
-                                <li class="item">
-                                    <h5 class="title">{category.data.title}</h5>
-                                    <ul class="nav vertical">
-                                        {
-                                            docs.filter((doc) => doc.data.category === category.id)
-                                                .sort((a, b) => a?.data?.title.localeCompare(b?.data?.title))
-                                                .map((doc) => {
-                                                    return (
-                                                            <li class="item">
-                                                                <a
-                                                                        class:list={generate_class(doc)}
-                                                                        href={generate_link(Astro, doc, 'docs')}
-                                                                >{doc.data.title}</a>
-                                                            </li>
-                                                    )
-                                                })
-                                        }
-                                    </ul>
-                                </li>
-                        )
+                  {components_category.sort(
+                    (a, b) => a?.data?.position - b?.data?.position).
+                    map((category) => {
+                      return (
+                              <li class="item">
+                                  <h5 class="title">{category.data.title}</h5>
+                                  <ul class="nav vertical">
+                                    {
+                                      docs.filter((doc) => doc.data.category ===
+                                        category.id).
+                                        sort((
+                                          a,
+                                          b) => a?.data?.title.localeCompare(
+                                          b?.data?.title)).
+                                        map((doc) => {
+                                          return (
+                                                  <li class="item">
+                                                      <a
+                                                              class:list={generate_class(
+                                                                doc)}
+                                                              href={generate_link(
+                                                                Astro, doc,
+                                                                'docs')}
+                                                      >{doc.data.title}</a>
+                                                  </li>
+                                          )
+                                        })
+                                    }
+                                  </ul>
+                              </li>
+                      )
                     })}
                 </ul>
             </nav>
