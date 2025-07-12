@@ -57,11 +57,12 @@ import {Snippet} from "/src/components/snippet"
     @use "~/src/styles/app.scss" as app;
 
     $features : (
-
       display: grid,
       row-gap : 1rem,
       column-gap : 1rem,
       grid-template-columns: 1fr,
+      padding: 0.5rem 0,
+
       /***/
       _responsive : (
         md: (
@@ -89,13 +90,18 @@ import {Snippet} from "/src/components/snippet"
           _subclasses : (
             '&:not(:first-child):before' : (
               content : '',
-              display: block,
+              display: none,
               height: 100%,
               width: 1px,
               left: -10px,
               top: 0,
               background: #ccc,
               position: absolute,
+              _responsive : (
+                md: (
+                  display: block,
+                )
+              ),
             ),
             '.number' : (
               display: block,
