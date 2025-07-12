@@ -25,10 +25,12 @@ const generate_class = (link) => {
     return [classes]
 }
 
+const { class: className, ...rest } = Astro.props
+
 import {generate_link} from '~/utils/links';
 ---
 
-<aside class="sidebar">
+<aside class:list={['sidebar', className]} {...rest}>
     <div style="position: sticky; top: 60px;left: 0;height: auto;overflow-y: auto;max-height: calc(100dvh - 60px); padding-bottom: 60px;">
         <div class="card">
             <nav>
@@ -78,11 +80,10 @@ import {generate_link} from '~/utils/links';
   @use "sass:meta";
   @use "sass:map";
 
-  @use "../../styles/app.scss" as app;
+  @use "~/styles/app.scss" as app;
 
   $sidebar: (
     --sidebar-section-width: 0,
-    grid-area: sidebar,
     display: block,
     align-self: start,
     height: 100%,

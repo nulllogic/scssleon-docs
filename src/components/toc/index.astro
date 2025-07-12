@@ -1,5 +1,5 @@
 ---
-const {headings, github_page} = Astro.props
+const {headings} = Astro.props
 import Link from '~/components/link.astro'
 ---
 <nav class="toc">
@@ -26,15 +26,6 @@ import Link from '~/components/link.astro'
                 )
             })}
         </ul>
-
-        <hr/>
-        <ul class="nav vertical">
-            <li class="item">
-                <Link href={github_page} target="_blank" rel="noopener noreferrer" class="link">
-                    View on Github
-                </Link>
-            </li>
-        </ul>
     </div>
 </nav>
 
@@ -47,6 +38,11 @@ import Link from '~/components/link.astro'
 
   $toc: (
     --nav-item : var(--color),
+    position: sticky,
+    top: 60px,
+    right: 0,
+    z-index: 2,
+    align-self: start,
     _subclasses : (
       '.nav' : (
         padding: 0.5rem 0,

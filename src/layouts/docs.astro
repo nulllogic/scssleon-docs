@@ -18,8 +18,8 @@ import Footer from "../components/footer/index.astro";
 <div class="docs">
     <div class="container xxl">
         <div class="layout">
-            <Sidebar/>
-            <Main>
+            <Sidebar class="left"/>
+            <Main class="right">
                 <slot/>
             </Main>
         </div>
@@ -33,7 +33,6 @@ import Footer from "../components/footer/index.astro";
     window.document.addEventListener('myEvent', handleEvent, false)
 
     function handleEvent(e) {
-        console.log(e);
         const iframes = document.querySelectorAll('iframe');
         iframes.forEach(iframe => {
             iframe.style.height = iframe.style.height + Math.random(5) + 'px';
@@ -60,6 +59,16 @@ import Footer from "../components/footer/index.astro";
         background: string.unquote('linear-gradient(rgba(38, 194, 44, 0.085), rgba(0, 0, 0, 0) 32.77%)'),
       )
     ),
+    _subclasses : (
+      '.left' : (
+        display: none,
+        _responsive : (
+          lg :(
+            display: block,
+          )
+        )
+      )
+    ),
   );
 
   @include app.generate-component(
@@ -79,9 +88,8 @@ import Footer from "../components/footer/index.astro";
   $layout: (
     --padding: 2.5rem 0,
     display: grid,
-    grid-template-areas: "sidebar main",
-    grid-template-columns: 1fr 5fr,
-    gap: 1.5rem,
+    grid-template-columns: 1fr,
+    gap: 0,
     padding: var(--padding),
     /*_colors: (*/
     /*    light: (*/
@@ -94,6 +102,12 @@ import Footer from "../components/footer/index.astro";
     _subclasses : (
       '.title' : (
         display: inline-block,
+      )
+    ),
+    _responsive : (
+      lg :(
+        grid-template-columns: 1fr 5fr,
+        gap: 1.5rem,
       )
     )
   );
