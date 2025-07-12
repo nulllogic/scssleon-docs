@@ -17,6 +17,7 @@
   $config : config.$config,
   $theme: (
     root : (
+      scroll-timeline: --page-scroll y,
       --padding-inline: 1rem 1rem,
       _responsive : (
         xxl: (
