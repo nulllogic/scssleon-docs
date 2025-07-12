@@ -6,8 +6,8 @@ import Link from '~/components/link.astro'
     <div class="card">
         <div style="display: flex; align-items: center; justify-content: start; gap: 5px;margin: 0 0 10px 0;">
             <div>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
-                     xmlns="http://www.w3.org/2000/svg" class="h-3 w-3">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.44434 12.6665H13.5554" stroke-linecap="round" stroke-linejoin="round"></path>
                     <path d="M2.44434 3.3335H13.5554" stroke-linecap="round" stroke-linejoin="round"></path>
                     <path d="M2.44434 8H7.33323" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -48,15 +48,20 @@ import Link from '~/components/link.astro'
   $toc: (
     --nav-item : var(--color),
     _subclasses : (
-      '.nav .item .link' : (
-        color: rgb(148, 163, 184),
+      '.nav' : (
+        padding: 0.5rem 0,
         _subclasses : (
-          '&.current' : (
-            /*font-weight: 500,*/
-            color: inherit,
+          '.item .link' : (
+            color: rgb(148, 163, 184),
+            _subclasses : (
+              '&.current' : (
+                /*font-weight: 500,*/
+                color: inherit,
+              )
+            )
           )
         )
-      )
+      ),
     ),
     _colors: (
       light : (
@@ -78,29 +83,6 @@ import Link from '~/components/link.astro'
 </style>
 
 <script>
-
-    // const observer = new IntersectionObserver((sections) => {
-    //     sections.forEach((section) => {
-    //         const heading = section.target.querySelector('h2, h3, h4, h5');
-    //         console.log(section.target, heading);
-    //         if (!heading) return;
-    //         const id = heading.getAttribute('id');
-    //
-    //         // Get the link to this section's heading
-    //         const link = document.querySelector(`.toc .nav .item a.link[href="#${id}"]`);
-    //         if (!link) return;
-    //
-    //         // Add/remove the .active class based on whether the
-    //         // section is visible
-    //         const addRemove = section.intersectionRatio > 0 ? 'add' : 'remove';
-    //         link.classList[addRemove]('active');
-    //     });
-    // });
-    //
-    // observer.observe(document.querySelector('main .content'));
-
-    // update this with whatever class wraps your blog post content
-
     function highlight_toc_current_link(e) {
         let toc_links = document.querySelectorAll('.toc .nav .item .link');
 
@@ -158,6 +140,32 @@ import Link from '~/components/link.astro'
                     document.body.getBoundingClientRect().top - 60,
             })
         })
-    })
+    });
 
+</script>
+
+<script>
+    /*
+        const observer = new IntersectionObserver((sections) => {
+            sections.forEach((section) => {
+                const heading = section.target.querySelector('h2, h3, h4, h5');
+                console.log(section.target, heading);
+                if (!heading) return;
+                const id = heading.getAttribute('id');
+
+                // Get the link to this section's heading
+                const link = document.querySelector(`.toc .nav .item a.link[href="#${id}"]`);
+                if (!link) return;
+
+                // Add/remove the .active class based on whether the
+                // section is visible
+                const addRemove = section.intersectionRatio > 0 ? 'add' : 'remove';
+                link.classList[addRemove]('active');
+            });
+        });
+
+        observer.observe(document.querySelector('main .content'));
+
+        update this with whatever class wraps your blog post content
+    */
 </script>
