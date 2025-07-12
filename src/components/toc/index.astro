@@ -3,26 +3,39 @@ const {headings, github_page} = Astro.props
 import Link from '~/components/link.astro'
 ---
 <nav class="toc">
-    <ul class="nav vertical">
-        {headings.map((heading) => {
-            return (
-                    <li class="item">
-                        <a href='#' class="link" onClick={(e) => {
-                            e.preventDefault()
-                        }}>{heading.text}</a>
-                    </li>
-            )
-        })}
-    </ul>
+    <div class="card">
+        <div style="display: flex; align-items: center; justify-content: start; gap: 5px;margin: 0 0 10px 0;">
+            <div>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+                     xmlns="http://www.w3.org/2000/svg" class="h-3 w-3">
+                    <path d="M2.44434 12.6665H13.5554" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M2.44434 3.3335H13.5554" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M2.44434 8H7.33323" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+            <div>
+                On this page
+            </div>
+        </div>
+        <ul class="nav vertical">
+            {headings.map((heading) => {
+                return (
+                        <li class="item">
+                            <a href={'#' + heading?.slug} class="link toc-link">{heading.text}</a>
+                        </li>
+                )
+            })}
+        </ul>
 
-    <hr/>
-    <ul class="nav vertical">
-        <li class="item">
-            <Link href={github_page} target="_blank" rel="noopener noreferrer" class="link">
-                View on Github
-            </Link>
-        </li>
-    </ul>
+        <hr/>
+        <ul class="nav vertical">
+            <li class="item">
+                <Link href={github_page} target="_blank" rel="noopener noreferrer" class="link">
+                    View on Github
+                </Link>
+            </li>
+        </ul>
+    </div>
 </nav>
 
 <style lang="scss">
@@ -34,6 +47,17 @@ import Link from '~/components/link.astro'
 
   $toc: (
     --nav-item : var(--color),
+    _subclasses : (
+      '.nav .item .link' : (
+        color: rgb(148, 163, 184),
+        _subclasses : (
+          '&.current' : (
+            /*font-weight: 500,*/
+            color: inherit,
+          )
+        )
+      )
+    ),
     _colors: (
       light : (
         color: red,
@@ -49,6 +73,91 @@ import Link from '~/components/link.astro'
       'toc',
       app.$config,
       app.$theme,
-      ( variable: (exclude : ('nav')) )
+      (variable: (exclude : ('nav')))
   );
 </style>
+
+<script>
+
+    // const observer = new IntersectionObserver((sections) => {
+    //     sections.forEach((section) => {
+    //         const heading = section.target.querySelector('h2, h3, h4, h5');
+    //         console.log(section.target, heading);
+    //         if (!heading) return;
+    //         const id = heading.getAttribute('id');
+    //
+    //         // Get the link to this section's heading
+    //         const link = document.querySelector(`.toc .nav .item a.link[href="#${id}"]`);
+    //         if (!link) return;
+    //
+    //         // Add/remove the .active class based on whether the
+    //         // section is visible
+    //         const addRemove = section.intersectionRatio > 0 ? 'add' : 'remove';
+    //         link.classList[addRemove]('active');
+    //     });
+    // });
+    //
+    // observer.observe(document.querySelector('main .content'));
+
+    // update this with whatever class wraps your blog post content
+
+    function highlight_toc_current_link(e) {
+        let toc_links = document.querySelectorAll('.toc .nav .item .link');
+
+        e.map((i) => {
+
+            console.log(i, `a[href="#${i.target.id}"].link`);
+            if (i.isIntersecting === true) {
+                toc_links.forEach((link) => link.classList.remove('current'));
+
+                const targetLink = document.querySelector(
+                    `a[href="#${i.target.id}"].link`,
+                );
+
+                if (targetLink) targetLink.classList.add('current');
+            }
+        });
+    }
+
+    let headings = null, content = document.querySelector('main .content');
+
+    if (content !== null) {
+        // Get all H1/H2/H3 tags from the post
+        headings = content.querySelectorAll(
+            ":scope > h1, :scope > h2, :scope > h3,  :scope > h4",
+        );
+    }
+
+    // Intersection Observer Options
+    let options: IntersectionObserverInit = {
+        root: null,
+        rootMargin: "0px 0px -50% 0px",
+        threshold: [1],
+    };
+
+    // Each Intersection Observer runs setCurrent
+    let observe_header_tags = new IntersectionObserver(highlight_toc_current_link, options);
+
+    if (content !== null) {
+        headings.forEach((heading) => {
+            // add scroll margin top to account for fixed navbar
+            // heading.classList.add("scroll-mt-24");
+            observe_header_tags.observe(heading);
+        });
+    }
+
+    const toc_links = document.querySelectorAll('.toc .nav .item .link');
+
+    toc_links.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            window.scrollTo({
+                behavior: 'smooth',
+                top:
+                    document.querySelector(e.target.hash).getBoundingClientRect().top -
+                    document.body.getBoundingClientRect().top - 60,
+            })
+        })
+    })
+
+</script>

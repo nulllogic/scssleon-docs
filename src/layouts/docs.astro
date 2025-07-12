@@ -48,9 +48,8 @@ import Footer from "../components/footer/index.astro";
 
   @use "../styles/app.scss" as app;
 
-  $docs_section: (
+  $docs: (
     padding-inline: var(global(--padding-inline)),
-
     background: var(--background),
     /***/
     _colors: (
@@ -64,7 +63,7 @@ import Footer from "../components/footer/index.astro";
   );
 
   @include app.generate-component(
-      $docs_section,
+      $docs,
       'docs',
       app.$config,
       app.$theme
@@ -77,7 +76,7 @@ import Footer from "../components/footer/index.astro";
 
   @use "../styles/app.scss" as app;
 
-  $layout-section: (
+  $layout: (
     --padding: 2.5rem 0,
     display: grid,
     grid-template-areas: "sidebar main",
@@ -100,7 +99,7 @@ import Footer from "../components/footer/index.astro";
   );
 
   @include app.generate-component(
-      $layout-section,
+      $layout,
       'layout',
       app.$config,
       app.$theme
