@@ -1,5 +1,5 @@
 ---
-const { title, description, image = '/placeholder-social.jpg' } = Astro.props
+const {title, description, image = '/placeholder-social.jpg'} = Astro.props
 ---
 
 <!-- |–––––––––––––––––––– SCSSLeon ϟ made with ♥ ––––-––––––––––––––––––––-| --><!-- Global Metadata -->
@@ -83,6 +83,12 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props
     $theme: $theme
   );
 
+  // ↓ Breadcrumbs
+  @use '~/styles/scss/components/breadcrumb' with (
+    $config: $config,
+    $theme: $theme
+  );
+
   // ↓ Card
   @use "~/styles/scss/components/card" with (
     $config: $config,
@@ -98,12 +104,12 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props
 </style>
 
 <script async>
-  // Apply saved theme or system preference on page load
-  const saved_theme = localStorage.getItem('theme');
+    // Apply saved theme or system preference on page load
+    const saved_theme = localStorage.getItem('theme');
 
-  if (saved_theme) {
-    document.documentElement.setAttribute('data-theme', saved_theme);
-  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
+    if (saved_theme) {
+        document.documentElement.setAttribute('data-theme', saved_theme);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
 </script>

@@ -96,11 +96,21 @@ const {headings, Content} = await render(page)
 
   $main: (
     display: grid,
-    grid-template-columns: minmax(0,1fr),
+    grid-template-columns: minmax(0, 1fr),
     grid-gap: 1.5rem,
     _responsive : (
-      lg: (
-        grid-template-columns: minmax(0,1fr) 15rem,
+      xl: (
+        grid-template-columns: minmax(0, 1fr) 15rem,
+      )
+    ),
+    _subclasses : (
+      '.toc' : (
+        display: none,
+        _responsive : (
+          xl: (
+            display: block,
+          )
+        ),
       )
     )
   );
