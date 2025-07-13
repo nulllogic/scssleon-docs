@@ -183,12 +183,6 @@ const commit_date =
 
   @use "~/styles/app.scss" as app;
 
-  // ↓ Buttons
-  @use '~/styles/scss/components/button' with (
-      $config: app.$config,
-      $theme: app.$theme
-  );
-
   $welcome-section: (
     --padding: 3rem 0,
     background: var(--background),

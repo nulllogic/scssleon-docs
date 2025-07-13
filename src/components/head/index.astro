@@ -89,6 +89,12 @@ const {title, description, image = '/placeholder-social.jpg'} = Astro.props
     $theme: $theme
   );
 
+  // ↓ Buttons
+  @use '~/styles/scss/components/button' with (
+  $config: $config,
+  $theme: $theme
+  );
+
   // ↓ Card
   @use "~/styles/scss/components/card" with (
     $config: $config,
