@@ -5,6 +5,21 @@ category: getting-started
 toc: true
 visible: false
 ---
+import {Raw, Snippet} from "/src/components/snippet"
+
+<Snippet>
+  <Fragment slot={'code'}>
+    <Raw lang={'scss'} highlights={['br', 'p']} title={'Dummy.js'} mark={['bootstrap']}
+         filePath={'/getting-started/introduction.mdx'}
+         line_start={19} line_end={25}>
+      @use "sass:list";
+      @use "sass:string";
+      @use "sass:meta";
+      @use "sass:map";
+    </Raw>
+  </Fragment>
+</Snippet>
+
 ## Quick start
 SCSSLeon is a sassy and stylish framework that's here to revolutionize your CSS game. With its sleek and modern approach, SCSSleon brings a touch of class to your web development projects. It's like the James Bond of CSS frameworks - suave, sophisticated, and always dressed to impress.
 

@@ -2,6 +2,8 @@
 import {Preview} from '../preview'
 import {generate_iframe_link} from '~/utils/links.js'
 
+console.log(Astro.slots['code']);
+
 let slots = []
 
 Object.keys(Astro.slots).forEach((element) => {
@@ -276,14 +278,14 @@ const {frame_url, preview, min_height} = Astro.props
                     transition: clip-path 0.15s linear,
                     animation: 0.55s circle-animation,
                     _animations : (
-                        'circle-animation' : (
-                            '0%' : (
-                              clip-path: circle(0),
-                            ),
-                            '100%': (
-                              clip-path: circle(100%),
-                            )
+                      'circle-animation' : (
+                        '0%' : (
+                          clip-path: circle(0),
+                        ),
+                        '100%': (
+                          clip-path: circle(100%),
                         )
+                      )
                     )
                   ),
                   /***/
@@ -720,11 +722,19 @@ const {frame_url, preview, min_height} = Astro.props
 
                         element.querySelector('.tooltip')?.classList.add('show');
 
-                        setTimeout(() => {
-                            element.querySelector('.tooltip')?.classList.remove('show');
-                        }, 800)
-                        navigator.clipboard.writeText('<empty clipboard>').then(function () {
+                        let copied_text = '';
+
+                        tab_items.forEach((tab) => {
+                            if (tab.classList.contains('active')) {
+                                copied_text = tab.querySelector('pre code')?.innerText
+                            }
+                        });
+
+                        navigator.clipboard.writeText(copied_text).then(function () {
                             /* clipboard successfully set */
+                            setTimeout(() => {
+                                element.querySelector('.tooltip')?.classList.remove('show');
+                            }, 800)
                         }, function () {
                             /* clipboard write failed */
                         })
