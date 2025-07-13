@@ -223,3 +223,20 @@ import Link from '~/components/link.astro'
         }
     }
 </style>
+
+<style lang="scss" is:global>
+  @use "sass:list";
+  @use "sass:meta";
+
+  // ↓ Config
+  @use "~/styles/app.scss" as app;
+
+  // ↓ Tooltip
+  @include app.generate-component(
+      app.get-theme(app.$theme, 'components.tooltip'),
+      'has-tooltip',
+      app.$config,
+      app.$theme,
+      ( variable: (name : 'tooltip') )
+  );
+</style>

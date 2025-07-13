@@ -113,7 +113,7 @@ const {frame_url, preview, min_height} = Astro.props
                 <div class="right">
                     <ul class="nav">
                         <li class="item">
-                            <a class="link clipboard" href="#">
+                            <a class="link clipboard has-tooltip" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      width="16"
                                      height="16" viewBox="0 0 24 24"
@@ -130,6 +130,9 @@ const {frame_url, preview, min_height} = Astro.props
                                           clip-rule="evenodd"></path>
                                     <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
                                 </svg>
+                                <span class="tooltip with-arrow">
+                                    Copied
+                                </span>
                             </a>
                         </li>
                     </ul>
@@ -695,6 +698,10 @@ const {frame_url, preview, min_height} = Astro.props
                 nav.querySelectorAll('.link').forEach(element => element.addEventListener('click', function (e) {
                     e.preventDefault()
                     if (element.classList.contains('clipboard')) {
+                        element.querySelector('.tooltip')?.classList.add('show');
+                        setTimeout(() => {
+                            element.querySelector('.tooltip')?.classList.remove('show');
+                        }, 800)
                         navigator.clipboard.writeText('<empty clipboard>').then(function () {
                             /* clipboard successfully set */
                         }, function () {
