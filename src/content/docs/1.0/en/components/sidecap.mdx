@@ -14,18 +14,20 @@ import {Snippet} from "/src/components/snippet"
         <div class="overlay show">
           <a href="#" onclick="event.preventDefault();sidecaps.open(sidecaps.elements[0])">Toggle Sidecap component</a>
           <div role="dialog" aria-modal="true" tabindex="-1" class="sidecap">
-            <div class="top">
+            <div>
               <div>
                 123
               </div>
               <div>
-                <a href="#" onclick="event.preventDefault();sidecaps.close(sidecaps.elements[0])">[x]</a>
+                <a href="#" onclick="event.preventDefault();sidecaps.close(sidecaps.elements[0])" class="btn btn-link">
+                  <svg width="16" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </a>
               </div>
             </div>
-            <div class="middle">
+            <div>
               444
             </div>
-            <div class="bottom">
+            <div>
               333
             </div>
           </div>
@@ -43,16 +45,25 @@ import {Snippet} from "/src/components/snippet"
 
         @include mixins.generate-component(
             $overlay,
-            "overlay",
+            'overlay',
             app.$config,
             app.$theme
+        );
+
+        $button: functions.get-theme(app.$theme, 'components.button');
+
+        @include mixins.generate-component(
+          $button,
+          'btn',
+          app.$config,
+          app.$theme
         );
 
         $sidecap: functions.get-theme(app.$theme, 'components.sidecap');
 
         @include mixins.generate-component(
           $sidecap,
-          "sidecap",
+          'sidecap',
           app.$config,
           app.$theme
         );
