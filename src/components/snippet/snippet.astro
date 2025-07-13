@@ -268,6 +268,7 @@ const {frame_url, preview, min_height} = Astro.props
               ),
               '&.dark_mode_toggle' : $schema_color_switcher,
               '&.clipboard' : (
+                /***/
                 _subclasses: (
                   '& > svg > path:nth-child(2)' : (
                     opacity: 0,
@@ -275,8 +276,10 @@ const {frame_url, preview, min_height} = Astro.props
                     stroke-dasharray: 50,
                     transition: stroke-dashoffset 0.15s linear,
                   ),
-                  '&:active' : (
+                  /***/
+                  '&.clicked' : (
                     _subclasses: (
+                      /***/
                       '& > svg > rect' : (
                         transform: translate(-3px, -3px),
                       ),
@@ -289,7 +292,7 @@ const {frame_url, preview, min_height} = Astro.props
                         display: none,
                       ),
                     )
-                  )
+                  ),
                 )
               )
             ),
@@ -658,6 +661,7 @@ const {frame_url, preview, min_height} = Astro.props
             nav_items_top_left.forEach((link) => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault()
+
                     if (link.classList.contains('toggle_outline')) {
                         const event = new Event('toggle_outline')
                         document.dispatchEvent(event)
@@ -698,7 +702,14 @@ const {frame_url, preview, min_height} = Astro.props
                 nav.querySelectorAll('.link').forEach(element => element.addEventListener('click', function (e) {
                     e.preventDefault()
                     if (element.classList.contains('clipboard')) {
+
+                        element?.classList.add('clicked');
+                        setTimeout(() => {
+                            element?.classList.remove('clicked');
+                        }, 800)
+
                         element.querySelector('.tooltip')?.classList.add('show');
+
                         setTimeout(() => {
                             element.querySelector('.tooltip')?.classList.remove('show');
                         }, 800)
