@@ -7,10 +7,30 @@ visible: false
 ---
 import { Raw, Snippet } from "/src/components/snippet"
 
-<Snippet file_path={file} clipboard={true} single={true}>
+<Snippet file_path={file} clipboard={true} single={true} title={'🎐 Intro (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧'}>
   <Fragment slot={'code'}>
-    <Raw lang={'scss'} highlights={['br', 'p']} title={'Dummy.js'} mark={['bootstrap']} line_start={19} line_end={25}>
-      123
+    <Raw file_path={file} lang={'scss'} highlights={['$accordion', 'p']} mark={['$accordion']}
+         line_start={16}
+         line_end={33}
+      >
+      @use 'sass:list';
+      @use 'sass:string';
+      @use 'sass:meta'; // [\!code error]
+      @use 'sass:map'; // [\!code focus]
+
+      // [\!code highlight:3]
+      @use '~/src/styles/app.scss' as app;
+      @use '@nulllogic/scssleon/scss/mixins.scss' as mixins;
+      @use '@nulllogic/scssleon/scss/functions.scss' as functions;
+
+      $accordion: functions.get-theme(app.$theme, 'components.accordion'); // [\!code focus]
+
+      @include mixins.generate-component(
+        $accordion,
+        'accordion',
+        app.$config,
+        app.$theme
+      );
     </Raw>
   </Fragment>
 </Snippet>

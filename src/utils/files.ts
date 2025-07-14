@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import readline from 'node:readline'
 
-export const read_lines_in_range = async (file_path, start_line, end_line) {
+export const read_lines_in_range = async function (file_path, start_line, end_line) {
 
   let results = [];
   const fileStream = fs.createReadStream(file_path, {encoding: 'utf8'});

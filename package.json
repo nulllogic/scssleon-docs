@@ -8,7 +8,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "size": "size-limit"
   },
   "dependencies": {
     "astro": "^5.11.0",
@@ -24,6 +25,7 @@
     "rehype-slug": "^6.0.0",
     "remark-smartypants": "^3.0.2",
     "@shikijs/transformers": "^3.7.0",
-    "sass": "^1.89.2"
+    "sass": "^1.89.2",
+    "size-limit" : "^11.2.0"
   }
 }
