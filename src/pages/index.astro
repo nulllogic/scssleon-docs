@@ -1,21 +1,21 @@
 ---
 import Index from '../layouts/index.astro'
-import {Snippet} from '../components/snippet'
+import { Snippet } from '../components/snippet'
 
 //https://api.github.com/repos/nulllogic/scssleon/branches/master
 
 const response = await fetch(
-    'https://api.github.com/repos/nulllogic/scssleon/branches/master',
+  'https://api.github.com/repos/nulllogic/scssleon/branches/master',
 )
 const data = await response.json()
 const commit_date =
-    typeof data.message === 'undefined'
-        ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
-        })
-        : new Date()
+  typeof data.message === 'undefined'
+    ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    })
+    : new Date()
 ---
 
 <Index>
@@ -38,12 +38,14 @@ const commit_date =
                     your engineering teams.
                 </h2>
 
-                <div class="grid" style="display:grid;grid-template-columns: 1fr 1fr;max-width:300px;margin: 0 auto;">
+                <div class="grid"
+                     style="display:grid;grid-template-columns: 1fr 1fr;max-width:300px;margin: 0 auto;">
                     <div>
                         <code>npm i test</code>
                     </div>
                     <div>
-                        <a href="/docs/1.0/en/getting-started/introduction" class="btn">Get started</a>
+                        <a href="/docs/1.0/en/getting-started/introduction"
+                           class="btn">Get started</a>
                     </div>
                 </div>
 
@@ -53,7 +55,7 @@ const commit_date =
 
                 <p class="latest_commit">
                     <span class="badge">Latest Commit on GitHub: {
-                        commit_date
+                      commit_date
                     }</span>
                 </p>
             </div>
@@ -153,8 +155,10 @@ const commit_date =
         <section class="get_started">
             <div class="container xxl">
                 <div style="margin: 0 auto; display: inline-block;">
-                    <h3 class="title">Ready for more productive development?</h3>
-                    <p>Try SCSSLeon for a few sessions and start building your product today</p>
+                    <h3 class="title">Ready for more productive
+                        development?</h3>
+                    <p>Try SCSSLeon for a few sessions and start building your
+                        product today</p>
                     <div class="grid">
                         <div>
                             Ready. Code. Ship.
@@ -168,7 +172,9 @@ const commit_date =
         </section>
 
         Ready to launch your fund?
-        Run your fund confidently. Streamline your setup, automate operations, access transparent reporting, and gain full-service support for any fund size or stage.
+        Run your fund confidently. Streamline your setup, automate operations,
+        access transparent reporting, and gain full-service support for any fund
+        size or stage.
 
 
     </main>

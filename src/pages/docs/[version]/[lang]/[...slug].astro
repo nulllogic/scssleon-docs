@@ -21,7 +21,7 @@ export async function getStaticPaths() {
     })
 }
 
-const {id, filePath} = Astro?.props
+const {id} = Astro?.props
 
 if (id === undefined) {
     throw new Error('ID is required')
@@ -48,7 +48,7 @@ const {headings, Content} = await render(page)
                 <h1 class="title">{page?.data?.title}</h1>
                 <p class="subtitle">{page?.data?.description}</p>
             </div>
-            <Content components={{a: Link}} filePath={filePath} />
+            <Content components={{a: Link}} file={'test'} />
             <a href="#" class="btn link">
                 <svg aria-hidden="true" class="astro-s727lrur astro-vtqsyavv"
                      width="16" height="16" viewBox="0 0 24 24" fill="currentColor"

@@ -5,17 +5,12 @@ category: getting-started
 toc: true
 visible: false
 ---
-import {Raw, Snippet} from "/src/components/snippet"
+import { Raw, Snippet } from "/src/components/snippet"
 
-<Snippet>
+<Snippet file_path={file} clipboard={true} single={true}>
   <Fragment slot={'code'}>
-    <Raw lang={'scss'} highlights={['br', 'p']} title={'Dummy.js'} mark={['bootstrap']}
-         filePath={'/getting-started/introduction.mdx'}
-         line_start={19} line_end={25}>
-      @use "sass:list";
-      @use "sass:string";
-      @use "sass:meta";
-      @use "sass:map";
+    <Raw lang={'scss'} highlights={['br', 'p']} title={'Dummy.js'} mark={['bootstrap']} line_start={19} line_end={25}>
+      123
     </Raw>
   </Fragment>
 </Snippet>
