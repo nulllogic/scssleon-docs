@@ -70,10 +70,10 @@ import { Raw, Snippet } from "/src/components/snippet"
 <Snippet preview={true}>
     <Fragment slot="html">
       <Raw file={file} line_start={73} line_end={89}>
-        <div class="alert" role="alert">
+        <div class="alert" role="alert" style="--xii-alert-grid-template-columns: 1fr;">
             <div class="center">
-                <div class="Flash__StyledFlash-sc-hzrzfc-0 eIEwNA">
-                    <svg aria-hidden="true" focusable="false" role="img" class="Octicon-sc-9kayk9-0" viewBox="0 0 16 16"
+                <div>
+                    <svg aria-hidden="true" focusable="false" role="img" viewBox="0 0 16 16"
                          width="16" height="16" fill="currentColor"
                          style="display: inline-block; vertical-align: text-bottom; overflow: visible;">
                         <path
@@ -90,7 +90,7 @@ import { Raw, Snippet } from "/src/components/snippet"
       </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={94} line_end={111}>
+      <Raw file={file} line_start={94} line_end={108}>
         @use "sass:list";
         @use "sass:string";
         @use "sass:meta";
@@ -98,14 +98,11 @@ import { Raw, Snippet } from "/src/components/snippet"
 
         @use "~/styles/app.scss" as app;
 
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $alert: app.get-theme(app.$theme, 'components.alert');
 
-        $alert: functions.get-theme(app.$theme, 'components.alert');
-
-        @include mixins.generate-component(
+        @include app.generate-component(
           $alert,
-          "alert",
+          'alert',
           app.$config,
           app.$theme
         );

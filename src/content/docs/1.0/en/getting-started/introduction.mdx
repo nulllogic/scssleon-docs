@@ -7,12 +7,9 @@ visible: false
 ---
 import { Raw, Snippet } from "/src/components/snippet"
 
-<Snippet file_path={file} single={true} title={'🎐 Intro (ﾉ◕ヮ◕)ﾉ*-✧'}>
+<Snippet single={true} title={'🎐 Intro (ﾉ◕ヮ◕)ﾉ*-✧'}>
   <Fragment slot={'code'}>
-    <Raw file_path={file} lang={'scss'} highlights={['$accordion', 'p']} mark={['$accordion']}
-         line_start={16}
-         line_end={33}
-      >
+    <Raw file={file} lang={'scss'} line_start={13} line_end={30}>
       @use 'sass:list';
       @use 'sass:string';
       @use 'sass:meta'; // [\!code ++]

@@ -5,12 +5,12 @@ category: components
 toc: true
 schema: true
 ---
-import {Snippet} from "~/components/snippet"
+import {Raw, Snippet} from "~/components/snippet"
 
 ## Example
-<Snippet frame_url={'components/accordion/1'} preview={true}>
+<Snippet preview={true}>
     <Fragment slot={'html'}>
-        ```html
+      <Raw file={file} line_start={14} line_end={61}>
         <div class="accordion">
             <div class="item">
                 <h4 class="question">
@@ -59,108 +59,33 @@ import {Snippet} from "~/components/snippet"
                 </div>
             </div>
         </div>
-        ```
+      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-        ```scss
-        @use 'sass:list';
-        @use 'sass:string';
-        @use 'sass:meta';
-        @use 'sass:map';
+      <Raw file={file} line_start={66} line_end={75}>
+        @use '~/styles/app.scss' as app;
 
-        @use '~/src/styles/app.scss' as app;
-        @use '@nulllogic/scssleon/scss/mixins.scss' as mixins;
-        @use '@nulllogic/scssleon/scss/functions.scss' as functions;
+        $accordion: app.get-theme(app.$theme, 'components.accordion');
 
-        $accordion: functions.get-theme(app.$theme, 'components.accordion');
-
-        @include mixins.generate-component(
-        $accordion,
-        'accordion',
-        app.$config,
-        app.$theme
+        @include app.generate-component(
+          $accordion,
+          'accordion',
+          app.$config,
+          app.$theme
         );
-        ```
+      </Raw>
     </Fragment>
     <Fragment slot={'js'}>
-        ```js
-        const accordion = (elements, options) => {
-
-        const defaults = {
-        show_multiply : false,
-        a11y : true
-    };
-
-        const KEY_CODES = {
-        enter: 13,
-        space: 32,
-        pageUp: 33,
-        pageDown: 34,
-        end: 35,
-        home: 36,
-        up: 38,
-        down: 40,
-    };
-
-        // Options
-        const settings = Object.assign({}, defaults, options);
-
-        const tt = (c) => {
-
-    }
-
-        function render () {
-        console.log(11);
-        // attach classes to buttons and containers
-        [].forEach.call(elements,
-        function(element) {
-        // item.classList.add(titleClass);
-        // item.nextElementSibling.classList.add(contentClass);
-    });
-
-        function _makeId() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
-        function (c) {
-        var r = (Math.random() * 16) | 0;
-        var v = c === 'x' ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-    },
-        );
-    }
-
-        // attach only one click listener
-        // element.addEventListener('click', onClick);
-
-        // accordion starts with all tabs closed
-        // closeAll();
-
-        // sets the open tab - if defined
-        // if (openTab) {
-        // open(openTab);
-        // }
-    }
-
-        render();
-
-        return ({
-        elements : elements,
-        open : () => {}
-    })
-    }
-
-        const accords = accordion(document.querySelectorAll('.accordion'), {
-
-    });
-
-        console.log(accords);
-        ```
+      <Raw file={file} line_start={80} line_end={80}>
+        console.log(123);
+      </Raw>
     </Fragment>
 </Snippet>
 
 ## Accordion with Schema
-<Snippet frame_url={'components/accordion/2'} preview={true}>
+<Snippet preview={true}>
     <Fragment slot={'html'}>
-        ```html
+      <Raw file={file} line_start={89} line_end={140}>
         <div class="accordion" itemscope itemtype="https://schema.org/FAQPage">
             <div class="item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
                 <h4 class="question open">
@@ -213,111 +138,26 @@ import {Snippet} from "~/components/snippet"
                 </div>
             </div>
         </div>
-        ```
+      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-        ```scss
-        @use 'sass:list';
-        @use 'sass:string';
-        @use 'sass:meta';
-        @use 'sass:map';
+      <Raw file={file} line_start={145} line_end={154}>
+        @use '~/styles/app.scss' as app;
 
-        @use '~/src/styles/app.scss' as app;
+        $accordion: app.get-theme(app.$theme, 'components.accordion');
 
-        @use '@nulllogic/scssleon/scss/mixins.scss' as mixins;
-        @use '@nulllogic/scssleon/scss/functions.scss' as functions;
-
-        $accordion: functions.get-theme(app.$theme, 'components.accordion');
-
-        @include mixins.generate-component(
-        $accordion,
-        'accordion',
-        app.$config,
-        app.$theme
+        @include app.generate-component(
+          $accordion,
+          'accordion',
+          app.$config,
+          app.$theme
         );
-        ```
+      </Raw>
     </Fragment>
     <Fragment slot={'js'}>
-        ```js
-        const accordion = (elements, options) => {
-            const defaults = {
-                accordion_item : ':scope > .item',
-                question_class : ':scope > .question',
-                answer_class : ':scope > .answer',
-                toggle_element : ':scope > .question > button',
-
-                show_multiply : false,
-                a11y : true
-            };
-
-            // Options
-            const settings = Object.assign({}, defaults, options);
-
-            // @TODO Add transitions
-            // @Add keycodes
-
-            const _a11y_checker = () => {
-                // @TODO Add aria-expanded check
-                // @TODO Add IDs
-            }
-
-            const _add_event_listeners = (question, answer, toggle_element) => {
-                    toggle_element.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        question.classList.toggle('open');
-                        answer.toggleAttribute('hidden');
-
-                        if(toggle_element.getAttribute('aria-expanded') !== 'true') {
-                            toggle_element.setAttribute('aria-expanded', 'true');
-                        } else {
-                            toggle_element.setAttribute('aria-expanded', 'false');
-                        }
-
-                    })
-            }
-
-            const _make_ID = () => {
-                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
-                        /[xy]/g, (c) => {
-                        let r = (Math.random() * 16) | 0;
-                        let v = c === 'x' ? r : (r & 0x3) | 0x8;
-                        return v.toString(16);
-                    },
-                );
-            }
-
-            const _init = () => {
-                // attach classes to buttons and containers
-                [].forEach.call(elements, (accordion) => {
-                    let accordion_items = accordion.querySelectorAll(settings.accordion_item);
-                    if(accordion_items.length > 0) {
-                            [].forEach.call(accordion_items, (item) => {
-                            _add_event_listeners(
-                                item.querySelector(settings.question_class),
-                                item.querySelector(settings.answer_class),
-                                item.querySelector(settings.toggle_element)
-                            );
-                        })
-                    }
-                });
-            }
-
-            // Initiating the accordion
-            if(accordion) {
-                _init();
-            }
-
-            return ({
-                elements : elements,
-                open : () => {}
-            })
-        }
-
-        const accords = accordion(document.querySelectorAll('.accordion'), {
-        });
-
-        console.log(accords);
-        ```
+      <Raw file={file} line_start={159} line_end={159}>
+        console.log('123');
+      </Raw>
     </Fragment>
 </Snippet>
 

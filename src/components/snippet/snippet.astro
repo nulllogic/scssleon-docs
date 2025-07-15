@@ -185,30 +185,14 @@ const {frame_url, preview, min_height, inline, file_path} = Astro.props
             {
                 Astro.slots.has('js') && (
                             <div class="tab">
-                                <Code defaultColor={'light'}
-                                      themes={{
-                                          light: 'min-light',
-                                          dark: 'github-dark-default',
-                                      }}
-                                      lang={'js'}
-                                      meta="{1,3}"
-                                      code={js.replace(/^<div[^>]*>|<\/div>$/g, '')}
-                                />
+                                1
                             </div>
                 )
             }
             {
                 Astro.slots.has('controls') && (
                             <div class="tab">
-                                <Code defaultColor={'light'}
-                                      themes={{
-                                          light: 'min-light',
-                                          dark: 'github-dark-default',
-                                      }}
-                                      lang={'js'}
-                                      meta="{1,3}"
-                                      code={js.replace(/^<div[^>]*>|<\/div>$/g, '')}
-                                />
+                                123
                             </div>
                 )
             }
