@@ -1,38 +1,16 @@
 ---
 import { read_lines_in_range } from '~/utils/files.ts'
-import {
-  transformerNotationFocus,
-  transformerNotationDiff,
-  transformerMetaHighlight,
-} from '@shikijs/transformers'
-
-import { Code } from 'astro:components'
 
 let code = ''
 
 try {
-  if (Astro?.props.file_path && Astro.props.line_start &&
-    Astro.props.line_end) {
-    code = await read_lines_in_range(Astro?.props.file_path,
-      Astro.props?.line_start, Astro.props?.line_end)
-  }
+    if (Astro?.props.file && Astro.props.line_start &&
+        Astro.props.line_end) {
+        code = await read_lines_in_range(Astro?.props.file,
+            Astro.props?.line_start, Astro.props?.line_end)
+    }
 } catch (err) {
-  console.error(`Error reading file: ${err.message}`) // Handle potential errors
+    console.error(`Error reading file: ${err.message}`) // Handle potential errors
 }
 ---
-<Code defaultColor={'light'}
-      themes={{
-        light: 'min-light',
-        dark: 'github-dark-default',
-      }}
-      wrap={false}
-      code={code.replaceAll('      ', '')}
-      lang={Astro?.props.lang}
-      transformers={[
-        transformerMetaHighlight(),
-        transformerNotationFocus(),
-        transformerNotationDiff({
-          matchAlgorithm: 'v3',
-        })]}
-      meta="{1,3}"
-/>
+<div set:html={code.replace(Astro.props.spaces ? Astro.props.spaces : '', '')} is:raw />

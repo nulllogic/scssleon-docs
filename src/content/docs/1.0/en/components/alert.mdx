@@ -6,11 +6,11 @@ toc: true
 ---
 ## Default alert
 
-import {Snippet} from "/src/components/snippet"
+import { Raw, Snippet } from "/src/components/snippet"
 
-<Snippet frame_url={'components/alert/1'} preview={true}>
+<Snippet preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={14} line_end={35}>
         <div class="alert" role="alert">
             <div>
               <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,19 +33,19 @@ import {Snippet} from "/src/components/snippet"
                 </a>
             </div>
         </div>
-        ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
+      <Raw file={file} line_start={40} line_end={65}>
         @use "sass:list";
         @use "sass:string";
         @use "sass:meta";
         @use "sass:map";
 
-        @use "~/src/styles/app.scss" as app;
+        @use "~/styles/app.scss" as app;
 
         // Load default button component
-        @use '~/src/styles/scss/components/button' with (
+        @use '~/styles/scss/components/button' with (
           $config: app.$config,
           $theme: app.$theme
         );
@@ -63,13 +63,13 @@ import {Snippet} from "/src/components/snippet"
           app.$config,
           app.$theme
         );
-        ```
+      </Raw>
     </Fragment>
 </Snippet>
 
-<Snippet frame_url={'components/alert/2'} preview={true}>
+<Snippet preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={73} line_end={89}>
         <div class="alert" role="alert">
             <div class="center">
                 <div class="Flash__StyledFlash-sc-hzrzfc-0 eIEwNA">
@@ -87,16 +87,16 @@ import {Snippet} from "/src/components/snippet"
                 </div>
             </div>
         </div>
-        ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
+      <Raw file={file} line_start={94} line_end={111}>
         @use "sass:list";
         @use "sass:string";
         @use "sass:meta";
         @use "sass:map";
 
-        @use "~/src/styles/app.scss" as app;
+        @use "~/styles/app.scss" as app;
 
         @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
         @use "@nulllogic/scssleon/scss/functions.scss" as functions;
@@ -104,12 +104,12 @@ import {Snippet} from "/src/components/snippet"
         $alert: functions.get-theme(app.$theme, 'components.alert');
 
         @include mixins.generate-component(
-        $alert,
-        "alert",
-        app.$config,
-        app.$theme
+          $alert,
+          "alert",
+          app.$config,
+          app.$theme
         );
-        ```
+      </Raw>
     </Fragment>
 </Snippet>
 

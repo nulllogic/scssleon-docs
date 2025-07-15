@@ -1,0 +1,91 @@
+---
+import {Iframe} from './';
+const {url, min_height} = Astro.props
+
+const html = await Astro.slots.render('html');
+const scss = await Astro.slots.render('scss');
+const js = await Astro.slots.render('js');
+---
+<div>
+    <Iframe>
+        <Fragment slot="html" set:html={html} is:raw/>
+        <Fragment slot="scss" set:html={scss} is:raw/>
+        <Fragment slot="js" set:html={js} is:raw/>
+    </Iframe>
+    {false && (
+            <iframe class="iframe-wrapper"
+                    class="iframe"
+                    srcdoc={srcdoc}
+                    frameborder="0"
+                    seamless
+                    data-min-height={min_height}/>
+    )}
+    {() => {
+        // const color = url;
+        // switch (color) {
+        //     case 'red': return <div id="red">red</div>;
+        //     case 'yellow': return <div id="yellow">yellow</div>
+        //     case 'blue': return <div id="blue">blue</div>
+        // }
+
+    }}
+    {url && false && (
+            <iframe
+                    src={url}
+                    class="iframe"
+                    onload="iframe_onload(this)"
+                    frameborder="0"
+                    seamless
+                    data-min-height={min_height}
+            />
+    )}
+    {!url && false && (
+            <iframe
+                    src={url}
+                    class="iframe"
+                    onload="iframe_onload(this)"
+                    frameborder="0"
+                    seamless
+                    data-min-height={min_height}
+            />
+    )}
+</div>
+
+<style lang="scss">
+
+  .iframe-wrapper {
+    position: relative;
+    height: 100%;
+
+    .iframe {
+      /*display: block;*/
+      width: 100%;
+      visibility: hidden;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      outline: 0;
+      transform-origin: 0 0;
+      /*height: auto;*/
+      /*z-index: 2;*/
+      /*position: relative;*/
+      /*display: block;*/
+
+      /*border-radius: 3px 3px 0 0;*/
+      /*overflow: scroll;*/
+    }
+
+    /*.background {*/
+    /*  stroke: rgba(40, 51, 56, 0.63);*/
+    /*  position: absolute;*/
+    /*  width: 100%;*/
+    /*  height: 100%;*/
+    /*  top: 0;*/
+    /*  left: 0;*/
+    /*  z-index: 1;*/
+
+    /*  -webkit-user-select: none;*/
+    /*  user-select: none;*/
+    /*}*/
+  }
+</style>
