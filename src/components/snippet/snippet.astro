@@ -27,7 +27,6 @@ const js_code_formatted =
   typeof props[2] !== 'undefined' && props[2] !== null ? props[2] : ''
 
 const { frame_url, preview, min_height, inline, file_path } = Astro.props
-console.log(Astro.props)
 ---
 <div class:list={['snippet', Astro.props?.single ? 'single' : '' ]}>
     <div class="preview-container">
@@ -208,8 +207,8 @@ console.log(Astro.props)
       '& > svg > path:nth-child(2)' : (
         opacity: 0,
         clip-path: circle(0),
-        transition: clip-path 0.15s linear,
-        animation: 1s circle-animation,
+        transition: clip-path 0.25s linear,
+        animation: circle-animation,
         _animations : (
           'circle-animation' : (
             '0%' : (
@@ -228,7 +227,7 @@ console.log(Astro.props)
           /***/
           '& > svg > rect' : (
             opacity: 0.65,
-            transform: translate(-5px, -5px) scale(1.15),
+            transform: translate(-6px, -6px) scale(1.2),
           ),
           '& > svg > path:nth-child(2)' : (
             opacity: 1,
@@ -536,7 +535,7 @@ console.log(Astro.props)
           '.astro-code' : (
             padding: 1rem,
             line-height: 1rem,
-            border-radius: 0 0 0.425rem 0.425rem,
+            border-radius: .425rem .425rem,
           )
         )
       ),

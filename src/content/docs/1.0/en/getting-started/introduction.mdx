@@ -15,11 +15,11 @@ import { Raw, Snippet } from "/src/components/snippet"
       >
       @use 'sass:list';
       @use 'sass:string';
-      @use 'sass:meta'; // [\!code error]
-      @use 'sass:map'; // [\!code focus]
+      @use 'sass:meta'; // [\!code ++]
+      @use 'sass:map'; // [\!code --]
 
       // [\!code highlight:3]
-      @use '~/src/styles/app.scss' as app;
+      @use '~/src/styles/app.scss' as app; [!code highlight]
       @use '@nulllogic/scssleon/scss/mixins.scss' as mixins;
       @use '@nulllogic/scssleon/scss/functions.scss' as functions;
 

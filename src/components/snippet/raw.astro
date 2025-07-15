@@ -26,7 +26,8 @@ try {
         dark: 'github-dark-default',
       }}
       wrap={false}
-      code={code.replaceAll('      ', '')} lang={Astro?.props.lang}
+      code={code.replaceAll('      ', '')}
+      lang={Astro?.props.lang}
       transformers={[
         transformerMetaHighlight(),
         transformerNotationFocus(),

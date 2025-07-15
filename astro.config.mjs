@@ -9,6 +9,12 @@ import preact from '@astrojs/preact'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 
+import {
+  transformerNotationFocus,
+  transformerNotationDiff,
+  transformerMetaHighlight,
+} from '@shikijs/transformers'
+
 import rehypeSlug from 'rehype-slug'
 import remarkSmartypants from 'remark-smartypants'
 
@@ -30,13 +36,6 @@ export default defineConfig({
     rehypePlugins: [
       rehypeSlug,
     ],
-    shikiConfig: {
-      defaultColor: 'light',
-      themes: {
-        light: 'min-light',
-        dark: 'github-dark-default',
-      },
-    },
   },
   security: {
     checkOrigin: true,
