@@ -1,56 +1,30 @@
 ---
-import fs from 'node:fs'
-import readline from 'node:readline';
-import {transformerNotationFocus, transformerMetaHighlight} from '@shikijs/transformers'
+import {Code} from "astro:components";
+import {read_lines_in_range} from '~/utils/files.ts'
 
-import {Code} from 'astro:components'
-import {getCollection} from 'astro:content'
-
-const docs = await getCollection('docs');
-const currentDoc = docs.filter((doc) => {
-    return doc?.filePath.includes(Astro.props?.filePath);
-})
-
-async function readLinesInRange(filePath, startLine, endLine) {
-
-    let results = [];
-    const fileStream = fs.createReadStream(filePath, {encoding: 'utf8'});
-    const rl = readline.createInterface({
-        input: fileStream,
-        crlfDelay: Infinity // Handle all common line endings
-    });
-
-    let currentLineNumber = 0;
-
-    for await (const line of rl) {
-        currentLineNumber++;
-
-        if (currentLineNumber >= startLine && currentLineNumber <= endLine) {
-            results.push(line);
-        }
-
-        // Optimization: If we've passed the endLine, we can close the interface
-        if (currentLineNumber > endLine) {
-            rl.close();
-            break; // Exit the loop
-        }
-    }
-
-    // Handle potential errors during file reading
-    rl.on('error', (err) => {
-        console.error('Error reading file:', err);
-    });
-
-    return results.join('\n');
-}
-
-let code = '';
+let code = ''
 
 try {
-    code = await readLinesInRange(currentDoc[0].filePath, Astro.props.line_start, Astro.props.line_end);
+    if (Astro?.props.file && Astro.props.line_start &&
+        Astro.props.line_end) {
+        code = await read_lines_in_range(Astro?.props.file,
+            Astro.props?.line_start, Astro.props?.line_end)
+    }
 } catch (err) {
-    console.error(`Error reading file: ${err.message}`); // Handle potential errors
+    console.error(`Error reading file: ${err.message}`) // Handle potential errors
 }
+
+// Split text into lines
+const lines = code.split('\n');
+
+// Get number of leading spaces in first line
+const firstLineSpaces = lines[0].match(/^\s*/)[0].length;
+
+// Process all lines
+code = lines.map((line, index) => {
+    // For other lines, remove up to firstLineSpaces from start
+    return line.replace(new RegExp(`^\\s{0,${firstLineSpaces}}`), '');
+}).join('\n');
 ---
 <Code defaultColor={'light'}
       themes={{
@@ -58,6 +32,4 @@ try {
           dark: 'github-dark-default',
       }}
       lang={Astro.props.lang} code={code}
-      transformers={[transformerMetaHighlight(), transformerNotationFocus()]}
-      meta="{1,3}"
 />

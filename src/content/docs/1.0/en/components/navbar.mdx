@@ -5,15 +5,16 @@ category: components
 toc: true
 ---
 
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Basic example
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet frame_url={'components/navbar/1'} preview={true}>
+<Snippet title={'Navbar 1'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={18} line_end={50}>
+        ```
         <nav class="navbar">
             <div class="left">
                 <ul class="nav horizontal">
@@ -48,41 +49,42 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
             </div>
         </nav>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "~/src/styles/app.scss" as app;
+      <Raw file={file} line_start={57} line_end={75}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $nav: app.get-theme(app.$theme, 'components.nav');
 
-        $nav: functions.get-theme(app.$theme, 'components.nav');
-
-        @include mixins.generate-component(
+        @include app.generate-component(
             $nav,
-            "nav",
+            'nav',
             app.$config,
             app.$theme
         );
 
-        $navbar: functions.get-theme(app.$theme, 'components.navbar');
+        $navbar: app.get-theme(app.$theme, 'components.navbar');
 
-        @include mixins.generate-component(
+        @include app.generate-component(
             $navbar,
-            "navbar",
+            'navbar',
             app.$config,
             app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 
 ## Centered navbar example
 
 
-<Snippet frame_url={'components/navbar/2'} preview={true}>
+<Snippet title={'Navbar 2'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={88} line_end={118}>
+        ```
         <nav class="navbar" style="--xii-navbar-grid-template-columns: 1fr 100px 1fr">
             <div class="left">
                 <ul class="nav horizontal">
@@ -115,32 +117,32 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
             </div>
         </nav>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "~/src/styles/app.scss" as app;
+      <Raw file={file} line_start={125} line_end={143}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $nav: app.get-theme(app.$theme, 'components.nav');
 
-        $nav: functions.get-theme(app.$theme, 'components.nav');
-
-        @include mixins.generate-component(
+        @include app.generate-component(
             $nav,
-            "nav",
+            'nav',
             app.$config,
             app.$theme
         );
 
-        $navbar: functions.get-theme(app.$theme, 'components.navbar');
+        $navbar: app.get-theme(app.$theme, 'components.navbar');
 
-        @include mixins.generate-component(
+        @include app.generate-component(
             $navbar,
-            "navbar",
+            'navbar',
             app.$config,
             app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 

@@ -4,216 +4,198 @@ description: A badge is like a digital sticker that adds a pop of information to
 category: components
 toc: true
 ---
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Example
-<Snippet frame_url={'components/badge/1'} preview={true}>
-    <Fragment slot="html">
-        ```html
-        <div class="content">
-            <h1>Example heading <span class="badge">New</span></h1>
-            <h2>Example heading <span class="badge">New</span></h2>
-            <h3>Example heading <span class="badge">New</span></h3>
-            <h4>Example heading <span class="badge">New</span></h4>
-            <h5>Example heading <span class="badge">New</span></h5>
-            <h6>Example heading <span class="badge">New</span></h6>
-        </div>
-        ```
-    </Fragment>
-    <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
-
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-        $badge: functions.get-theme(app.$theme, 'components.badge');
-
-        @include mixins.generate-component(
-            $badge,
-            "badge",
-            app.$config,
-            app.$theme
-        );
-        ```
-    </Fragment>
-</Snippet>
-
-## Inside button
-<Snippet frame_url={'components/badge/2'} preview={true}>
-    <Fragment slot="html">
-        ```html
-        <button type="button" class="btn btn-primary">
-            Notifications <span class="badge">4</span>
-        </button>
-        ```
-    </Fragment>
-    <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
-
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-        $badge: functions.get-theme(app.$theme, 'components.badge');
-
-        @include mixins.generate-component(
-        $badge,
-        "badge",
-        app.$config,
-        app.$theme
-        );
-        ```
-    </Fragment>
-</Snippet>
-
-## Inside button
-<Snippet frame_url={'components/badge/3'} preview={true}>
-    <Fragment slot="html">
-        ```html
-        <button type="button" class="btn btn-primary">
-            Profile <span class="badge">9</span>
-            <span class="sr">unread messages</span>
-        </button>
-        ```
-    </Fragment>
-    <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
-
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-        $badge: functions.get-theme(app.$theme, 'components.badge');
-
-        @include mixins.generate-component(
-        $badge,
-        "badge",
-        app.$config,
-        app.$theme
-        );
-        ```
-    </Fragment>
-</Snippet>
-
-## Outline
-<Snippet frame_url={'components/badge/4'} preview={true}>
-    <Fragment slot="html">
-        ```html
+<Snippet title={'Badge 1'} preview={true}>
+  <Fragment slot="html">
+    <Raw file={file} line_start={14} line_end={21}>
+      ```
+      <div class="content">
         <h1>Example heading <span class="badge">New</span></h1>
         <h2>Example heading <span class="badge">New</span></h2>
         <h3>Example heading <span class="badge">New</span></h3>
         <h4>Example heading <span class="badge">New</span></h4>
         <h5>Example heading <span class="badge">New</span></h5>
         <h6>Example heading <span class="badge">New</span></h6>
-        ```
-    </Fragment>
-    <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      </div>
+      ```
+    </Raw>
+  </Fragment>
+  <Fragment slot="scss">
+    <Raw file={file} line_start={28} line_end={37}>
+      ```
+      @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+      $badge: app.get-theme(app.$theme, 'components.badge');
 
-        $badge: functions.get-theme(app.$theme, 'components.badge');
-
-        @include mixins.generate-component(
+      @include app.generate-component(
         $badge,
-        "badge",
+        'badge',
         app.$config,
         app.$theme
-        );
-        ```
-    </Fragment>
+      );
+      ```
+    </Raw>
+  </Fragment>
 </Snippet>
 
-## Icons
-<Snippet frame_url={'components/badge/5'} preview={true}>
-    <Fragment slot="html">
-        ```html
-        <h1>Example heading <span class="badge"><svg width="10" height="10" aria-hidden="true"
-                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                     viewBox="0 0 20 20">
-                <path
-                    d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/></svg>New</span>
-        </h1>
-        <h2>Example heading <span class="badge">New</span></h2>
-        <h3>Example heading <span class="badge">New</span></h3>
-        <h4>Example heading <span class="badge">New</span></h4>
-        <h5>Example heading <span class="badge">New</span></h5>
-        <h6>Example heading <span class="badge">New</span></h6>
-        ```
-    </Fragment>
-    <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+## Inside button
+<Snippet title={'Badge 2'} preview={true}>
+  <Fragment slot="html">
+    <Raw file={file} line_start={48} line_end={50}>
+      ```
+      <button type="button" class="btn btn-primary">
+        Notifications <span class="badge">4</span>
+      </button>
+      ```
+    </Raw>
+  </Fragment>
+  <Fragment slot="scss">
+    <Raw file={file} line_start={57} line_end={66}>
+      ```
+      @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+      $badge: app.get-theme(app.$theme, 'components.badge');
 
-        $badge: functions.get-theme(app.$theme, 'components.badge');
-
-        @include mixins.generate-component(
+      @include app.generate-component(
         $badge,
-        "badge",
+        'badge',
         app.$config,
         app.$theme
-        );
-        ```
-    </Fragment>
+      );
+      ```
+    </Raw>
+  </Fragment>
+</Snippet>
+
+## Inside button
+<Snippet title={'Badge 3'} preview={true}>
+  <Fragment slot="html">
+    <Raw file={file} line_start={77} line_end={80}>
+      ```
+      <button type="button" class="btn btn-primary">
+        Profile <span class="badge">9</span>
+        <span class="sr">unread messages</span>
+      </button>
+      ```
+    </Raw>
+  </Fragment>
+  <Fragment slot="scss">
+    <Raw file={file} line_start={87} line_end={96}>
+      ```
+      @use '~/styles/app.scss' as app;
+
+      $badge: app.get-theme(app.$theme, 'components.badge');
+
+      @include app.generate-component(
+        $badge,
+        'badge',
+        app.$config,
+        app.$theme
+      );
+      ```
+    </Raw>
+  </Fragment>
 </Snippet>
 
 ## Outline
-<Snippet frame_url={'components/badge/6'} preview={true}>
-    <Fragment slot="html">
-        ```html
-        <span class="badge"
-              style="--xii-badge-background: transparent; --xii-badge-color: red; --xii-badge-border: 1px solid red;">New</span>
-        <span class="badge"
-              style="--xii-badge-background: transparent; --xii-badge-color: green; --xii-badge-border: 1px solid green;">New</span>
-        <span class="badge"
-              style="--xii-badge-background: transparent; --xii-badge-color: yellow; --xii-badge-border: 1px solid yellow;">New</span>
-        ```
-    </Fragment>
-    <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+<Snippet title={'Badge 4'} preview={true}>
+  <Fragment slot="html">
+    <Raw file={file} line_start={107} line_end={112}>
+      ```
+      <h1>Example heading <span class="badge">New</span></h1>
+      <h2>Example heading <span class="badge">New</span></h2>
+      <h3>Example heading <span class="badge">New</span></h3>
+      <h4>Example heading <span class="badge">New</span></h4>
+      <h5>Example heading <span class="badge">New</span></h5>
+      <h6>Example heading <span class="badge">New</span></h6>
+      ```
+    </Raw>
+  </Fragment>
+  <Fragment slot="scss">
+    <Raw file={file} line_start={119} line_end={128}>
+      ```
+      @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+      $badge: app.get-theme(app.$theme, 'components.badge');
 
-        $badge: functions.get-theme(app.$theme, 'components.badge');
-
-        @include mixins.generate-component(
+      @include app.generate-component(
         $badge,
-        "badge",
+        'badge',
         app.$config,
         app.$theme
-        );
-        ```
-    </Fragment>
+      );
+      ```
+    </Raw>
+  </Fragment>
+</Snippet>
+
+## Icons
+<Snippet title={'Badge 5'} preview={true}>
+  <Fragment slot="html">
+    <Raw file={file} line_start={139} line_end={149}>
+      ```
+      <h1>Example heading <span class="badge"><svg width="10" height="10" aria-hidden="true"
+                                                   xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                   viewBox="0 0 20 20">
+                <path
+                  d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/></svg>New</span>
+      </h1>
+      <h2>Example heading <span class="badge">New</span></h2>
+      <h3>Example heading <span class="badge">New</span></h3>
+      <h4>Example heading <span class="badge">New</span></h4>
+      <h5>Example heading <span class="badge">New</span></h5>
+      <h6>Example heading <span class="badge">New</span></h6>
+      ```
+    </Raw>
+  </Fragment>
+  <Fragment slot="scss">
+    <Raw file={file} line_start={156} line_end={164}>
+      ```
+      @use '~/styles/app.scss' as app;
+      $badge: app.get-theme(app.$theme, 'components.badge');
+
+      @include app.generate-component(
+        $badge,
+        'badge',
+        app.$config,
+        app.$theme
+      );
+      ```
+    </Raw>
+  </Fragment>
+</Snippet>
+
+
+## Outline
+<Snippet title={'Badge 6'} preview={true}>
+  <Fragment slot="html">
+    <Raw file={file} line_start={176} line_end={181}>
+      ```
+      <span class="badge"
+              style="--xii-badge-background: transparent; --xii-badge-color: red; --xii-badge-border: 1px solid red;">New</span>
+      <span class="badge"
+            style="--xii-badge-background: transparent; --xii-badge-color: green; --xii-badge-border: 1px solid green;">New</span>
+      <span class="badge"
+            style="--xii-badge-background: transparent; --xii-badge-color: yellow; --xii-badge-border: 1px solid yellow;">New</span>
+      ```
+    </Raw>
+  </Fragment>
+  <Fragment slot="scss">
+    <Raw file={file} line_start={188} line_end={197}>
+      ```
+      @use '~/styles/app.scss' as app;
+
+      $badge: app.get-theme(app.$theme, 'components.badge');
+
+      @include app.generate-component(
+        $badge,
+        'badge',
+        app.$config,
+        app.$theme
+      );
+      ```
+    </Raw>
+  </Fragment>
 </Snippet>

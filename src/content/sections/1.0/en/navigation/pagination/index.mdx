@@ -9,21 +9,27 @@ image :
   alt : 'Form layout'
 ---
 
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 <Snippet>
-  <nav class="pagination" aria-label="Pagination"
-      style="--xii-pagination-grid-template-columns: 1fr 1fr">
-      <div class="left">
+  <Fragment slot="html">
+    <Raw file={file} line_start={18} line_end={30}>
+      ```
+      <nav class="pagination" aria-label="Pagination"
+           style="--xii-pagination-grid-template-columns: 1fr 1fr">
+        <div class="left">
           <p>Showing 1 to 10 of 97 results</p>
-      </div>
-      <div class="right">
+        </div>
+        <div class="right">
           <div class="btn-group separated" role="group" aria-label="Basic example">
             <button type="button" class="btn">Left</button>
             <button type="button" class="btn">Middle</button>
             <button type="button" class="btn">Right</button>
           </div>
-      </div>
-    </nav>
+        </div>
+      </nav>
+      ```
+    </Raw>
+  </Fragment>
 </Snippet>
 

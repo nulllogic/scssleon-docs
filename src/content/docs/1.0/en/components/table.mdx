@@ -4,7 +4,7 @@ description: Tables
 category: components
 toc: true
 ---
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Overview
 
@@ -12,134 +12,128 @@ Due to the widespread use of `<table>` elements across third-party widgets like 
 
 Using the most basic table markup, here's how `.table`-based tables look in xiigrid.
 
-<Snippet frame_url={'components/table/1'} preview={true}>
+<Snippet title={'Table 1'} preview={true}>
   <Fragment slot="html">
-    ```html
-    <table class="table">
-      <thead class="top">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Twitter</th>
-      </tr>
-      </thead>
-      <tbody class="middle">
-      <tr>
-        <td scope="row">1</td>
-        <td>T</td>
-        <td>B</td>
-        <td>@tbd</td>
-      </tr>
-      <tr>
-        <td scope="row">2</td>
-        <td>A</td>
-        <td>B</td>
-        <td>@abc</td>
-      </tr>
-      <tr>
-        <td scope="row">3</td>
-        <td colspan="2">Void</td>
-        <td>@nulllogic</td>
-      </tr>
-      </tbody>
-      <tfoot class="bottom">
-      <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-      </tr>
-      </tfoot>
-    </table>
-    ```
+    <Raw file={file} line_start={19} line_end={55}>
+      ```
+      <table class="table">
+        <thead class="top">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Twitter</th>
+        </tr>
+        </thead>
+        <tbody class="middle">
+        <tr>
+          <td scope="row">1</td>
+          <td>T</td>
+          <td>B</td>
+          <td>@tbd</td>
+        </tr>
+        <tr>
+          <td scope="row">2</td>
+          <td>A</td>
+          <td>B</td>
+          <td>@abc</td>
+        </tr>
+        <tr>
+          <td scope="row">3</td>
+          <td colspan="2">Void</td>
+          <td>@nulllogic</td>
+        </tr>
+        </tbody>
+        <tfoot class="bottom">
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+        </tr>
+        </tfoot>
+      </table>
+      ```
+    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    ```scss
-    @use "sass:list";
-    @use "sass:string";
-    @use "sass:meta";
-    @use "sass:map";
+    <Raw file={file} line_start={62} line_end={71}>
+      ```
+      @use '~/styles/app.scss' as app;
 
-    @use "~/src/styles/app.scss" as app;
-    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+      $table: app.get-theme(app.$theme, 'components.table');
 
-    $table: functions.get-theme(app.$theme, 'components.table');
-
-    @include mixins.generate-component(
+      @include app.generate-component(
       $table,
-      "table",
+      'table',
       app.$config,
       app.$theme
-    );
-    ```
+      );
+      ```
+    </Raw>
   </Fragment>
 </Snippet>
 
 ## Table striped
 
-<Snippet frame_url={'components/table/2'} preview={true}>
+<Snippet title={'Table 2'} preview={true}>
   <Fragment slot="html">
-    ```html
-    <table class="table stripe">
-      <thead class="top">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Twitter</th>
-      </tr>
-      </thead>
-      <tbody class="middle">
-      <tr>
-        <td scope="row">1</td>
-        <td>T</td>
-        <td>B</td>
-        <td>@tbd</td>
-      </tr>
-      <tr>
-        <td scope="row">2</td>
-        <td>A</td>
-        <td>B</td>
-        <td>@abc</td>
-      </tr>
-      <tr>
-        <td scope="row">3</td>
-        <td colspan="2">Void</td>
-        <td>@nulllogic</td>
-      </tr>
-      </tbody>
-      <tfoot class="bottom">
-      <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-      </tr>
-      </tfoot>
-    </table>
-    ```
+    <Raw file={file} line_start={83} line_end={119}>
+      ```
+      <table class="table stripe">
+        <thead class="top">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Twitter</th>
+        </tr>
+        </thead>
+        <tbody class="middle">
+        <tr>
+          <td scope="row">1</td>
+          <td>T</td>
+          <td>B</td>
+          <td>@tbd</td>
+        </tr>
+        <tr>
+          <td scope="row">2</td>
+          <td>A</td>
+          <td>B</td>
+          <td>@abc</td>
+        </tr>
+        <tr>
+          <td scope="row">3</td>
+          <td colspan="2">Void</td>
+          <td>@nulllogic</td>
+        </tr>
+        </tbody>
+        <tfoot class="bottom">
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+        </tr>
+        </tfoot>
+      </table>
+      ```
+    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    ```scss
-    @use "sass:list";
-    @use "sass:string";
-    @use "sass:meta";
-    @use "sass:map";
+    <Raw file={file} line_start={126} line_end={135}>
+      ```
+      @use '~/styles/app.scss' as app;
 
-    @use "~/src/styles/app.scss" as app;
-    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+      $table: app.get-theme(app.$theme, 'components.table');
 
-    $table: functions.get-theme(app.$theme, 'components.table');
-
-    @include mixins.generate-component(
-    $table,
-    "table",
-    app.$config,
-    app.$theme
-    );
-    ```
+      @include app.generate-component(
+        $table,
+        'table',
+        app.$config,
+        app.$theme
+      );
+      ```
+    </Raw>
   </Fragment>
 </Snippet>

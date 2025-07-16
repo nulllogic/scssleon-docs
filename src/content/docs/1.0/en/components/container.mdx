@@ -5,27 +5,31 @@ category: components
 toc: true
 ---
 
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Examples
 
-<Snippet frame_url={'components/container/1'} preview={true}>
+<Snippet title={'Container 1'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={16} line_end={18}>
+        ```
         <div class="container xxl">
             123
         </div>
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 
-<Snippet frame_url={'components/container/2'} preview={true}>
+<Snippet title={'Container 2'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={28} line_end={30}>
+        ```
         <div class="container sm">
             123
         </div>
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 

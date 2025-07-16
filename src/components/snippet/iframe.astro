@@ -200,11 +200,12 @@ const iframe_wrapper_style = await sass.compileStringAsync(`
     position: relative,
     padding: 1rem,
     overflow: scroll,
+    z-index: 2,
     /***/
     _subclasses: (
       '.preview' : (
+        z-index: 3,
         position: relative,
-        z-index: 2,
       ),
       '.background' : (
         position: absolute,

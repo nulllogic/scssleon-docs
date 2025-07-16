@@ -5,13 +5,14 @@ category: components
 toc: true
 ---
 
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Examples
 
-<Snippet frame_url={'components/content/1'} preview={true}>
+<Snippet title={'Content 1'} preview={true}>
   <Fragment slot={'html'}>
-    ```html
+    <Raw file={file} line_start={16} line_end={121}>
+    ```
     <div class="content">
       <h1>Example heading H1</h1>
       <h2>Example heading H2</h2>
@@ -119,22 +120,20 @@ P Q R S T U V W X Y Z [ \ ] ^ _
 p q r s t u v w x y z | ~ </pre>
     </div>
     ```
+    </Raw>
   </Fragment>
   <Fragment slot={'scss'}>
-    ```scss
-    @use 'sass:list';
-    @use 'sass:string';
-    @use 'sass:meta';
-    @use 'sass:map';
-
-    @use '~/src/styles/app.scss' as app;
+    <Raw file={file} line_start={128} line_end={135}>
+    ```
+    @use '~/styles/app.scss' as app;
 
     // ↓ Amazing content
     // Special class `.content` to allow formatting of the default html tags
-    @use "~/src/styles/scss/content" with (
+    @use "~/styles/scss/content" with (
       $config: app.$config,
       $theme: app.$theme
     );
     ```
+    </Raw>
   </Fragment>
 </Snippet>

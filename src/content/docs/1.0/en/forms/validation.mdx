@@ -5,37 +5,39 @@ category: forms
 toc: true
 ---
 
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Basic &lt;input&gt;
 
-<Snippet frame_url={'components/forms/validation/1'} preview={true}>
+<Snippet title={'Validation 1'} preview={true}>
   <Fragment slot="html">
-    ```html
-    <div class="form">
-      <div class="field is-invalid">
-        <label for="input1" class="label">Email address:</label>
-        <input type="email" class="input"
-               id="input1" placeholder="name@example.com"/>
-        <p class="invalid-feedback">Please provide a valid email.</p>
+    <Raw file={file} line_start={16} line_end={23}>
+      ```
+      <div class="form">
+        <div class="field is-invalid">
+          <label for="input1" class="label">Email address:</label>
+          <input type="email" class="input"
+                 id="input1" placeholder="name@example.com"/>
+          <p class="invalid-feedback">Please provide a valid email.</p>
+        </div>
       </div>
-    </div>
-    ```
+      ```
+    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    ```scss
-    @use "sass:list";
-    @use "sass:string";
-    @use "sass:meta";
-    @use "sass:map";
+    <Raw file={file} line_start={30} line_end={39}>
+      ```
+      @use '~/styles/app.scss' as app;
 
-    @use "~/src/styles/app.scss" as app;
+      $form: app.get-theme(app.$theme, 'components.form');
 
-    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-    $form: functions.get-theme(app.$theme, 'components.form');
-    @include mixins.generate-component($form, 'form', app.$config, app.$theme);
-    ```
+      @include app.generate-component(
+        $form,
+        'form',
+        app.$config,
+        app.$theme
+      );
+      ```
+    </Raw>
   </Fragment>
 </Snippet>

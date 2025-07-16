@@ -4,13 +4,14 @@ description: A modal is like a digital pop-up book, presenting information in a 
 category: components
 toc: true
 ---
-import { Snippet } from "/src/components/snippet"
+import { Raw, Snippet } from "/src/components/snippet"
 
 ## Example
 
-<Snippet frame_url={'components/modal/1'} preview={true} min_height={450}>
+<Snippet title={'Modal 1'} preview={true} min_height={450}>
   <Fragment slot="html">
-    ```html
+    <Raw file={file} line_start={15} line_end={38}>
+    ```
     <div class="overlay show">
       <a href="#" onclick="event.preventDefault();modals.open(modals.elements[0])">Toggle Modal component</a>
       <dialog class="modal" role="alert">
@@ -36,49 +37,45 @@ import { Snippet } from "/src/components/snippet"
       </dialog>
     </div>
     ```
+    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    ```scss
-    @use "sass:list";
-    @use "sass:string";
-    @use "sass:meta";
-    @use "sass:map";
+    <Raw file={file} line_start={45} line_end={72}>
+    ```
+    @use '~/styles/app.scss' as app;
 
-    @use "~/src/styles/app.scss" as app;
-    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+    $overlay: app.get-theme(app.$theme, 'components.overlay');
 
-    $overlay: functions.get-theme(app.$theme, 'components.overlay');
-
-    @include mixins.generate-component(
+    @include app.generate-component(
       $overlay,
       'overlay',
       app.$config,
       app.$theme
     );
 
-    $button: functions.get-theme(app.$theme, 'components.button');
+    $button: app.get-theme(app.$theme, 'components.button');
 
-    @include mixins.generate-component(
+    @include app.generate-component(
       $button,
       'btn',
       app.$config,
       app.$theme
     );
 
-    $modal: functions.get-theme(app.$theme, 'components.modal');
+    $modal: app.get-theme(app.$theme, 'components.modal');
 
-    @include mixins.generate-component(
+    @include app.generate-component(
       $modal,
       'modal',
       app.$config,
       app.$theme
     );
-
     ```
+    </Raw>
   </Fragment>
   <Fragment slot={'js'}>
-    ```js
+    <Raw file={file} line_start={79} line_end={142}>
+    ```
     const modal = (elements, options) => {
 
     const defaults = {
@@ -144,5 +141,6 @@ import { Snippet } from "/src/components/snippet"
     const modals = modal(document.querySelectorAll('.modal'), {
   });
     ```
+    </Raw>
   </Fragment>
 </Snippet>

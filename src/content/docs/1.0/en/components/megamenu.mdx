@@ -5,13 +5,14 @@ category: components
 toc: true
 ---
 
-import {Snippet} from '/src/components/snippet';
+import {Raw, Snippet} from '/src/components/snippet';
 
 ## Example
 
-<Snippet frame_url={'components/megamenu/1'} preview={true} min_height={250}>
+<Snippet title={'Megamenu 1'} preview={true} min_height={250}>
   <Fragment slot="html">
-    ```html
+    <Raw file={file} line_start={16} line_end={49}>
+    ```
     <div class="header">
       <div class="has-megamenu on-hover">
         <div class="navbar">
@@ -47,15 +48,12 @@ import {Snippet} from '/src/components/snippet';
       </div>
     </div>
     ```
+    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    ```scss
-    @use "sass:list";
-    @use "sass:string";
-    @use "sass:meta";
-    @use "sass:map";
-
-    @use "~/src/styles/app.scss" as app;
+    <Raw file={file} line_start={56} line_end={77}>
+    ```
+    @use '~/styles/app.scss' as app;
 
     // Load megamenu component with some extra components
     @include app.generate-components(
@@ -78,5 +76,6 @@ import {Snippet} from '/src/components/snippet';
       $theme: app.$theme,
     );
     ```
+    </Raw>
   </Fragment>
 </Snippet>

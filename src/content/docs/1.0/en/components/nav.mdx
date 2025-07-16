@@ -5,15 +5,16 @@ category: components
 toc: true
 ---
 
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Basic example
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet frame_url={'components/nav/1'} preview={true}>
+<Snippet title={'Nav 1'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={18} line_end={31}>
+        ```
         <ul class="nav horizontal">
             <li class="item">
                 <a class="link active" aria-current="page" href="#">Active</a>
@@ -29,30 +30,23 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
             </li>
         </ul>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={38} line_end={47}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
+        $nav: app.get-theme(app.$theme, 'components.nav');
 
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-        $nav: functions.get-theme(app.$theme, 'components.nav');
-
-        @include mixins.generate-component(
+        @include app.generate-component(
             $nav,
-            "nav",
+            'nav',
             app.$config,
             app.$theme
         );
-
-
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 
@@ -60,9 +54,10 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet frame_url={'components/nav/2'} preview={true}>
+<Snippet title={'Nav 2'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={61} line_end={74}>
+        ```
         <ul class="nav vertical">
             <li class="item">
                 <a class="link active" aria-current="page" href="#">Active</a>
@@ -78,27 +73,22 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
             </li>
         </ul>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={81} line_end={90}>
+        ```
+        @use "~/styles/app.scss" as app;
 
-        @use "~/src/styles/app.scss" as app;
+        $nav: app.get-theme(app.$theme, 'components.nav');
 
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-        $nav: functions.get-theme(app.$theme, 'components.nav');
-
-        @include mixins.generate-component(
-        $nav,
-        "nav",
-        app.$config,
-        app.$theme
+        @include app.generate-component(
+          $nav,
+          'nav',
+          app.$config,
+          app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>

@@ -5,44 +5,44 @@ category: components
 toc: true
 ---
 
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Example
 
-<Snippet frame_url={'components/loader/1'} preview={true}>
+<Snippet title={'Loader 1'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={16} line_end={16}>
+        ```
         <icon-loader />
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={23} line_end={32}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-        $loader: functions.get-theme(app.$theme, 'components.loader');
+        $loader: app.get-theme(app.$theme, 'components.loader');
 
-        @include mixins.generate-component(
+        @include app.generate-component(
           $loader,
           'loader',
           app.$config,
           app.$theme
         );
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="js">
-        ```js
+      <Raw file={file} line_start={39} line_end={43}>
+        ```
         customElements.define("icon-loader", class extends HTMLElement {
-            connectedCallback() {
-            this.innerHTML = `<svg class="loader" width="40" height="40" class="" role="progressbar" aria-valuetext="Loading" viewBox="0 0 100 100" aria-label="Contents"><circle class="circle" cx="50" cy="50" r="45" fill="none"></circle></svg>`;
-        }
+              connectedCallback() {
+                this.innerHTML = `<svg class="loader" width="40" height="40" class="" role="progressbar" aria-valuetext="Loading" viewBox="0 0 100 100" aria-label="Contents"><circle class="circle" cx="50" cy="50" r="45" fill="none"></circle></svg>`;
+          }
         });
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 

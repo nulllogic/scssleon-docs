@@ -4,25 +4,28 @@ description: A button is like a digital doorbell, inviting users to take action 
 category: components
 toc: true
 ---
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Examples
 
 SCSSLeon includes several predefined button styles, each serving its own semantic purpose, with a few extras thrown in for more control.
 
-<Snippet frame_url={'components/button/1'} preview={true}>
+<Snippet title={'Buttons 1'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={17} line_end={21}>
+        ```
         <button type="button" class="btn">Default</button>
         <button type="button" class="btn loading">Loading</button>
         <button type="button" class="btn" disabled>Disabled</button>
         <button type="button" class="btn link">Link</button>
         <button type="button" class="btn blank">Blank</button>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "~/src/styles/app.scss" as app;
+      <Raw file={file} line_start={28} line_end={35}>
+        ```
+        @use '~/styles/app.scss' as app;
 
         @include app.generate-component(
             app.get-theme(app.$theme, 'components.button'),
@@ -31,23 +34,27 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
             app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 
 ## Variations
 
-<Snippet frame_url={'components/button/2'} preview={true}>
+<Snippet title={'Button 2'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={47} line_end={50}>
+        ```
         <button type="button" class="btn" style="--xii-button-background: red">Default</button>
         <button type="button" class="btn" style="--xii-button-background: green">Default</button>
         <button type="button" class="btn" style="--xii-button-background: blue">Default</button>
         <button type="button" class="btn" style="--xii-button-background: silver">Default</button>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "~/src/styles/app.scss" as app;
+      <Raw file={file} line_start={57} line_end={64}>
+        ```
+        @use '~/styles/app.scss' as app;
 
         @include app.generate-component(
           app.get-theme(app.$theme, 'components.button'),
@@ -56,24 +63,28 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
           app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 
 ## Types
 
-<Snippet frame_url={'components/button/3'} preview={true}>
+<Snippet title={'Button 3'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={76} line_end={80}>
+        ```
         <a class="btn" href="#" role="button">Link</a>
         <button class="btn" type="submit">Button</button>
         <input class="btn" type="button" value="Input"/>
         <input class="btn" type="submit" value="Submit"/>
         <input class="btn" type="reset" value="Reset"/>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "~/src/styles/app.scss" as app;
+      <Raw file={file} line_start={87} line_end={94}>
+        ```
+        @use '~/styles/app.scss' as app;
 
         @include app.generate-component(
           app.get-theme(app.$theme, 'components.button'),
@@ -82,6 +93,7 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
           app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 

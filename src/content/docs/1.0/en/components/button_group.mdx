@@ -4,52 +4,48 @@ description: A button group is like a digital gang of buttons, working together 
 category: components
 toc: true
 ---
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Basic example
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet frame_url={'components/button_group/1'} preview={true}>
+<Snippet title={'Button group 1'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={17} line_end={21}>
+        ```
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn">Left</button>
             <button type="button" class="btn">Middle</button>
             <button type="button" class="btn">Right</button>
         </div>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={28} line_end={46}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
+        $button: app.get-theme(app.$theme, 'components.button');
 
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-        $button: functions.get-theme(app.$theme, 'components.button');
-
-        @include mixins.generate-component(
+        @include app.generate-component(
             $button,
-            "btn",
+            'btn',
             app.$config,
             app.$theme
         );
 
-        $button_group: functions.get-theme(app.$theme, 'components.button-group');
+        $button_group: app.get-theme(app.$theme, 'components.button-group');
 
-        @include mixins.generate-component(
+        @include app.generate-component(
             $button_group,
-            "btn-group",
+            'btn-group',
             app.$config,
             app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 
@@ -57,45 +53,41 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet frame_url={'components/button_group/2'} preview={true}>
+<Snippet title={'Button group 2'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={60} line_end={64}>
+        ```
         <div class="btn-group separated" role="group" aria-label="Basic example">
             <button type="button" class="btn">Left</button>
             <button type="button" class="btn">Middle</button>
             <button type="button" class="btn">Right</button>
         </div>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={71} line_end={89}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
+        $button: app.get-theme(app.$theme, 'components.button');
 
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-        $button: functions.get-theme(app.$theme, 'components.button');
-
-        @include mixins.generate-component(
-            $button,
-            "btn",
-            app.$config,
-            app.$theme
+        @include app.generate-component(
+          $button,
+          'btn',
+          app.$config,
+          app.$theme
         );
 
-        $button_group: functions.get-theme(app.$theme, 'components.button-group');
+        $button_group: app.get-theme(app.$theme, 'components.button-group');
 
-        @include mixins.generate-component(
-            $button_group,
-            "btn-group",
-            app.$config,
-            app.$theme
+        @include app.generate-component(
+          $button_group,
+          'btn-group',
+          app.$config,
+          app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>

@@ -6,15 +6,16 @@ toc: true
 schema: true
 ---
 
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Example
 
 Use an ordered or unordered list with linked list items to create a minimally styled breadcrumb. Use our utilities to add additional styles as desired.
 
-<Snippet frame_url={'components/breadcrumb/1'} preview={true}>
+<Snippet title={'Breadcrumb 1'} preview={true}>
     <Fragment slot={'html'}>
-        ```html
+      <Raw file={file} line_start={19} line_end={31}>
+        ```
         <nav aria-label="Breadcrumb">
             <ul class="breadcrumb">
                 <li class="item"><a href="#" class="link">Home</a></li>
@@ -29,39 +30,37 @@ Use an ordered or unordered list with linked list items to create a minimally st
             </ul>
         </nav>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={38} line_end={47}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $breadcrumb: app.get-theme(app.$theme, 'components.breadcrumb');
 
-        $breadcrumb: functions.get-theme(app.$theme, 'components.breadcrumb');
-
-        @include mixins.generate-component(
-        $breadcrumb,
-        "breadcrumb",
-        app.$config,
-        app.$theme
+        @include app.generate-component(
+          $breadcrumb,
+          'breadcrumb',
+          app.$config,
+          app.$theme
         );
         ```
+      </Raw>
     </Fragment>
     <Fragment slot={'js'}>
-        ```js
-        customElements.define("svg-circle", class extends HTMLElement {
-        connectedCallback() {
-        this.innerHTML = `<svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
-                     fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-                </svg>`;
-    }
-    });
+      <Raw file={file} line_start={54} line_end={61}>
         ```
+        customElements.define("svg-circle", class extends HTMLElement {
+          connectedCallback() {
+            this.innerHTML = `<svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                       fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                  </svg>`;
+          }
+        });
+        ```
+      </Raw>
     </Fragment>
 </Snippet>
 
@@ -69,9 +68,10 @@ Use an ordered or unordered list with linked list items to create a minimally st
 
 Dividers are automatically added in CSS through [`::before`](https://developer.mozilla.org/en-US/docs/Web/CSS/::before) and [`content`](https://developer.mozilla.org/en-US/docs/Web/CSS/content). They can be changed by modifying a local CSS custom property `--xii-breadcrumb-divider`, or through the `$breadcrumb-divider` Sass variable — and `$breadcrumb-divider-flipped` for its RTL counterpart, if needed. We default to our Sass variable, which is set as a fallback to the custom property. This way, you get a global divider that you can override without recompiling CSS at any time.
 
-<Snippet frame_url={'components/breadcrumb/2'} preview={true}>
+<Snippet title={'Breadcrumb 2'} preview={true}>
     <Fragment slot={'html'}>
-        ```html
+      <Raw file={file} line_start={75} line_end={87}>
+        ```
         <nav aria-label="breadcrumb">
             <ul class="breadcrumb">
                 <li class="item"><a href="#" class="link">Home</a></li>
@@ -86,28 +86,23 @@ Dividers are automatically added in CSS through [`::before`](https://developer.m
             </ul>
         </nav>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={94} line_end={103}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
+        $breadcrumb: app.get-theme(app.$theme, 'components.breadcrumb');
 
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-        $breadcrumb: functions.get-theme(app.$theme, 'components.breadcrumb');
-
-        @include mixins.generate-component(
-        $breadcrumb,
-        "breadcrumb",
-        app.$config,
-        app.$theme
+        @include app.generate-component(
+          $breadcrumb,
+          'breadcrumb',
+          app.$config,
+          app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 
@@ -115,9 +110,10 @@ Dividers are automatically added in CSS through [`::before`](https://developer.m
 
 Use an ordered or unordered list with linked list items to create a minimally styled breadcrumb. Use our utilities to add additional styles as desired.
 
-<Snippet frame_url={'components/breadcrumb/1'} preview={true}>
+<Snippet title={'Breadcrumb 3'} preview={true}>
     <Fragment slot={'html'}>
-        ```html
+      <Raw file={file} line_start={117} line_end={145}>
+        ```
         <nav aria-label="Breadcrumb">
             <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
                 <li class="item" itemprop="itemListElement" itemscope
@@ -148,39 +144,34 @@ Use an ordered or unordered list with linked list items to create a minimally st
             </ul>
         </nav>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={152} line_end={161}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $breadcrumb: app.get-theme(app.$theme, 'components.breadcrumb');
 
-        $breadcrumb: functions.get-theme(app.$theme, 'components.breadcrumb');
-
-        @include mixins.generate-component(
-        $breadcrumb,
-        "breadcrumb",
-        app.$config,
-        app.$theme
+        @include app.generate-component(
+          $breadcrumb,
+          'breadcrumb',
+          app.$config,
+          app.$theme
         );
         ```
+      </Raw>
     </Fragment>
     <Fragment slot={'js'}>
-        ```js
-        customElements.define("svg-circle", class extends HTMLElement {
-        connectedCallback() {
-        this.innerHTML = `<svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
-                     fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-                </svg>`;
-    }
-    });
+      <Raw file={file} line_start={168} line_end={172}>
         ```
+        customElements.define("svg-circle", class extends HTMLElement {
+          connectedCallback() {
+            this.innerHTML = '<svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"> <path fill-rule="evenodd" d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>';
+          }
+        });
+        ```
+      </Raw>
     </Fragment>
 </Snippet>
 

@@ -8,9 +8,10 @@ toc: true
 
 import { Raw, Snippet } from "/src/components/snippet"
 
-<Snippet preview={true}>
+<Snippet title={'Alert 1'} preview={true}>
     <Fragment slot="html">
-      <Raw file={file} line_start={14} line_end={35}>
+      <Raw file={file} line_start={15} line_end={36}>
+        ```
         <div class="alert" role="alert">
             <div>
               <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,16 +34,14 @@ import { Raw, Snippet } from "/src/components/snippet"
                 </a>
             </div>
         </div>
+        ```
       </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={40} line_end={65}>
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
-
-        @use "~/styles/app.scss" as app;
+      <Raw file={file} line_start={43} line_end={64}>
+        ```
+        @use 'sass:map';
+        @use '~/styles/app.scss' as app;
 
         // Load default button component
         @use '~/styles/scss/components/button' with (
@@ -63,13 +62,15 @@ import { Raw, Snippet } from "/src/components/snippet"
           app.$config,
           app.$theme
         );
+        ```
       </Raw>
     </Fragment>
 </Snippet>
 
-<Snippet preview={true}>
+<Snippet title={'Alert 2'} preview={true}>
     <Fragment slot="html">
-      <Raw file={file} line_start={73} line_end={89}>
+      <Raw file={file} line_start={74} line_end={90}>
+        ```
         <div class="alert" role="alert" style="--xii-alert-grid-template-columns: 1fr;">
             <div class="center">
                 <div>
@@ -87,16 +88,13 @@ import { Raw, Snippet } from "/src/components/snippet"
                 </div>
             </div>
         </div>
+        ```
       </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={94} line_end={108}>
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
-
-        @use "~/styles/app.scss" as app;
+      <Raw file={file} line_start={97} line_end={106}>
+        ```
+        @use '~/styles/app.scss' as app;
 
         $alert: app.get-theme(app.$theme, 'components.alert');
 
@@ -106,6 +104,7 @@ import { Raw, Snippet } from "/src/components/snippet"
           app.$config,
           app.$theme
         );
+        ```
       </Raw>
     </Fragment>
 </Snippet>

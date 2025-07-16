@@ -4,13 +4,14 @@ description: Give textual form controls like `<input>`s and `<textarea>`s an upg
 category: forms
 toc: true
 ---
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Example
 
-<Snippet frame_url={'components/forms/radio/1'} preview={true}>
+<Snippet title={'Radio 1'} preview={true}>
   <Fragment slot="html">
-    ```html
+    <Raw file={file} line_start={15} line_end={30}>
+    ```
     <div class="form">
       <div class="field">
         <div class="inline">
@@ -28,22 +29,22 @@ import {Snippet} from "/src/components/snippet"
       </div>
     </div>
     ```
+    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    ```scss
-    @use "sass:list";
-    @use "sass:string";
-    @use "sass:meta";
-    @use "sass:map";
+    <Raw file={file} line_start={37} line_end={45}>
+      ```
+      @use '~/styles/app.scss' as app;
 
-    @use "~/src/styles/app.scss" as app;
-
-    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-    $form: functions.get-theme(app.$theme, 'components.form');
-    @include mixins.generate-component($form, 'form', app.$config, app.$theme);
-    ```
+      $form: app.get-theme(app.$theme, 'components.form');
+      @include app.generate-component(
+        $form,
+        'form',
+        app.$config,
+        app.$theme
+      );
+      ```
+    </Raw>
   </Fragment>
 </Snippet>
 

@@ -4,12 +4,13 @@ description: Give textual form controls like `<input>`s and `<textarea>`s an upg
 category: forms
 toc: true
 ---
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Example
-<Snippet frame_url={'components/forms/checkbox/1'} preview={true}>
+<Snippet title={'Checkbox 1'} preview={true}>
   <Fragment slot="html">
-    ```html
+    <Raw file={file} line_start={14} line_end={29}>
+    ```
     <div class="form">
       <div class="field">
         <div class="inline">
@@ -27,29 +28,30 @@ import {Snippet} from "/src/components/snippet"
       </div>
     </div>
     ```
+    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    ```scss
-    @use "sass:list";
-    @use "sass:string";
-    @use "sass:meta";
-    @use "sass:map";
-
-    @use "~/src/styles/app.scss" as app;
-
-    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-    $form: functions.get-theme(app.$theme, 'components.form');
-    @include mixins.generate-component($form, 'form', app.$config, app.$theme);
+    <Raw file={file} line_start={36} line_end={44}>
     ```
+    @use '~/styles/app.scss' as app;
+
+    $form: app.get-theme(app.$theme, 'components.form');
+    @include app.generate-component(
+      $form,
+      'form',
+      app.$config,
+      app.$theme
+    );
+    ```
+    </Raw>
   </Fragment>
 </Snippet>
 
 ## Indeterminate
-<Snippet frame_url={'components/forms/checkbox/2'} preview={true}>
+<Snippet title={'Checkbox 2'} preview={true}>
   <Fragment slot="html">
-    ```html
+    <Raw file={file} line_start={55} line_end={65}>
+    ```
     <div class="form">
       <div class="field">
         <div class="inline">
@@ -62,30 +64,27 @@ import {Snippet} from "/src/components/snippet"
       </div>
     </div>
     ```
+    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    ```scss
-    @use "sass:list";
-    @use "sass:string";
-    @use "sass:meta";
-    @use "sass:map";
+    <Raw file={file} line_start={72} line_end={79}>
+    ```
+    @use '~/styles/app.scss' as app;
 
-    @use "~/src/styles/app.scss" as app;
-
-    @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-    @use "@nulllogic/scssleon/scss/functions.scss" as functions;
-
-    @include mixins.generate-component(
-    functions.get-theme(app.$theme, 'components.form'),
-    'form',
-    app.$config,
-    app.$theme
+    @include app.generate-component(
+      app.get-theme(app.$theme, 'components.form'),
+      'form',
+      app.$config,
+      app.$theme
     );
     ```
+    </Raw>
   </Fragment>
   <Fragment slot="js">
-    ```js
-    document.getElementById('input1').indeterminate = true;
-    ```
+    <Raw file={file} line_start={86} line_end={86}>
+      ```
+      document.getElementById('input1').indeterminate = true;
+      ```
+    </Raw>
   </Fragment>
 </Snippet>

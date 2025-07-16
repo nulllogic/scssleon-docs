@@ -4,13 +4,14 @@ description: Sidecap
 category: components
 toc: true
 ---
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Basic example
 
-<Snippet frame_url={'components/sidecap/1'} preview={true} min_height={450}>
+<Snippet title={'Sidecap 1'} preview={true} min_height={450}>
     <Fragment slot={'html'}>
-        ```html
+      <Raw file={file} line_start={15} line_end={35}>
+        ```
         <div class="overlay show">
           <a href="#" onclick="event.preventDefault();sidecaps.open(sidecaps.elements[0])">Toggle Sidecap component</a>
           <div role="dialog" aria-modal="true" tabindex="-1" class="sidecap">
@@ -33,44 +34,45 @@ import {Snippet} from "/src/components/snippet"
           </div>
         </div>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-        ```scss
+      <Raw file={file} line_start={42} line_end={69}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $overlay: app.get-theme(app.$theme, 'components.overlay');
 
-        $overlay: functions.get-theme(app.$theme, 'components.overlay');
-
-        @include mixins.generate-component(
+        @include app.generate-component(
             $overlay,
             'overlay',
             app.$config,
             app.$theme
         );
 
-        $button: functions.get-theme(app.$theme, 'components.button');
+        $button: app.get-theme(app.$theme, 'components.button');
 
-        @include mixins.generate-component(
+        @include app.generate-component(
           $button,
           'btn',
           app.$config,
           app.$theme
         );
 
-        $sidecap: functions.get-theme(app.$theme, 'components.sidecap');
+        $sidecap: app.get-theme(app.$theme, 'components.sidecap');
 
-        @include mixins.generate-component(
+        @include app.generate-component(
           $sidecap,
           'sidecap',
           app.$config,
           app.$theme
         );
         ```
+      </Raw>
     </Fragment>
     <Fragment slot={'js'}>
-      ```js
+      <Raw file={file} line_start={76} line_end={139}>
+      ```
       const sidecap = (elements, options) => {
 
         const defaults = {
@@ -136,5 +138,6 @@ import {Snippet} from "/src/components/snippet"
       const sidecaps = sidecap(document.querySelectorAll('.sidecap'), {
       });
       ```
+      </Raw>
     </Fragment>
 </Snippet>

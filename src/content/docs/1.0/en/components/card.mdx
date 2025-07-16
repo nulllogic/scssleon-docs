@@ -5,38 +5,35 @@ category: components
 toc: true
 ---
 
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Examples
 
-<Snippet frame_url={'components/card/1'} preview={true}>
+<Snippet title={'Card 1'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={16} line_end={18}>
+        ```
         <div class="card">
             123
         </div>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={25} line_end={34}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $card: app.get-theme(app.$theme, 'components.card');
 
-        $card: functions.get-theme(app.$theme, 'components.card');
-
-        @include mixins.generate-component(
+        @include app.generate-component(
             $card,
-            "card",
+            'card',
             app.$config,
             app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 

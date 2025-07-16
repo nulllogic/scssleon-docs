@@ -5,125 +5,125 @@ category: components
 toc: true
 ---
 
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Examples
-<Snippet frame_url={'components/tooltip/1'} preview={true} min_height={450}>
+<Snippet title={'Tooltip 1'} preview={true} min_height={450}>
   <Fragment slot="html">
-    ```html
-    <div style="display: flex;align-items: center;justify-content:center;width:100%;height:100%;position: absolute;inset:0;">
-      <div style="display: flex;gap:2rem;">
+    <Raw file={file} line_start={15} line_end={48}>
+      ```
+      <div
+        style="display: flex;align-items: center;justify-content:center;width:100%;height:100%;position: absolute;inset:0;">
+        <div style="display: flex;gap:2rem;">
 
-        <a href="#" class="has-tooltip">
-          Tooltip
-          <span class="tooltip">
+          <a href="#" class="has-tooltip on-hover">
+            Tooltip
+            <span class="tooltip">
             <span>test</span>
           </span>
-        </a>
+          </a>
 
-        <a href="#" class="has-tooltip">
-          ?
-          <span class="tooltip to-left" style="--xii-tooltip-padding: 0.75rem;">
+          <a href="#" class="has-tooltip on-hover">
+            ?
+            <span class="tooltip to-left" style="--xii-tooltip-padding: 0.75rem;">
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.</span>
           </span>
-        </a>
+          </a>
 
-        <a href="#" class="has-tooltip">
-          ?
-          <span class="tooltip to-bottom" style="--xii-tooltip-padding: 0.75rem;">
+          <a href="#" class="has-tooltip on-hover">
+            ?
+            <span class="tooltip to-bottom" style="--xii-tooltip-padding: 0.75rem;">
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.</span>
           </span>
-        </a>
+          </a>
 
-        <a href="#" class="has-tooltip">
-          ?
-          <span class="tooltip to-right" style="--xii-tooltip-padding: 0.75rem;">
+          <a href="#" class="has-tooltip on-hover">
+            ?
+            <span class="tooltip to-right" style="--xii-tooltip-padding: 0.75rem;">
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.</span>
           </span>
-        </a>
+          </a>
 
+        </div>
       </div>
-    </div>
-    ```
+      ```
+    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    ```scss
-    @use "sass:list";
-    @use "sass:string";
-    @use "sass:meta";
-    @use "sass:map";
+    <Raw file={file} line_start={55} line_end={64}>
+      ```
+      @use '~/styles/app.scss' as app;
 
-    @use "~/src/styles/app.scss" as app;
-
-    // Load tooltip component
-    @include app.generate-component(
-      app.get-theme(app.$theme, 'components.tooltip'),
-      'has-tooltip',
-      app.$config,
-      app.$theme,
-      ( variable: (name : 'tooltip') )
-    );
-    ```
+      // Load tooltip component
+      @include app.generate-component(
+        app.get-theme(app.$theme, 'components.tooltip'),
+        'has-tooltip',
+        app.$config,
+        app.$theme,
+        ( variable: (name : 'tooltip') )
+      );
+      ```
+    </Raw>
   </Fragment>
 </Snippet>
 
 
 ## With arrow
-<Snippet frame_url={'components/tooltip/2'} preview={true} min_height={450}>
+<Snippet title={'Tooltip 2'} preview={true} min_height={450}>
   <Fragment slot="html">
-    ```html
-    <div style="display: flex;align-items: center;justify-content:center;width:100%;height:100%;position: absolute;inset:0;">
-      <div style="display: flex;gap:2rem;">
+    <Raw file={file} line_start={76} line_end={109}>
+      ```
+      <div
+        style="display: flex;align-items: center;justify-content:center;width:100%;height:100%;position: absolute;inset:0;">
+        <div style="display: flex;gap:2rem;">
 
-        <a href="#" class="has-tooltip">
-          Tooltip
-          <span class="tooltip with-arrow">
+          <a href="#" class="has-tooltip on-hover">
+            Tooltip
+            <span class="tooltip with-arrow">
             <span>test</span>
           </span>
-        </a>
+          </a>
 
-        <a href="#" class="has-tooltip">
-          ?
-          <span class="tooltip with-arrow to-left" style="--xii-tooltip-padding: 0.75rem;">
+          <a href="#" class="has-tooltip on-hover">
+            ?
+            <span class="tooltip with-arrow to-left" style="--xii-tooltip-padding: 0.75rem;">
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.</span>
           </span>
-        </a>
+          </a>
 
-        <a href="#" class="has-tooltip">
-          ?
-          <span class="tooltip with-arrow to-bottom" style="--xii-tooltip-padding: 0.75rem;">
+          <a href="#" class="has-tooltip on-hover">
+            ?
+            <span class="tooltip with-arrow to-bottom" style="--xii-tooltip-padding: 0.75rem;">
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.</span>
           </span>
-        </a>
+          </a>
 
-        <a href="#" class="has-tooltip">
-          ?
-          <span class="tooltip with-arrow to-right" style="--xii-tooltip-padding: 0.75rem;">
+          <a href="#" class="has-tooltip on-hover">
+            ?
+            <span class="tooltip with-arrow to-right" style="--xii-tooltip-padding: 0.75rem;">
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.</span>
           </span>
-        </a>
+          </a>
 
+        </div>
       </div>
-    </div>
-    ```
+      ```
+    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    ```scss
-    @use "sass:list";
-    @use "sass:string";
-    @use "sass:meta";
-    @use "sass:map";
+    <Raw file={file} line_start={116} line_end={125}>
+      ```
+      @use '~/styles/app.scss' as app;
 
-    @use "~/src/styles/app.scss" as app;
-
-    // Load tooltip component
-    @include app.generate-component(
-    app.get-theme(app.$theme, 'components.tooltip'),
-    'has-tooltip',
-    app.$config,
-    app.$theme,
-    ( variable: (name : 'tooltip') )
-    );
-    ```
+      // Load tooltip component
+      @include app.generate-component(
+        app.get-theme(app.$theme, 'components.tooltip'),
+        'has-tooltip',
+        app.$config,
+        app.$theme,
+        ( variable: (name : 'tooltip') )
+      );
+      ```
+    </Raw>
   </Fragment>
 </Snippet>

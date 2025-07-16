@@ -4,13 +4,14 @@ description: A pagination component is like a digital bookmark, helping users na
 category: components
 toc: true
 ---
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Default pagination
 
-<Snippet frame_url={'components/pagination/1'} preview={true}>
+<Snippet title={'Pagination 1'} preview={true}>
     <Fragment slot={'html'}>
-        ```html
+      <Raw file={file} line_start={15} line_end={27}>
+        ```
         <nav class="pagination" aria-label="Pagination"
              style="--xii-pagination-grid-template-columns: 1fr 1fr">
             <div class="left">
@@ -25,53 +26,50 @@ import {Snippet} from "/src/components/snippet"
             </div>
         </nav>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={34} line_end={61}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $button: app.get-theme(app.$theme, 'components.button');
 
-        $button: functions.get-theme(app.$theme, 'components.button');
-
-        @include mixins.generate-component(
+        @include app.generate-component(
             $button,
-            "btn",
+            'btn',
             app.$config,
             app.$theme
         );
 
-        $button_group: functions.get-theme(app.$theme, 'components.button-group');
+        $button_group: app.get-theme(app.$theme, 'components.button-group');
 
-        @include mixins.generate-component(
+        @include app.generate-component(
             $button_group,
-            "btn-group",
+            'btn-group',
             app.$config,
             app.$theme
         );
 
-        $pagination: functions.get-theme(app.$theme, 'components.pagination');
+        $pagination: app.get-theme(app.$theme, 'components.pagination');
 
-        @include mixins.generate-component(
+        @include app.generate-component(
             $pagination,
-            "pagination",
+            'pagination',
             app.$config,
             app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 
 ## Pagination centered
 
-<Snippet frame_url={'components/pagination/2'} preview={true}>
+<Snippet title={'Pagination 2'} preview={true}>
     <Fragment slot={'html'}>
-        ```html
+      <Raw file={file} line_start={73} line_end={88}>
+        ```
         <nav class="pagination" aria-label="Pagination"
              style="--xii-pagination-grid-template-columns: 100px 1fr 100px">
             <div class="left">
@@ -89,53 +87,51 @@ import {Snippet} from "/src/components/snippet"
             </div>
         </nav>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={95} line_end={122}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $button: app.get-theme(app.$theme, 'components.button');
 
-        $button: functions.get-theme(app.$theme, 'components.button');
-
-        @include mixins.generate-component(
-            $button,
-            "btn",
-            app.$config,
-            app.$theme
+        @include app.generate-component(
+          $button,
+          'btn',
+          app.$config,
+          app.$theme
         );
 
-        $button_group: functions.get-theme(app.$theme, 'components.button-group');
+        $button_group: app.get-theme(app.$theme, 'components.button-group');
 
-        @include mixins.generate-component(
-            $button_group,
-            "btn-group",
-            app.$config,
-            app.$theme
+        @include app.generate-component(
+          $button_group,
+          'btn-group',
+          app.$config,
+          app.$theme
         );
 
-        $pagination: functions.get-theme(app.$theme, 'components.pagination');
+        $pagination: app.get-theme(app.$theme, 'components.pagination');
 
-        @include mixins.generate-component(
-            $pagination,
-            "pagination",
-            app.$config,
-            app.$theme
+        @include app.generate-component(
+          $pagination,
+          'pagination',
+          app.$config,
+          app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 
 
 ## SVG icons
 
-<Snippet frame_url={'components/pagination/3'} preview={true}>
+<Snippet title={'Pagination 3'} preview={true}>
     <Fragment slot={'html'}>
+      <Raw file={file} line_start={135} line_end={178}>
+        ```
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li class="item">
@@ -180,52 +176,51 @@ import {Snippet} from "/src/components/snippet"
                 </li>
             </ul>
         </nav>
+        ```
+      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={185} line_end={212}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $button: app.get-theme(app.$theme, 'components.button');
 
-        $button: functions.get-theme(app.$theme, 'components.button');
-
-        @include mixins.generate-component(
-            $button,
-            "btn",
-            app.$config,
-            app.$theme
+        @include app.generate-component(
+          $button,
+          'btn',
+          app.$config,
+          app.$theme
         );
 
-        $button_group: functions.get-theme(app.$theme, 'components.button-group');
+        $button_group: app.get-theme(app.$theme, 'components.button-group');
 
-        @include mixins.generate-component(
-            $button_group,
-            "btn-group",
-            app.$config,
-            app.$theme
+        @include app.generate-component(
+          $button_group,
+          'btn-group',
+          app.$config,
+          app.$theme
         );
 
-        $pagination: functions.get-theme(app.$theme, 'components.pagination');
+        $pagination: app.get-theme(app.$theme, 'components.pagination');
 
-        @include mixins.generate-component(
-            $pagination,
-            "pagination",
-            app.$config,
-            app.$theme
+        @include app.generate-component(
+          $pagination,
+          'pagination',
+          app.$config,
+          app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 
 ## Custom structure
 
-<Snippet frame_url={'components/pagination/4'} preview={true}>
+<Snippet title={'Pagination 4'} preview={true}>
     <Fragment slot={'html'}>
+      <Raw file={file} line_start={224} line_end={235}>
+        ```
         <div class="flex align-items-center justify-content-between">
             <div>
                 Showing 1 to 10 of 42 results
@@ -238,26 +233,23 @@ import {Snippet} from "/src/components/snippet"
                 </ul>
             </div>
         </div>
+        ```
+      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={242} line_end={251}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $pagination: app.get-theme(app.$theme, 'components.pagination');
 
-        $pagination: functions.get-theme(app.$theme, 'components.pagination');
-
-        @include mixins.generate-component(
-            $pagination,
-            "pagination",
-            app.$config,
-            app.$theme
+        @include app.generate-component(
+          $pagination,
+          'pagination',
+          app.$config,
+          app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>

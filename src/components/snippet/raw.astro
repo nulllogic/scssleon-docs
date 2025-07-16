@@ -24,6 +24,5 @@ code = lines.map((line, index) => {
     // For other lines, remove up to firstLineSpaces from start
     return line.replace(new RegExp(`^\\s{0,${firstLineSpaces}}`), '');
 }).join('\n');
-
 ---
 <div set:html={code} is:raw/>

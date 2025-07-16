@@ -4,7 +4,7 @@ description: A placeholder component is like a digital sketchpad, providing a te
 category: components
 toc: true
 ---
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## About
 
@@ -13,9 +13,10 @@ Placeholders can be used to enhance the experience of your application. They're 
 ## Example
 
 In the example below, we take a typical card component and recreate it with placeholders applied to create a "loading card". Size and proportions are the same between the two.
-<Snippet frame_url={'components/placeholder/1'} preview={true}>
+<Snippet title={'Placeholder 1'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={20} line_end={26}>
+        ```
         <div class="placeholder" aria-hidden="true">
             <span class="el"></span>
             <span class="el"></span>
@@ -24,130 +25,121 @@ In the example below, we take a typical card component and recreate it with plac
             <span class="el"></span>
         </div>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={33} line_end={42}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $placeholder: app.get-theme(app.$theme, 'components.placeholder');
 
-        $placeholder: functions.get-theme(app.$theme, 'components.placeholder');
-
-        @include mixins.generate-component(
+        @include app.generate-component(
             $placeholder,
-            "placeholder",
+            'placeholder',
             app.$config,
             app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
+
 ### Width
 
 You can change the `width` through grid column classes, width utilities, or inline styles.
-<Snippet frame_url={'components/placeholder/2'} preview={true}>
+
+<Snippet title={'Placeholder 2'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={56} line_end={60}>
+        ```
         <div class="placeholder" aria-hidden="true">
             <span class="el"></span>
             <span class="el"></span>
             <span class="el" style="width: 25%;"></span>
         </div>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={67} line_end={76}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $placeholder: app.get-theme(app.$theme, 'components.placeholder');
 
-        $placeholder: functions.get-theme(app.$theme, 'components.placeholder');
-
-        @include mixins.generate-component(
+        @include app.generate-component(
             $placeholder,
-            "placeholder",
+            'placeholder',
             app.$config,
             app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
+
 ### Animation
 
 Animate placeholders with `.glow` or `.wave` to better convey the perception of something being _actively_ loaded.
-<Snippet frame_url={'components/placeholder/3'} preview={true}>
+
+<Snippet title={'Placeholder 3'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={90} line_end={94}>
+        ```
         <p class="placeholder glow">
             <span class="el"></span>
             <span class="el"></span>
             <span class="el"></span>
         </p>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={101} line_end={110}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $placeholder: app.get-theme(app.$theme, 'components.placeholder');
 
-        $placeholder: functions.get-theme(app.$theme, 'components.placeholder');
-
-        @include mixins.generate-component(
+        @include app.generate-component(
             $placeholder,
-            "placeholder",
+            'placeholder',
             app.$config,
             app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 
-<Snippet frame_url={'components/placeholder/4'} preview={true}>
+<Snippet title={'Placeholder 4'} preview={true}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={120} line_end={124}>
+        ```
         <p class="placeholder wave">
             <span class="el"></span>
             <span class="el"></span>
             <span class="el"></span>
         </p>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-        ```scss
-        @use "sass:list";
-        @use "sass:string";
-        @use "sass:meta";
-        @use "sass:map";
+      <Raw file={file} line_start={131} line_end={140}>
+        ```
+        @use '~/styles/app.scss' as app;
 
-        @use "~/src/styles/app.scss" as app;
-        @use "@nulllogic/scssleon/scss/mixins.scss" as mixins;
-        @use "@nulllogic/scssleon/scss/functions.scss" as functions;
+        $placeholder: app.get-theme(app.$theme, 'components.placeholder');
 
-        $placeholder: functions.get-theme(app.$theme, 'components.placeholder');
-
-        @include mixins.generate-component(
+        @include app.generate-component(
             $placeholder,
-            "placeholder",
+            'placeholder',
             app.$config,
             app.$theme
         );
         ```
+      </Raw>
     </Fragment>
 </Snippet>
 

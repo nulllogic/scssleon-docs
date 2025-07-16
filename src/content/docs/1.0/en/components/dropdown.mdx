@@ -5,13 +5,14 @@ category: components
 toc: true
 ---
 
-import {Snippet} from "/src/components/snippet"
+import {Raw, Snippet} from "/src/components/snippet"
 
 ## Examples
 
-<Snippet frame_url={'components/dropdown/1'} preview={true} min_height={250}>
+<Snippet title={'Dropdown 1'} preview={true} min_height={250}>
     <Fragment slot="html">
-        ```html
+      <Raw file={file} line_start={16} line_end={58}>
+        ```
         <div class="has-dropdown on-hover">
             <a href="#" class="btn toggle" type="button" aria-expanded="false">
                 Dropdown button <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
@@ -56,15 +57,12 @@ import {Snippet} from "/src/components/snippet"
             </div>
         </div>
         ```
+      </Raw>
     </Fragment>
     <Fragment slot="scss">
-      ```scss
-      @use "sass:list";
-      @use "sass:string";
-      @use "sass:meta";
-      @use "sass:map";
-
-      @use "~/src/styles/app.scss" as app;
+      <Raw file={file} line_start={65} line_end={82}>
+      ```
+      @use '~/styles/app.scss' as app;
 
       // Load dropdown component
       @include app.generate-components(
@@ -83,5 +81,6 @@ import {Snippet} from "/src/components/snippet"
         $theme : app.$theme,
       );
       ```
+      </Raw>
     </Fragment>
 </Snippet>
