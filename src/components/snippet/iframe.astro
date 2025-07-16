@@ -248,14 +248,15 @@ srcdoc += '</head>'
 
 srcdoc += '<body>'
 
+// Adding background here ;;
+srcdoc += '<div class="background"></div>'
+
 srcdoc += '<div class="wrapper">'
 
 if (Astro.slots.has('html')) {
   srcdoc += (await Astro.slots.render('html')).replace(/^<div[^>]*>|<\/div>$/g,
     '')
 }
-
-srcdoc += '<div class="background" />'
 
 srcdoc += '</div>'
 
