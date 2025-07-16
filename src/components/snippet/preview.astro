@@ -7,19 +7,12 @@ const scss = await Astro.slots.render('scss');
 const js = await Astro.slots.render('js');
 ---
 <div>
-    <Iframe>
+    <Iframe min_height={Astro.props?.min_height}>
         <Fragment slot="html" set:html={html} is:raw/>
         <Fragment slot="scss" set:html={scss} is:raw/>
         <Fragment slot="js" set:html={js} is:raw/>
     </Iframe>
-    {false && (
-            <iframe class="iframe-wrapper"
-                    class="iframe"
-                    srcdoc={srcdoc}
-                    frameborder="0"
-                    seamless
-                    data-min-height={min_height}/>
-    )}
+
     {() => {
         // const color = url;
         // switch (color) {
@@ -29,26 +22,6 @@ const js = await Astro.slots.render('js');
         // }
 
     }}
-    {url && false && (
-            <iframe
-                    src={url}
-                    class="iframe"
-                    onload="iframe_onload(this)"
-                    frameborder="0"
-                    seamless
-                    data-min-height={min_height}
-            />
-    )}
-    {!url && false && (
-            <iframe
-                    src={url}
-                    class="iframe"
-                    onload="iframe_onload(this)"
-                    frameborder="0"
-                    seamless
-                    data-min-height={min_height}
-            />
-    )}
 </div>
 
 <style lang="scss">

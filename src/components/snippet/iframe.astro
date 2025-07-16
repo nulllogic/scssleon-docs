@@ -2,6 +2,8 @@
 import * as sass from 'sass'
 import path from 'path';
 
+const {min_height} = Astro.props;
+
 const scss_importes = [
     {
         // An importer that redirects relative URLs starting with "~" to
@@ -35,7 +37,7 @@ let srcdoc = `<!doctype html>
 
 srcdoc += `<script>
     function iframe_onload(iframe) {
-        if (iframe.dataset.minHeight) {
+        if (iframe.dataset.minHeight && iframe.dataset.minHeight !== '') {
             iframe.contentWindow.document.querySelector(
                 '.iframe').style.minHeight = iframe.dataset.minHeight + 'px'
         }
@@ -277,6 +279,7 @@ srcdoc += '</body></html>';
         seamless
         srcdoc={srcdoc}
         onload="iframe_onload(this)"
+        data-min-height={min_height !== null ? min_height : ''}
 />
 
 <style lang="scss">
