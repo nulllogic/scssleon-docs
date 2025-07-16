@@ -1,6 +1,6 @@
 ---
 import Index from '../layouts/index.astro'
-import { Snippet } from '../components/snippet'
+import { CodeWrapper, Snippet } from '../components/snippet'
 
 //https://api.github.com/repos/nulllogic/scssleon/branches/master
 
@@ -41,7 +41,24 @@ const commit_date =
                 <div class="grid"
                      style="display:grid;grid-template-columns: 1fr 1fr;max-width:300px;margin: 0 auto;">
                     <div>
-                        <code>npm i test</code>
+                        <Snippet inline={true}>
+                            <Fragment slot={'code'}>
+                                <CodeWrapper inline={true} lang={'scss'}>
+                                    ```
+                                    @use '~/src/styles/app.scss' as app; [!code highlight]
+
+                                    $accordion: app.get-theme(app.$theme, 'components.accordion'); // [\!code focus]
+
+                                    @include app.generate-component(
+                                      $accordion,
+                                      'accordion',
+                                      app.$config,
+                                      app.$theme
+                                    );
+                                    ```
+                                </CodeWrapper>
+                            </Fragment>
+                        </Snippet>
                     </div>
                     <div>
                         <a href="/docs/1.0/en/getting-started/introduction"

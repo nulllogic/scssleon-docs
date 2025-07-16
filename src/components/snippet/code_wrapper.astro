@@ -1,35 +1,48 @@
 ---
-import {Code} from "astro:components";
-import {read_lines_in_range} from '~/utils/files.ts'
+import { Code } from 'astro:components'
+import { read_lines_in_range } from '~/utils/files.ts'
 
-let code = ''
+const { inline = false } = Astro.props
 
-try {
+let code = await(Astro.slots.render('default'));
+
+console.log('-----')
+console.log(code.trim());
+console.log('-----')
+
+if (inline) {
+
+  try {
     if (Astro?.props.file && Astro.props.line_start &&
-        Astro.props.line_end) {
-        code = await read_lines_in_range(Astro?.props.file,
-            Astro.props?.line_start, Astro.props?.line_end)
+      Astro.props.line_end) {
+      code = await read_lines_in_range(Astro?.props.file,
+        Astro.props?.line_start, Astro.props?.line_end)
     }
-} catch (err) {
+  } catch (err) {
     console.error(`Error reading file: ${err.message}`) // Handle potential errors
+  }
 }
 
 // Split text into lines
-const lines = code.split('\n');
+const lines = !inline ? code.split('\n') : code.trim().replaceAll('```', '').trim().split('\n');
 
 // Get number of leading spaces in first line
-const firstLineSpaces = lines[0].match(/^\s*/)[0].length;
+const firstLineSpaces = !inline ? lines[0].match(/^\s*/)[0].length : lines[2].match(/^\s*/)[0].length
 
 // Process all lines
 code = lines.map((line, index) => {
-    // For other lines, remove up to firstLineSpaces from start
-    return line.replace(new RegExp(`^\\s{0,${firstLineSpaces}}`), '');
-}).join('\n');
+  // For other lines, remove up to firstLineSpaces from start
+  return line.replace(new RegExp(`^\\s{0,${firstLineSpaces}}`), '')
+}).join('\n')
+
+console.log(code);
+
 ---
 <Code defaultColor={'light'}
       themes={{
-          light: 'min-light',
-          dark: 'github-dark-default',
+        light: 'min-light',
+        dark: 'github-dark-default',
       }}
-      lang={Astro.props.lang} code={code}
+      lang={Astro.props.lang}
+      code={code}
 />
