@@ -10,26 +10,54 @@ import {Raw, Snippet} from "/src/components/snippet"
 ## Examples
 
 <Snippet title={'Container 1'} preview={true}>
-    <Fragment slot="html">
-      <Raw file={file} line_start={16} line_end={18}>
-        ```
-        <div class="container xxl">
-            123
-        </div>
-        ```
-      </Raw>
-    </Fragment>
+  <Fragment slot="html">
+    <Raw file={file} line_start={16} line_end={19}>
+      ```
+      <div class="container xxl"
+           style="background: oklch(0.43 0.13 141.78); color: white; padding: 10px;border-radius: .5rem;text-align: center;">
+        XXL
+      </div>
+      ```
+    </Raw>
+  </Fragment>
+  <Fragment slot="scss">
+    <Raw file={file} line_start={26} line_end={32}>
+      ```
+      @use '~/styles/app.scss' as app;
+
+      // ↓ Container
+      @use "~/styles/scss/components/container" with (
+        $config: app.$config,
+        $theme: app.$theme
+      );
+      ```
+    </Raw>
+  </Fragment>
 </Snippet>
 
 <Snippet title={'Container 2'} preview={true}>
-    <Fragment slot="html">
-      <Raw file={file} line_start={28} line_end={30}>
-        ```
-        <div class="container sm">
-            123
-        </div>
-        ```
-      </Raw>
-    </Fragment>
+  <Fragment slot="html">
+    <Raw file={file} line_start={42} line_end={45}>
+      ```
+      <div class="container sm"
+           style="background: oklch(0.43 0.13 141.78); color: white; padding: 10px;border-radius: .5rem;text-align: center;">
+        SM
+      </div>
+      ```
+    </Raw>
+  </Fragment>
+  <Fragment slot="scss">
+    <Raw file={file} line_start={52} line_end={58}>
+      ```
+      @use '~/styles/app.scss' as app;
+
+      // ↓ Container
+      @use "~/styles/scss/components/container" with (
+        $config: app.$config,
+        $theme: app.$theme
+      );
+      ```
+    </Raw>
+  </Fragment>
 </Snippet>
 
