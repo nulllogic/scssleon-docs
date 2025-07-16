@@ -9,20 +9,12 @@ import { CodeWrapper, Snippet } from "/src/components/snippet"
 
 <Snippet single={true} title={'🎐 Intro (ﾉ◕ヮ◕)ﾉ*-✧'}>
   <Fragment slot={'code'}>
-    <CodeWrapper file={file} lang={'scss'} line_start={13} line_end={30}>
-      @use 'sass:list';
-      @use 'sass:string';
-      @use 'sass:meta'; // [\!code ++]
-      @use 'sass:map'; // [\!code --]
-
-      // [\!code highlight:3]
+    <CodeWrapper file={file} lang={'scss'} line_start={13} line_end={22}>
       @use '~/src/styles/app.scss' as app; [!code highlight]
-      @use '@nulllogic/scssleon/scss/mixins.scss' as mixins;
-      @use '@nulllogic/scssleon/scss/functions.scss' as functions;
 
-      $accordion: functions.get-theme(app.$theme, 'components.accordion'); // [\!code focus]
+      $accordion: app.get-theme(app.$theme, 'components.accordion'); // [\!code focus]
 
-      @include mixins.generate-component(
+      @include app.generate-component(
         $accordion,
         'accordion',
         app.$config,
