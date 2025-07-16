@@ -40,14 +40,11 @@ let srcdoc = `<!doctype html>
 <head>`
 
 srcdoc += `<script>
-    function iframe_onload(iframe) {
-        if (iframe.dataset.minHeight && iframe.dataset.minHeight !== '') {
-            iframe.contentWindow.document.querySelector(
-                '.iframe').style.minHeight = iframe.dataset.minHeight + 'px'
-        }
-        iframe.style.height = iframe.contentWindow.document.body.scrollHeight +'px'
-        iframe.style.visibility = 'visible'
-    }
+    
+    window.addEventListener('load', function(){
+      
+    })
+
 </script>`
 
 // Outline styling for debug purposes
@@ -205,36 +202,31 @@ const iframe_wrapper_style = await sass.compileStringAsync(`
     padding: 1rem,
     overflow: scroll,
     z-index: 2,
-    /***/
-    _subclasses: (
-      '.preview' : (
-        z-index: 3,
-        position: relative,
+  );
+  
+  $background: (
+    position: absolute,
+    width: 100%,
+    height: 100%,
+    top: 0,
+    left: 0,
+    z-index: 1,
+    -webkit-user-select: none,
+    user-select: none,
+    background: var(--background),
+    _colors : (
+      light : (
+        /*color: rgb(229, 236, 226),*/
+        background : string.unquote('rgba(55, 241, 14, 0.09) linear-gradient(135deg, rgba(219, 226, 216, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(219, 226, 216, 0.45) 0, rgba(219, 226, 216, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
       ),
-      '.background' : (
-        position: absolute,
-        width: 100%,
-        height: 100%,
-        top: 0,
-        left: 0,
-        z-index: 1,
-        -webkit-user-select: none,
-        user-select: none,
-        background: var(--background),
-        _colors : (
-          light : (
-            /*color: rgb(229, 236, 226),*/
-            background : string.unquote('rgba(55, 241, 14, 0.09) linear-gradient(135deg, rgba(219, 226, 216, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(219, 226, 216, 0.45) 0, rgba(219, 226, 216, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
-          ),
-          dark : (
-            background : string.unquote('rgba(19, 38, 81, 0.1) linear-gradient(135deg, rgba(19, 83, 14, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(19, 83, 14, 0.45) 0, rgba(19, 83, 14, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
-          )
-        )
+      dark : (
+        background : string.unquote('rgba(19, 38, 81, 0.1) linear-gradient(135deg, rgba(19, 83, 14, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(19, 83, 14, 0.45) 0, rgba(19, 83, 14, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
       )
     )
   );
 
   @include app.generate-component($wrapper, 'wrapper', app.$config, app.$theme);
+  @include app.generate-component($background, 'background', app.$config, app.$theme);
 `, { importers: scss_importes })
 
 if (Astro.slots.has('scss')) {
@@ -257,14 +249,11 @@ srcdoc += '</head>'
 srcdoc += '<body>'
 
 srcdoc += '<div class="wrapper">'
-srcdoc += '<div class="preview">'
 
 if (Astro.slots.has('html')) {
   srcdoc += (await Astro.slots.render('html')).replace(/^<div[^>]*>|<\/div>$/g,
     '')
 }
-
-srcdoc += '</div>' // Closing preview;
 
 srcdoc += '<div class="background" />'
 
@@ -291,8 +280,6 @@ parent.document.addEventListener('toggle_outline', (e) => {
 
 srcdoc += `<script is:inline>
 
-console.log(parent.document, document);
-
 parent.document.addEventListener('dark_mode_toggle', (e) => {
   const current_theme = document.documentElement.getAttribute('data-theme')
   const new_theme = current_theme === 'dark' ? 'light' : 'dark'
@@ -311,7 +298,6 @@ if (saved_theme) {
 
 srcdoc += `<script is:inline>
 parent.document.addEventListener('theme_change', (e) => {
-  console.log(123);
   document.documentElement.setAttribute('data-theme', e?.detail?.theme)
 })
 </script>`;
@@ -342,7 +328,7 @@ srcdoc += '</body></html>'
         seamless
         srcdoc={srcdoc}
         onload="iframe_onload(this)"
-        data-min-height={min_height !== null ? min_height : ''}
+        data-min-height={min_height !== null ? min_height + 'px' : 0}
 />
 
 <style lang="scss">
@@ -355,11 +341,11 @@ srcdoc += '</body></html>'
 
   $iframe: (
     width: 100%,
-    visibility: hidden,
     height: 100%,
     padding: 0,
     margin: 0,
     outline: 0,
+    visibility: hidden,
     transform-origin: 0 0,
   );
 
@@ -370,3 +356,16 @@ srcdoc += '</body></html>'
       app.$theme,
   );
 </style>
+
+<script is:inline>
+    function iframe_onload (iframe) {
+
+        if (iframe.dataset.minHeight) {
+            iframe.contentDocument.querySelector(
+                '.wrapper').style.minHeight = iframe.dataset.minHeight;
+        }
+        iframe.style.height = iframe.contentDocument.body.scrollHeight +
+            'px'
+        iframe.style.visibility = 'visible'
+    }
+</script>
