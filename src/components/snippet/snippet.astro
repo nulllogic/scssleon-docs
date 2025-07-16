@@ -1,17 +1,17 @@
 ---
-import {Preview} from './'
-import {Raw} from './'
-import {render} from 'astro:content'
-import {Code} from "astro:components";
+import { Preview } from './'
+import { Raw } from './'
+import { render } from 'astro:content'
+import { Code } from 'astro:components'
 
 // HTML
-const html = (await Astro.slots.render('html'));
+const html = (await Astro.slots.render('html'))
 // SCSS
-const scss = (await Astro.slots.render('scss'));
+const scss = (await Astro.slots.render('scss'))
 // JS
-const js = (await Astro.slots.render('js'));
+const js = (await Astro.slots.render('js'))
 
-const {frame_url, preview, min_height, inline, file_path} = Astro.props
+const { frame_url, preview, min_height, inline, file_path } = Astro.props
 ---
 <div class:list={['snippet', Astro.props?.single ? 'single' : '']}>
     <div class="preview-container">
@@ -19,15 +19,15 @@ const {frame_url, preview, min_height, inline, file_path} = Astro.props
             <div class="navbar">
                 <div class="left">
                     <ul class="nav">
-                        {Astro.props.title && (
-                                <li class="item">
-                                    {Astro.props?.title}
-                                </li>
-                        )}
+                      {Astro.props.title && (
+                              <li class="item">
+                                {Astro.props?.title}
+                              </li>
+                      )}
                     </ul>
                 </div>
                 <div class="right">
-                    <nav class="nav">
+                    <ul class="nav buttons">
                         <li class="item">
                             <a class="link toggle_outline" href="#">
                                 <svg width="14" height="14"
@@ -61,87 +61,87 @@ const {frame_url, preview, min_height, inline, file_path} = Astro.props
                                 </svg>
                             </a>
                         </li>
-                    </nav>
+                    </ul>
                 </div>
             </div>
         </div>
-        {
-            Astro.slots.has('html') && (
-                        <div class="preview">
-                            <Preview min_height={min_height}>
-                                <Fragment slot="html" set:html={html} is:raw/>
-                                <Fragment slot="scss" set:html={scss} is:raw/>
-                                <Fragment slot="js" set:html={js} is:raw/>
-                            </Preview>
-                            <div class="resizer"><span class="drag"><span
-                                    class="el"/></span></div>
-                        </div>
-            )
-        }
-        {
-            Astro.slots.has('code') && Astro.props?.single && (
-                        <div class="single">
-                            <slot name="code"/>
-                            <div class="buttons"
-                                 style="position: absolute; right: 10px; top: 10px;display: inline-flex;gap: 5px;">
-                                <a class="clipboard link has-tooltip" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         width="16"
-                                         height="16" viewBox="0 0 24 24"
-                                         fill="none"
-                                         stroke="currentColor" stroke-width="2"
-                                         stroke-linecap="round"
-                                         stroke-linejoin="round"
-                                    >
-                                        <rect width="14" height="14" x="8" y="8"
-                                              rx="2"
-                                              ry="2"></rect>
-                                        <path stroke="rgb(74, 109, 71)" fill="none"
-                                              fill-rule="evenodd"
-                                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                              clip-rule="evenodd"></path>
-                                        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-                                    </svg>
-                                    <span class="tooltip with-arrow">
+      {
+        Astro.slots.has('html') && (
+                      <div class="preview">
+                          <Preview min_height={min_height}>
+                              <Fragment slot="html" set:html={html} is:raw/>
+                              <Fragment slot="scss" set:html={scss} is:raw/>
+                              <Fragment slot="js" set:html={js} is:raw/>
+                          </Preview>
+                          <div class="resizer"><span class="drag"><span
+                                  class="el"/></span></div>
+                      </div>
+        )
+      }
+      {
+        Astro.slots.has('code') && Astro.props?.single && (
+                      <div class="single">
+                          <slot name="code"/>
+                          <div class="buttons"
+                               style="position: absolute; right: 10px; top: 10px;display: inline-flex;gap: 5px;">
+                              <a class="clipboard link has-tooltip" href="#">
+                                  <svg xmlns="http://www.w3.org/2000/svg"
+                                       width="16"
+                                       height="16" viewBox="0 0 24 24"
+                                       fill="none"
+                                       stroke="currentColor" stroke-width="2"
+                                       stroke-linecap="round"
+                                       stroke-linejoin="round"
+                                  >
+                                      <rect width="14" height="14" x="8" y="8"
+                                            rx="2"
+                                            ry="2"></rect>
+                                      <path stroke="rgb(74, 109, 71)" fill="none"
+                                            fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd"></path>
+                                      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                  </svg>
+                                  <span class="tooltip with-arrow">
                                     <span>Copied</span>
                                 </span>
-                                </a>
-                            </div>
-                        </div>
-            )
-        }
+                              </a>
+                          </div>
+                      </div>
+        )
+      }
 
         <div class="bottomnav">
             <div class="navbar">
                 <div class="left">
                     <ul class="nav">
-                        {
-                            Astro.slots.has('html') && (
-                                        <li class="item active">
-                                            <a class="link" href="#">
-                                                HTML
-                                            </a>
-                                        </li>
-                            )
-                        }
-                        {
-                            Astro.slots.has('scss') && (
-                                        <li class="item">
-                                            <a class="link" href="#">
-                                                SCSS
-                                            </a>
-                                        </li>
-                            )
-                        }
-                        {
-                            Astro.slots.has('js') && (
-                                        <li class="item">
-                                            <a class="link" href="#">
-                                                JS
-                                            </a>
-                                        </li>
-                            )
-                        }
+                      {
+                        Astro.slots.has('html') && (
+                                      <li class="item active">
+                                          <a class="link" href="#">
+                                              HTML
+                                          </a>
+                                      </li>
+                        )
+                      }
+                      {
+                        Astro.slots.has('scss') && (
+                                      <li class="item">
+                                          <a class="link" href="#">
+                                              SCSS
+                                          </a>
+                                      </li>
+                        )
+                      }
+                      {
+                        Astro.slots.has('js') && (
+                                      <li class="item">
+                                          <a class="link" href="#">
+                                              JS
+                                          </a>
+                                      </li>
+                        )
+                      }
                     </ul>
                 </div>
                 <div class="right buttons">
@@ -176,63 +176,63 @@ const {frame_url, preview, min_height, inline, file_path} = Astro.props
         </div>
 
         <div class="tab-content">
-            {
-                Astro.slots.has('html') && (
-                            <div class="tab active">
-                                <div class="code">
-                                    <Code defaultColor={'light'}
-                                          themes={{
-                                              light: 'min-light',
-                                              dark: 'github-dark-default',
-                                          }}
-                                          lang={'html'}
-                                          meta="{1,3}"
-                                          code={html.replace(/^<div[^>]*>|<\/div>$/g, '')}
-                                    />
-                                </div>
-                            </div>
-                )
-            }
-            {
-                Astro.slots.has('scss') && (
-                            <div class="tab">
-                                <div class="code">
-                                    <Code defaultColor={'light'}
-                                          themes={{
-                                              light: 'min-light',
-                                              dark: 'github-dark-default',
-                                          }}
-                                          lang={'scss'}
-                                          meta="{1,3}"
-                                          code={scss.replace(/^<div[^>]*>|<\/div>$/g, '')}
-                                    />
-                                </div>
-                            </div>
-                )
-            }
-            {
-                Astro.slots.has('js') && (
-                            <div class="tab">
-                                <div class="code">
-                                    <Code defaultColor={'light'}
-                                          themes={{
-                                              light: 'min-light',
-                                              dark: 'github-dark-default',
-                                          }}
-                                          lang={'js'}
-                                          code={js.replace(/^<div[^>]*>|<\/div>$/g, '')}
-                                    />
-                                </div>
-                            </div>
-                )
-            }
-            {
-                Astro.slots.has('controls') && (
-                            <div class="tab">
-                                123
-                            </div>
-                )
-            }
+          {
+            Astro.slots.has('html') && (
+                          <div class="tab active">
+                              <div class="code">
+                                  <Code defaultColor={'light'}
+                                        themes={{
+                                          light: 'min-light',
+                                          dark: 'github-dark-default',
+                                        }}
+                                        lang={'html'}
+                                        meta="{1,3}"
+                                        code={html.replace(/^<div[^>]*>|<\/div>$/g, '')}
+                                  />
+                              </div>
+                          </div>
+            )
+          }
+          {
+            Astro.slots.has('scss') && (
+                          <div class="tab">
+                              <div class="code">
+                                  <Code defaultColor={'light'}
+                                        themes={{
+                                          light: 'min-light',
+                                          dark: 'github-dark-default',
+                                        }}
+                                        lang={'scss'}
+                                        meta="{1,3}"
+                                        code={scss.replace(/^<div[^>]*>|<\/div>$/g, '')}
+                                  />
+                              </div>
+                          </div>
+            )
+          }
+          {
+            Astro.slots.has('js') && (
+                          <div class="tab">
+                              <div class="code">
+                                  <Code defaultColor={'light'}
+                                        themes={{
+                                          light: 'min-light',
+                                          dark: 'github-dark-default',
+                                        }}
+                                        lang={'js'}
+                                        code={js.replace(/^<div[^>]*>|<\/div>$/g, '')}
+                                  />
+                              </div>
+                          </div>
+            )
+          }
+          {
+            Astro.slots.has('controls') && (
+                          <div class="tab">
+                              123
+                          </div>
+            )
+          }
         </div>
     </div>
 </div>
@@ -763,153 +763,151 @@ const {frame_url, preview, min_height, inline, file_path} = Astro.props
 
 <script>
 
-    document.querySelectorAll('.snippet').forEach((snippet) => {
+  document.querySelectorAll('.snippet').forEach((snippet) => {
 
-        // Tabs
-        // Checking first, if element exist
-        if (snippet.querySelector('.topnav .navbar')) {
-            const nav_items_top_left = snippet.querySelectorAll(
-                '.topnav .navbar .left .nav .item .link')
+    // Tabs
+    // Checking first, if element exist
+    if (snippet.querySelector('.topnav .navbar')) {
+      const nav_items_top_left = snippet.querySelectorAll(
+        '.topnav .navbar .left .nav .item .link')
 
-            nav_items_top_left.forEach((link) => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault()
+    }
 
-                    if (link.classList.contains('toggle_outline')) {
-                        const event = new Event('toggle_outline')
-                        document.dispatchEvent(event)
-                    }
+    // @TODO rewrite a bit code below to make it look nicer
 
-                    if (link.classList.contains('dark_mode_toggle')) {
-                        const event = new Event('dark_mode_toggle')
-                        document.dispatchEvent(event)
-                        link.classList.toggle('clicked')
-                    }
-                })
-            })
-        }
+    if (snippet.querySelector('.bottomnav .navbar')) {
+      const nav_items_left = snippet.querySelectorAll(
+        '.bottomnav .navbar .left .nav .item')
+      const tab_items = snippet.querySelectorAll('.tab-content .tab')
 
-        // @TODO rewrite a bit code below to make it look nicer
+      nav_items_left.forEach((nav, index) => {
+        nav.querySelectorAll('.link').
+          forEach(element => element.addEventListener('click', function (e) {
+            e.preventDefault()
 
-        if (snippet.querySelector('.bottomnav .navbar')) {
-            const nav_items_left = snippet.querySelectorAll(
-                '.bottomnav .navbar .left .nav .item')
-            const tab_items = snippet.querySelectorAll('.tab-content .tab')
+            nav_items_left.forEach(
+              element => element.classList.remove('active'))
+            nav.classList.add('active')
 
-            nav_items_left.forEach((nav, index) => {
-                nav.querySelectorAll('.link').forEach(element => element.addEventListener('click', function (e) {
-                    e.preventDefault()
+            tab_items.forEach(element => element.classList.remove('active'))
+            tab_items[index].classList.add('active')
+          }))
+      })
 
-                    nav_items_left.forEach(
-                        element => element.classList.remove('active'))
-                    nav.classList.add('active')
+      const nav_items_right = snippet.querySelectorAll(
+        '.navbar .right .nav .item')
+      nav_items_right.forEach((nav, index) => {
+        nav.querySelectorAll('.link').
+          forEach(element => element.addEventListener('click', function (e) {
+            e.preventDefault()
 
-                    tab_items.forEach(element => element.classList.remove('active'))
-                    tab_items[index].classList.add('active')
-                }))
-            })
+          }))
+      })
 
-            const nav_items_right = snippet.querySelectorAll(
-                '.navbar .right .nav .item')
-            nav_items_right.forEach((nav, index) => {
-                nav.querySelectorAll('.link').forEach(element => element.addEventListener('click', function (e) {
-                    e.preventDefault()
+    }
 
-                }))
-            })
+    const preview = snippet.querySelector('.preview')
 
-        }
+    if (preview) {
+      // Proceed, if preview is enabled
 
-        const preview = snippet.querySelector('.preview')
+      const resizer = snippet.querySelector('.preview .resizer .drag')
+      if (resizer) {
+        const container_limit = Math.round(preview.clientWidth / 1.5)
 
-        if (preview) {
-            // Proceed, if preview is enabled
+        resizer.onmousedown = (event) => {
+          event.preventDefault()
 
-            const resizer = snippet.querySelector('.preview .resizer .drag')
-            if (resizer) {
-                const container_limit = Math.round(preview.clientWidth / 1.5)
+          const original_margin = parseFloat(
+            isNaN(preview.style.marginRight) ? preview.style.marginRight : 0,
+          )
+          const original_mouse_x = event.pageX
 
-                resizer.onmousedown = (event) => {
-                    event.preventDefault()
-
-                    const original_margin = parseFloat(
-                        isNaN(preview.style.marginRight) ? preview.style.marginRight : 0,
-                    )
-                    const original_mouse_x = event.pageX
-
-                    const event_drag_start_handler = (event) => {
-                        const width = original_margin - (event.pageX - original_mouse_x)
-                        if (width < container_limit && width > 0) {
-                            preview.style.marginRight = width + 'px'
-                        } else if (width < 0) {
-                            preview.style.marginRight = 0 + 'px'
-                        }
-                    }
-
-                    const event_drag_end_handler = (event) => {
-                        document.documentElement.classList.remove('dragging')
-                        preview.classList.remove('is_resizing')
-                        document.removeEventListener('mousemove', event_drag_start_handler)
-                        document.removeEventListener('mouseup', event_drag_end_handler)
-                    }
-
-                    document.documentElement.classList.add('dragging')
-                    preview.classList.add('is_resizing')
-                    document.addEventListener('mousemove', event_drag_start_handler)
-                    document.addEventListener('mouseup', event_drag_end_handler,
-                        {once: true})
-                }
+          const event_drag_start_handler = (event) => {
+            const width = original_margin - (event.pageX - original_mouse_x)
+            if (width < container_limit && width > 0) {
+              preview.style.marginRight = width + 'px'
+            } else if (width < 0) {
+              preview.style.marginRight = 0 + 'px'
             }
+          }
+
+          const event_drag_end_handler = (event) => {
+            document.documentElement.classList.remove('dragging')
+            preview.classList.remove('is_resizing')
+            document.removeEventListener('mousemove', event_drag_start_handler)
+            document.removeEventListener('mouseup', event_drag_end_handler)
+          }
+
+          document.documentElement.classList.add('dragging')
+          preview.classList.add('is_resizing')
+          document.addEventListener('mousemove', event_drag_start_handler)
+          document.addEventListener('mouseup', event_drag_end_handler,
+            { once: true })
         }
+      }
+    }
 
-        const buttons = snippet.querySelectorAll('.buttons .link');
-        if (buttons.length > 0) {
-            buttons.forEach((button, index) => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
+    const buttons = snippet.querySelectorAll('.buttons .link')
 
-                    if (button.classList.contains('clipboard')) {
+    if (buttons.length > 0) {
+      buttons.forEach((button, index) => {
+        button.addEventListener('click', (e) => {
+          e.preventDefault()
 
-                        button?.classList.add('clicked')
-                        setTimeout(() => {
-                            button?.classList.remove('clicked')
-                        }, 800)
+          if (button.classList.contains('clipboard')) {
 
-                        button.querySelector('.tooltip')?.classList.add('show')
+            button?.classList.add('clicked')
+            setTimeout(() => {
+              button?.classList.remove('clicked')
+            }, 800)
 
-                        let copied_text = ''
+            button.querySelector('.tooltip')?.classList.add('show')
 
-                        // tab_items.forEach((tab) => {
-                        //   if (tab.classList.contains('active')) {
-                        //     copied_text = tab.querySelector('pre code')?.innerText
-                        //   }
-                        // })
+            let copied_text = ''
 
-                        navigator.clipboard.writeText(copied_text).then(function () {
-                            /* clipboard successfully set */
-                            setTimeout(() => {
-                                button.querySelector('.tooltip')?.classList.remove('show')
-                            }, 800)
-                        }, function () {
-                            /* clipboard write failed */
-                        })
-                    }
+            // tab_items.forEach((tab) => {
+            //   if (tab.classList.contains('active')) {
+            //     copied_text = tab.querySelector('pre code')?.innerText
+            //   }
+            // })
 
-                })
+            navigator.clipboard.writeText(copied_text).then(function () {
+              /* clipboard successfully set */
+              setTimeout(() => {
+                button.querySelector('.tooltip')?.classList.remove('show')
+              }, 800)
+            }, function () {
+              /* clipboard write failed */
             })
-        }
-    })
+          }
+
+          if (button.classList.contains('toggle_outline')) {
+            const event = new Event('toggle_outline')
+            document.dispatchEvent(event)
+          }
+
+          if (button.classList.contains('dark_mode_toggle')) {
+            const event = new Event('dark_mode_toggle')
+            document.dispatchEvent(event)
+            button.classList.toggle('clicked')
+          }
+
+        })
+      })
+    }
+  })
 </script>
 
 <script is:inline>
-    function iframe_onload(iframe) {
-        if (iframe.dataset.minHeight) {
-            iframe.contentWindow.document.querySelector(
-                '.iframe').style.minHeight = iframe.dataset.minHeight + 'px'
-        }
-        iframe.style.height = iframe.contentWindow.document.body.scrollHeight +
-            'px'
-        iframe.style.visibility = 'visible'
-
+  function iframe_onload (iframe) {
+    if (iframe.dataset.minHeight) {
+      iframe.contentWindow.document.querySelector(
+        '.iframe').style.minHeight = iframe.dataset.minHeight + 'px'
     }
+    iframe.style.height = iframe.contentWindow.document.body.scrollHeight +
+      'px'
+    iframe.style.visibility = 'visible'
+
+  }
 </script>

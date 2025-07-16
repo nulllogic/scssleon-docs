@@ -1,39 +1,43 @@
 ---
 import * as sass from 'sass'
-import path from 'path';
+import path from 'path'
 
-const {min_height} = Astro.props;
+const { min_height } = Astro.props
+
+let iframe_scripts = Astro.slots.has('js') ? (await Astro.slots.render(
+  'js')).replace(/^<div[^>]*>|<\/div>$/g,
+  '') : ''
 
 const scss_importes = [
-    {
-        // An importer that redirects relative URLs starting with "~" to
-        // `node_modules`.
-        findFileUrl(url) {
-            if (url.startsWith('~')) {
-                // console.log(path.resolve(process.cwd()), url.substring(1));
-                // console.log(path.resolve(process.cwd()) + '/src' + url.substring(1));
-                return new URL(
-                    `file://` + path.resolve(process.cwd()) + '/src' + url.substring(1))
-            }
-            if (url.startsWith('@')) {
-                return import.meta.env.PROD ?
-                    new URL(
-                        `file://` + path.resolve(process.cwd()) + '/node_modules/@' +
-                        url.substring(1)) :
-                    new URL(
-                        `file://` + path.resolve(process.cwd()) + '/src/styles/scss/' +
-                        url.substring(1).replace('nulllogic/scssleon/scss/', ''))
-            }
+  {
+    // An importer that redirects relative URLs starting with "~" to
+    // `node_modules`.
+    findFileUrl (url) {
+      if (url.startsWith('~')) {
+        // console.log(path.resolve(process.cwd()), url.substring(1));
+        // console.log(path.resolve(process.cwd()) + '/src' + url.substring(1));
+        return new URL(
+          `file://` + path.resolve(process.cwd()) + '/src' + url.substring(1))
+      }
+      if (url.startsWith('@')) {
+        return import.meta.env.PROD ?
+          new URL(
+            `file://` + path.resolve(process.cwd()) + '/node_modules/@' +
+            url.substring(1)) :
+          new URL(
+            `file://` + path.resolve(process.cwd()) + '/src/styles/scss/' +
+            url.substring(1).replace('nulllogic/scssleon/scss/', ''))
+      }
 
-            return null
-        },
-    }];
+      return null
+    },
+  }]
 
 let srcdoc = `<!doctype html>
 <html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<head>`;
+<head>`
 
 srcdoc += `<script>
     function iframe_onload(iframe) {
@@ -41,12 +45,10 @@ srcdoc += `<script>
             iframe.contentWindow.document.querySelector(
                 '.iframe').style.minHeight = iframe.dataset.minHeight + 'px'
         }
-        iframe.style.height = iframe.contentWindow.document.body.scrollHeight +
-            'px'
+        iframe.style.height = iframe.contentWindow.document.body.scrollHeight +'px'
         iframe.style.visibility = 'visible'
-
     }
-</script>`;
+</script>`
 
 // Outline styling for debug purposes
 
@@ -184,11 +186,11 @@ const base_style = await sass.compileStringAsync(`
     $config: app.$config,
     $theme: app.$theme
   );
-`, {importers: scss_importes});
+`, { importers: scss_importes })
 
 srcdoc += `<style>
     ${base_style.css}
-</style>`;
+</style>`
 
 const iframe_wrapper_style = await sass.compileStringAsync(`
   @use "sass:list";
@@ -222,10 +224,10 @@ const iframe_wrapper_style = await sass.compileStringAsync(`
         _colors : (
           light : (
             /*color: rgb(229, 236, 226),*/
-            background : string.unquote('rgba(55, 241, 14, 0.09) linear-gradient(135deg, rgba(219, 226, 216, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(219, 226, 216, 0.45) 0, rgba(219, 226, 216, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px  '),
+            background : string.unquote('rgba(55, 241, 14, 0.09) linear-gradient(135deg, rgba(219, 226, 216, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(219, 226, 216, 0.45) 0, rgba(219, 226, 216, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
           ),
           dark : (
-            background : string.unquote('rgba(19, 38, 81, 0.1) linear-gradient(135deg, rgba(19, 83, 14, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(19, 83, 14, 0.45) 0, rgba(19, 83, 14, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px  '),
+            background : string.unquote('rgba(19, 38, 81, 0.1) linear-gradient(135deg, rgba(19, 83, 14, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(19, 83, 14, 0.45) 0, rgba(19, 83, 14, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
           )
         )
       )
@@ -233,45 +235,106 @@ const iframe_wrapper_style = await sass.compileStringAsync(`
   );
 
   @include app.generate-component($wrapper, 'wrapper', app.$config, app.$theme);
-`, {importers: scss_importes});
+`, { importers: scss_importes })
 
 if (Astro.slots.has('scss')) {
-    const scss = (await Astro.slots.render('scss')).replace(/^<div[^>]*>|<\/div>$/g, '');
-    const scss_compiled = await sass.compileStringAsync(scss, {importers: scss_importes});
+  const scss = (await Astro.slots.render('scss')).replace(
+    /^<div[^>]*>|<\/div>$/g, '')
+  const scss_compiled = await sass.compileStringAsync(scss,
+    { importers: scss_importes })
 
-    srcdoc += `<style>
+  srcdoc += `<style>
         ${scss_compiled.css}
-    </style>`;
+    </style>`
 }
 
 srcdoc += `<style>
     ${iframe_wrapper_style.css}
-</style>`;
+</style>`
 
-srcdoc += '</head>';
+srcdoc += '</head>'
 
-srcdoc += '<body>';
+srcdoc += '<body>'
 
-srcdoc += '<div class="wrapper">';
-srcdoc += '<div class="preview">';
+srcdoc += '<div class="wrapper">'
+srcdoc += '<div class="preview">'
 
 if (Astro.slots.has('html')) {
-    srcdoc += (await Astro.slots.render('html')).replace(/^<div[^>]*>|<\/div>$/g, '');
+  srcdoc += (await Astro.slots.render('html')).replace(/^<div[^>]*>|<\/div>$/g,
+    '')
 }
 
-srcdoc += '</div>'; // Closing preview;
+srcdoc += '</div>' // Closing preview;
 
-srcdoc += '<div class="background" />';
+srcdoc += '<div class="background" />'
 
-srcdoc += '</div>';
+srcdoc += '</div>'
 
 if (Astro.slots.has('js')) {
-    srcdoc += '<script>';
-    srcdoc += (await Astro.slots.render('js')).replace(/^<div[^>]*>|<\/div>$/g, '');
-    srcdoc += '</script>';
+  srcdoc += '<script is:inline>' + iframe_scripts + '</script>'
 }
 
-srcdoc += '</body></html>';
+srcdoc += `<script is:inline>
+parent.document.addEventListener('toggle_outline', (e) => {
+  const existingStyle = document.getElementById('outline')
+
+  if (!existingStyle) {
+    const style = document.createElement('style')
+    style.setAttribute('id', 'outline')
+    style.innerHTML = "${outline.css.replace(/(\r\n|\n|\r)/gm, '')}";
+    document.head.appendChild(style)
+  } else {
+    existingStyle.remove()
+  }
+})
+</script>`;
+
+srcdoc += `<script is:inline>
+
+console.log(parent.document, document);
+
+parent.document.addEventListener('dark_mode_toggle', (e) => {
+  const current_theme = document.documentElement.getAttribute('data-theme')
+  const new_theme = current_theme === 'dark' ? 'light' : 'dark'
+  document.documentElement.setAttribute('data-theme', new_theme)
+})
+
+// Apply saved theme or system preference on page load
+const saved_theme = localStorage.getItem('theme')
+
+if (saved_theme) {
+  document.documentElement.setAttribute('data-theme', saved_theme)
+} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark')
+}
+</script>`;
+
+srcdoc += `<script is:inline>
+parent.document.addEventListener('theme_change', (e) => {
+  console.log(123);
+  document.documentElement.setAttribute('data-theme', e?.detail?.theme)
+})
+</script>`;
+
+srcdoc += `<script is:inline>
+document.addEventListener('readystatechange', function () {
+  if (document.readyState === 'interactive') {
+    // DOM is ready
+  }
+  if (document.readyState === 'complete') {
+    // All resources loaded
+    document.querySelector('body').classList.remove('preload');
+  }
+})
+</script>`;
+
+srcdoc += `<style>
+.preload * {
+  transition: none !important;
+}
+</style>`;
+
+srcdoc += '</body></html>'
 ---
 
 <iframe class="iframe"
