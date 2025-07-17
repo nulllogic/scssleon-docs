@@ -109,8 +109,12 @@ const {
                                             clip-rule="evenodd"></path>
                                       <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
                                   </svg>
-                                  <span class="tooltip with-arrow">
-                                    <span>Copied</span>
+                                  <span class="tooltip with-arrow funky">
+                                    <span style="min-width: 135px;text-wrap: stable;display:inline-block;padding: 3px 0;" hidden>✨コピーしました 👺</span>
+                                    <span style="min-width: 125px;text-wrap: stable;display:inline-block;padding: 3px 0;" hidden>🔊•၊၊||၊|။||||။‌‌၊|• 0:10</span>
+                                    <span style="min-width: 95px;text-wrap: stable;display:inline-block;padding: 3px 0;" hidden>🍻Kopiert 💾</span>
+                                    <span style="min-width: 110px;text-wrap: stable;display:inline-block;padding: 3px 0;" hidden>👲已复制 🧧🐉</span>
+                                    <span style="min-width: 90px;text-wrap: stable;display:inline-block;padding: 3px 0;" hidden>🐂Copied 🍔</span>
                                 </span>
                               </a>
                           </div>
@@ -541,12 +545,15 @@ const {
     margin: 0 0 1rem 0,
     border-radius: 0.5rem,
     background: var(--background),
+    box-shadow: var(--shadow),
     /***/
     _colors: (
       light : (
         background : rgb(248, 249, 250),
+        shadow: string.unquote('0 4px 12px rgba(224,224,224,0.5)'),
       ),
       dark : (
+        shadow : string.unquote('rgba(1, 4, 9, 0.4) 0 1px 0 0'),
         background : rgb(13, 17, 23) // github-dark
       )
     ),
@@ -847,9 +854,20 @@ const {
               button?.classList.remove('clicked')
             }, 800)
 
-            button.querySelector('.tooltip')?.classList.add('show')
+            let tooltip = button.querySelector('.tooltip');
 
-            let copied_text = ''
+            tooltip?.classList.add('show')
+
+            let random_tooltip_index = Math.floor(Math.random() * 5 );
+
+            tooltip?.querySelectorAll(':scope.funky > *').forEach((text, index) => {
+              text.setAttribute('hidden', '');
+              if(index === random_tooltip_index) {
+                text.removeAttribute('hidden');
+              }
+            })
+
+            let copied_text = '';
 
             // tab_items.forEach((tab) => {
             //   if (tab.classList.contains('active')) {
