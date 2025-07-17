@@ -1,6 +1,7 @@
 ---
 import {SidebarMenu} from '~/components/sidebar/index.ts';
 ---
+{Astro.url.pathname !== '/' && (
 <div id="sidebar_menu" class="menu mobile">
     <div class="overlay show blurred">
         <div class="card">
@@ -8,6 +9,7 @@ import {SidebarMenu} from '~/components/sidebar/index.ts';
         </div>
     </div>
 </div>
+    )}
 
 
 <style lang="scss">
@@ -35,9 +37,9 @@ import {SidebarMenu} from '~/components/sidebar/index.ts';
       '&.show' : (
         display: block,
         _responsive : (
-            lg : (
-                display: none,
-            )
+          lg : (
+            display: none,
+          )
         )
       ),
       '.overlay' : (
@@ -52,9 +54,9 @@ import {SidebarMenu} from '~/components/sidebar/index.ts';
             width: 100%,
             overflow-y: scroll,
             _responsive : (
-                sm : (
-                    max-width: 410px,
-                )
+              sm : (
+                max-width: 410px,
+              )
             )
           )
         )
