@@ -1,6 +1,6 @@
 ---
 import Logo from '../logo/index.astro'
-import { generate_rel_link } from '~/utils/links'
+import {generate_rel_link} from '~/utils/links'
 ---
 
 <div class="header">
@@ -16,7 +16,7 @@ import { generate_rel_link } from '~/utils/links'
                     <ul class="nav menu">
                         <li class="item">
                             <a href={generate_rel_link(Astro,
-                              './docs/1.0/en/getting-started/introduction')}
+                                './docs/1.0/en/getting-started/introduction')}
                                class="link"
                                target="_self" aria-label="Components">
                                 Components
@@ -24,7 +24,7 @@ import { generate_rel_link } from '~/utils/links'
                         </li>
                         <li class="item">
                             <a href={generate_rel_link(Astro,
-                              './sections/1.0/en/welcome')} class="link"
+                                './sections/1.0/en/welcome')} class="link"
                                target="_self"
                                aria-label="Sections">
                                 Sections
@@ -81,8 +81,10 @@ import { generate_rel_link } from '~/utils/links'
                         </li>
                         <li class="item">
                             <a href="#" class="link toggle mobile_menu">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" width="24px">
-                                    <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                     data-slot="icon" aria-hidden="true" width="24px">
+                                    <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round"
+                                          stroke-linejoin="round"></path>
                                 </svg>
                             </a>
                         </li>
@@ -91,42 +93,42 @@ import { generate_rel_link } from '~/utils/links'
             </header>
         </div>
     </div>
-  {Astro.url.pathname !== '/' && (
-          <div class="bottom">
-              <div class="container">
-                  <nav aria-label="breadcrumb">
-                      <ul class="breadcrumb">
-                          <li class="item">
-                              <a href="#" class="btn blank">
-                                  <svg viewBox="0 0 16 16" fill="currentColor"
-                                       width="14px">
-                                      <path fill-rule="evenodd"
-                                            d="M2 4.75A.75.75 0 0 1 2.75 4h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75Zm0 6.5a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
-                                            clip-rule="evenodd"></path>
-                                  </svg>
-                              </a>
-                          </li>
-                          <li class="item" aria-current="page"
-                              style="margin-left: .75rem;">Components
-                          </li>
-                          <li class="item">
-                              <svg width="17" height="17"
-                                   xmlns="http://www.w3.org/2000/svg"
-                                   viewBox="0 0 16 16"
-                                   fill="currentColor"
-                                   aria-hidden="true">
-                                  <path fill-rule="evenodd"
-                                        d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z"
-                                        clip-rule="evenodd"/>
-                              </svg>
-                          </li>
-                          <li class="item active" aria-current="page">Library
-                          </li>
-                      </ul>
-                  </nav>
-              </div>
-          </div>
-  )}
+    {Astro.url.pathname !== '/' && (
+            <div class="bottom">
+                <div class="container">
+                    <nav aria-label="breadcrumb">
+                        <ul class="breadcrumb">
+                            <li class="item">
+                                <a href="#" class="btn blank link toggle sidemenu">
+                                    <svg viewBox="0 0 16 16" fill="currentColor"
+                                         width="14px">
+                                        <path fill-rule="evenodd"
+                                              d="M2 4.75A.75.75 0 0 1 2.75 4h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75Zm0 6.5a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="item" aria-current="page"
+                                style="margin-left: .75rem;">Components
+                            </li>
+                            <li class="item">
+                                <svg width="17" height="17"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 16 16"
+                                     fill="currentColor"
+                                     aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                          d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </li>
+                            <li class="item active" aria-current="page">Library
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+    )}
 </div>
 
 <style lang="scss">
@@ -139,7 +141,7 @@ import { generate_rel_link } from '~/utils/links'
   @use "~/styles/app.scss" as app;
 
 
-  $mobile_menu_button : (
+  $mobile_menu_button: (
     display: inherit,
     _responsive: (
       lg : (
@@ -318,43 +320,54 @@ import { generate_rel_link } from '~/utils/links'
 </style>
 
 <script type="text/javascript">
-  const nav = document.querySelector('.header')
-  const navTop = nav.offsetTop
+    const nav = document.querySelector('.header')
+    const navTop = nav.offsetTop
 
-  function stickyNavigation () {
-    if (window.scrollY > navTop) {
-      // nav offsetHeight = height of nav
-      nav.classList.add('sticky')
-    } else {
-      nav.classList.remove('sticky')
+    function stickyNavigation() {
+        if (window.scrollY > navTop) {
+            // nav offsetHeight = height of nav
+            nav.classList.add('sticky')
+        } else {
+            nav.classList.remove('sticky')
+        }
     }
-  }
 
-  window.addEventListener('scroll', stickyNavigation)
+    window.addEventListener('scroll', stickyNavigation)
 </script>
 
 <script>
 
-  const light_dark_toggler = document.querySelector('.toggle.dark_mode')
+    const light_dark_toggler = document.querySelector('.toggle.dark_mode')
 
-  if (light_dark_toggler) {
-    light_dark_toggler.addEventListener('click', (e) => {
-      e.preventDefault()
+    if (light_dark_toggler) {
+        light_dark_toggler.addEventListener('click', (e) => {
+            e.preventDefault()
 
-      light_dark_toggler.classList.add('clicked')
+            light_dark_toggler.classList.add('clicked')
 
-      const current_theme = document.documentElement.getAttribute('data-theme')
-      const new_theme = current_theme === 'dark' ? 'light' : 'dark'
-      document.documentElement.setAttribute('data-theme', new_theme)
-      localStorage.setItem('theme', new_theme)
-      const event = new CustomEvent('theme_change', {
-        detail: {
-          theme: new_theme,
-        },
-      })
-      document.dispatchEvent(event)
-    })
-  }
+            const current_theme = document.documentElement.getAttribute('data-theme')
+            const new_theme = current_theme === 'dark' ? 'light' : 'dark'
+            document.documentElement.setAttribute('data-theme', new_theme)
+            localStorage.setItem('theme', new_theme)
+            const event = new CustomEvent('theme_change', {
+                detail: {
+                    theme: new_theme,
+                },
+            })
+            document.dispatchEvent(event)
+        })
+    }
+
+    const nav = document.querySelector('.header');
+    const buttons = nav.querySelectorAll('.link.toggle');
+
+    buttons.forEach(button => button.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (button.classList.contains('sidemenu')) {
+            document.getElementById('sidebar_menu').classList.toggle('show');
+            document.body.toggleAttribute('scroll-lock');
+        }
+    }))
 
 </script>
 

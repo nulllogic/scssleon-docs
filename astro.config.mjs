@@ -13,6 +13,7 @@ import rehypeSlug from 'rehype-slug'
 import remarkSmartypants from 'remark-smartypants'
 
 import { iframe } from './src/utils/integrations/iframe'
+console.log(path.resolve(__dirname, './src'));
 
 export default defineConfig({
   site: 'https://nulllogic.github.io',
@@ -44,7 +45,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '~': path.resolve(__dirname, './src'),
+      '~': path.resolve(__dirname, './src/'),
     },
   },
 })

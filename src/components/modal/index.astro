@@ -1,0 +1,72 @@
+---
+import {SidebarMenu} from '~/components/sidebar/index.ts';
+---
+<div id="sidebar_menu" class="menu mobile">
+    <div class="overlay show blurred">
+        <div class="card">
+            <SidebarMenu/>
+        </div>
+    </div>
+</div>
+
+
+<style lang="scss">
+  @use "sass:list";
+  @use "sass:meta";
+
+  @use '~/styles/app.scss' as app;
+
+  // ↓ Overlay
+  @use '~/styles/scss/components/overlay' with (
+      $config: app.$config,
+      $theme: app.$theme
+  );
+
+  $menu: (
+    position: fixed,
+    top: 83px,
+    left: 0,
+    bottom: 0,
+    width: 100%,
+    height: auto,
+    z-index : app.get-config(app.$config, 'z-index.header'),
+    display: none,
+    _subclasses : (
+      '&.show' : (
+        display: block,
+        _responsive : (
+            lg : (
+                display: none,
+            )
+        )
+      ),
+      '.overlay' : (
+        --overlay-align-items : start,
+        --overlay-justify-content: start,
+        _subclasses : (
+          '.card' : (
+            padding-inline: var(global(--padding-inline)),
+            padding-block: 20px,
+            border: none,
+            border-radius: 0,
+            width: 100%,
+            overflow-y: scroll,
+            _responsive : (
+                sm : (
+                    max-width: 430px,
+                )
+            )
+          )
+        )
+      )
+    )
+  );
+
+  @include app.generate-component(
+      $menu,
+      'menu',
+      app.$config,
+      app.$theme,
+      (variable: (exclude : 'overlay'))
+  );
+</style>

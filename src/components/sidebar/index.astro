@@ -1,74 +1,12 @@
 ---
-import { getCollection } from 'astro:content'
-import { generate_rel_link } from '~/utils/links'
-
-const components_category = await getCollection('components_category')
-const docs = await getCollection('docs')
-
-const pathname = new URL(Astro.request.url).pathname
-const generate_class = (link) => {
-  let classes = ['link']
-  let url = generate_rel_link(Astro, 'docs/' + Astro.params.version +
-    '/' +
-    Astro.params.lang +
-    link.id.replace(
-      Astro.params.version.replace(/\./g, '') +
-      '/' +
-      Astro.params.lang,
-      '',
-    ))
-
-  if (pathname === url.pathname) {
-    classes.push('active')
-  }
-
-  return [classes]
-}
-
 const { class: className, ...rest } = Astro.props
-
-import { generate_link } from '~/utils/links'
+import {SidebarMenu} from "./index.ts";
 ---
 
 <aside class:list={['sidebar', className]} {...rest}>
     <div style="position: sticky; top: 60px;left: 0;height: auto;overflow-y: auto;max-height: calc(100dvh - 60px); padding-bottom: 60px;padding-right: 15px;">
         <div class="card">
-            <nav>
-                <ul class="nav vertical">
-                  {components_category.sort(
-                    (a, b) => a?.data?.position - b?.data?.position).
-                    map((category) => {
-                      return (
-                              <li class="item">
-                                  <h5 class="title">{category.data.title}</h5>
-                                  <ul class="nav vertical">
-                                    {
-                                      docs.filter((doc) => doc.data.category ===
-                                        category.id).
-                                        sort((
-                                          a,
-                                          b) => a?.data?.title.localeCompare(
-                                          b?.data?.title)).
-                                        map((doc) => {
-                                          return (
-                                                  <li class="item">
-                                                      <a
-                                                              class:list={generate_class(
-                                                                doc)}
-                                                              href={generate_link(
-                                                                Astro, doc,
-                                                                'docs')}
-                                                      >{doc.data.title}</a>
-                                                  </li>
-                                          )
-                                        })
-                                    }
-                                  </ul>
-                              </li>
-                      )
-                    })}
-                </ul>
-            </nav>
+            <SidebarMenu />
         </div>
     </div>
 
@@ -96,66 +34,6 @@ import { generate_link } from '~/utils/links'
     display: block,
     align-self: start,
     height: 100%,
-    /***/
-    _subclasses : (
-      '.nav' : (
-        --nav-gap : 1px,
-        /***/
-        _subclasses : (
-          '.item' : (
-            /***/
-            _subclasses: (
-              '&:first-child .title' : (
-                margin: 0 0 10px 0
-              ),
-              '.title' : (
-                font-size: 1.25rem,
-                font-weight: 500,
-                margin: 10px 0,
-              ),
-              '.item' : (
-                /***/
-                _subclasses: (
-                  '.link' : (
-                    color: var(--link-color),
-                    padding: .4rem,
-                    text-decoration: none,
-                    border-radius: 0.25rem,
-                    margin: 0 0 0 0.75rem,
-                    /***/
-                    _colors: (
-                      light: (
-                        link-color: rgb(148, 163, 184),
-                        hover-color: rgba(43, 57, 10, 0.7),
-                        background: #e0e3de,
-                        background-active-link : rgb(74, 109, 71),
-                      ),
-                      dark: (
-                        link-color: rgb(148, 163, 184),
-                        hover-color: #fff,
-                        background : rgb(148, 163, 184),
-                        background-active-link : rgba(57, 119, 33, 0.6),
-                      )
-                    ),
-                    /***/
-                    _subclasses: (
-                      '&.active' : (
-                        color: rgb(238, 246, 220),
-                        background: var(--background-active-link),
-                      ),
-                      '&:hover:not(.active)' : (
-                        color: var(--hover-color),
-                        background: var(--background),
-                      )
-                    )
-                  )
-                )
-              )
-            )
-          )
-        )
-      )
-    )
   );
 
   @include app.generate-component(
