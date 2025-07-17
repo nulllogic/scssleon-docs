@@ -4,7 +4,7 @@ import { generate_rel_link } from '~/utils/links'
 ---
 
 <div class="header">
-    <div class="top">
+    <div class:list={['top', Astro.url.pathname === '/' ? 'is-homepage' : '']}>
         <div class="container xxl">
             <header class="navbar">
                 <div>
@@ -248,6 +248,9 @@ import { generate_rel_link } from '~/utils/links'
         ),
         /***/
         _subclasses : (
+          '&.is-homepage' : (
+            box-shadow: var(--shadow),
+          ),
           '.navbar' : $navbar,
           '.link.toggle_mode' : $scheme_color_switcher,
         )

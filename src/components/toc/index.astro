@@ -84,7 +84,6 @@ import Link from '~/components/link.astro'
 
         e.map((i) => {
 
-            console.log(i, `a[href="#${i.target.id}"].link`);
             if (i.isIntersecting === true) {
                 toc_links.forEach((link) => link.classList.remove('current'));
 
