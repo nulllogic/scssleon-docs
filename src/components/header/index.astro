@@ -7,11 +7,13 @@ import { generate_rel_link } from '~/utils/links'
     <div class:list={['top', Astro.url.pathname === '/' ? 'is-homepage' : '']}>
         <div class="container xxl">
             <header class="navbar">
-                <div>
+                <div style="display: inline-flex;gap: 15px;">
                     <ul class="nav horizontal">
                         <li class="item">
                             <Logo class="link"/>
                         </li>
+                    </ul>
+                    <ul class="nav menu">
                         <li class="item">
                             <a href={generate_rel_link(Astro,
                               './docs/1.0/en/getting-started/introduction')}
@@ -56,7 +58,7 @@ import { generate_rel_link } from '~/utils/links'
                         <li class="item">
                             <a
                                     href="https://github.com/nulllogic/xiigrid"
-                                    class="link toggle_mode"
+                                    class="link toggle dark_mode"
                                     target="_blank"
                             >
                                 <svg class="white" width="22px" fill="none"
@@ -74,6 +76,15 @@ import { generate_rel_link } from '~/utils/links'
                                           d="M11.2,2.1v-1c.1,0,.3,1,.3,1,0,.4.4.8.8.8h1c0,.1-1,.3-1,.3-.4,0-.8.4-.8.8v1c-.1,0-.3-1-.3-1,0-.4-.4-.8-.8-.8h-1c0-.1,1-.3,1-.3.4,0,.8-.4.8-.8Z"/>
                                     <path stroke-linejoin="round"
                                           d="M15.2,7.1v-1c.1,0,.3,1,.3,1,0,.4.4.8.8.8h1c0,.1-1,.3-1,.3-.4,0-.8.4-.8.8v1c-.1,0-.3-1-.3-1,0-.4-.4-.8-.8-.8h-1c0-.1,1-.3,1-.3.4,0,.8-.4.8-.8Z"/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="#" class="link toggle mobile_menu">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="3" y1="5" x2="21" y2="5"></line>
+                                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                                    <line x1="3" y1="19" x2="21" y2="19"></line>
                                 </svg>
                             </a>
                         </li>
@@ -128,6 +139,16 @@ import { generate_rel_link } from '~/utils/links'
   @use "sass:map";
 
   @use "~/styles/app.scss" as app;
+
+
+  $mobile_menu_button : (
+    display: inherit,
+    _responsive: (
+      lg : (
+        display: none,
+      )
+    )
+  );
 
   $scheme_color_switcher: (
     width: 22px,
@@ -199,6 +220,16 @@ import { generate_rel_link } from '~/utils/links'
         _subclasses : (
           '.nav' : (
             --nav-gap : 15px,
+            _subclasses : (
+              '&.menu' : (
+                display: none,
+                _responsive: (
+                  lg : (
+                    display: inherit,
+                  )
+                )
+              )
+            )
           )
         )
       ),
@@ -238,7 +269,7 @@ import { generate_rel_link } from '~/utils/links'
         box-shadow: none,
         /***/
         padding-inline: var(global(--padding-inline)),
-        padding-block: 5px 5px,
+        padding-block: 7px,
         /***/
         _responsive : (
           lg: (
@@ -252,7 +283,8 @@ import { generate_rel_link } from '~/utils/links'
             box-shadow: var(--shadow),
           ),
           '.navbar' : $navbar,
-          '.link.toggle_mode' : $scheme_color_switcher,
+          '.link.toggle.dark_mode' : $scheme_color_switcher,
+          '.link.toggle.mobile_menu' : $mobile_menu_button,
         )
       ),
       '.bottom': (
@@ -305,7 +337,7 @@ import { generate_rel_link } from '~/utils/links'
 
 <script>
 
-  const light_dark_toggler = document.querySelector('.toggle_mode')
+  const light_dark_toggler = document.querySelector('.toggle.dark_mode')
 
   if (light_dark_toggler) {
     light_dark_toggler.addEventListener('click', (e) => {
