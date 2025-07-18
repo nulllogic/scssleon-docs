@@ -1,6 +1,6 @@
 ---
 import Index from '../layouts/index.astro'
-import { CodeWrapper, Snippet } from '../components/snippet'
+import { Raw, Snippet, CodeWrapper } from '../components/snippet'
 import Link from '~/components/link.astro'
 
 //https://api.github.com/repos/nulllogic/scssleon/branches/master
@@ -42,10 +42,10 @@ const commit_date =
                     <div>
                         <Snippet inline={true} multi_line={false}>
                             <Fragment slot={'code'}>
-                                <CodeWrapper inline={true} lang={'sh'} multiline={false}>
-                                    ```
-                                    npm i @nulllogic/scssleon@latest
-                                    ```
+                                <CodeWrapper lang={'sh'}>
+                                    <Raw inline={true}>
+                                        npm i @nulllogic/scssleon@latest
+                                    </Raw>
                                 </CodeWrapper>
                             </Fragment>
                         </Snippet>
@@ -242,6 +242,8 @@ const commit_date =
             background-clip: text,
             background-image: var(--title-gradient),
             color: transparent,
+            position: relative,
+            z-index: 1,
             _colors: (
               light: (
                 title-gradient: radial-gradient(89.470001% 51.040001% at 44.27% 50%, rgb(1, 105, 8), rgb(28, 111, 26) 52.73%, rgb(0, 33, 11)),
@@ -316,7 +318,7 @@ const commit_date =
         max-width: 400px,
         width:100%,
         margin: 0 auto 1rem auto,
-        align-items: stretch,
+        align-items: center,
         _responsive: (
           md: (
             flex-direction: row,
@@ -325,6 +327,13 @@ const commit_date =
         _subclasses : (
           '& > :nth-child(2)' : (
             padding: 3px 0,
+            width: 100%,
+            max-width: 302px,
+            _responsive : (
+              md : (
+                width: auto,
+              )
+            ),
             _subclasses : (
               '& > .btn' : (
                 /*padding-inline: 1rem,*/

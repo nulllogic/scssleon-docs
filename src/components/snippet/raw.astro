@@ -1,20 +1,34 @@
 ---
 import {read_lines_in_range} from '~/utils/files.ts'
 
-let code = ''
+const { inline = false } = Astro.props;
 
-try {
+let code = '';
+
+if(inline) {
+  code = await (Astro.slots.render('default'));
+} else {
+  try {
     if (Astro?.props.file && Astro.props.line_start &&
-        Astro.props.line_end) {
-        code = await read_lines_in_range(Astro?.props.file,
-            Astro.props?.line_start, Astro.props?.line_end)
+      Astro.props.line_end) {
+      code = await read_lines_in_range(Astro?.props.file,
+        Astro.props?.line_start, Astro.props?.line_end)
     }
-} catch (err) {
+  } catch (err) {
     console.error(`Error reading file: ${err.message}`) // Handle potential errors
+  }
 }
 
 // Split text into lines
 const lines = code.split('\n');
+
+if (lines[0] === '') {
+  lines.shift();
+}
+
+if (lines[lines.length - 1] === '') {
+  lines.pop();
+}
 
 // Get number of leading spaces in first line
 const firstLineSpaces = lines[0].match(/^\s*/)[0].length;

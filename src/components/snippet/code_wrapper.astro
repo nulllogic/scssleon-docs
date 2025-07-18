@@ -3,41 +3,10 @@ import { Code } from 'astro:components'
 import { read_lines_in_range } from '~/utils/files.ts'
 
 const {
-  inline = false,
-  multiline = true,
+
 } = Astro.props
 
 let code = await (Astro.slots.render('default'))
-
-if (inline) {
-
-  try {
-    if (Astro?.props.file && Astro.props.line_start &&
-      Astro.props.line_end) {
-      code = await read_lines_in_range(Astro?.props.file,
-        Astro.props?.line_start, Astro.props?.line_end)
-    }
-  } catch (err) {
-    console.error(`Error reading file: ${err.message}`) // Handle potential errors
-  }
-}
-
-// Split text into lines
-const lines = !inline ? code.split('\n') : code.trim().
-  replaceAll('```', '').
-  trim().
-  split('\n')
-
-let spaces = ''
-
-// // Get number of leading spaces in first line
-// const firstLineSpaces = !inline ? lines[0].match(/^\s*/)[0] !== '' : lines[2].match(/^\s*/)[0].length
-//
-// Process all lines
-code = lines.map((line, index) => {
-  // For other lines, remove up to firstLineSpaces from start
-  return line.replace(new RegExp(`^\\s{0,${spaces}}`), '')
-}).join('\n')
 ---
 <Code defaultColor={false}
       themes={{
@@ -45,5 +14,5 @@ code = lines.map((line, index) => {
         dark: 'github-dark-default',
       }}
       lang={Astro.props.lang}
-      code={code}
+      code={code.trim().replace(/^<div[^>]*>|<\/div>$/g, '')}
 />

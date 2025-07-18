@@ -1,6 +1,5 @@
 ---
-import { Preview } from './'
-import { Raw } from './'
+import { CodeWrapper, Preview, Raw } from './'
 import { render } from 'astro:content'
 import { Code } from 'astro:components'
 
@@ -192,16 +191,7 @@ const {
                   Astro.slots.has('html') && (
                                 <div class="tab active">
                                     <div class="code">
-                                        <Code defaultColor={'light'}
-                                              themes={{
-                                                light: 'min-light',
-                                                dark: 'github-dark-default',
-                                              }}
-                                              lang={'html'}
-                                              meta="{1,3}"
-                                              code={html.replace(
-                                                /^<div[^>]*>|<\/div>$/g, '')}
-                                        />
+                                        <CodeWrapper lang={'html'} set:html={html}/>
                                     </div>
                                 </div>
                   )
@@ -210,16 +200,7 @@ const {
                   Astro.slots.has('scss') && (
                                 <div class="tab">
                                     <div class="code">
-                                        <Code defaultColor={'light'}
-                                              themes={{
-                                                light: 'min-light',
-                                                dark: 'github-dark-default',
-                                              }}
-                                              lang={'scss'}
-                                              meta="{1,3}"
-                                              code={scss.replace(
-                                                /^<div[^>]*>|<\/div>$/g, '')}
-                                        />
+                                        <CodeWrapper lang={'scss'} set:html={scss}/>
                                     </div>
                                 </div>
                   )
@@ -228,15 +209,7 @@ const {
                   Astro.slots.has('js') && (
                                 <div class="tab">
                                     <div class="code">
-                                        <Code defaultColor={'light'}
-                                              themes={{
-                                                light: 'min-light',
-                                                dark: 'github-dark-default',
-                                              }}
-                                              lang={'js'}
-                                              code={js.replace(/^<div[^>]*>|<\/div>$/g,
-                                                '')}
-                                        />
+                                        <CodeWrapper lang={'js'} set:html={js}/>
                                     </div>
                                 </div>
                   )
