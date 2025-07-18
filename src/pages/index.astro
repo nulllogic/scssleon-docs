@@ -42,8 +42,7 @@ const commit_date =
                     <div>
                         <Snippet inline={true} multi_line={false}>
                             <Fragment slot={'code'}>
-                                <CodeWrapper inline={true} from_file={true}
-                                             lang={'sh'}>
+                                <CodeWrapper inline={true} lang={'sh'} multiline={false}>
                                     ```
                                     npm i @nulllogic/scssleon@latest
                                     ```
@@ -54,22 +53,25 @@ const commit_date =
                     <div>
                         <a href="/docs/1.0/en/getting-started/introduction"
                            class="btn"
-                           style="height:100%;border-radius: 0.425rem 0.425rem;">Get
+                           style="height:100%;border-radius: 0.425rem 0.425rem;">🚀
+                            Get
                             started</a>
                     </div>
                 </div>
 
-                <div class="commit">
-                    <span class="badge">Latest Commit on GitHub: {
-                      commit_date
-                    }</span>
-                </div>
-
                 <div class="version">
                     Currently
-                    <Link class="link" href="https://www.npmjs.com/package/@nulllogic/scssleon" aria-label="SCSSLeon repository"
+                    <Link class="link"
+                          href="https://www.npmjs.com/package/@nulllogic/scssleon"
+                          aria-label="SCSSLeon repository"
                           title="SCSSLeon repository">v1.0.4
                     </Link>
+                </div>
+
+                <div class="commit">
+                    <span class="">Latest Commit on GitHub: {
+                      commit_date
+                    }</span>
                 </div>
             </div>
         </section>
@@ -209,9 +211,10 @@ const commit_date =
   @use "~/styles/app.scss" as app;
 
   $welcome-section: (
-    --padding: 3rem 0,
+    --padding: 3rem,
+    padding-inline: var(global(--padding-inline)),
     background: var(--background),
-    padding: var(--padding),
+    padding-block: var(--padding),
     text-align: center,
     position: relative,
     z-index: 1,
@@ -322,14 +325,26 @@ const commit_date =
         _subclasses : (
           '& > :nth-child(2)' : (
             padding: 3px 0,
+            _subclasses : (
+              '& > .btn' : (
+                /*padding-inline: 1rem,*/
+                width: 100%,
+                padding-block: 0.75rem,
+                justify-content: center,
+                _responsive : (
+                  md : (
+                    width: auto,
+                    justify-content: inherit,
+                    /*padding: inherit,*/
+                  )
+                )
+              )
+            )
           )
         )
       ),
-      '.commit' : (
-        margin: 0 0 1rem 0,
-      ),
       '.version' : (
-        margin: 0 0 1rem 0,
+        margin: 0 0 0.5rem 0,
         _subclasses : (
           '.link' : (
             text-decoration: underline,
@@ -340,6 +355,19 @@ const commit_date =
                 text-decoration: none,
               )
             )
+          )
+        )
+      ),
+      '.commit' : (
+        margin: 0 0 1rem 0,
+        font-size: 0.825rem,
+        color: var(--color),
+        _colors : (
+          light: (
+            color: #8e8e8e,
+          ),
+          dark: (
+            color: #717171,
           )
         )
       ),

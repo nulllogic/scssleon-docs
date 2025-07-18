@@ -2,7 +2,10 @@
 import { Code } from 'astro:components'
 import { read_lines_in_range } from '~/utils/files.ts'
 
-const { inline = false } = Astro.props
+const {
+  inline = false,
+  multiline = true,
+} = Astro.props
 
 let code = await (Astro.slots.render('default'))
 
@@ -25,7 +28,7 @@ const lines = !inline ? code.split('\n') : code.trim().
   trim().
   split('\n')
 
-let spaces = '';
+let spaces = ''
 
 // // Get number of leading spaces in first line
 // const firstLineSpaces = !inline ? lines[0].match(/^\s*/)[0] !== '' : lines[2].match(/^\s*/)[0].length
