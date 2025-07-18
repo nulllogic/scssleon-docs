@@ -13,6 +13,8 @@ build:
 
 watch:
 	@echo "[Running Docker SCSSLEON docs]"
-	docker run --rm -it -v ${CURRENT_DIR}/src:/app/src \
+	docker run --rm -it \
+		-v ${CURRENT_DIR}/public:/app/public \
+		-v ${CURRENT_DIR}/src:/app/src \
 		-v ${SCSSLEON_DIR}/scss:/app/src/styles/scss \
 		-p 4321:4321 scssleon-docs

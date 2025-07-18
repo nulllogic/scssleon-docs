@@ -12,7 +12,9 @@ import Link from '~/components/link.astro'
                 </div>
                 <p>
                     Designed and built with all the love in the world by the
-                    <Link href="https://nulllogic.net" aria-label="Home" title="Home">NullLogic</Link>
+                    <Link href="https://nulllogic.net" aria-label="Home"
+                          title="Home">NullLogic
+                    </Link>
                     team with the help of our contributors.
                 </p>
                 <p>Currently v</p>
@@ -22,13 +24,18 @@ import Link from '~/components/link.astro'
                 <h5 class="title">Links</h5>
                 <ul class="nav vertical">
                     <li class="item">
-                        <Link href="/" aria-label="Home" title="Home">Home</Link>
+                        <Link href="/" aria-label="Home" title="Home">Home
+                        </Link>
                     </li>
                     <li class="item">
-                        <Link href="/docs/1.0/en/" aria-label="Components" title="Components">Components</Link>
+                        <Link href="/docs/1.0/en/" aria-label="Components"
+                              title="Components">Components
+                        </Link>
                     </li>
                     <li class="item">
-                        <Link href="/sections/1.0/en/welcome" aria-label="Sections" title="Sections">Sections</Link>
+                        <Link href="/sections/1.0/en/welcome"
+                              aria-label="Sections" title="Sections">Sections
+                        </Link>
                     </li>
                 </ul>
             </div>
@@ -37,17 +44,20 @@ import Link from '~/components/link.astro'
                 <h5 class="title">Community</h5>
                 <ul class="nav vertical">
                     <li class="item">
-                        <Link href="https://github.com/nulllogic/scssleon/issues" aria-label="Issues" title="Issues">
+                        <Link href="https://github.com/nulllogic/scssleon/issues"
+                              aria-label="Issues" title="Issues">
                             Issues
                         </Link>
                     </li>
                     <li class="item">
-                        <Link href="https://github.com/nulllogic/scssleon/discussions" aria-label="Discussions"
+                        <Link href="https://github.com/nulllogic/scssleon/discussions"
+                              aria-label="Discussions"
                               title="Discussions">Discussions
                         </Link>
                     </li>
                     <li class="item">
-                        <Link href="https://stackoverflow.com/questions/tagged/scssleon" aria-label="Stack Overflow"
+                        <Link href="https://stackoverflow.com/questions/tagged/scssleon"
+                              aria-label="Stack Overflow"
                               title="Stack Overflow">Stack Overflow
                         </Link>
                     </li>
@@ -64,7 +74,7 @@ import Link from '~/components/link.astro'
 
   @use "../../styles/app.scss" as app;
 
-  $footer_grid : (
+  $footer_grid: (
     --columns: 1fr,
     display: grid,
     grid-template-columns: var(--columns),
@@ -99,7 +109,6 @@ import Link from '~/components/link.astro'
   $footer-component: (
     padding-inline: var(global(--padding-inline)),
     padding-block: 35px,
-
     background: var(--background),
     border-top: var(--border),
     box-shadow: var(--box-shadow),
@@ -130,28 +139,17 @@ import Link from '~/components/link.astro'
   );
 </style>
 
-<style is:global>
-    html[data-theme='dark'] pre:has(code),
-    html[data-theme='dark'] pre:has(code) span {
-        color: var(--shiki-dark) !important;
-        background-color: var(--shiki-dark-bg) !important;
-        font-style: var(--shiki-dark-font-style) !important;
-        font-weight: var(--shiki-dark-font-weight) !important;
-        text-decoration: var(--shiki-dark-text-decoration) !important;
-    }
-</style>
-
 <script>
-    customElements.define('svg-circle', class extends HTMLElement {
-        connectedCallback() {
-            this.innerHTML = `<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+  customElements.define('svg-circle', class extends HTMLElement {
+    connectedCallback () {
+      this.innerHTML = `<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
              fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd"
                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                   clip-rule="evenodd"/>
-        </svg>`;
-        }
-    });
+        </svg>`
+    }
+  })
 </script>
 
 <style>
@@ -159,61 +157,61 @@ import Link from '~/components/link.astro'
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items:center
+        align-items: center
     }
 
     .spinner-circle {
         transform-origin: center;
-        animation:spinner-circle-animate 1s step-start infinite
+        animation: spinner-circle-animate 1s step-start infinite
     }
 
     rect {
-        fill:rgb(161, 161, 161);
+        fill: rgb(161, 161, 161);
     }
 
     @keyframes spinner-circle-animate {
         0% {
-            transform:rotate(0)
+            transform: rotate(0)
         }
 
         10% {
-            transform:rotate(36deg)
+            transform: rotate(36deg)
         }
 
         20% {
-            transform:rotate(72deg)
+            transform: rotate(72deg)
         }
 
         30% {
-            transform:rotate(108deg)
+            transform: rotate(108deg)
         }
 
         40% {
-            transform:rotate(144deg)
+            transform: rotate(144deg)
         }
 
         50% {
-            transform:rotate(180deg)
+            transform: rotate(180deg)
         }
 
         60% {
-            transform:rotate(216deg)
+            transform: rotate(216deg)
         }
 
         70% {
-            transform:rotate(252deg)
+            transform: rotate(252deg)
         }
 
         80% {
-            transform:rotate(288deg)
+            transform: rotate(288deg)
         }
 
         90% {
-            transform:rotate(324deg)
+            transform: rotate(324deg)
         }
 
         to {
-            transform:rotate(360deg)
+            transform: rotate(360deg)
         }
     }
 </style>
@@ -231,6 +229,12 @@ import Link from '~/components/link.astro'
       'has-tooltip',
       app.$config,
       app.$theme,
-      ( variable: (name : 'tooltip') )
+      (variable: (name : 'tooltip'))
   );
+</style>
+
+<style is:global>
+    .preload * {
+        transition: none !important;
+    }
 </style>

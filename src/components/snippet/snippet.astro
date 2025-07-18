@@ -547,23 +547,26 @@ const {
   );
 
   $snippet: (
-    margin: 0 0 1rem 0,
     border-radius: 0.5rem,
     background: var(--background),
     box-shadow: var(--shadow),
+    z-index: 1,
     /***/
     _colors: (
       light : (
-        background : rgb(248, 249, 250),
+        background : rgba(247, 249, 250, 0.81),
         shadow: string.unquote('0 4px 12px rgba(224,224,224,0.5)'),
       ),
       dark : (
         shadow : string.unquote('rgba(1, 4, 9, 0.4) 0 1px 0 0'),
-        background : rgb(13, 17, 23) // github-dark
+        background : rgba(13, 17, 23, 0.81) // github-dark
       )
     ),
     /***/
     _subclasses: (
+      '&:where(.content, .content > *)' : (
+        margin: 0 0 1rem 0,
+      ),
       '.topnav' : $snippet-topnav,
       '.bottomnav' : $snippet-bottomnav,
       '.buttons' : (
@@ -577,7 +580,7 @@ const {
           '.astro-code' : (
             border-radius: .425rem .425rem,
             text-align: left,
-            padding: 0.5rem 2rem 0.5rem 1rem,
+            padding: 0.825rem 2.25rem 0.825rem 1rem,
           ),
 
           '.buttons' : (
@@ -591,8 +594,8 @@ const {
                 top: 10px,
               ),
               '&.single_line' : (
-                top: 50%,
-                transform: translateY(-50%)
+                top: calc(50% - 3px),
+                transform: translateY(calc(-50% + 3px))
               )
             )
           )
@@ -639,6 +642,19 @@ const {
         _subclasses : (
           'code' : (
             background: none,
+            _subclasses : (
+              '& *' : (
+                color: var(--code-color),
+                _colors : (
+                  light : (
+                    code-color : var(--shiki-light),
+                  ),
+                  dark : (
+                    code-color : var(--shiki-dark),
+                  )
+                ),
+              )
+            )
           )
         )
       )
@@ -656,6 +672,12 @@ const {
 </style>
 
 <style lang="scss">
+
+  /*color: var(--shiki-dark) !important;*/
+  /*background-color: var(--shiki-dark-bg) !important;*/
+  /*font-style: var(--shiki-dark-font-style) !important;*/
+  /*font-weight: var(--shiki-dark-font-weight) !important;*/
+  /*text-decoration: var(--shiki-dark-text-decoration) !important;*/
 
   /*
   .content {
@@ -785,6 +807,7 @@ const {
   document.querySelectorAll('.snippet').forEach((snippet) => {
 
     // Tabs
+
     // Checking first, if element exist
     if (snippet.querySelector('.topnav .navbar')) {
       const nav_items_top_left = snippet.querySelectorAll(
@@ -895,13 +918,7 @@ const {
                 }
               })
 
-            let copied_text = ''
-
-            // tab_items.forEach((tab) => {
-            //   if (tab.classList.contains('active')) {
-            //     copied_text = tab.querySelector('pre code')?.innerText
-            //   }
-            // })
+            let copied_text = snippet.querySelector('.astro-code code')?.innerText;
 
             navigator.clipboard.writeText(copied_text).then(function () {
               /* clipboard successfully set */

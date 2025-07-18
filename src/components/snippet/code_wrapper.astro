@@ -36,7 +36,7 @@ code = lines.map((line, index) => {
   return line.replace(new RegExp(`^\\s{0,${spaces}}`), '')
 }).join('\n')
 ---
-<Code defaultColor={'light'}
+<Code defaultColor={false}
       themes={{
         light: 'min-light',
         dark: 'github-dark-default',

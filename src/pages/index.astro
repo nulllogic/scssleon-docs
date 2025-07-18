@@ -1,6 +1,7 @@
 ---
 import Index from '../layouts/index.astro'
 import { CodeWrapper, Snippet } from '../components/snippet'
+import Link from '~/components/link.astro'
 
 //https://api.github.com/repos/nulllogic/scssleon/branches/master
 
@@ -17,7 +18,6 @@ const commit_date =
     })
     : new Date()
 ---
-
 <Index>
     <main>
 
@@ -38,14 +38,14 @@ const commit_date =
                     your engineering teams.
                 </h2>
 
-                <div class="grid"
-                     style="display:grid;grid-template-columns: 1fr 1fr;max-width:300px;margin: 0 auto;">
+                <div class="grid">
                     <div>
                         <Snippet inline={true} multi_line={false}>
                             <Fragment slot={'code'}>
-                                <CodeWrapper from_file={true} lang={'sh'}>
+                                <CodeWrapper inline={true} from_file={true}
+                                             lang={'sh'}>
                                     ```
-                                    npm i @nulllogic/scssleon
+                                    npm i @nulllogic/scssleon@latest
                                     ```
                                 </CodeWrapper>
                             </Fragment>
@@ -53,23 +53,29 @@ const commit_date =
                     </div>
                     <div>
                         <a href="/docs/1.0/en/getting-started/introduction"
-                           class="btn">Get started</a>
+                           class="btn"
+                           style="height:100%;border-radius: 0.425rem 0.425rem;">Get
+                            started</a>
                     </div>
                 </div>
 
-                <div>
-                    Currently v0.0.1
-                </div>
-
-                <p class="latest_commit">
+                <div class="commit">
                     <span class="badge">Latest Commit on GitHub: {
                       commit_date
                     }</span>
-                </p>
+                </div>
+
+                <div class="version">
+                    Currently
+                    <Link class="link" href="https://www.npmjs.com/package/@nulllogic/scssleon" aria-label="SCSSLeon repository"
+                          title="SCSSLeon repository">v1.0.4
+                    </Link>
+                </div>
             </div>
         </section>
 
-        <section style="background: radial-gradient(circle at -48% 130%, rgba(208, 242, 36, 0.667) 24%, rgb(5, 74, 73) 45%);">
+        <section
+                style="background: radial-gradient(circle at -48% 130%, rgba(208, 242, 36, 0.667) 24%, rgb(5, 74, 73) 45%);">
             Good color
         </section>
 
@@ -93,6 +99,7 @@ const commit_date =
                     enable global options like gradients and shadows, and write
                     your own CSS with our variables, maps, functions,
                     and mixins.</p>
+
                 <div class="grid">
                     <div class="column">
                         <h3>Include all of SCSSLeon’s parts</h3>
@@ -299,15 +306,40 @@ const commit_date =
         margin: 0 0 20px 0,
         font-size: 2rem,
       ),
-      '.latest_commit' : (
-        _subclasses : (
-          'span' : (
-            background: var(--background),
-          )
+      '.grid' : (
+        gap:15px,
+        display: flex,
+        flex-direction: column,
+        max-width: 400px,
+        width:100%,
+        margin: 0 auto 1rem auto,
+        align-items: stretch,
+        _responsive: (
+          md: (
+            flex-direction: row,
+          ),
         ),
-        _colors: (
-          dark : (
-            background: rgba(65, 52, 99, 0.4)
+        _subclasses : (
+          '& > :nth-child(2)' : (
+            padding: 3px 0,
+          )
+        )
+      ),
+      '.commit' : (
+        margin: 0 0 1rem 0,
+      ),
+      '.version' : (
+        margin: 0 0 1rem 0,
+        _subclasses : (
+          '.link' : (
+            text-decoration: underline,
+            /*text-decoration-color : green,*/
+            text-underline-offset: 3px,
+            _subclasses : (
+              '&:hover' : (
+                text-decoration: none,
+              )
+            )
           )
         )
       ),
