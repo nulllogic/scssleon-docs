@@ -33,7 +33,7 @@ import {generate_rel_link} from '~/utils/links'
                     </ul>
                 </div>
                 <div>
-                    <ul class="nav horizonatal">
+                    <ul class="nav horizonatal menu">
                         <li class="item">
                             <a
                                     href="https://github.com/nulllogic/xiigrid"
@@ -80,7 +80,7 @@ import {generate_rel_link} from '~/utils/links'
                             </a>
                         </li>
                         <li class="item">
-                            <a href="#" class="link toggle mobile_menu">
+                            <a href="#" class="link toggle mainmenu">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                      data-slot="icon" aria-hidden="true" width="24px">
                                     <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round"
@@ -238,6 +238,30 @@ import {generate_rel_link} from '~/utils/links'
         _subclasses : (
           '.nav' : (
             --nav-gap : .825rem,
+            _subclasses : (
+              '&.menu' : (
+                _subclasses : (
+                  '.item' : (
+                    display: none,
+
+                    _responsive: (
+                      lg : (
+                        display: inherit,
+                      )
+                    )
+                  ),
+                  '.item:last-child' : (
+                    display: inherit,
+
+                    _responsive: (
+                      lg : (
+                        display: none,
+                      )
+                    )
+                  )
+                )
+              )
+            )
           )
         )
       )
@@ -363,8 +387,14 @@ import {generate_rel_link} from '~/utils/links'
 
     buttons.forEach(button => button.addEventListener('click', (e) => {
         e.preventDefault();
+
         if (button.classList.contains('sidemenu')) {
-            document.getElementById('sidebar_menu').classList.toggle('show');
+            document.getElementById('sidebar_mobile_menu').classList.toggle('show');
+            document.body.toggleAttribute('scroll-lock');
+        }
+
+        if (button.classList.contains('mainmenu')) {
+            document.getElementById('main_mobile_menu').classList.toggle('show');
             document.body.toggleAttribute('scroll-lock');
         }
     }))

@@ -1,0 +1,50 @@
+---
+import {generate_rel_link} from "../../utils/links.ts";
+---
+
+<ul class="nav menu vertical">
+    <li class="item">
+        <a href={generate_rel_link(Astro,
+            './docs/1.0/en/getting-started/introduction')}
+           class="link"
+           target="_self" aria-label="Components">
+            Components
+        </a>
+    </li>
+    <li class="item">
+        <a href={generate_rel_link(Astro,
+            './sections/1.0/en/welcome')} class="link"
+           target="_self"
+           aria-label="Sections">
+            Sections
+        </a>
+    </li>
+</ul>
+
+<style lang="scss">
+  @use "sass:list";
+  @use "sass:meta";
+
+  @use '~/styles/app.scss' as app;
+
+  $menu: (
+    _subclasses : (
+      '.item' : (
+        _subclasses : (
+          '.link' : (
+            padding-block: 1rem,
+            font-size: 1.125rem,
+          )
+        )
+      ),
+    )
+  );
+
+  @include app.generate-component(
+      $menu,
+      'menu',
+      app.$config,
+      app.$theme,
+      (variable: (exclude : 'nav'))
+  );
+</style>

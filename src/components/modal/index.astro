@@ -1,8 +1,9 @@
 ---
 import {SidebarMenu} from '~/components/sidebar/index.ts';
+import {MobileMenu} from '~/components/header/index.ts';
 ---
 {Astro.url.pathname !== '/' && (
-<div id="sidebar_menu" class="menu mobile">
+<div id="sidebar_mobile_menu" class="menu sidebar">
     <div class="overlay show blurred">
         <div class="card">
             <SidebarMenu/>
@@ -11,6 +12,13 @@ import {SidebarMenu} from '~/components/sidebar/index.ts';
 </div>
     )}
 
+<div id="main_mobile_menu" class="menu main">
+    <div class="overlay show blurred">
+        <div class="card">
+            <MobileMenu/>
+        </div>
+    </div>
+</div>
 
 <style lang="scss">
   @use "sass:list";
@@ -26,7 +34,7 @@ import {SidebarMenu} from '~/components/sidebar/index.ts';
 
   $menu: (
     position: fixed,
-    top: 83px,
+    top: 84px,
     left: 0,
     bottom: 0,
     width: 100%,
@@ -34,6 +42,9 @@ import {SidebarMenu} from '~/components/sidebar/index.ts';
     z-index : app.get-config(app.$config, 'z-index.header'),
     display: none,
     _subclasses : (
+      '&.main' : (
+        top: 45px,
+      ),
       '&.show' : (
         display: block,
         _responsive : (
