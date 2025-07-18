@@ -4,7 +4,7 @@ import { read_lines_in_range } from '~/utils/files.ts'
 
 const { inline = false } = Astro.props
 
-let code = await(Astro.slots.render('default'));
+let code = await (Astro.slots.render('default'))
 
 if (inline) {
 
@@ -20,15 +20,20 @@ if (inline) {
 }
 
 // Split text into lines
-const lines = !inline ? code.split('\n') : code.trim().replaceAll('```', '').trim().split('\n');
+const lines = !inline ? code.split('\n') : code.trim().
+  replaceAll('```', '').
+  trim().
+  split('\n')
 
-// Get number of leading spaces in first line
-const firstLineSpaces = !inline ? lines[0].match(/^\s*/)[0].length : lines[2].match(/^\s*/)[0].length
+let spaces = '';
 
+// // Get number of leading spaces in first line
+// const firstLineSpaces = !inline ? lines[0].match(/^\s*/)[0] !== '' : lines[2].match(/^\s*/)[0].length
+//
 // Process all lines
 code = lines.map((line, index) => {
   // For other lines, remove up to firstLineSpaces from start
-  return line.replace(new RegExp(`^\\s{0,${firstLineSpaces}}`), '')
+  return line.replace(new RegExp(`^\\s{0,${spaces}}`), '')
 }).join('\n')
 ---
 <Code defaultColor={'light'}

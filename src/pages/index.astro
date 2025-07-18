@@ -41,20 +41,11 @@ const commit_date =
                 <div class="grid"
                      style="display:grid;grid-template-columns: 1fr 1fr;max-width:300px;margin: 0 auto;">
                     <div>
-                        <Snippet inline={true}>
+                        <Snippet inline={true} multi_line={false}>
                             <Fragment slot={'code'}>
-                                <CodeWrapper inline={true} lang={'scss'}>
+                                <CodeWrapper from_file={true} lang={'sh'}>
                                     ```
-                                    @use '~/src/styles/app.scss' as app; [!code highlight]
-
-                                    $accordion: app.get-theme(app.$theme, 'components.accordion'); // [\!code focus]
-
-                                    @include app.generate-component(
-                                      $accordion,
-                                      'accordion',
-                                      app.$config,
-                                      app.$theme
-                                    );
+                                    npm i @nulllogic/scssleon
                                     ```
                                 </CodeWrapper>
                             </Fragment>
@@ -261,8 +252,9 @@ const commit_date =
             /*margin-top: -40px,*/
             _colors : (
               light: (
-                subtitle-gradient : linear-gradient(to right, rgb(192, 98, 97), rgb(190, 164, 72), rgb(8, 148, 178)),
+                subtitle-gradient : radial-gradient(circle at left, #f2623c 0%, #f12993 30%, #6e3e94 60%, #05afef 90%),
                 // linear-gradient(to right, rgb(61, 76, 244) 0%, rgb(255, 40, 98) 100%);
+                // linear-gradient(to right, rgb(192, 98, 97), rgb(190, 164, 72), rgb(8, 148, 178))
               ),
               dark : (
                 subtitle-gradient : linear-gradient(-135deg, color(display-p3 .6196078431 .4784313725 1/1) 0%, color(display-p3 .9960784314 .5450980392 .7333333333/1) 33.33%, color(display-p3 1 .7411764706 .4784313725/1) 66.67%, color(display-p3 .9725490196 .9176470588 .7647058824/1) 100%),
