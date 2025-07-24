@@ -2,8 +2,9 @@
 const {headings} = Astro.props
 import Link from '~/components/link.astro'
 
+console.log(Astro.url.pathname);
 const github_page =
-    'https://github.com/nulllogic/scssleon-docs/tree/master/src/content' + Astro.url.pathname.replace(/\/$/, '') + '.mdx'
+    'https://github.com/nulllogic/scssleon-docs/tree/master/src/content' + Astro.url.pathname.replace(/\/$/, '').replace('/scssleon-docs', '') + '.mdx'
 ---
 <nav class="toc">
     <div class="card" style="margin: 0 0 7px 0;">
