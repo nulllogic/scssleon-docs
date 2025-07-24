@@ -1,6 +1,6 @@
-import { defineConfig } from 'astro/config'
-import path, { dirname } from 'path'
-import { fileURLToPath } from 'url'
+import {defineConfig} from 'astro/config'
+import path, {dirname} from 'path'
+import {fileURLToPath} from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -12,7 +12,8 @@ import sitemap from '@astrojs/sitemap'
 import rehypeSlug from 'rehype-slug'
 import remarkSmartypants from 'remark-smartypants'
 
-import { iframe } from './src/utils/integrations/iframe'
+import {iframe} from './src/utils/integrations/iframe'
+
 console.log(path.resolve(__dirname, './src'));
 
 export default defineConfig({
@@ -26,7 +27,7 @@ export default defineConfig({
     // Override with our own config
     smartypants: true,
     remarkPlugins: [
-      [remarkSmartypants, { dashes: false }],
+      [remarkSmartypants, {dashes: false}],
     ],
     rehypePlugins: [
       rehypeSlug,
