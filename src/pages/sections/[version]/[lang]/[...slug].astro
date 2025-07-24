@@ -87,13 +87,13 @@ const {headings, Content} = await render(page);
   @use "~/styles/app.scss" as app;
 
   // ↓ Amazing content
-  @use "~/styles/scss/content" with (
+  @use "@nulllogic/scssleon/scss/content" with (
     $config: app.$config,
     $theme: app.$theme
   );
 
   // ↓ Breadcrumbs
-  @use '~/styles/scss/components/breadcrumb' with (
+  @use '@nulllogic/scssleon/scss/components/breadcrumb' with (
     $config: app.$config,
     $theme: app.$theme
   );

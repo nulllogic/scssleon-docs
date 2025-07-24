@@ -4,8 +4,8 @@ import {SidebarMenu} from "./index.ts";
 ---
 
 <aside class:list={['sidebar', className]} {...rest}>
-    <div style="position: sticky; top: 60px;left: 0;height: auto;overflow-y: auto;max-height: calc(100dvh - 60px); padding-bottom: 60px;padding-right: 15px;">
-        <div class="card">
+    <div style="position: sticky; top: 60px;left: 0;height: 100%;overflow-y: auto;max-height: calc(100dvh - 60px); padding-bottom: 60px;padding-right: 15px;">
+        <div class="card" style="overflow-y: scroll;">
             <SidebarMenu />
         </div>
     </div>
@@ -23,11 +23,11 @@ import {SidebarMenu} from "./index.ts";
 </aside>
 
 <style lang="scss">
-  @use "sass:list";
-  @use "sass:meta";
-  @use "sass:map";
+  @use 'sass:list';
+  @use 'sass:meta';
+  @use 'sass:map';
 
-  @use "~/styles/app.scss" as app;
+  @use '~/styles/app.scss' as app;
 
   $sidebar: (
     --sidebar-section-width: 0,

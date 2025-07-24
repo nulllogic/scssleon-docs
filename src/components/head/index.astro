@@ -35,24 +35,24 @@ const {title, description, image = '/placeholder-social.jpg'} = Astro.props
 
 <!-- Styles -->
 <style lang="scss" is:global>
-  @use "sass:list";
-  @use "sass:meta";
+  @use 'sass:list';
+  @use 'sass:meta';
 
   // ↓ Config
-  @use "~/styles/app.scss" as app;
+  @use '~/styles/app.scss' as app;
 
   // Getting updated variables
   $config: app.$config;
   $theme: app.$theme;
 
   // ↓ Root
-  @use "~/styles/scss/root" with (
+  @use '@nulllogic/scssleon/scss/root' with (
     $config: $config,
     $theme: $theme
   );
 
   // Great reset
-  @use "~/styles/scss/reset" with (
+  @use '@nulllogic/scssleon/scss/reset' with (
     $config: $config,
     $theme: $theme
   );
@@ -60,49 +60,49 @@ const {title, description, image = '/placeholder-social.jpg'} = Astro.props
   // Base
   // Special utility, that will dynamically generate CSS
   // properties for HTML tags, specified in theme
-  @use "~/styles/scss/base" with (
+  @use '@nulllogic/scssleon/scss/base' with (
     $config: $config,
     $theme: $theme
   );
 
   // ↓ Container
-  @use "~/styles/scss/components/container" with (
+  @use '@nulllogic/scssleon/scss/components/container' with (
     $config: $config,
     $theme: $theme
   );
 
   // ↓ Navigation bar
-  @use "~/styles/scss/components/navbar" with (
+  @use '@nulllogic/scssleon/scss/components/navbar' with (
     $config: $config,
     $theme: $theme
   );
 
   // ↓ Nav
-  @use "~/styles/scss/components/nav" with (
+  @use '@nulllogic/scssleon/scss/components/nav' with (
     $config: $config,
     $theme: $theme
   );
 
   // ↓ Breadcrumbs
-  @use '~/styles/scss/components/breadcrumb' with (
+  @use '@nulllogic/scssleon/scss/components/breadcrumb' with (
     $config: $config,
     $theme: $theme
   );
 
   // ↓ Buttons
-  @use '~/styles/scss/components/button' with (
+  @use '@nulllogic/scssleon/scss/components/button' with (
   $config: $config,
   $theme: $theme
   );
 
   // ↓ Card
-  @use "~/styles/scss/components/card" with (
+  @use '@nulllogic/scssleon/scss/components/card' with (
     $config: $config,
     $theme: $theme
   );
 
   // ↓ Badge
-  @use "~/styles/scss/components/badge" with (
+  @use '@nulllogic/scssleon/scss/components/badge' with (
     $config: $config,
     $theme: $theme
   );

@@ -3,7 +3,7 @@
 const { href }: Record<string, any> = Astro.props
 
 const domain = import.meta.env.site // pulls from astro.config.mjs
-let attr: { target?: string; rel?: string } = {}
+let attr: { target?: string; rel?: string; class?: string } = {}
 
 // check if the link is external
 const is_external = (href && !href.includes(domain) && !href.startsWith('/') &&
@@ -13,8 +13,10 @@ if (is_external) {
   attr['target'] = '_blank'
   attr['rel'] = 'noopener noreferrer'
 }
+
+const { class: className, ...rest } = Astro.props
 ---
-<a href={href} {...attr} class="link">
+<a href={href} {...attr} class:list={['link', className]} {...rest}>
     <slot/>
   {is_external &&
           <svg width="16" height="16" viewBox="-4 -4 20 20"
@@ -27,12 +29,12 @@ if (is_external) {
   }</a>
 
 <style lang="scss">
-  @use "sass:list";
-  @use "sass:string";
-  @use "sass:meta";
-  @use "sass:map";
+  @use 'sass:list';
+  @use 'sass:string';
+  @use 'sass:meta';
+  @use 'sass:map';
 
-  @use "~/styles/app.scss" as app;
+  @use '~/styles/app.scss' as app;
 
   $link: (
     display: inline-flex,

@@ -152,19 +152,19 @@ const outline = await sass.compileStringAsync(`
 `)
 
 const base_style = await sass.compileStringAsync(`
-  @use "sass:list";
-  @use "sass:meta";
+  @use 'sass:list';
+  @use 'sass:meta';
 
-  @use "~/styles/app.scss" as app;
+  @use '~/styles/app.scss' as app;
 
   // ↓ Root
-  @use "~/styles/scss/root" with (
+  @use '@nulllogic/scssleon/scss/root' with (
     $config: app.$config,
     $theme: app.$theme
   );
 
   // Great reset
-  @use "~/styles/scss/reset" with (
+  @use '@nulllogic/scssleon/scss/reset' with (
     $config: app.$config,
     $theme: app.$theme
   );
@@ -172,14 +172,14 @@ const base_style = await sass.compileStringAsync(`
   // Base
   // Special utility, that will dynamically generate CSS
   // properties for HTML tags, specified in theme
-  @use "~/styles/scss/base" with (
+  @use '@nulllogic/scssleon/scss/base' with (
     $config: app.$config,
     $theme: app.$theme
   );
 
   // ↓ Amazing content
   // Special class \`.content\` to allow formatting of the default html tags
-  @use "~/styles/scss/content" with (
+  @use '@nulllogic/scssleon/scss/content' with (
     $config: app.$config,
     $theme: app.$theme
   );
@@ -190,12 +190,12 @@ srcdoc += `<style>
 </style>`
 
 const iframe_wrapper_style = await sass.compileStringAsync(`
-  @use "sass:list";
-  @use "sass:string";
-  @use "sass:meta";
-  @use "sass:map";
+  @use 'sass:list';
+  @use 'sass:string';
+  @use 'sass:meta';
+  @use 'sass:map';
 
-  @use "~/styles/app.scss" as app;
+  @use '~/styles/app.scss' as app;
 
   $wrapper: (
     position: relative,
@@ -334,12 +334,12 @@ srcdoc += '</body></html>'
 />
 
 <style lang="scss">
-  @use "sass:list";
-  @use "sass:string";
-  @use "sass:meta";
-  @use "sass:map";
+  @use 'sass:list';
+  @use 'sass:string';
+  @use 'sass:meta';
+  @use 'sass:map';
 
-  @use "~/styles/app.scss" as app;
+  @use '~/styles/app.scss' as app;
 
   $iframe: (
     width: 100%,

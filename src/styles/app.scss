@@ -1,10 +1,10 @@
 @use 'sass:map';
-@use "sass:string";
+@use 'sass:string';
 
-@forward "./scss/mixins";
-@forward "./scss/functions";
+@forward '@nulllogic/scssleon/scss/mixins';
+@forward '@nulllogic/scssleon/scss/functions';
 
-@use "./scss/config.scss" as config with (
+@use '@nulllogic/scssleon/scss/config.scss' as config with (
   $config: (
     prefix: "xii",
     enable: (
@@ -13,7 +13,7 @@
   )
 );
 
-@use "./scss/themes/default.scss" as theme with (
+@use '@nulllogic/scssleon/scss/themes/default.scss' as theme with (
   $config : config.$config,
   $theme: (
     root : (

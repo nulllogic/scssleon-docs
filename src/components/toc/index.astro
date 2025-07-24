@@ -1,9 +1,12 @@
 ---
 const {headings} = Astro.props
 import Link from '~/components/link.astro'
+
+const github_page =
+    'https://github.com/nulllogic/scssleon-docs/tree/master/src/content' + Astro.url.pathname + '.mdx'
 ---
 <nav class="toc">
-    <div class="card">
+    <div class="card" style="margin: 0 0 7px 0;">
         <div style="display: flex; align-items: center; justify-content: start; gap: 5px;margin: 0 0 10px 0;">
             <div>
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
@@ -27,14 +30,36 @@ import Link from '~/components/link.astro'
             })}
         </ul>
     </div>
+    <div class="subcard">
+        <ul class="nav vertical">
+            <li class="item">
+                <Link href={github_page ? github_page : '#'} class="link sublink">
+                    <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22 7.24a1 1 0 0 0-.29-.71l-4.24-4.24a1 1 0 0 0-1.1-.22 1 1 0 0 0-.32.22l-2.83 2.83L2.29 16.05a1 1 0 0 0-.29.71V21a1 1 0 0 0 1 1h4.24a1 1 0 0 0 .76-.29l10.87-10.93L21.71 8c.1-.1.17-.2.22-.33a1 1 0 0 0 0-.24v-.14l.07-.05ZM6.83 20H4v-2.83l9.93-9.93 2.83 2.83L6.83 20ZM18.17 8.66l-2.83-2.83 1.42-1.41 2.82 2.82-1.41 1.42Z"></path>
+                    </svg>
+                    Edit this page
+                </Link>
+            </li>
+            <li class="item">
+                <Link href={'https://github.com/nulllogic/scssleon/issues/new?template=feature-request.md'} class="link sublink">
+                    Request a feature
+                </Link>
+            </li>
+            <li id="scroll_top" class="item" hidden>
+                <a href="#" class="link sublink">
+                    Scroll to top
+                </a>
+            </li>
+        </ul>
+    </div>
 </nav>
 
 <style lang="scss">
-  @use "sass:list";
-  @use "sass:meta";
-  @use "sass:map";
+  @use 'sass:list';
+  @use 'sass:meta';
+  @use 'sass:map';
 
-  @use "../../styles/app.scss" as app;
+  @use '~/styles/app.scss' as app;
 
   $toc: (
     --nav-item : var(--color),
@@ -58,6 +83,16 @@ import Link from '~/components/link.astro'
           )
         )
       ),
+      '.subcard' : (
+        _subclasses : (
+          '.sublink' : (
+            gap: 3px,
+            font-size: 0.825rem,
+            display: inline-flex,
+            align-items: center,
+          )
+        )
+      )
     ),
     _colors: (
       light : (
@@ -140,6 +175,15 @@ import Link from '~/components/link.astro'
 </script>
 
 <script>
+
+    const scroll_top_link = document.getElementById('scroll_top')
+
+    document.addEventListener('scroll', (e) => {
+        if(scroll_top_link) {
+            scroll_top_link.hidden = document.documentElement.scrollTop <= 300;
+        }
+    });
+    // scroll_top
     /*
         const observer = new IntersectionObserver((sections) => {
             sections.forEach((section) => {
