@@ -8,4 +8,3 @@ target
 /src/styles/scss
 node_modules
 .astro
-package-lock.json
