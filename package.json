@@ -26,6 +26,7 @@
     "remark-smartypants": "^3.0.2",
     "@shikijs/transformers": "^3.8.0",
     "sass": "^1.89.2",
+    "astro-compress": "^2.3.8",
     "size-limit" : "^11.2.0"
   }
 }

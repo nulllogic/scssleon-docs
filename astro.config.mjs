@@ -14,13 +14,11 @@ import remarkSmartypants from 'remark-smartypants'
 
 import {iframe} from './src/utils/integrations/iframe'
 
-console.log(path.resolve(__dirname, './src'));
-
 export default defineConfig({
   site: 'https://nulllogic.github.io',
   // adding sub directory ( it's required for github pages )
   base: import.meta.env.PROD ? '/scssleon-docs' : '',
-  integrations: [mdx(), sitemap(), preact(), iframe()],
+  integrations: [mdx(), sitemap(), preact(), iframe(), (await import('astro-compress')).default()],
   compressHTML: true,
   output: 'static',
   markdown: {
