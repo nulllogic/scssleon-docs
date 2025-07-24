@@ -30,6 +30,8 @@
   </p>
 </div>
 
+<hr />
+
 Install 🐳Docker and download docker image to preview the documentation changes locally.
 
 To install, use the following command :
