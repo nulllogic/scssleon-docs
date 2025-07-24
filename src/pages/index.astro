@@ -1,22 +1,23 @@
 ---
 import Index from '../layouts/index.astro'
-import { Raw, Snippet, CodeWrapper } from '../components/snippet'
+import {Raw, Snippet, CodeWrapper} from '../components/snippet'
 import Link from '~/components/link.astro'
+import {generate_rel_link} from "~/utils/links";
 
 //https://api.github.com/repos/nulllogic/scssleon/branches/master
 
 const response = await fetch(
-  'https://api.github.com/repos/nulllogic/scssleon/branches/master',
+    'https://api.github.com/repos/nulllogic/scssleon/branches/master',
 )
 const data = await response.json()
 const commit_date =
-  typeof data.message === 'undefined'
-    ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    })
-    : new Date()
+    typeof data.message === 'undefined'
+        ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+        })
+        : new Date()
 ---
 <Index>
     <main>
@@ -51,7 +52,8 @@ const commit_date =
                         </Snippet>
                     </div>
                     <div>
-                        <a href="/docs/1.0/en/getting-started/introduction"
+                        <a href={generate_rel_link(Astro,
+                            './docs/1.0/en/getting-started/introduction')}
                            class="btn"
                            style="height:100%;border-radius: 0.425rem 0.425rem;">🚀
                             Get
