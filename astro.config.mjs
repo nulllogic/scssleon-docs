@@ -18,7 +18,11 @@ export default defineConfig({
   site: 'https://nulllogic.github.io',
   // adding sub directory ( it's required for github pages )
   base: import.meta.env.PROD ? '/scssleon-docs' : '',
-  integrations: [mdx(), sitemap(), preact(), iframe(), (await import('astro-compress')).default()],
+  integrations: [mdx(), sitemap(), preact(), iframe(), (await import('astro-compress')).default({
+    CSS: true,
+    HTML: true,
+    SVG: true,
+  })],
   compressHTML: true,
   output: 'static',
   markdown: {

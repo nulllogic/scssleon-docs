@@ -4,7 +4,10 @@ import { generate_rel_link } from '~/utils/links'
 ---
 
 <div class="header">
-    <div class:list={['top', Astro.url.pathname === '/' ? 'is-homepage' : '']}>
+    <div class:list={['top',
+      import.meta.env.PROD
+        ? Astro.url.pathname === import.meta.env.BASE_URL
+        : Astro.url.pathname === '/' ? 'is-homepage' : '']}>
         <div class="container xxl">
             <header class="navbar">
                 <div style="display: inline-flex;gap: 15px;">
@@ -96,7 +99,7 @@ import { generate_rel_link } from '~/utils/links'
             </header>
         </div>
     </div>
-  {Astro.url.pathname !== '/' && (
+  {import.meta.env.PROD ? Astro.url.pathname !== import.meta.env.BASE_URL : Astro.url.pathname !== '/' && (
           <div class="bottom">
               <div class="container">
                   <nav aria-label="breadcrumb">
@@ -365,46 +368,46 @@ import { generate_rel_link } from '~/utils/links'
 
   const light_dark_toggler = document.querySelector('.toggle.dark_mode')
 
-    if (light_dark_toggler) {
-      light_dark_toggler.addEventListener('click', (e) => {
-        e.preventDefault()
-
-        light_dark_toggler.classList.add('clicked')
-
-        const current_theme = document.documentElement.getAttribute('data-theme')
-        const new_theme = current_theme === 'dark' ? 'light' : 'dark'
-        document.documentElement.setAttribute('data-theme', new_theme)
-
-        document.body.classList.add('preload')
-        localStorage.setItem('theme', new_theme)
-        setTimeout(() => {
-          document.body.classList.remove('preload')
-          }, 200)
-        const event = new CustomEvent('theme_change', {
-          detail: {
-            theme: new_theme,
-            },
-          })
-        document.dispatchEvent(event)
-        })
-      }
-
-    const nav = document.querySelector('.header')
-    const buttons = nav.querySelectorAll('.link.toggle')
-
-    buttons.forEach(button => button.addEventListener('click', (e) => {
+  if (light_dark_toggler) {
+    light_dark_toggler.addEventListener('click', (e) => {
       e.preventDefault()
 
-      if (button.classList.contains('sidemenu')) {
-        document.getElementById('sidebar_mobile_menu').classList.toggle('show')
-        document.body.toggleAttribute('scroll-lock')
-        }
+      light_dark_toggler.classList.add('clicked')
 
-      if (button.classList.contains('mainmenu')) {
-        document.getElementById('main_mobile_menu').classList.toggle('show')
-        document.body.toggleAttribute('scroll-lock')
-        }
-      }))
+      const current_theme = document.documentElement.getAttribute('data-theme')
+      const new_theme = current_theme === 'dark' ? 'light' : 'dark'
+      document.documentElement.setAttribute('data-theme', new_theme)
+
+      document.body.classList.add('preload')
+      localStorage.setItem('theme', new_theme)
+      setTimeout(() => {
+        document.body.classList.remove('preload')
+      }, 200)
+      const event = new CustomEvent('theme_change', {
+        detail: {
+          theme: new_theme,
+        },
+      })
+      document.dispatchEvent(event)
+    })
+  }
+
+  const nav = document.querySelector('.header')
+  const buttons = nav.querySelectorAll('.link.toggle')
+
+  buttons.forEach(button => button.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    if (button.classList.contains('sidemenu')) {
+      document.getElementById('sidebar_mobile_menu').classList.toggle('show')
+      document.body.toggleAttribute('scroll-lock')
+    }
+
+    if (button.classList.contains('mainmenu')) {
+      document.getElementById('main_mobile_menu').classList.toggle('show')
+      document.body.toggleAttribute('scroll-lock')
+    }
+  }))
 
 </script>
 
