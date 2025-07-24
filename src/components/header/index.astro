@@ -5,9 +5,7 @@ import { generate_rel_link } from '~/utils/links'
 
 <div class="header">
     <div class:list={['top',
-      import.meta.env.PROD
-        ? Astro.url.pathname === import.meta.env.BASE_URL
-        : Astro.url.pathname === '/' ? 'is-homepage' : '']}>
+      (import.meta.env.PROD ? Astro.url.pathname === import.meta.env.BASE_URL : Astro.url.pathname === '/') ? 'is-homepage' : '']}>
         <div class="container xxl">
             <header class="navbar">
                 <div style="display: inline-flex;gap: 15px;">
@@ -99,7 +97,7 @@ import { generate_rel_link } from '~/utils/links'
             </header>
         </div>
     </div>
-  {import.meta.env.PROD ? Astro.url.pathname !== import.meta.env.BASE_URL : Astro.url.pathname !== '/' && (
+  {(import.meta.env.PROD ? Astro.url.pathname !== import.meta.env.BASE_URL : Astro.url.pathname !== '/') && (
           <div class="bottom">
               <div class="container">
                   <nav aria-label="breadcrumb">
