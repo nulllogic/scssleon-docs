@@ -2,7 +2,7 @@
 import {SidebarMenu} from '~/components/sidebar/index.ts';
 import {MobileMenu} from '~/components/header/index.ts';
 ---
-{(Astro.url.pathname !== '/' || Astro.url.pathname !== import.meta.env.BASE_URL) && (
+{(import.meta.env.PROD ? Astro.url.pathname !== import.meta.env.BASE_URL : Astro.url.pathname !== '/' ) && (
 <div id="sidebar_mobile_menu" class="menu sidebar">
     <div class="overlay show blurred">
         <div class="card">
