@@ -10,11 +10,11 @@ import {generate_rel_link} from "~/utils/links";
 
 <slot/>
 
-<link rel="icon" type="image/svg+xml" href={generate_rel_link(Astro, '/favicon.svg')}/>
+<link rel="icon" type="image/svg+xml" href={generate_rel_link(Astro, './favicon.svg')}/>
 <meta name="generator" content={Astro.generator}/>
 
 <!-- Sitemap -->
-<link rel="sitemap" href={generate_rel_link(Astro, '/sitemap.xml')} />
+<link rel="sitemap" href={generate_rel_link(Astro, './sitemap.xml')} />
 
 <!-- Primary Meta Tags -->
 <meta name="title" content={title}/>
