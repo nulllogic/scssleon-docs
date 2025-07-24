@@ -4,8 +4,8 @@
   <a href="https://mintlify.com">
     <a href="https://nulllogic.github.io/scssleon-docs/" title="SCSSLEON documentation" target="_blank">
         <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="https://nulllogic.github.io/scssleon-docs/favicon.svg">
-          <img alt="SCSSleon framework" src="https://nulllogic.github.io/scssleon-docs/favicon.svg" width="100" height="100">
+          <source media="(prefers-color-scheme: dark)" srcset="./.imgs/favicon.svg">
+          <img alt="SCSSleon framework" src="./.imgs/favicon.svg" width="100" height="100">
         </picture>
         </a>
     <br />
