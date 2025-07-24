@@ -442,7 +442,8 @@ const {
 
   $preview-resizer-dragging-element: (
     position: absolute,
-    left: 100%,
+    left: unset,
+    right: 0,
     top: 0,
     bottom: 0,
     -webkit-user-select: none,
@@ -473,6 +474,12 @@ const {
         )
       ),
     ),
+    _responsive : (
+      md: (
+        left: 100%,
+        right: unset,
+      )
+    )
   );
 
   $snippet-content: (
