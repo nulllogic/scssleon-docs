@@ -347,8 +347,8 @@ import { generate_rel_link } from '~/utils/links'
 </style>
 
 <script type="text/javascript">
-  const nav = document.querySelector('.header')
-  const navTop = nav.offsetTop
+  const nav = document.querySelector('.header');
+  const navTop = nav.offsetTop;
 
   function stickyNavigation () {
     if (window.scrollY > navTop) {
@@ -359,51 +359,51 @@ import { generate_rel_link } from '~/utils/links'
     }
   }
 
-  window.addEventListener('scroll', stickyNavigation)
+  window.addEventListener('scroll', stickyNavigation);
 </script>
 
 <script>
 
-  const light_dark_toggler = document.querySelector('.toggle.dark_mode')
+  const light_dark_toggler = document.querySelector('.toggle.dark_mode');
 
   if (light_dark_toggler) {
     light_dark_toggler.addEventListener('click', (e) => {
-      e.preventDefault()
+      e.preventDefault();
 
-      light_dark_toggler.classList.add('clicked')
+      light_dark_toggler.classList.add('clicked');
 
       const current_theme = document.documentElement.getAttribute('data-theme')
       const new_theme = current_theme === 'dark' ? 'light' : 'dark'
       document.documentElement.setAttribute('data-theme', new_theme)
 
-      document.body.classList.add('preload')
+      document.body.classList.add('preload');
       localStorage.setItem('theme', new_theme)
       setTimeout(() => {
-        document.body.classList.remove('preload')
+        document.body.classList.remove('preload');
       }, 200)
       const event = new CustomEvent('theme_change', {
         detail: {
           theme: new_theme,
         },
       })
-      document.dispatchEvent(event)
+      document.dispatchEvent(event);
     })
   }
 
-  const nav = document.querySelector('.header')
-  const buttons = nav.querySelectorAll('.link.toggle')
+  const nav = document.querySelector('.header');
+  const buttons = nav.querySelectorAll('.link.toggle');
 
   buttons.forEach(button => button.addEventListener('click', (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (button.classList.contains('sidemenu')) {
-      document.getElementById('sidebar_mobile_menu').classList.toggle('show')
-      document.body.toggleAttribute('scroll-lock')
+      document.getElementById('sidebar_mobile_menu').classList.toggle('show');
+      document.body.toggleAttribute('scroll-lock');
     }
 
     if (button.classList.contains('mainmenu')) {
-      document.getElementById('main_mobile_menu').classList.toggle('show')
-      document.body.toggleAttribute('scroll-lock')
+      document.getElementById('main_mobile_menu').classList.toggle('show');
+      document.body.toggleAttribute('scroll-lock');
     }
   }))
 
