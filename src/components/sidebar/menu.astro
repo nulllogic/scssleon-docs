@@ -20,7 +20,7 @@ const generate_class = (link) => {
             '',
         ))
 
-    if (pathname === url.pathname + '/') {
+    if (pathname === url.pathname + (import.meta.env.PROD ? '/' : '')) {
         classes.push('active')
     }
 
