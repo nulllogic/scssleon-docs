@@ -68,7 +68,7 @@ const commit_date =
                     <Link class="link"
                           href="https://www.npmjs.com/package/@nulllogic/scssleon"
                           aria-label="SCSSLeon repository"
-                          title="SCSSLeon repository">v1.0.4
+                          title="SCSSLeon repository">v1.0.6
                     </Link>
                 </div>
 
@@ -221,9 +221,11 @@ const commit_date =
     width: 100%,
     text-align: center,
     _subclasses : (
+
       'span:nth-child(1)' : (
-        filter: blur(4px),
         background-image: var(--gradient-line1),
+
+        filter: blur(4px),
         height: 2px,
         display: block,
         width: 100%,
@@ -236,6 +238,7 @@ const commit_date =
           )
         )
       ),
+
       'span:nth-child(2)' : (
         background-image: var(--gradient-line2),
 
@@ -243,6 +246,7 @@ const commit_date =
         display: block,
         width: 100%,
         margin-top: -2px,
+
         _colors : (
           light : (
             gradient-line2 : linear-gradient(to right, rgba(0, 0, 0, 0), rgba(131, 126, 28, 0.52), rgba(0, 0, 0, 0)),
@@ -252,6 +256,7 @@ const commit_date =
           )
         )
       ),
+
       'span:nth-child(3)' : (
         background-image: var(--gradient-line3),
 
@@ -262,6 +267,7 @@ const commit_date =
         margin-top: -1px,
         max-width: 200px,
         margin: 0 auto,
+
         _colors : (
           light : (
             gradient-line3 : linear-gradient(to right, rgba(0, 0, 0, 0), rgba(128, 122, 18, 0.52), rgba(0, 0, 0, 0)),
@@ -271,6 +277,7 @@ const commit_date =
           )
         )
       ),
+
       'span:nth-child(4)' : (
         background-image: var(--gradient-line4),
 
@@ -280,6 +287,7 @@ const commit_date =
         width: 100%,
         margin-top: -5px,
         max-width: 160px,
+
         _colors : (
           light : (
             gradient-line3 : linear-gradient(to right, rgba(0, 0, 0, 0), rgba(198, 188, 15, 0.52), rgba(0, 0, 0, 0)),
@@ -294,6 +302,7 @@ const commit_date =
 
   $welcome-section: (
     --padding: 3rem,
+
     padding-inline: var(global(--padding-inline)),
     background: var(--background),
     padding-block: var(--padding),
@@ -325,7 +334,7 @@ const commit_date =
           '.first' : (
             display: inline-block,
             height: auto,
-            font-size: 8.6rem,
+            font-size: 6rem,
             background-clip: text,
             background-image: var(--title-gradient),
             color: transparent,
@@ -339,6 +348,11 @@ const commit_date =
                 title-gradient: radial-gradient(89.470001% 51.040001% at 44.27% 50%, rgb(226, 227, 233) 0px, rgb(212, 214, 222) 52.73%, rgb(61, 63, 76) 100%),
               )
             ),
+            _responsive : (
+                md : (
+                  font-size: 8.6rem,
+                )
+            )
           ),
           '.second' : (
             display: inline-block,
@@ -347,6 +361,7 @@ const commit_date =
             background-clip: text,
             color: transparent,
             -webkit-text-fill-color: transparent,
+            font-size: 3rem,
             /*text-transform: uppercase,*/
             /*margin-top: -40px,*/
             _colors : (
@@ -359,6 +374,11 @@ const commit_date =
               dark : (
                 subtitle-gradient : linear-gradient(-135deg, color(display-p3 .6196078431 .4784313725 1/1) 0%, color(display-p3 .9960784314 .5450980392 .7333333333/1) 33.33%, color(display-p3 1 .7411764706 .4784313725/1) 66.67%, color(display-p3 .9725490196 .9176470588 .7647058824/1) 100%),
               )
+            ),
+            _responsive : (
+              md : (
+                font-size: 4rem,
+              )
             )
           ),
           '.lines' : $welcome-title-lines,
@@ -366,7 +386,13 @@ const commit_date =
       ),
       '.subtitle' : (
         margin: 0 0 20px 0,
-        font-size: 2rem,
+        font-size: 1.5rem,
+        line-height: 1.15,
+        _responsive : (
+          md : (
+            font-size: 2rem,
+          )
+        )
       ),
       '.grid' : (
         gap:15px,

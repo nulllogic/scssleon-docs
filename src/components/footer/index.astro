@@ -17,7 +17,13 @@ import Link from '~/components/link.astro'
                     </Link>
                     team with the help of our contributors.
                 </p>
-                <p>Currently v</p>
+                <p>Currently
+                    <Link class="link"
+                          href="https://www.npmjs.com/package/@nulllogic/scssleon"
+                          aria-label="SCSSLeon repository"
+                          title="SCSSLeon repository">v1.0.6
+                    </Link>
+                </p>
             </div>
 
             <div class="column">
@@ -100,6 +106,9 @@ import Link from '~/components/link.astro'
           ),
           '.logo' : (
             margin: 0 0 15px 0,
+          ),
+          'p' : (
+            line-height: clamp(1.5rem, calc(1rem * pow(1.618, 1)), 1.618rem),
           )
         )
       )
@@ -140,16 +149,16 @@ import Link from '~/components/link.astro'
 </style>
 
 <script>
-  customElements.define('svg-circle', class extends HTMLElement {
-    connectedCallback () {
-      this.innerHTML = `<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+    customElements.define('svg-circle', class extends HTMLElement {
+        connectedCallback() {
+            this.innerHTML = `<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
              fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd"
                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                   clip-rule="evenodd"/>
         </svg>`
-    }
-  })
+        }
+    })
 </script>
 
 <style>
