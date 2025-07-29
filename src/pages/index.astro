@@ -27,10 +27,12 @@ const commit_date =
             <div class="container xxl">
                 <h1 class="title">
                     <span class="first">SCSS</span>
-                    <span class="line1"></span>
-                    <span class="line2"></span>
-                    <span class="line3"></span>
-                    <span class="line4"></span>
+                    <span class="lines">
+                        <span/>
+                        <span/>
+                        <span/>
+                        <span/>
+                    </span>
                     <span class="second">superpowers</span>
                 </h1>
 
@@ -212,6 +214,84 @@ const commit_date =
 
   @use '~/styles/app.scss' as app;
 
+
+  $welcome-title-lines: (
+    display: block,
+    justify-content: center,
+    width: 100%,
+    text-align: center,
+    _subclasses : (
+      'span:nth-child(1)' : (
+        filter: blur(4px),
+        background-image: var(--gradient-line1),
+        height: 2px,
+        display: block,
+        width: 100%,
+        _colors : (
+          light : (
+            gradient-line1 : linear-gradient(to right, rgba(0, 0, 0, 0), rgba(168, 162, 28, 0.52), rgba(0, 0, 0, 0)),
+          ),
+          dark : (
+            gradient-line1 : linear-gradient(to right, rgba(0, 0, 0, 0), rgb(27, 138, 27), rgba(0, 0, 0, 0)),
+          )
+        )
+      ),
+      'span:nth-child(2)' : (
+        background-image: var(--gradient-line2),
+
+        height: 1px,
+        display: block,
+        width: 100%,
+        margin-top: -2px,
+        _colors : (
+          light : (
+            gradient-line2 : linear-gradient(to right, rgba(0, 0, 0, 0), rgba(131, 126, 28, 0.52), rgba(0, 0, 0, 0)),
+          ),
+          dark : (
+            gradient-line2 : linear-gradient(to right, rgba(0, 0, 0, 0), rgba(30, 129, 23, 0.45), rgba(0, 0, 0, 0)),
+          )
+        )
+      ),
+      'span:nth-child(3)' : (
+        background-image: var(--gradient-line3),
+
+        filter: blur(4px),
+        height: 5px,
+        display: block,
+        width: 100%,
+        margin-top: -1px,
+        max-width: 200px,
+        margin: 0 auto,
+        _colors : (
+          light : (
+            gradient-line3 : linear-gradient(to right, rgba(0, 0, 0, 0), rgba(128, 122, 18, 0.52), rgba(0, 0, 0, 0)),
+          ),
+          dark : (
+            gradient-line3 : linear-gradient(to right, rgba(0, 0, 0, 0), rgba(35, 145, 24, 0.4), rgba(0, 0, 0, 0)),
+          )
+        )
+      ),
+      'span:nth-child(4)' : (
+        background-image: var(--gradient-line4),
+
+        filter: blur(4px),
+        height: 1px,
+        display: block,
+        width: 100%,
+        margin-top: -5px,
+        max-width: 160px,
+        _colors : (
+          light : (
+            gradient-line3 : linear-gradient(to right, rgba(0, 0, 0, 0), rgba(198, 188, 15, 0.52), rgba(0, 0, 0, 0)),
+          ),
+          dark : (
+            gradient-line3 : linear-gradient(to right, rgba(0, 0, 0, 0), rgb(28, 188, 42), rgba(0, 0, 0, 0)),
+          )
+        )
+      ),
+    )
+  );
+
   $welcome-section: (
     --padding: 3rem,
     padding-inline: var(global(--padding-inline)),
@@ -230,12 +310,17 @@ const commit_date =
     ),
     _subclasses : (
       '.title' : (
-        font-size: 4rem,
+        font-size: 1rem,
         margin: 0 auto 15px auto,
         text-align: center,
         display: inline-flex,
         align-items: center,
         flex-direction: column,
+        _responsive : (
+          md : (
+            font-size: 4rem,
+          )
+        ),
         _subclasses : (
           '.first' : (
             display: inline-block,
@@ -276,38 +361,7 @@ const commit_date =
               )
             )
           ),
-          '.line1' : (
-            filter: blur(4px),
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(27, 138, 27), rgba(0, 0, 0, 0)),
-            height: 2px,
-            display: block,
-            width: 100%
-          ),
-          '.line2' : (
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(30, 129, 23, 0.45), rgba(0, 0, 0, 0)),
-            height: 1px,
-            display: block,
-            width: 100%,
-            margin-top: -2px,
-          ),
-          '.line3' : (
-            filter: blur(4px),
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(35, 145, 24, 0.4), rgba(0, 0, 0, 0)),
-            height: 5px,
-            display: block,
-            width: 100%,
-            margin-top: -1px,
-            max-width: 200px
-          ),
-          '.line4' : (
-            filter: blur(4px),
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(28, 188, 42), rgba(0, 0, 0, 0)),
-            height: 1px,
-            display: block,
-            width: 100%,
-            margin-top: -5px,
-            max-width: 160px
-          ),
+          '.lines' : $welcome-title-lines,
         )
       ),
       '.subtitle' : (
