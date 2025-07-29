@@ -1,4 +1,4 @@
-FROM node:slim AS astro
+FROM alpine:latest AS alpine
 
 LABEL version="1.0.0"
 LABEL maintainer="Vladimir Lukyanov | vladimir@lukyanov.net"
@@ -6,20 +6,4 @@ LABEL description="Docker container for SCSSLeon docs generator"
 
 WORKDIR /app
 
-COPY package.json .
-COPY astro.config.mjs .
-COPY tsconfig.json .
-
-RUN ["mkdir", "public"]
-RUN ["mkdir", "src"]
-
-RUN ["npm", "i"]
-
-EXPOSE 3000
-
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
-
-# production environment
-#FROM nginx:latest
-#COPY ./.config/nginx.conf /etc/nginx/nginx.conf
-#CMD ["nginx", "-g", "daemon off;"]
+RUN apk update && apk add nodejs npm curl icu-data-full
