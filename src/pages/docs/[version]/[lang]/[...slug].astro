@@ -34,19 +34,24 @@ if (page === undefined) {
     return Astro.redirect('/404')
 }
 const {headings, Content} = await render(page)
+
+const category = await getEntry('components_category', page.data.category);
 ---
 
-<Docs title={page.data.title + ' | ' + 'SCSSLeon 🦎'} description={page.data.description}>
+<Docs title={page.data.title + ' | ' + 'SCSSLeon 🦎'}
+      description={page.data.description}
+      category={category?.data.title}
+>
     <div class="main">
         <div class="content">
             <div class="intro">
                 <h1 class="title">{page?.data?.title}</h1>
                 <p class="subtitle">{page?.data?.description}</p>
             </div>
-            <Content components={{a: Link}} file={'test'} />
+            <Content components={{a: Link}} file={'test'}/>
         </div>
         <div class="toc">
-            <Toc headings={headings} />
+            <Toc headings={headings}/>
         </div>
     </div>
 </Docs>

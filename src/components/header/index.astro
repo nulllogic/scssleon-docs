@@ -1,6 +1,7 @@
 ---
 import Logo from '../logo/index.astro'
 import { generate_rel_link } from '~/utils/links'
+const {title, category} = Astro.props;
 ---
 
 <div class="header">
@@ -114,7 +115,7 @@ import { generate_rel_link } from '~/utils/links'
                               </a>
                           </li>
                           <li class="item" aria-current="page"
-                              style="margin-left: .75rem;">Components
+                              style="margin-left: .75rem;">{category}
                           </li>
                           <li class="item">
                               <svg width="17" height="17"
@@ -127,7 +128,7 @@ import { generate_rel_link } from '~/utils/links'
                                         clip-rule="evenodd"/>
                               </svg>
                           </li>
-                          <li class="item active" aria-current="page">Library
+                          <li class="item active" aria-current="page">{title.split('|')[0].trim()}
                           </li>
                       </ul>
                   </nav>

@@ -6,7 +6,7 @@ import Main from '../components/main.astro';
 import Modal from '../components/modal/index.astro';
 import Footer from '../components/footer/index.astro';
 
-const {title, description} = Astro.props;
+const {title, description, category} = Astro.props;
 ---
 
 <!doctype html>
@@ -15,7 +15,7 @@ const {title, description} = Astro.props;
     <Head title={title} description={description}/>
 </head>
 <body>
-<Header/>
+<Header title={title} category={category}/>
 <div class="docs">
     <div class="container xxl">
         <div class="layout">
