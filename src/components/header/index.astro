@@ -115,7 +115,7 @@ const {title, category} = Astro.props;
                               </a>
                           </li>
                           <li class="item" aria-current="page"
-                              style="margin-left: .75rem;">{category}
+                              style="margin-left: .75rem;">{category ? category : ''}
                           </li>
                           <li class="item">
                               <svg width="17" height="17"
@@ -128,7 +128,7 @@ const {title, category} = Astro.props;
                                         clip-rule="evenodd"/>
                               </svg>
                           </li>
-                          <li class="item active" aria-current="page">{title.split('|')[0].trim()}
+                          <li class="item active" aria-current="page">{title ? title.split('|')[0].trim() : ''}
                           </li>
                       </ul>
                   </nav>
