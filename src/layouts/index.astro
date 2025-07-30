@@ -1,10 +1,4 @@
 ---
-export interface Props {
-    title: string;
-}
-
-const {title} = Astro.props
-
 import Head from '../components/head/index.astro'
 import Header from '../components/header/index.astro'
 import Modal from '../components/modal/index.astro';
@@ -14,12 +8,15 @@ import Footer from '../components/footer/index.astro'
 <!doctype html>
 <html lang="en">
 <head>
-    <Head title="SCSSLeon 🦎 docs" description="Desciption"/>
+    <Head
+            title="SCSSLeon 🦎 – modern SCSS framework for the website development"
+            description="SCSSLeon is SCSS framework for rapidly building modern websites"
+    />
 </head>
 <body>
 <Header/>
 <slot/>
-<Modal />
+<Modal/>
 <Footer/>
 </body>
 </html>

@@ -36,7 +36,7 @@ if (page === undefined) {
 const {headings, Content} = await render(page)
 ---
 
-<Docs>
+<Docs title={page.data.title + ' | ' + 'SCSSLeon 🦎'} description={page.data.description}>
     <div class="main">
         <div class="content">
             <div class="intro">
