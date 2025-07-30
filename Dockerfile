@@ -7,3 +7,7 @@ LABEL description="Docker container for SCSSLeon docs generator"
 WORKDIR /app
 
 RUN apk update && apk add nodejs npm curl icu-data-full
+
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
