@@ -30,16 +30,16 @@ import Link from '~/components/link.astro'
                 <h5 class="title">Links</h5>
                 <ul class="nav vertical">
                     <li class="item">
-                        <Link href="/" aria-label="Home" title="Home">Home
+                        <Link href={import.meta.env.PROD ? '/scssleon-docs' : '/'} aria-label="Home" title="Home">Home
                         </Link>
                     </li>
                     <li class="item">
-                        <Link href="/docs/1.0/en/" aria-label="Components"
+                        <Link href={import.meta.env.PROD ? '/scssleon-docs/docs/1.0/en/getting-started/introduction' : '/docs/1.0/en/getting-started/introduction'} aria-label="Components"
                               title="Components">Components
                         </Link>
                     </li>
                     <li class="item">
-                        <Link href="/sections/1.0/en/welcome"
+                        <Link href={import.meta.env.PROD ? '/scssleon-docs/sections/1.0/en/welcome/' : '/sections/1.0/en/welcome/'}
                               aria-label="Sections" title="Sections">Sections
                         </Link>
                     </li>
