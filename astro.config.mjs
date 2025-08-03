@@ -23,6 +23,7 @@ export default defineConfig({
     HTML: true,
     SVG: true,
   })],
+  prefetch: true,
   compressHTML: true,
   output: 'static',
   markdown: {
