@@ -9,6 +9,7 @@ import {generate_rel_link} from "~/utils/links";
 const response = await fetch(
     'https://api.github.com/repos/nulllogic/scssleon/branches/master',
 )
+
 const data = await response.json()
 const commit_date =
     typeof data.message === 'undefined'
