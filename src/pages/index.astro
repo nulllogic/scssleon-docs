@@ -4,11 +4,7 @@ import {Raw, Snippet, CodeWrapper} from '../components/snippet'
 import Link from '~/components/link.astro'
 import {generate_rel_link} from "~/utils/links";
 
-//https://api.github.com/repos/nulllogic/scssleon/branches/master
-
-const response = await fetch(
-    'https://api.github.com/repos/nulllogic/scssleon/branches/master',
-)
+const response = await fetch('https://api.github.com/repos/nulllogic/scssleon/branches/master');
 
 const data = await response.json()
 const commit_date =
@@ -19,6 +15,9 @@ const commit_date =
             year: 'numeric',
         })
         : new Date()
+
+const package_response = await fetch('https://raw.githubusercontent.com/nulllogic/scssleon/refs/heads/master/package.json')
+const package_info = await package_response.json()
 ---
 <Index>
     <main>
@@ -69,7 +68,7 @@ const commit_date =
                     <Link class="link"
                           href="https://www.npmjs.com/package/@nulllogic/scssleon"
                           aria-label="SCSSLeon repository"
-                          title="SCSSLeon repository">v1.0.8
+                          title="SCSSLeon repository">v{package_info?.version}
                     </Link>
                 </div>
 

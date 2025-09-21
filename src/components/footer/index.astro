@@ -1,6 +1,10 @@
 ---
 import Logo from '~/components/logo/index.astro'
 import Link from '~/components/link.astro'
+
+const package_response = await fetch('https://raw.githubusercontent.com/nulllogic/scssleon/refs/heads/master/package.json')
+const package_info = await package_response.json()
+
 ---
 
 <footer class="footer">
@@ -21,7 +25,7 @@ import Link from '~/components/link.astro'
                     <Link class="link"
                           href="https://www.npmjs.com/package/@nulllogic/scssleon"
                           aria-label="SCSSLeon repository"
-                          title="SCSSLeon repository">v1.0.8
+                          title="SCSSLeon repository">v{package_info?.version}
                     </Link>
                 </p>
             </div>
