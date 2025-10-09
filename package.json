@@ -12,8 +12,8 @@
     "size": "size-limit"
   },
   "dependencies": {
-    "astro": "^5.14.1",
-    "@astrojs/mdx": "^4.3.6",
+    "astro": "^5.14.3",
+    "@astrojs/mdx": "^4.3.7",
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/preact": "^4.1.1",
