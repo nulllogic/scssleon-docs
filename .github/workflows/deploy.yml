@@ -32,6 +32,11 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist' # The directory containing your built site files
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
