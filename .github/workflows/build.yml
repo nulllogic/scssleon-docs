@@ -1,0 +1,96 @@
+name: "Astro Build"
+description: "A composite action that prepares your Astro site to be deployed to GitHub Pages"
+branding:
+  icon: "arrow-up-right"
+  color: "purple"
+inputs:
+  node-version:
+    description: "The node version to use"
+    required: false
+    default: "22"
+  package-manager:
+    description: "You may specify your preferred package manager (one of `npm | yarn | pnpm | bun | deno` and an optional `@<version>` tag). Otherwise, the package manager will be automatically detected."
+    required: false
+    default: "npm"
+  path:
+    description: "Path of the directory containing your site"
+    required: false
+    default: "."
+  build-cmd:
+    description: "The command used to build your site"
+    required: false
+    default:
+
+runs:
+  using: composite
+  steps:
+    - name: Install
+      shell: bash
+      working-directory: ${{ inputs.path }}
+      run: |
+        # Standard package manager install
+        $PACKAGE_MANAGER install
+
+    - name: Build (npm/yarn/pnpm/bun)
+      if: ${{ env.PACKAGE_MANAGER != 'deno' }}
+      shell: bash
+      working-directory: ${{ inputs.path }}
+      run: ${{ inputs.build-cmd || '$PACKAGE_MANAGER run build' }}
+
+    - name: Archive artifact
+      shell: sh
+      if: runner.os == 'Linux'
+      run: |
+        echo ::group::Archive artifact
+        tar \
+          --dereference --hard-dereference \
+          --directory "$INPUT_PATH" \
+          -cvf "$RUNNER_TEMP/artifact.tar" \
+          --exclude=.git \
+          --exclude=.github \
+          .
+        echo ::endgroup::
+      env:
+        INPUT_PATH: ${{ inputs.path }}/dist/
+
+    - name: Archive artifact
+      shell: sh
+      if: runner.os == 'macOS'
+      run: |
+        echo ::group::Archive artifact
+        gtar \
+          --dereference --hard-dereference \
+          --directory "$INPUT_PATH" \
+          -cvf "$RUNNER_TEMP/artifact.tar" \
+          --exclude=.git \
+          --exclude=.github \
+          .
+        echo ::endgroup::
+      env:
+        INPUT_PATH: ${{ inputs.path }}/dist/
+
+    - name: Archive artifact
+      shell: bash
+      if: runner.os == 'Windows'
+      run: |
+        echo ::group::Archive artifact
+        tar \
+          --dereference --hard-dereference \
+          --directory "$INPUT_PATH" \
+          -cvf "$RUNNER_TEMP\artifact.tar" \
+          --exclude=.git \
+          --exclude=.github \
+          --force-local \
+          "."
+        echo ::endgroup::
+      env:
+        INPUT_PATH: ${{ inputs.path }}/dist/
+
+    - name: Upload artifact
+      id: upload-artifact
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      with:
+        name: github-pages
+        path: ${{ runner.temp }}/artifact.tar
+        retention-days: 1
+        if-no-files-found: error
