@@ -41,6 +41,14 @@ export default defineConfig({
       },
     },
   },
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'min-light',
+        dark: 'github-dark-default',
+      },
+    },
+  },
   experimental: {
     rustCompiler: true
   }

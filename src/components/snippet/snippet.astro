@@ -2,24 +2,32 @@
 import {CodeWrapper, Preview, Raw} from './'
 import {render} from 'astro:content'
 import {Code} from 'astro:components'
-
-console.log(Astro.props);
+import {extractor} from './utils/extractor.ts';
+import { Prism } from '@astrojs/prism';
 
 // HTML
-const html = (await Astro.slots.render('html'));
+const html_rendered = (await Astro.slots.render('html'));
 // SCSS
-const scss = (await Astro.slots.render('scss'))
+const scss_rendered = (await Astro.slots.render('scss'));
 // JS
-const js = (await Astro.slots.render('js'))
+const js_rendered = (await Astro.slots.render('js'));
 
 const {
     title = '',
     preview = false,
+    file = null,
     min_height = '',
     inline = false,
     single = true,
     multi_line = true,
 } = Astro.props
+
+const {
+    html = null,
+    scss = null,
+    js = null
+} = await extractor(file, title);
+
 ---
 <div class:list={['snippet', single ? 'single' : '']}>
     <div class="preview-container">
@@ -194,7 +202,7 @@ const {
                         Astro.slots.has('html') && (
                                     <div class="tab active">
                                         <div class="code">
-                                            <CodeWrapper lang={'html'} set:html={html}/>
+                                            <Prism lang="html" code={html} />
                                         </div>
                                     </div>
                         )
@@ -203,7 +211,7 @@ const {
                         Astro.slots.has('scss') && (
                                     <div class="tab">
                                         <div class="code">
-                                            <CodeWrapper lang={'scss'} set:html={scss}/>
+                                            <Prism lang="scss" code={scss} />
                                         </div>
                                     </div>
                         )
@@ -212,7 +220,7 @@ const {
                         Astro.slots.has('js') && (
                                     <div class="tab">
                                         <div class="code">
-                                            <CodeWrapper lang={'js'} set:html={js}/>
+                                            <Prism lang="js" code={js} />
                                         </div>
                                     </div>
                         )

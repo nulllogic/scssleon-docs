@@ -3,8 +3,6 @@ import {read_lines_in_range} from '~/utils/files.ts'
 
 const { inline = false } = Astro.props;
 
-console.log(await (Astro.slots.render('default')));
-
 // let code = '';
 //
 // if(inline) {
@@ -41,4 +39,4 @@ console.log(await (Astro.slots.render('default')));
 //     return line.replace(new RegExp(`^\\s{0,${firstLineSpaces}}`), '');
 // }).join('\n');
 ---
-<div set:html={1123} is:raw/>
+<div set:html={await (Astro.slots.render('default'))} is:raw/>

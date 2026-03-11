@@ -1,1 +1,1 @@
-export { default as extractor } from './extractor';
+export { extractor } from './extractor';
