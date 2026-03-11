@@ -5,22 +5,19 @@ category: components
 toc: true
 ---
 
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Examples
 
 <Snippet title={'Card 1'} preview={true}>
     <Fragment slot="html">
-      <Raw file={file}>
         ```
         <div class="card">
           123
         </div>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={25} line_end={34}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -33,7 +30,6 @@ import {Raw, Snippet} from "/src/components/snippet"
             app.$theme
         );
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 

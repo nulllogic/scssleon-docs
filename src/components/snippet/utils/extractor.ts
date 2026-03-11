@@ -98,8 +98,8 @@ function parseTitleAttr(attrs: string): string | null {
 /**
  * Parse the inner body of a <Snippet> and extract code per Fragment slot.
  *
- * For each <Fragment slot="…"> … </Fragment> block that contains a <Raw>
- * element we grab the text between the opening ``` and closing ``` fence.
+ * For each <Fragment slot="…"> … </Fragment> block, the fenced code block
+ * (``` … ```) is expected directly inside the Fragment (no <Raw> wrapper).
  */
 function parseSnippetContent(body: string): Record<string, string> {
     const result: Record<string, string> = {};
@@ -123,19 +123,8 @@ function parseSnippetContent(body: string): Record<string, string> {
 
         const fragBody = body.slice(afterFragOpen, closeFragIdx);
 
-        // Find <Raw …> inside this Fragment
-        const rawOpenRe = /<Raw\b([^>]*)>/g;
-        const rawMatch = rawOpenRe.exec(fragBody);
-        if (!rawMatch) continue;
-
-        const afterRawOpen = rawMatch.index + rawMatch[0].length;
-        const closeRawIdx = fragBody.indexOf('</Raw>', afterRawOpen);
-        if (closeRawIdx === -1) continue;
-
-        const rawBody = fragBody.slice(afterRawOpen, closeRawIdx);
-
-        // Extract the content between the first ``` and the last ```
-        const code = extractFencedCode(rawBody);
+        // Extract the fenced code block directly from the Fragment body
+        const code = extractFencedCode(fragBody);
         if (code !== null) {
             result[slot] = code;
         }
