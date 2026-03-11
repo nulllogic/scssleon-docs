@@ -230,14 +230,14 @@ const iframe_wrapper_style = await sass.compileStringAsync(`
 `, { importers: scss_importes })
 
 if (Astro.slots.has('scss')) {
-  const scss = (await Astro.slots.render('scss')).replace(
-    /^<div[^>]*>|<\/div>$/g, '')
-  const scss_compiled = await sass.compileStringAsync(scss,
-    { importers: scss_importes })
-
-  srcdoc += `<style>
-        ${scss_compiled.css}
-    </style>`
+  // const scss = (await Astro.slots.render('scss')).replace(
+  //   /^<div[^>]*>|<\/div>$/g, '')
+  // const scss_compiled = await sass.compileStringAsync(scss,
+  //   { importers: scss_importes })
+  //
+  // srcdoc += `<style>
+  //       ${scss_compiled.css}
+  //   </style>`
 }
 
 srcdoc += `<style>
