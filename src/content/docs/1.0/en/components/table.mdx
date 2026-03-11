@@ -4,7 +4,7 @@ description: Tables
 category: components
 toc: true
 ---
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Overview
 
@@ -12,9 +12,8 @@ Due to the widespread use of `<table>` elements across third-party widgets like 
 
 Using the most basic table markup, here's how `.table`-based tables look in xiigrid.
 
-<Snippet title={'Table 1'} preview={true}>
+<Snippet file={file} title={'Table 1'} preview={true}>
   <Fragment slot="html">
-    <Raw file={file} line_start={19} line_end={55}>
       ```
       <table class="table">
         <thead class="top">
@@ -54,10 +53,8 @@ Using the most basic table markup, here's how `.table`-based tables look in xiig
         </tfoot>
       </table>
       ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={62} line_end={71}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -70,15 +67,13 @@ Using the most basic table markup, here's how `.table`-based tables look in xiig
       app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>
 
 ## Table striped
 
-<Snippet title={'Table 2'} preview={true}>
+<Snippet file={file} title={'Table 2'} preview={true}>
   <Fragment slot="html">
-    <Raw file={file} line_start={83} line_end={119}>
       ```
       <table class="table stripe">
         <thead class="top">
@@ -118,10 +113,8 @@ Using the most basic table markup, here's how `.table`-based tables look in xiig
         </tfoot>
       </table>
       ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={126} line_end={135}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -134,6 +127,5 @@ Using the most basic table markup, here's how `.table`-based tables look in xiig
         app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>

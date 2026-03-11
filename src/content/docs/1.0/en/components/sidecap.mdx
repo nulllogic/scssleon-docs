@@ -4,13 +4,12 @@ description: Sidecap
 category: components
 toc: true
 ---
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Basic example
 
-<Snippet title={'Sidecap 1'} preview={true} min_height={450}>
+<Snippet file={file} title={'Sidecap 1'} preview={true} min_height={450}>
     <Fragment slot={'html'}>
-      <Raw file={file} line_start={15} line_end={35}>
         ```
         <div class="overlay show">
           <a href="#" onclick="event.preventDefault();sidecaps.open(sidecaps.elements[0])">Toggle Sidecap component</a>
@@ -34,10 +33,8 @@ import {Raw, Snippet} from "/src/components/snippet"
           </div>
         </div>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-      <Raw file={file} line_start={42} line_end={69}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -68,10 +65,8 @@ import {Raw, Snippet} from "/src/components/snippet"
           app.$theme
         );
         ```
-      </Raw>
     </Fragment>
     <Fragment slot={'js'}>
-      <Raw file={file} line_start={76} line_end={139}>
       ```
       const sidecap = (elements, options) => {
 
@@ -138,6 +133,5 @@ import {Raw, Snippet} from "/src/components/snippet"
       const sidecaps = sidecap(document.querySelectorAll('.sidecap'), {
       });
       ```
-      </Raw>
     </Fragment>
 </Snippet>

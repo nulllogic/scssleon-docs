@@ -4,13 +4,12 @@ description: A modal is like a digital pop-up book, presenting information in a 
 category: components
 toc: true
 ---
-import { Raw, Snippet } from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Example
 
-<Snippet title={'Modal 1'} preview={true} min_height={450}>
+<Snippet file={file} title={'Modal 1'} preview={true} min_height={450}>
   <Fragment slot="html">
-    <Raw file={file} line_start={15} line_end={38}>
     ```
     <div class="overlay show">
       <a href="#" onclick="event.preventDefault();modals.open(modals.elements[0])">Toggle Modal component</a>
@@ -37,10 +36,8 @@ import { Raw, Snippet } from "/src/components/snippet"
       </dialog>
     </div>
     ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={45} line_end={72}>
     ```
     @use '~/styles/app.scss' as app;
 
@@ -71,10 +68,8 @@ import { Raw, Snippet } from "/src/components/snippet"
       app.$theme
     );
     ```
-    </Raw>
   </Fragment>
   <Fragment slot={'js'}>
-    <Raw file={file} line_start={79} line_end={142}>
     ```
     const modal = (elements, options) => {
 
@@ -141,6 +136,5 @@ import { Raw, Snippet } from "/src/components/snippet"
     const modals = modal(document.querySelectorAll('.modal'), {
   });
     ```
-    </Raw>
   </Fragment>
 </Snippet>

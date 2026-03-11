@@ -4,13 +4,12 @@ description: Give textual form controls like `<input>`s and `<textarea>`s an upg
 category: forms
 toc: true
 ---
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Basic &lt;input&gt;
 
-<Snippet title={'Input 1'} preview={true}>
+<Snippet file={file} title={'Input 1'} preview={true}>
   <Fragment slot="html">
-    <Raw file={file} line_start={15} line_end={21}>
     ```
     <div class="form">
       <div class="field">
@@ -20,10 +19,8 @@ import {Raw, Snippet} from "/src/components/snippet"
       </div>
     </div>
     ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={28} line_end={37}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -36,15 +33,13 @@ import {Raw, Snippet} from "/src/components/snippet"
         app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>
 
 ## Basic &lt;textarea&gt;
 
-<Snippet title={'Input 2'} preview={true}>
+<Snippet file={file} title={'Input 2'} preview={true}>
   <Fragment slot="html">
-    <Raw file={file} line_start={49} line_end={54}>
       ```
       <div class="form">
         <div class="field">
@@ -53,10 +48,8 @@ import {Raw, Snippet} from "/src/components/snippet"
         </div>
       </div>
       ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={61} line_end={70}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -69,15 +62,13 @@ import {Raw, Snippet} from "/src/components/snippet"
         app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>
 
 ## Advanced &lt;input&gt;
 
-<Snippet title={'Input 3'} preview={true}>
+<Snippet file={file} title={'Input 3'} preview={true}>
   <Fragment slot="html">
-    <Raw file={file} line_start={82} line_end={131}>
       ```
       <div class="form">
         <div class="field">
@@ -130,10 +121,8 @@ import {Raw, Snippet} from "/src/components/snippet"
         </div>
       </div>
       ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={138} line_end={147}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -146,16 +135,14 @@ import {Raw, Snippet} from "/src/components/snippet"
         app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>
 
 ## Disabled
 
-<Snippet title={'Input 4'} preview={true}>
+<Snippet file={file} title={'Input 4'} preview={true}>
   <Fragment slot="html">
     ```
-    <Raw file={file} line_start={159} line_end={165}>
       <div class="form">
         <div class="field">
           <label for="input1" class="label">Email address:</label>
@@ -163,11 +150,9 @@ import {Raw, Snippet} from "/src/components/snippet"
                  id="input1" placeholder="name@example.com" disabled/>
         </div>
       </div>
-    </Raw>
     ```
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={172} line_end={181}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -180,15 +165,13 @@ import {Raw, Snippet} from "/src/components/snippet"
         app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>
 
 ## Readonly
 
-<Snippet title={'Input 5'} preview={true}>
+<Snippet file={file} title={'Input 5'} preview={true}>
   <Fragment slot="html">
-    <Raw file={file} line_start={193} line_end={199}>
       ```
       <div class="form">
         <div class="field">
@@ -198,10 +181,8 @@ import {Raw, Snippet} from "/src/components/snippet"
         </div>
       </div>
       ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={206} line_end={215}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -214,13 +195,11 @@ import {Raw, Snippet} from "/src/components/snippet"
         app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>
 
-<Snippet title={'Input 6'} preview={true}>
+<Snippet file={file} title={'Input 6'} preview={true}>
   <Fragment slot="html">
-    <Raw file={file} line_start={225} line_end={261}>
       ```
         <input type="name" value="John Doe" class="input"/>
 
@@ -260,7 +239,6 @@ import {Raw, Snippet} from "/src/components/snippet"
         <input type="range" id="volume" name="volume" min="0" max="11"/>
         <label htmlFor="volume">Volume</label>
       ```
-    </Raw>
   </Fragment>
 </Snippet>
 

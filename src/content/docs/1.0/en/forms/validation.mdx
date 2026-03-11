@@ -5,13 +5,12 @@ category: forms
 toc: true
 ---
 
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Basic &lt;input&gt;
 
-<Snippet title={'Validation 1'} preview={true}>
+<Snippet file={file} title={'Validation 1'} preview={true}>
   <Fragment slot="html">
-    <Raw file={file} line_start={16} line_end={23}>
       ```
       <div class="form">
         <div class="field is-invalid">
@@ -22,10 +21,8 @@ import {Raw, Snippet} from "/src/components/snippet"
         </div>
       </div>
       ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={30} line_end={39}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -38,6 +35,5 @@ import {Raw, Snippet} from "/src/components/snippet"
         app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>

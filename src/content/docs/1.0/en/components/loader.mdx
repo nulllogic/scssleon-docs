@@ -5,20 +5,17 @@ category: components
 toc: true
 ---
 
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Example
 
-<Snippet title={'Loader 1'} preview={true}>
+<Snippet file={file} title={'Loader 1'} preview={true}>
     <Fragment slot="html">
-      <Raw file={file} line_start={16} line_end={16}>
         ```
         <icon-loader />
         ```
-      </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={23} line_end={32}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -31,10 +28,8 @@ import {Raw, Snippet} from "/src/components/snippet"
           app.$theme
         );
         ```
-      </Raw>
     </Fragment>
     <Fragment slot="js">
-      <Raw file={file} line_start={39} line_end={43}>
         ```
         customElements.define("icon-loader", class extends HTMLElement {
               connectedCallback() {
@@ -42,7 +37,6 @@ import {Raw, Snippet} from "/src/components/snippet"
           }
         });
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 

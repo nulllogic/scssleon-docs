@@ -4,20 +4,17 @@ description: An overlay is like a digital curtain that adds a layer of drama to 
 category: components
 toc: true
 ---
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
-<Snippet title={'Overlay 1'} preview={true} min_height={350}>
+<Snippet file={file} title={'Overlay 1'} preview={true} min_height={350}>
   <Fragment slot="html">
-    <Raw file={file} line_start={13} line_end={15}>
       ```
       <div class="overlay show">
         123
       </div>
       ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={22} line_end={31}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -30,22 +27,18 @@ import {Raw, Snippet} from "/src/components/snippet"
       app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>
 
-<Snippet title={'Overlay 2'} preview={true} min_height={350}>
+<Snippet file={file} title={'Overlay 2'} preview={true} min_height={350}>
   <Fragment slot="html">
-    <Raw file={file} line_start={41} line_end={43}>
       ```
       <div class="overlay show blurred">
         123
       </div>
       ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={50} line_end={59}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -58,6 +51,5 @@ import {Raw, Snippet} from "/src/components/snippet"
         app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>

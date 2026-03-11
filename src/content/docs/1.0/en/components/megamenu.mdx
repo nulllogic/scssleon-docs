@@ -5,13 +5,12 @@ category: components
 toc: true
 ---
 
-import {Raw, Snippet} from '/src/components/snippet';
+import {Snippet} from '/src/components/snippet';
 
 ## Example
 
-<Snippet title={'Megamenu 1'} preview={true} min_height={250}>
+<Snippet file={file} title={'Megamenu 1'} preview={true} min_height={250}>
   <Fragment slot="html">
-    <Raw file={file} line_start={16} line_end={49}>
     ```
     <div class="header">
       <div class="has-megamenu on-hover">
@@ -48,10 +47,8 @@ import {Raw, Snippet} from '/src/components/snippet';
       </div>
     </div>
     ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={56} line_end={77}>
     ```
     @use '~/styles/app.scss' as app;
 
@@ -76,6 +73,5 @@ import {Raw, Snippet} from '/src/components/snippet';
       $theme: app.$theme,
     );
     ```
-    </Raw>
   </Fragment>
 </Snippet>

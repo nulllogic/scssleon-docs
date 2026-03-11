@@ -7,10 +7,9 @@ visible: false
 ---
 import { CodeWrapper, Raw, Snippet } from "/src/components/snippet"
 
-<Snippet inline={true} title={'🎐 Intro (ﾉ◕ヮ◕)ﾉ*-✧'}>
+<Snippet file={file} inline={true} title={'🎐 Intro (ﾉ◕ヮ◕)ﾉ*-✧'}>
   <Fragment slot={'code'}>
     <CodeWrapper lang={'scss'}>
-      <Raw file={file} line_start={15} line_end={24}>
         ```
         @use '~/src/styles/app.scss' as app; [!code highlight]
 
@@ -23,7 +22,6 @@ import { CodeWrapper, Raw, Snippet } from "/src/components/snippet"
           app.$theme
         );
         ```
-      </Raw>
     </CodeWrapper>
   </Fragment>
 </Snippet>

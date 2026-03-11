@@ -8,13 +8,12 @@ image :
   alt : 'Form layout'
 ---
 
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Form example
 
-<Snippet title={'Feature 1'} preview={true}>
+<Snippet file={file} title={'Feature 1'} preview={true}>
   <Fragment slot="html">
-    <Raw file={file} line_start={19} line_end={48}>
       ```
       <div class="features">
         <div class="item">
@@ -47,10 +46,8 @@ import {Raw, Snippet} from "/src/components/snippet"
         </div>
       </div>
       ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={55} line_end={134}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -133,6 +130,5 @@ import {Raw, Snippet} from "/src/components/snippet"
         app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>

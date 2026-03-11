@@ -5,13 +5,12 @@ category: components
 toc: true
 ---
 
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Examples
 
-<Snippet title={'Content 1'} preview={true}>
+<Snippet file={file} title={'Content 1'} preview={true}>
   <Fragment slot={'html'}>
-    <Raw file={file} line_start={16} line_end={129}>
     ```
     <div class="content">
       <h1>Example heading H1</h1>
@@ -128,10 +127,8 @@ P Q R S T U V W X Y Z [ \ ] ^ _
 p q r s t u v w x y z | ~ </pre>
     </div>
     ```
-    </Raw>
   </Fragment>
   <Fragment slot={'scss'}>
-    <Raw file={file} line_start={136} line_end={143}>
     ```
     @use '~/styles/app.scss' as app;
 
@@ -142,6 +139,5 @@ p q r s t u v w x y z | ~ </pre>
       $theme: app.$theme
     );
     ```
-    </Raw>
   </Fragment>
 </Snippet>

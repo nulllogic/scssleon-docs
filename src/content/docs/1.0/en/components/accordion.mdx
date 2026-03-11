@@ -5,12 +5,11 @@ category: components
 toc: true
 schema: true
 ---
-import {Raw, Snippet} from "~/components/snippet"
+import {Snippet} from "~/components/snippet"
 
 ## Example
-<Snippet title={'Accordion 1'} preview={true}>
+<Snippet file={file} title={'Accordion 1'} preview={true}>
     <Fragment slot={'html'}>
-      <Raw file={file} line_start={15} line_end={62}>
         ```
         <div class="accordion">
             <div class="item">
@@ -61,10 +60,8 @@ import {Raw, Snippet} from "~/components/snippet"
             </div>
         </div>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-      <Raw file={file} line_start={69} line_end={78}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -77,10 +74,8 @@ import {Raw, Snippet} from "~/components/snippet"
           app.$theme
         );
         ```
-      </Raw>
     </Fragment>
     <Fragment slot={'js'}>
-      <Raw file={file} line_start={85} line_end={162}>
         ```
         const accordion = (elements, options) => {
         const defaults = {
@@ -161,14 +156,12 @@ import {Raw, Snippet} from "~/components/snippet"
 
         console.log(accords);
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 
 ## Accordion with Schema
-<Snippet title={'Accordion 2'} preview={true}>
+<Snippet file={file} title={'Accordion 2'} preview={true}>
     <Fragment slot={'html'}>
-      <Raw file={file} line_start={173} line_end={224}>
         ```
         <div class="accordion" itemscope itemtype="https://schema.org/FAQPage">
             <div class="item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
@@ -223,10 +216,8 @@ import {Raw, Snippet} from "~/components/snippet"
             </div>
         </div>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-      <Raw file={file} line_start={231} line_end={240}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -239,10 +230,8 @@ import {Raw, Snippet} from "~/components/snippet"
           app.$theme
         );
         ```
-      </Raw>
     </Fragment>
     <Fragment slot={'js'}>
-      <Raw file={file} line_start={247} line_end={324}>
         ```
         const accordion = (elements, options) => {
         const defaults = {
@@ -323,7 +312,6 @@ import {Raw, Snippet} from "~/components/snippet"
 
         console.log(accords);
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 

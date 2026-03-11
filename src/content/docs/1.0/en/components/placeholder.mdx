@@ -4,7 +4,7 @@ description: A placeholder component is like a digital sketchpad, providing a te
 category: components
 toc: true
 ---
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## About
 
@@ -13,9 +13,8 @@ Placeholders can be used to enhance the experience of your application. They're 
 ## Example
 
 In the example below, we take a typical card component and recreate it with placeholders applied to create a "loading card". Size and proportions are the same between the two.
-<Snippet title={'Placeholder 1'} preview={true}>
+<Snippet file={file} title={'Placeholder 1'} preview={true}>
     <Fragment slot="html">
-      <Raw file={file} line_start={20} line_end={26}>
         ```
         <div class="placeholder" aria-hidden="true">
             <span class="el"></span>
@@ -25,10 +24,8 @@ In the example below, we take a typical card component and recreate it with plac
             <span class="el"></span>
         </div>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={33} line_end={42}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -41,7 +38,6 @@ In the example below, we take a typical card component and recreate it with plac
             app.$theme
         );
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 
@@ -49,9 +45,8 @@ In the example below, we take a typical card component and recreate it with plac
 
 You can change the `width` through grid column classes, width utilities, or inline styles.
 
-<Snippet title={'Placeholder 2'} preview={true}>
+<Snippet file={file} title={'Placeholder 2'} preview={true}>
     <Fragment slot="html">
-      <Raw file={file} line_start={56} line_end={60}>
         ```
         <div class="placeholder" aria-hidden="true">
             <span class="el"></span>
@@ -59,10 +54,8 @@ You can change the `width` through grid column classes, width utilities, or inli
             <span class="el" style="width: 25%;"></span>
         </div>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={67} line_end={76}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -75,7 +68,6 @@ You can change the `width` through grid column classes, width utilities, or inli
             app.$theme
         );
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 
@@ -83,9 +75,8 @@ You can change the `width` through grid column classes, width utilities, or inli
 
 Animate placeholders with `.glow` or `.wave` to better convey the perception of something being _actively_ loaded.
 
-<Snippet title={'Placeholder 3'} preview={true}>
+<Snippet file={file} title={'Placeholder 3'} preview={true}>
     <Fragment slot="html">
-      <Raw file={file} line_start={90} line_end={94}>
         ```
         <p class="placeholder glow">
             <span class="el"></span>
@@ -93,10 +84,8 @@ Animate placeholders with `.glow` or `.wave` to better convey the perception of 
             <span class="el"></span>
         </p>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={101} line_end={110}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -109,13 +98,11 @@ Animate placeholders with `.glow` or `.wave` to better convey the perception of 
             app.$theme
         );
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 
-<Snippet title={'Placeholder 4'} preview={true}>
+<Snippet file={file} title={'Placeholder 4'} preview={true}>
     <Fragment slot="html">
-      <Raw file={file} line_start={120} line_end={124}>
         ```
         <p class="placeholder wave">
             <span class="el"></span>
@@ -123,10 +110,8 @@ Animate placeholders with `.glow` or `.wave` to better convey the perception of 
             <span class="el"></span>
         </p>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={131} line_end={140}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -139,7 +124,6 @@ Animate placeholders with `.glow` or `.wave` to better convey the perception of 
             app.$theme
         );
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 

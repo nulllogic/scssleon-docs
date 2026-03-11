@@ -6,11 +6,10 @@ toc: true
 ---
 ## Default alert
 
-import { Raw, Snippet } from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
-<Snippet title={'Alert 1'} preview={true}>
+<Snippet file={file} title={'Alert 1'} preview={true}>
     <Fragment slot="html">
-      <Raw file={file} line_start={15} line_end={36}>
         ```
         <div class="alert" role="alert">
             <div>
@@ -35,10 +34,8 @@ import { Raw, Snippet } from "/src/components/snippet"
             </div>
         </div>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={43} line_end={64}>
         ```
         @use 'sass:map';
         @use '~/styles/app.scss' as app;
@@ -63,13 +60,11 @@ import { Raw, Snippet } from "/src/components/snippet"
           app.$theme
         );
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 
-<Snippet title={'Alert 2'} preview={true}>
+<Snippet file={file} title={'Alert 2'} preview={true}>
     <Fragment slot="html">
-      <Raw file={file} line_start={74} line_end={90}>
         ```
         <div class="alert" role="alert" style="--xii-alert-grid-template-columns: 1fr;">
             <div class="center">
@@ -89,10 +84,8 @@ import { Raw, Snippet } from "/src/components/snippet"
             </div>
         </div>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={97} line_end={106}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -105,7 +98,6 @@ import { Raw, Snippet } from "/src/components/snippet"
           app.$theme
         );
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 

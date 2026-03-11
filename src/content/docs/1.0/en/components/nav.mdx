@@ -5,15 +5,14 @@ category: components
 toc: true
 ---
 
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Basic example
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet title={'Nav 1'} preview={true}>
+<Snippet file={file} title={'Nav 1'} preview={true}>
     <Fragment slot="html">
-      <Raw file={file} line_start={18} line_end={31}>
         ```
         <ul class="nav horizontal">
             <li class="item">
@@ -30,10 +29,8 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
             </li>
         </ul>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={38} line_end={47}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -46,7 +43,6 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
             app.$theme
         );
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 
@@ -54,9 +50,8 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet title={'Nav 2'} preview={true}>
+<Snippet file={file} title={'Nav 2'} preview={true}>
     <Fragment slot="html">
-      <Raw file={file} line_start={61} line_end={74}>
         ```
         <ul class="nav vertical">
             <li class="item">
@@ -73,10 +68,8 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
             </li>
         </ul>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot="scss">
-      <Raw file={file} line_start={81} line_end={90}>
         ```
         @use "~/styles/app.scss" as app;
 
@@ -89,6 +82,5 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
           app.$theme
         );
         ```
-      </Raw>
     </Fragment>
 </Snippet>

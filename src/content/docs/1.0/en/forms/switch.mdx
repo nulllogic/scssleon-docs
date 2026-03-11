@@ -4,13 +4,12 @@ description: Give textual form controls like `<input>`s and `<textarea>`s an upg
 category: forms
 toc: true
 ---
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Example
 
-<Snippet title={'Switch 1'} preview={true}>
+<Snippet file={file} title={'Switch 1'} preview={true}>
   <Fragment slot="html">
-    <Raw file={file} line_start={15} line_end={36}>
       ```
       <div class="form">
         <div class="field">
@@ -35,10 +34,8 @@ import {Raw, Snippet} from "/src/components/snippet"
         </div>
       </div>
       ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={43} line_end={52}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -51,7 +48,6 @@ import {Raw, Snippet} from "/src/components/snippet"
         app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>
 

@@ -8,11 +8,10 @@ image :
   alt : 'Form layout'
 ---
 
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
-<Snippet title={'Navbar 1'}>
+<Snippet file={file} title={'Navbar 1'}>
   <Fragment slot="html">
-    <Raw file={file} line_start={17} line_end={49}>
       ```
       <nav class="navbar">
         <div class="left">
@@ -48,6 +47,5 @@ import {Raw, Snippet} from "/src/components/snippet"
         </div>
       </nav>
       ```
-    </Raw>
   </Fragment>
 </Snippet>

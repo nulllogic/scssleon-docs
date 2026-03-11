@@ -6,15 +6,14 @@ toc: true
 schema: true
 ---
 
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Example
 
 Use an ordered or unordered list with linked list items to create a minimally styled breadcrumb. Use our utilities to add additional styles as desired.
 
-<Snippet title={'Breadcrumb 1'} preview={true}>
+<Snippet file={file} title={'Breadcrumb 1'} preview={true}>
     <Fragment slot={'html'}>
-      <Raw file={file} line_start={19} line_end={31}>
         ```
         <nav aria-label="Breadcrumb">
             <ul class="breadcrumb">
@@ -30,10 +29,8 @@ Use an ordered or unordered list with linked list items to create a minimally st
             </ul>
         </nav>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-      <Raw file={file} line_start={38} line_end={47}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -46,10 +43,8 @@ Use an ordered or unordered list with linked list items to create a minimally st
           app.$theme
         );
         ```
-      </Raw>
     </Fragment>
     <Fragment slot={'js'}>
-      <Raw file={file} line_start={54} line_end={61}>
         ```
         customElements.define("svg-circle", class extends HTMLElement {
           connectedCallback() {
@@ -60,7 +55,6 @@ Use an ordered or unordered list with linked list items to create a minimally st
           }
         });
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 
@@ -68,9 +62,8 @@ Use an ordered or unordered list with linked list items to create a minimally st
 
 Dividers are automatically added in CSS through [`::before`](https://developer.mozilla.org/en-US/docs/Web/CSS/::before) and [`content`](https://developer.mozilla.org/en-US/docs/Web/CSS/content). They can be changed by modifying a local CSS custom property `--xii-breadcrumb-divider`, or through the `$breadcrumb-divider` Sass variable — and `$breadcrumb-divider-flipped` for its RTL counterpart, if needed. We default to our Sass variable, which is set as a fallback to the custom property. This way, you get a global divider that you can override without recompiling CSS at any time.
 
-<Snippet title={'Breadcrumb 2'} preview={true}>
+<Snippet file={file} title={'Breadcrumb 2'} preview={true}>
     <Fragment slot={'html'}>
-      <Raw file={file} line_start={75} line_end={87}>
         ```
         <nav aria-label="breadcrumb">
             <ul class="breadcrumb">
@@ -86,10 +79,8 @@ Dividers are automatically added in CSS through [`::before`](https://developer.m
             </ul>
         </nav>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-      <Raw file={file} line_start={94} line_end={103}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -102,7 +93,6 @@ Dividers are automatically added in CSS through [`::before`](https://developer.m
           app.$theme
         );
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 
@@ -110,9 +100,8 @@ Dividers are automatically added in CSS through [`::before`](https://developer.m
 
 Use an ordered or unordered list with linked list items to create a minimally styled breadcrumb. Use our utilities to add additional styles as desired.
 
-<Snippet title={'Breadcrumb 3'} preview={true}>
+<Snippet file={file} title={'Breadcrumb 3'} preview={true}>
     <Fragment slot={'html'}>
-      <Raw file={file} line_start={117} line_end={145}>
         ```
         <nav aria-label="Breadcrumb">
             <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -144,10 +133,8 @@ Use an ordered or unordered list with linked list items to create a minimally st
             </ul>
         </nav>
         ```
-      </Raw>
     </Fragment>
     <Fragment slot={'scss'}>
-      <Raw file={file} line_start={152} line_end={161}>
         ```
         @use '~/styles/app.scss' as app;
 
@@ -160,10 +147,8 @@ Use an ordered or unordered list with linked list items to create a minimally st
           app.$theme
         );
         ```
-      </Raw>
     </Fragment>
     <Fragment slot={'js'}>
-      <Raw file={file} line_start={168} line_end={172}>
         ```
         customElements.define("svg-circle", class extends HTMLElement {
           connectedCallback() {
@@ -171,7 +156,6 @@ Use an ordered or unordered list with linked list items to create a minimally st
           }
         });
         ```
-      </Raw>
     </Fragment>
 </Snippet>
 

@@ -9,11 +9,10 @@ image :
   alt : 'Form layout'
 ---
 
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
-<Snippet>
+<Snippet file={file}>
   <Fragment slot="html">
-    <Raw file={file} line_start={18} line_end={30}>
       ```
       <nav class="pagination" aria-label="Pagination"
            style="--xii-pagination-grid-template-columns: 1fr 1fr">
@@ -29,7 +28,6 @@ import {Raw, Snippet} from "/src/components/snippet"
         </div>
       </nav>
       ```
-    </Raw>
   </Fragment>
 </Snippet>
 

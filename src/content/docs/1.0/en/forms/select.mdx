@@ -4,12 +4,11 @@ description: Give textual form controls like `<input>`s and `<textarea>`s an upg
 category: forms
 toc: true
 ---
-import {Raw, Snippet} from "/src/components/snippet"
+import {Snippet} from "/src/components/snippet"
 
 ## Example
-<Snippet title={'Select 1'} preview={true}>
+<Snippet file={file} title={'Select 1'} preview={true}>
   <Fragment slot="html">
-    <Raw file={file} line_start={14} line_end={24}>
       ```
       <div class="form">
         <div class="field">
@@ -23,10 +22,8 @@ import {Raw, Snippet} from "/src/components/snippet"
         </div>
       </div>
       ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={31} line_end={40}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -39,14 +36,12 @@ import {Raw, Snippet} from "/src/components/snippet"
         app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>
 
 ## Multiple
-<Snippet title={'Select 2'} preview={true}>
+<Snippet file={file} title={'Select 2'} preview={true}>
   <Fragment slot="html">
-    <Raw file={file} line_start={51} line_end={61}>
       ```
       <div class="form">
         <div class="field">
@@ -60,10 +55,8 @@ import {Raw, Snippet} from "/src/components/snippet"
         </div>
       </div>
       ```
-    </Raw>
   </Fragment>
   <Fragment slot="scss">
-    <Raw file={file} line_start={68} line_end={77}>
       ```
       @use '~/styles/app.scss' as app;
 
@@ -76,6 +69,5 @@ import {Raw, Snippet} from "/src/components/snippet"
         app.$theme
       );
       ```
-    </Raw>
   </Fragment>
 </Snippet>
