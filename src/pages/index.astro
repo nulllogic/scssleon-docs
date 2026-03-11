@@ -100,6 +100,28 @@ const package_info = await package_response.json()
             </div>
         </section>
 
+        <section>
+            <div class="container xxl">
+                <p>100% Open Source</p>
+                <p>We believe in transparency and community. OutRay is built in the open, so you can inspect the code,
+                    contribute features, or self-host the entire platform on your own infrastructure.</p>
+                <p>
+                    Auditable Security
+
+                    Verify our security claims by inspecting the source code yourself.
+                    Community Driven
+
+                    Built with feedback and contributions from developers like you.
+                    Self-Hostable
+
+                    Run the entire stack on your own servers. No vendor lock-in.
+                    Free Forever
+
+                    The core features will always be free and open source.
+                </p>
+            </div>
+        </section>
+
 
         <!--        <section-->
         <!--                style="background: radial-gradient(circle at -48% 130%, rgba(208, 242, 36, 0.667) 24%, rgb(5, 74, 73) 45%);">-->
@@ -487,10 +509,10 @@ const package_info = await package_response.json()
   );
 
   @include app.generate-component(
-      $welcome-section,
-      'welcome',
-      app.$config,
-      app.$theme
+    $welcome-section,
+    'welcome',
+    app.$config,
+    app.$theme
   );
 
   $customize-section: (
@@ -514,10 +536,10 @@ const package_info = await package_response.json()
   );
 
   @include app.generate-component(
-      $customize-section,
-      'customize',
-      app.$config,
-      app.$theme
+    $customize-section,
+    'customize',
+    app.$config,
+    app.$theme
   );
 
   $card: app.get-theme(app.$theme, 'components.card');
@@ -599,10 +621,10 @@ const package_info = await package_response.json()
   );
 
   @include app.generate-component(
-      $features-section,
-      'features',
-      app.$config,
-      app.$theme
+    $features-section,
+    'features',
+    app.$config,
+    app.$theme
   );
 
   .sr-only {
@@ -647,9 +669,9 @@ const package_info = await package_response.json()
   );
 
   @include app.generate-component(
-      $get_started,
-      'get_started',
-      app.$config,
-      app.$theme
+    $get_started,
+    'get_started',
+    app.$config,
+    app.$theme
   );
 </style>

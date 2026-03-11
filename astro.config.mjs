@@ -26,6 +26,7 @@ export default defineConfig({
   output: 'static',
   security: {
     checkOrigin: true,
+    csp: true
   },
   server: {
     host: true,

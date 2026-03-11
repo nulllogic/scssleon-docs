@@ -4,7 +4,6 @@ import Link from '~/components/link.astro'
 
 const package_response = await fetch('https://raw.githubusercontent.com/nulllogic/scssleon/refs/heads/master/package.json')
 const package_info = await package_response.json()
-
 ---
 
 <footer class="footer">
@@ -38,7 +37,8 @@ const package_info = await package_response.json()
                         </Link>
                     </li>
                     <li class="item">
-                        <Link href={import.meta.env.PROD ? '/scssleon-docs/docs/1.0/en/getting-started/introduction' : '/docs/1.0/en/getting-started/introduction'} aria-label="Components"
+                        <Link href={import.meta.env.PROD ? '/scssleon-docs/docs/1.0/en/getting-started/introduction' : '/docs/1.0/en/getting-started/introduction'}
+                              aria-label="Components"
                               title="Components">Components
                         </Link>
                     </li>
@@ -146,10 +146,10 @@ const package_info = await package_response.json()
   );
 
   @include app.generate-component(
-      $footer-component,
-      'footer',
-      app.$config,
-      app.$theme
+    $footer-component,
+    'footer',
+    app.$config,
+    app.$theme
   );
 </style>
 
@@ -163,7 +163,15 @@ const package_info = await package_response.json()
                   clip-rule="evenodd"/>
         </svg>`
         }
-    })
+    });
+
+    // BFCache
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            // Force a reload if the user has logged out.
+            location.reload();
+        }
+    });
 </script>
 
 <style>
@@ -239,11 +247,11 @@ const package_info = await package_response.json()
 
   // ↓ Tooltip
   @include app.generate-component(
-      app.get-theme(app.$theme, 'components.tooltip'),
-      'has-tooltip',
-      app.$config,
-      app.$theme,
-      (variable: (name : 'tooltip'))
+    app.get-theme(app.$theme, 'components.tooltip'),
+    'has-tooltip',
+    app.$config,
+    app.$theme,
+    (variable: (name : 'tooltip'))
   );
 </style>
 

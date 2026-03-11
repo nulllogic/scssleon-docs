@@ -12,7 +12,7 @@ build:
 	docker build -t scssleon-docs .
 
 watch:
-	@echo "[Running Docker SCSSLEON docs]"
+	@echo "[Running Docker SCSSLEON 🦎 docs]"
 	docker run --rm -it -v ${CURRENT_DIR}:/app scssleon-docs npm i
 	docker run --rm -it \
 			-e ASTRO_TELEMETRY_DISABLED=1 \
