@@ -9,7 +9,7 @@ import {Snippet} from "/src/components/snippet"
 ## Example
 <Snippet file={file} title={'Badge 1'} preview={true}>
   <Fragment slot="html">
-      ```
+      ```html
       <div class="content">
         <h1>Example heading <span class="badge">New</span></h1>
         <h2>Example heading <span class="badge">New</span></h2>
@@ -21,7 +21,7 @@ import {Snippet} from "/src/components/snippet"
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $badge: app.get-theme(app.$theme, 'components.badge');
@@ -39,14 +39,14 @@ import {Snippet} from "/src/components/snippet"
 ## Inside button
 <Snippet file={file} title={'Badge 2'} preview={true}>
   <Fragment slot="html">
-      ```
+      ```html
       <button type="button" class="btn btn-primary">
         Notifications <span class="badge">4</span>
       </button>
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $badge: app.get-theme(app.$theme, 'components.badge');
@@ -64,7 +64,7 @@ import {Snippet} from "/src/components/snippet"
 ## Inside button
 <Snippet file={file} title={'Badge 3'} preview={true}>
   <Fragment slot="html">
-      ```
+      ```html
       <button type="button" class="btn btn-primary">
         Profile <span class="badge">9</span>
         <span class="sr">unread messages</span>
@@ -72,7 +72,7 @@ import {Snippet} from "/src/components/snippet"
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $badge: app.get-theme(app.$theme, 'components.badge');
@@ -90,7 +90,7 @@ import {Snippet} from "/src/components/snippet"
 ## Outline
 <Snippet file={file} title={'Badge 4'} preview={true}>
   <Fragment slot="html">
-      ```
+      ```html
       <h1>Example heading <span class="badge">New</span></h1>
       <h2>Example heading <span class="badge">New</span></h2>
       <h3>Example heading <span class="badge">New</span></h3>
@@ -100,7 +100,7 @@ import {Snippet} from "/src/components/snippet"
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $badge: app.get-theme(app.$theme, 'components.badge');
@@ -118,7 +118,7 @@ import {Snippet} from "/src/components/snippet"
 ## Icons
 <Snippet file={file} title={'Badge 5'} preview={true}>
   <Fragment slot="html">
-      ```
+      ```html
       <h1>Example heading <span class="badge"><svg width="10" height="10" aria-hidden="true"
                                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                    viewBox="0 0 20 20">
@@ -133,7 +133,7 @@ import {Snippet} from "/src/components/snippet"
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
       $badge: app.get-theme(app.$theme, 'components.badge');
 
@@ -151,7 +151,7 @@ import {Snippet} from "/src/components/snippet"
 ## Outline
 <Snippet file={file} title={'Badge 6'} preview={true}>
   <Fragment slot="html">
-      ```
+      ```html
       <span class="badge"
               style="--xii-badge-background: transparent; --xii-badge-color: red; --xii-badge-border: 1px solid red;">New</span>
       <span class="badge"
@@ -161,7 +161,7 @@ import {Snippet} from "/src/components/snippet"
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $badge: app.get-theme(app.$theme, 'components.badge');

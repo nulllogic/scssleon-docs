@@ -9,9 +9,9 @@ import {Snippet} from "/src/components/snippet"
 
 ## Basic &lt;input&gt;
 
-<Snippet file={file} title={'Validation 1'} preview={true}>
+<Snippet title={'Validation 1'} preview={true} file={file}>
   <Fragment slot="html">
-      ```
+      ```html
       <div class="form">
         <div class="field is-invalid">
           <label for="input1" class="label">Email address:</label>
@@ -23,7 +23,7 @@ import {Snippet} from "/src/components/snippet"
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $form: app.get-theme(app.$theme, 'components.form');

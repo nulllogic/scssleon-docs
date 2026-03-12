@@ -7,9 +7,9 @@ toc: true
 import {Snippet} from "/src/components/snippet"
 
 ## Example
-<Snippet file={file} title={'Checkbox 1'} preview={true}>
+<Snippet title={'Checkbox 1'} preview={true} file={file}>
   <Fragment slot="html">
-    ```
+    ```html
     <div class="form">
       <div class="field">
         <div class="inline">
@@ -29,7 +29,7 @@ import {Snippet} from "/src/components/snippet"
     ```
   </Fragment>
   <Fragment slot="scss">
-    ```
+    ```scss
     @use '~/styles/app.scss' as app;
 
     $form: app.get-theme(app.$theme, 'components.form');
@@ -44,9 +44,9 @@ import {Snippet} from "/src/components/snippet"
 </Snippet>
 
 ## Indeterminate
-<Snippet file={file} title={'Checkbox 2'} preview={true}>
+<Snippet title={'Checkbox 2'} preview={true} file={file}>
   <Fragment slot="html">
-    ```
+    ```html
     <div class="form">
       <div class="field">
         <div class="inline">
@@ -61,7 +61,7 @@ import {Snippet} from "/src/components/snippet"
     ```
   </Fragment>
   <Fragment slot="scss">
-    ```
+    ```scss
     @use '~/styles/app.scss' as app;
 
     @include app.generate-component(
@@ -73,7 +73,7 @@ import {Snippet} from "/src/components/snippet"
     ```
   </Fragment>
   <Fragment slot="js">
-      ```
+      ```js
       document.getElementById('input1').indeterminate = true;
       ```
   </Fragment>

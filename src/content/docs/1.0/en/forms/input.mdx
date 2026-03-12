@@ -8,9 +8,9 @@ import {Snippet} from "/src/components/snippet"
 
 ## Basic &lt;input&gt;
 
-<Snippet file={file} title={'Input 1'} preview={true}>
+<Snippet title={'Input 1'} preview={true} file={file}>
   <Fragment slot="html">
-    ```
+    ```html
     <div class="form">
       <div class="field">
         <label for="input1" class="label">Email address:</label>
@@ -21,7 +21,7 @@ import {Snippet} from "/src/components/snippet"
     ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $form: app.get-theme(app.$theme, 'components.form');
@@ -38,9 +38,9 @@ import {Snippet} from "/src/components/snippet"
 
 ## Basic &lt;textarea&gt;
 
-<Snippet file={file} title={'Input 2'} preview={true}>
+<Snippet title={'Input 2'} preview={true} file={file}>
   <Fragment slot="html">
-      ```
+      ```html
       <div class="form">
         <div class="field">
           <label for="input2" class="label">Email address:</label>
@@ -50,7 +50,7 @@ import {Snippet} from "/src/components/snippet"
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $form: app.get-theme(app.$theme, 'components.form');
@@ -67,9 +67,9 @@ import {Snippet} from "/src/components/snippet"
 
 ## Advanced &lt;input&gt;
 
-<Snippet file={file} title={'Input 3'} preview={true}>
+<Snippet title={'Input 3'} preview={true} file={file}>
   <Fragment slot="html">
-      ```
+      ```html
       <div class="form">
         <div class="field">
           <label for="input1" class="label">Name:</label>
@@ -123,7 +123,7 @@ import {Snippet} from "/src/components/snippet"
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $form: app.get-theme(app.$theme, 'components.form');
@@ -140,9 +140,9 @@ import {Snippet} from "/src/components/snippet"
 
 ## Disabled
 
-<Snippet file={file} title={'Input 4'} preview={true}>
+<Snippet title={'Input 4'} preview={true} file={file}>
   <Fragment slot="html">
-    ```
+    ```html
       <div class="form">
         <div class="field">
           <label for="input1" class="label">Email address:</label>
@@ -153,7 +153,7 @@ import {Snippet} from "/src/components/snippet"
     ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $form: app.get-theme(app.$theme, 'components.form');
@@ -170,9 +170,9 @@ import {Snippet} from "/src/components/snippet"
 
 ## Readonly
 
-<Snippet file={file} title={'Input 5'} preview={true}>
+<Snippet title={'Input 5'} preview={true} file={file}>
   <Fragment slot="html">
-      ```
+      ```html
       <div class="form">
         <div class="field">
           <label for="input1" class="label">Email address:</label>
@@ -183,7 +183,7 @@ import {Snippet} from "/src/components/snippet"
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $form: app.get-theme(app.$theme, 'components.form');
@@ -198,9 +198,9 @@ import {Snippet} from "/src/components/snippet"
   </Fragment>
 </Snippet>
 
-<Snippet file={file} title={'Input 6'} preview={true}>
+<Snippet title={'Input 6'} preview={true} file={file}>
   <Fragment slot="html">
-      ```
+      ```html
         <input type="name" value="John Doe" class="input"/>
 
         <input type="email" value="john.doe@cirrus.io" class="input"/>

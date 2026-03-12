@@ -10,7 +10,7 @@ import {Snippet} from "/src/components/snippet"
 
 <Snippet file={file} title={'Alert 1'} preview={true}>
     <Fragment slot="html">
-        ```
+        ```html
         <div class="alert" role="alert">
             <div>
               <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,7 @@ import {Snippet} from "/src/components/snippet"
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use 'sass:map';
         @use '~/styles/app.scss' as app;
 
@@ -65,7 +65,7 @@ import {Snippet} from "/src/components/snippet"
 
 <Snippet file={file} title={'Alert 2'} preview={true}>
     <Fragment slot="html">
-        ```
+        ```html
         <div class="alert" role="alert" style="--xii-alert-grid-template-columns: 1fr;">
             <div class="center">
                 <div>
@@ -86,7 +86,7 @@ import {Snippet} from "/src/components/snippet"
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $alert: app.get-theme(app.$theme, 'components.alert');

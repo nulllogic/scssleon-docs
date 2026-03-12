@@ -10,7 +10,7 @@ import {Snippet} from "~/components/snippet"
 ## Example
 <Snippet file={file} title={'Accordion 1'} preview={true}>
     <Fragment slot={'html'}>
-        ```
+        ```html
         <div class="accordion">
             <div class="item">
                 <h4 class="question">
@@ -62,7 +62,7 @@ import {Snippet} from "~/components/snippet"
         ```
     </Fragment>
     <Fragment slot={'scss'}>
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $accordion: app.get-theme(app.$theme, 'components.accordion');
@@ -76,7 +76,7 @@ import {Snippet} from "~/components/snippet"
         ```
     </Fragment>
     <Fragment slot={'js'}>
-        ```
+        ```js
         const accordion = (elements, options) => {
         const defaults = {
         accordion_item : ':scope > .item',

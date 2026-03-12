@@ -10,9 +10,9 @@ import {Snippet} from "/src/components/snippet"
 
 SCSSLeon includes several predefined button styles, each serving its own semantic purpose, with a few extras thrown in for more control.
 
-<Snippet file={file} title={'Buttons 1'} preview={true}>
+<Snippet title={'Buttons 1'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <button type="button" class="btn">Default</button>
         <button type="button" class="btn loading">Loading</button>
         <button type="button" class="btn" disabled>Disabled</button>
@@ -21,7 +21,7 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         @include app.generate-component(
@@ -36,9 +36,9 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
 
 ## Variations
 
-<Snippet file={file} title={'Button 2'} preview={true}>
+<Snippet title={'Button 2'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <button type="button" class="btn" style="--xii-button-background: red">Default</button>
         <button type="button" class="btn" style="--xii-button-background: green">Default</button>
         <button type="button" class="btn" style="--xii-button-background: blue">Default</button>
@@ -46,7 +46,7 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         @include app.generate-component(
@@ -63,7 +63,7 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
 
 <Snippet file={file} title={'Button 3'} preview={true}>
     <Fragment slot="html">
-        ```
+        ```html
         <a class="btn" href="#" role="button">Link</a>
         <button class="btn" type="submit">Button</button>
         <input class="btn" type="button" value="Input"/>
@@ -72,7 +72,7 @@ SCSSLeon includes several predefined button styles, each serving its own semanti
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         @include app.generate-component(

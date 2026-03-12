@@ -10,9 +10,9 @@ import {Snippet} from "/src/components/snippet"
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet file={file} title={'Button group 1'} preview={true}>
+<Snippet title={'Button group 1'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn">Left</button>
             <button type="button" class="btn">Middle</button>
@@ -21,7 +21,7 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $button: app.get-theme(app.$theme, 'components.button');
@@ -49,9 +49,9 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet file={file} title={'Button group 2'} preview={true}>
+<Snippet title={'Button group 2'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <div class="btn-group separated" role="group" aria-label="Basic example">
             <button type="button" class="btn">Left</button>
             <button type="button" class="btn">Middle</button>
@@ -60,7 +60,7 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $button: app.get-theme(app.$theme, 'components.button');

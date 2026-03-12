@@ -9,9 +9,9 @@ import {Snippet} from "/src/components/snippet"
 
 ## Examples
 
-<Snippet file={file} title={'Container 1'} preview={true}>
+<Snippet title={'Container 1'} preview={true} file={file}>
   <Fragment slot="html">
-      ```
+      ```html
       <div class="container xxl"
            style="background: oklch(0.5 0.07 142.54); color: white; padding: 10px;border-radius: .5rem;text-align: center;">
         XXL
@@ -19,7 +19,7 @@ import {Snippet} from "/src/components/snippet"
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       // ↓ Container
@@ -31,9 +31,9 @@ import {Snippet} from "/src/components/snippet"
   </Fragment>
 </Snippet>
 
-<Snippet file={file} title={'Container 2'} preview={true}>
+<Snippet title={'Container 2'} preview={true} file={file}>
   <Fragment slot="html">
-      ```
+      ```html
       <div class="container sm"
            style="background: oklch(0.5 0.07 142.54); color: white; padding: 10px;border-radius: .5rem;text-align: center;">
         SM
@@ -41,7 +41,7 @@ import {Snippet} from "/src/components/snippet"
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       // ↓ Container

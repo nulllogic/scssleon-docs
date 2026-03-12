@@ -230,6 +230,7 @@ export async function extractor(
     filePath: string,
     title: string,
 ): Promise<Record<string, string> | null> {
+    if(!filePath || filePath[0] == 'undefined') return;
     const content = await fs.readFile(filePath, 'utf8');
     return extractSnippetByTitle(content, title);
 }

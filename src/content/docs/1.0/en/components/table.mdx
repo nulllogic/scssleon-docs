@@ -12,9 +12,9 @@ Due to the widespread use of `<table>` elements across third-party widgets like 
 
 Using the most basic table markup, here's how `.table`-based tables look in xiigrid.
 
-<Snippet file={file} title={'Table 1'} preview={true}>
+<Snippet title={'Table 1'} preview={true} file={file}>
   <Fragment slot="html">
-      ```
+      ```html
       <table class="table">
         <thead class="top">
         <tr>
@@ -55,7 +55,7 @@ Using the most basic table markup, here's how `.table`-based tables look in xiig
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $table: app.get-theme(app.$theme, 'components.table');
@@ -72,9 +72,9 @@ Using the most basic table markup, here's how `.table`-based tables look in xiig
 
 ## Table striped
 
-<Snippet file={file} title={'Table 2'} preview={true}>
+<Snippet title={'Table 2'} preview={true} file={file}>
   <Fragment slot="html">
-      ```
+      ```html
       <table class="table stripe">
         <thead class="top">
         <tr>
@@ -115,7 +115,7 @@ Using the most basic table markup, here's how `.table`-based tables look in xiig
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $table: app.get-theme(app.$theme, 'components.table');

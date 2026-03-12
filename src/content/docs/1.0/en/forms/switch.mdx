@@ -8,9 +8,9 @@ import {Snippet} from "/src/components/snippet"
 
 ## Example
 
-<Snippet file={file} title={'Switch 1'} preview={true}>
+<Snippet title={'Switch 1'} preview={true} file={file}>
   <Fragment slot="html">
-      ```
+      ```html
       <div class="form">
         <div class="field">
           <div class="switcher">
@@ -36,7 +36,7 @@ import {Snippet} from "/src/components/snippet"
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $form: app.get-theme(app.$theme, 'components.form');

@@ -9,14 +9,14 @@ import {Snippet} from "/src/components/snippet"
 
 ## Example
 
-<Snippet file={file} title={'Loader 1'} preview={true}>
+<Snippet title={'Loader 1'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <icon-loader />
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $loader: app.get-theme(app.$theme, 'components.loader');
@@ -30,7 +30,7 @@ import {Snippet} from "/src/components/snippet"
         ```
     </Fragment>
     <Fragment slot="js">
-        ```
+        ```js
         customElements.define("icon-loader", class extends HTMLElement {
               connectedCallback() {
                 this.innerHTML = `<svg class="loader" width="40" height="40" class="" role="progressbar" aria-valuetext="Loading" viewBox="0 0 100 100" aria-label="Contents"><circle class="circle" cx="50" cy="50" r="45" fill="none"></circle></svg>`;

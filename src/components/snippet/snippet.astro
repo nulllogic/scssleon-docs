@@ -1,9 +1,6 @@
 ---
-import {CodeWrapper, Preview, Raw} from './'
-import {render} from 'astro:content'
-import {Code} from 'astro:components'
+import {Preview} from './'
 import {extractor} from './utils/extractor.ts';
-import { Prism } from '@astrojs/prism';
 
 // HTML
 const html_rendered = (await Astro.slots.render('html'));
@@ -27,7 +24,6 @@ const {
     scss = null,
     js = null
 } = await extractor(file, title);
-
 ---
 <div class:list={['snippet', single ? 'single' : '']}>
     <div class="preview-container">
@@ -202,7 +198,7 @@ const {
                         Astro.slots.has('html') && (
                                     <div class="tab active">
                                         <div class="code">
-                                            <Prism lang="html" code={html} />
+                                            <div set:html={html_rendered}></div>
                                         </div>
                                     </div>
                         )
@@ -211,7 +207,7 @@ const {
                         Astro.slots.has('scss') && (
                                     <div class="tab">
                                         <div class="code">
-                                            <Prism lang="scss" code={scss} />
+                                            <div set:html={scss_rendered}></div>
                                         </div>
                                     </div>
                         )
@@ -220,7 +216,7 @@ const {
                         Astro.slots.has('js') && (
                                     <div class="tab">
                                         <div class="code">
-                                            <Prism lang="js" code={js} />
+                                            <div set:html={js_rendered}></div>
                                         </div>
                                     </div>
                         )

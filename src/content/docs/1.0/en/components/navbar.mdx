@@ -11,9 +11,9 @@ import {Snippet} from "/src/components/snippet"
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet file={file} title={'Navbar 1'} preview={true}>
+<Snippet title={'Navbar 1'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <nav class="navbar">
             <div class="left">
                 <ul class="nav horizontal">
@@ -50,7 +50,7 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $nav: app.get-theme(app.$theme, 'components.nav');
@@ -77,9 +77,9 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
 ## Centered navbar example
 
 
-<Snippet file={file} title={'Navbar 2'} preview={true}>
+<Snippet title={'Navbar 2'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <nav class="navbar" style="--xii-navbar-grid-template-columns: 1fr 100px 1fr">
             <div class="left">
                 <ul class="nav horizontal">
@@ -114,7 +114,7 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $nav: app.get-theme(app.$theme, 'components.nav');

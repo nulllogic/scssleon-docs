@@ -9,9 +9,9 @@ import {Snippet} from "/src/components/snippet"
 
 ## Examples
 
-<Snippet file={file} title={'Content 1'} preview={true}>
+<Snippet title={'Content 1'} preview={true} file={file}>
   <Fragment slot={'html'}>
-    ```
+    ```html
     <div class="content">
       <h1>Example heading H1</h1>
       <h2>Example heading H2</h2>
@@ -129,7 +129,7 @@ p q r s t u v w x y z | ~ </pre>
     ```
   </Fragment>
   <Fragment slot={'scss'}>
-    ```
+    ```scss
     @use '~/styles/app.scss' as app;
 
     // ↓ Amazing content

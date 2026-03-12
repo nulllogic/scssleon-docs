@@ -11,9 +11,9 @@ import {Snippet} from "/src/components/snippet"
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet file={file} title={'Nav 1'} preview={true}>
+<Snippet title={'Nav 1'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <ul class="nav horizontal">
             <li class="item">
                 <a class="link active" aria-current="page" href="#">Active</a>
@@ -31,7 +31,7 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $nav: app.get-theme(app.$theme, 'components.nav');
@@ -50,9 +50,9 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
 
 Wrap a series of buttons with `.btn` in `.btn-group`.
 
-<Snippet file={file} title={'Nav 2'} preview={true}>
+<Snippet title={'Nav 2'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <ul class="nav vertical">
             <li class="item">
                 <a class="link active" aria-current="page" href="#">Active</a>
@@ -70,7 +70,7 @@ Wrap a series of buttons with `.btn` in `.btn-group`.
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use "~/styles/app.scss" as app;
 
         $nav: app.get-theme(app.$theme, 'components.nav');

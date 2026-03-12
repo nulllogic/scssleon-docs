@@ -13,9 +13,9 @@ Placeholders can be used to enhance the experience of your application. They're 
 ## Example
 
 In the example below, we take a typical card component and recreate it with placeholders applied to create a "loading card". Size and proportions are the same between the two.
-<Snippet file={file} title={'Placeholder 1'} preview={true}>
+<Snippet title={'Placeholder 1'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <div class="placeholder" aria-hidden="true">
             <span class="el"></span>
             <span class="el"></span>
@@ -26,7 +26,7 @@ In the example below, we take a typical card component and recreate it with plac
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $placeholder: app.get-theme(app.$theme, 'components.placeholder');
@@ -45,9 +45,9 @@ In the example below, we take a typical card component and recreate it with plac
 
 You can change the `width` through grid column classes, width utilities, or inline styles.
 
-<Snippet file={file} title={'Placeholder 2'} preview={true}>
+<Snippet title={'Placeholder 2'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <div class="placeholder" aria-hidden="true">
             <span class="el"></span>
             <span class="el"></span>
@@ -56,7 +56,7 @@ You can change the `width` through grid column classes, width utilities, or inli
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $placeholder: app.get-theme(app.$theme, 'components.placeholder');
@@ -75,9 +75,9 @@ You can change the `width` through grid column classes, width utilities, or inli
 
 Animate placeholders with `.glow` or `.wave` to better convey the perception of something being _actively_ loaded.
 
-<Snippet file={file} title={'Placeholder 3'} preview={true}>
+<Snippet title={'Placeholder 3'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <p class="placeholder glow">
             <span class="el"></span>
             <span class="el"></span>
@@ -86,7 +86,7 @@ Animate placeholders with `.glow` or `.wave` to better convey the perception of 
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $placeholder: app.get-theme(app.$theme, 'components.placeholder');
@@ -101,9 +101,9 @@ Animate placeholders with `.glow` or `.wave` to better convey the perception of 
     </Fragment>
 </Snippet>
 
-<Snippet file={file} title={'Placeholder 4'} preview={true}>
+<Snippet title={'Placeholder 4'} preview={true} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <p class="placeholder wave">
             <span class="el"></span>
             <span class="el"></span>
@@ -112,7 +112,7 @@ Animate placeholders with `.glow` or `.wave` to better convey the perception of 
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $placeholder: app.get-theme(app.$theme, 'components.placeholder');

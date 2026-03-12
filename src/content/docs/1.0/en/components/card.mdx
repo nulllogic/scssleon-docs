@@ -9,16 +9,16 @@ import {Snippet} from "/src/components/snippet"
 
 ## Examples
 
-<Snippet file={file} title={'Card 1'} preview={true}>
+<Snippet title={'Card 1'} preview={true} file={file} >
     <Fragment slot="html">
-        ```
+        ```html
         <div class="card">
           123
         </div>
         ```
     </Fragment>
     <Fragment slot="scss">
-        ```
+        ```scss
         @use '~/styles/app.scss' as app;
 
         $card: app.get-theme(app.$theme, 'components.card');

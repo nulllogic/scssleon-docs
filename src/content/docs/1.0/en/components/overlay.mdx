@@ -6,16 +6,16 @@ toc: true
 ---
 import {Snippet} from "/src/components/snippet"
 
-<Snippet file={file} title={'Overlay 1'} preview={true} min_height={350}>
+<Snippet title={'Overlay 1'} preview={true} min_height={350} file={file}>
   <Fragment slot="html">
-      ```
+      ```html
       <div class="overlay show">
         123
       </div>
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $overlay: app.get-theme(app.$theme, 'components.overlay');
@@ -30,16 +30,16 @@ import {Snippet} from "/src/components/snippet"
   </Fragment>
 </Snippet>
 
-<Snippet file={file} title={'Overlay 2'} preview={true} min_height={350}>
+<Snippet title={'Overlay 2'} preview={true} min_height={350} file={file}>
   <Fragment slot="html">
-      ```
+      ```html
       <div class="overlay show blurred">
         123
       </div>
       ```
   </Fragment>
   <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       $overlay: app.get-theme(app.$theme, 'components.overlay');

@@ -9,9 +9,9 @@ import {Snippet} from '/src/components/snippet';
 
 ## Example
 
-<Snippet file={file} title={'Megamenu 1'} preview={true} min_height={250}>
+<Snippet title={'Megamenu 1'} preview={true} min_height={250} file={file}>
   <Fragment slot="html">
-    ```
+    ```html
     <div class="header">
       <div class="has-megamenu on-hover">
         <div class="navbar">
@@ -49,7 +49,7 @@ import {Snippet} from '/src/components/snippet';
     ```
   </Fragment>
   <Fragment slot="scss">
-    ```
+    ```scss
     @use '~/styles/app.scss' as app;
 
     // Load megamenu component with some extra components

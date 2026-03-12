@@ -5,8 +5,7 @@ import path from 'path'
 const { min_height } = Astro.props
 
 let iframe_scripts = Astro.slots.has('js') ? (await Astro.slots.render(
-  'js')).replace(/^<div[^>]*>|<\/div>$/g,
-  '') : ''
+  'js')) : '';
 
 const scss_importes = [
   {
@@ -230,14 +229,14 @@ const iframe_wrapper_style = await sass.compileStringAsync(`
 `, { importers: scss_importes })
 
 if (Astro.slots.has('scss')) {
-  // const scss = (await Astro.slots.render('scss')).replace(
-  //   /^<div[^>]*>|<\/div>$/g, '')
-  // const scss_compiled = await sass.compileStringAsync(scss,
-  //   { importers: scss_importes })
-  //
-  // srcdoc += `<style>
-  //       ${scss_compiled.css}
-  //   </style>`
+  const scss = (await Astro.slots.render('scss')).replace(
+    /^<div[^>]*>|<\/div>$/g, '');
+  const scss_compiled = await sass.compileStringAsync(scss,
+    { importers: scss_importes });
+
+  srcdoc += `<style>
+        ${scss_compiled.css}
+    </style>`
 }
 
 srcdoc += `<style>
@@ -254,8 +253,7 @@ srcdoc += '<div class="background"></div>'
 srcdoc += '<div class="wrapper">'
 
 if (Astro.slots.has('html')) {
-  srcdoc += (await Astro.slots.render('html')).replace(/^<div[^>]*>|<\/div>$/g,
-    '')
+  srcdoc += (await Astro.slots.render('html'));
 }
 
 srcdoc += '</div>'

@@ -8,9 +8,9 @@ import {Snippet} from "/src/components/snippet"
 
 ## Example
 
-<Snippet file={file} title={'Modal 1'} preview={true} min_height={450}>
+<Snippet title={'Modal 1'} preview={true} min_height={450} file={file}>
   <Fragment slot="html">
-    ```
+    ```html
     <div class="overlay show">
       <a href="#" onclick="event.preventDefault();modals.open(modals.elements[0])">Toggle Modal component</a>
       <dialog class="modal" role="alert">
@@ -38,7 +38,7 @@ import {Snippet} from "/src/components/snippet"
     ```
   </Fragment>
   <Fragment slot="scss">
-    ```
+    ```scss
     @use '~/styles/app.scss' as app;
 
     $overlay: app.get-theme(app.$theme, 'components.overlay');
@@ -70,7 +70,7 @@ import {Snippet} from "/src/components/snippet"
     ```
   </Fragment>
   <Fragment slot={'js'}>
-    ```
+    ```js
     const modal = (elements, options) => {
 
     const defaults = {

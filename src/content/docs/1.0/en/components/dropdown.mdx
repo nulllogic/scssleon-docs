@@ -9,9 +9,9 @@ import {Snippet} from "/src/components/snippet"
 
 ## Examples
 
-<Snippet file={file} title={'Dropdown 1'} preview={true} min_height={250}>
+<Snippet title={'Dropdown 1'} preview={true} min_height={250} file={file}>
     <Fragment slot="html">
-        ```
+        ```html
         <div class="has-dropdown on-hover">
             <a href="#" class="btn toggle" type="button" aria-expanded="false">
                 Dropdown button <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
@@ -58,7 +58,7 @@ import {Snippet} from "/src/components/snippet"
         ```
     </Fragment>
     <Fragment slot="scss">
-      ```
+      ```scss
       @use '~/styles/app.scss' as app;
 
       // Load dropdown component
