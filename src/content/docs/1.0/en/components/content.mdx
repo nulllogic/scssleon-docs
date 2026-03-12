@@ -27,8 +27,10 @@ import {Snippet} from "/src/components/snippet"
       <h6>Heading 6</h6>
 
       <blockquote>
-        <p>A block quotation (also known as a long quotation or extract) is a quotation in a written document, that is set off from the main text as a paragraph, or block of text.</p>
-        <p>It is typically distinguished visually using indentation and a different typeface or smaller size quotation. It may or may not include a citation, usually placed at the bottom.</p>
+        <p>A block quotation (also known as a long quotation or extract) is a quotation in a written document, that is
+          set off from the main text as a paragraph, or block of text.</p>
+        <p>It is typically distinguished visually using indentation and a different typeface or smaller size quotation.
+          It may or may not include a citation, usually placed at the bottom.</p>
         <cite><a href="#">Said no one, ever.</a></cite>
       </blockquote>
 
@@ -85,13 +87,17 @@ import {Snippet} from "/src/components/snippet"
       <p>The <b>b element</b> is stylistically different text from normal text, without any special importance.</p>
       <p>The <i>i element</i> is text that is offset from the normal text.</p>
       <p>The <u>u element</u> is text with an unarticulated, though explicitly rendered, non-textual annotation.</p>
-      <p><del>This text is deleted</del> and <ins>This text is inserted</ins>.</p>
+      <p>
+        <del>This text is deleted</del>
+        and <ins>This text is inserted</ins>.
+      </p>
       <p><s>This text has a strikethrough</s>.</p>
       <p>Superscript<sup>®</sup>.</p>
       <p>Subscript for things like H<sub>2</sub>O.</p>
       <p><small>This small text is small for fine print, etc.</small></p>
       <p>Abbreviation: <abbr title="HyperText Markup Language">HTML</abbr></p>
-      <p><q cite="https://developer.mozilla.org/en-US/docs/HTML/Element/q">This text is a short inline quotation.</q></p>
+      <p><q cite="https://developer.mozilla.org/en-US/docs/HTML/Element/q">This text is a short inline quotation.</q>
+      </p>
       <p><cite>This is a citation.</cite></p>
       <p>The <dfn>dfn element</dfn> indicates a definition.</p>
       <p>The <mark>mark element</mark> indicates a highlight.</p>
@@ -100,18 +106,20 @@ import {Snippet} from "/src/components/snippet"
 
       <details>
         <summary>Expand for details</summary>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, odio! Odio natus ullam ad quaerat, eaque necessitatibus, aliquid distinctio similique voluptatibus dicta consequuntur animi. Quaerat facilis quidem unde eos! Ipsa.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, odio! Odio natus ullam ad quaerat, eaque
+          necessitatibus, aliquid distinctio similique voluptatibus dicta consequuntur animi. Quaerat facilis quidem
+          unde eos! Ipsa.</p>
       </details>
 
       <address>
-        Written by <a href="mailto:webmaster@example.com">Jon Doe</a>.<br />
-        Visit us at:<br />
-        Example.com<br />
-        Box 564, Disneyland<br />
+        Written by <a href="mailto:webmaster@example.com">Jon Doe</a>.<br/>
+        Visit us at:<br/>
+        Example.com<br/>
+        Box 564, Disneyland<br/>
         USA
       </address>
 
-      <hr />
+      <hr/>
 
       <p><strong>Keyboard input:</strong> <kbd>Cmd</kbd></p>
       <p><strong>Inline code:</strong> <code>&lt;div&gt;code&lt;/div&gt;</code></p>
@@ -135,8 +143,8 @@ p q r s t u v w x y z | ~ </pre>
     // ↓ Amazing content
     // Special class `.content` to allow formatting of the default html tags
     @use '@nulllogic/scssleon/scss/content' with (
-      $config: app.$config,
-      $theme: app.$theme
+    $config: app.$config,
+    $theme: app.$theme
     );
     ```
   </Fragment>

@@ -5,8 +5,6 @@ const {url, min_height} = Astro.props
 const html = await Astro.slots.render('html');
 const scss = await Astro.slots.render('scss');
 const js = await Astro.slots.render('js');
-
-console.log(html);
 ---
 <div>
     <Iframe min_height={Astro.props?.min_height}>
