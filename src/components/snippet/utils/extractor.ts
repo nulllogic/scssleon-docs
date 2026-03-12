@@ -104,12 +104,16 @@ function parseTitleAttr(attrs: string): string | null {
 function parseSnippetContent(body: string): Record<string, string> {
     const result: Record<string, string> = {};
 
-    // Walk through every <Fragment slot="…"> in the body
-    const fragOpenRe = /<Fragment\s+slot="([^"]+)"[^>]*>/g;
+    // Walk through every <Fragment slot="…"> in the body.
+    // Handles all valid quoting styles:
+    //   slot="html"   (plain double-quotes)
+    //   slot='html'   (plain single-quotes)
+    //   slot={'html'} slot={"html"} slot={`html`}  (JSX expression)
+    const fragOpenRe = /<Fragment\s+slot=(?:"([^"]+)"|'([^']+)'|\{['"`]([^'"`]+)['"`]\})[^>]*>/g;
     let fm: RegExpExecArray | null;
 
     while ((fm = fragOpenRe.exec(body)) !== null) {
-        const slot = fm[1];
+        const slot = fm[1] ?? fm[2] ?? fm[3];
         const afterFragOpen = fm.index + fm[0].length;
 
         // Find the matching </Fragment>
@@ -230,7 +234,7 @@ export async function extractor(
     filePath: string,
     title: string,
 ): Promise<Record<string, string> | null> {
-    if(!filePath || filePath[0] == 'undefined') return;
+    if(!filePath || filePath[0] == 'undefined') return null;
     const content = await fs.readFile(filePath, 'utf8');
     return extractSnippetByTitle(content, title);
 }
