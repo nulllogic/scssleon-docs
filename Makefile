@@ -12,10 +12,10 @@ build:
 	docker build -t scssleon-docs .
 
 watch:
-	@echo "[✨ \033[0;32mRunning\033[0m Docker 🐳 SCSSLEON 🦎 docs]"
-	docker run --rm -it -v ${CURRENT_DIR}:/app scssleon-docs npm i
+	@echo "✨ \033[0;32mRunning\033[0m Docker 🐳 SCSSLEON 🦎 docs"
+	docker run --rm -it -v ${CURRENT_DIR}:/app scssleon-docs npm i --force
 	docker run --rm -it \
 			-e ASTRO_TELEMETRY_DISABLED=1 \
 			-v ${CURRENT_DIR}:/app \
 			-v ${SCSSLEON_DIR}/scss:/app/src/styles/scss \
-			-p 4321:4321 scssleon-docs npm run dev
+			-p 8080:8080 scssleon-docs npm run dev -- --port 8080

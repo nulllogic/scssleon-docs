@@ -25,8 +25,7 @@ export default defineConfig({
   compressHTML: true,
   output: 'static',
   security: {
-    checkOrigin: true,
-    csp: true
+    checkOrigin: true
   },
   server: {
     host: true,
@@ -49,8 +48,5 @@ export default defineConfig({
         dark: 'github-dark-default',
       },
     },
-  },
-  experimental: {
-    rustCompiler: true
   }
 })
