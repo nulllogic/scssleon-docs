@@ -21,7 +21,6 @@ const package_info = await package_response.json()
 ---
 <Index>
     <main>
-
         <section class="welcome">
             <div class="top_bg_glow"/>
             <div class="container xxl">
@@ -46,7 +45,11 @@ const package_info = await package_response.json()
 
                 <div class="grid">
                     <div>
-                        1
+                        <Snippet inline={true} title={'🎐 Intro (ﾉ◕ヮ◕)ﾉ*-✧'}>
+                            <Fragment slot={'code'} lang={'sh'} oneline={true}>
+                                npm i @nulllogic/scssleon@latest
+                            </Fragment>
+                        </Snippet>
                     </div>
                     <div>
                         <a href={generate_rel_link(Astro,
@@ -308,7 +311,7 @@ const package_info = await package_response.json()
 
   $welcome-section: (
     --padding: 3rem,
-    padding-inline: var(global(--padding-inline)),
+    padding-inline: var(--padding-inline),
     background: var(--background),
     padding-block: var(--padding),
     text-align: center,

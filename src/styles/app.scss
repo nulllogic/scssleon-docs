@@ -1,8 +1,11 @@
 @use 'sass:map';
 @use 'sass:string';
 
-@forward '@nulllogic/scssleon/scss/mixins';
-@forward '@nulllogic/scssleon/scss/functions';
+//@forward '@nulllogic/scssleon/scss/mixins';
+//@forward '@nulllogic/scssleon/scss/functions';
+
+@forward '~/styles/scss/mixins';
+@forward '~/styles/scss/functions';
 
 @use '@nulllogic/scssleon/scss/config.scss' as config with (
   $config: (

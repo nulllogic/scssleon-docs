@@ -1,20 +1,20 @@
 ---
 // accept the href prop from the MDX file
-const { href }: Record<string, any> = Astro.props
+const { href }: Record<string, any> = Astro.props;
 
-const domain = import.meta.env.site // pulls from astro.config.mjs
-let attr: { target?: string; rel?: string; class?: string } = {}
+const domain = import.meta.env.site; // pulls from astro.config.mjs
+let attr: { target?: string; rel?: string; class?: string } = {};
 
 // check if the link is external
 const is_external = (href && !href.includes(domain) && !href.startsWith('/') &&
-  !href.startsWith('#'))
+  !href.startsWith('#'));
 if (is_external) {
   // if it is, add target="_blank" and rel="noopener noreferrer"
-  attr['target'] = '_blank'
-  attr['rel'] = 'noopener noreferrer'
+  attr['target'] = '_blank';
+  attr['rel'] = 'noopener noreferrer';
 }
 
-const { class: className, ...rest } = Astro.props
+const { class: className, ...rest } = Astro.props;
 ---
 <a href={href} {...attr} class:list={['link', className]} {...rest}>
     <slot/>
@@ -43,13 +43,10 @@ const { class: className, ...rest } = Astro.props
     gap: 1px,
     line-height: 1,
     text-decoration: underline,
+    text-underline-offset: 3px,
+    text-decoration-thickness: 1px,
   );
 
-  @include app.generate-component(
-      $link,
-      'link',
-      app.$config,
-      app.$theme
-  );
+  @include app.generate-component($link, 'link', app.$config, app.$theme);
 
 </style>

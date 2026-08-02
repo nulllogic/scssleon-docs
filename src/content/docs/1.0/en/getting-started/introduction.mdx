@@ -5,24 +5,20 @@ category: getting-started
 toc: true
 visible: false
 ---
-import { CodeWrapper, Raw, Snippet } from "/src/components/snippet"
+import { Snippet } from "/src/components/snippet"
 
 <Snippet file={file} inline={true} title={'🎐 Intro (ﾉ◕ヮ◕)ﾉ*-✧'}>
-  <Fragment slot={'code'}>
-    <CodeWrapper lang={'scss'}>
-        ```
-        @use '~/src/styles/app.scss' as app; [!code highlight]
+  <Fragment slot={'code'} lang={'scss'}>
+      @use '~/src/styles/app.scss' as app; [!code highlight]
 
-        $accordion: app.get-theme(app.$theme, 'components.accordion'); // [\!code focus]
+      $accordion: app.get-theme(app.$theme, 'components.accordion'); // [\!code focus]
 
-        @include app.generate-component(
-          $accordion,
-          'accordion',
-          app.$config,
-          app.$theme
-        );
-        ```
-    </CodeWrapper>
+      @include app.generate-component(
+        $accordion,
+        'accordion',
+        app.$config,
+        app.$theme
+      );
   </Fragment>
 </Snippet>
 

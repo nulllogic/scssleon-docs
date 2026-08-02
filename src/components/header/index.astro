@@ -1,12 +1,15 @@
 ---
-import Logo from '../logo/index.astro'
-import { generate_rel_link } from '~/utils/links'
-const {title, category} = Astro.props;
+import Logo from '../logo/index.astro';
+import { generate_rel_link } from '~/utils/links';
+const { title, category } = Astro.props;
 ---
 
 <div class="header">
-    <div class:list={['top',
-      (import.meta.env.PROD ? Astro.url.pathname === import.meta.env.BASE_URL : Astro.url.pathname === '/') ? 'is-homepage' : '']}>
+    <div class:list={[
+      'top',
+      (import.meta.env.PROD
+        ? Astro.url.pathname === import.meta.env.BASE_URL
+        : Astro.url.pathname === '/') ? 'is-homepage' : '']}>
         <div class="container xxl">
             <header class="navbar">
                 <div style="display: inline-flex;gap: 15px;">
@@ -100,7 +103,9 @@ const {title, category} = Astro.props;
             </header>
         </div>
     </div>
-  {(import.meta.env.PROD ? Astro.url.pathname !== import.meta.env.BASE_URL : Astro.url.pathname !== '/') && (
+  {(import.meta.env.PROD
+    ? Astro.url.pathname !== import.meta.env.BASE_URL
+    : Astro.url.pathname !== '/') && (
           <div class="bottom">
               <div class="container">
                   <nav aria-label="breadcrumb">
@@ -117,7 +122,9 @@ const {title, category} = Astro.props;
                               </a>
                           </li>
                           <li class="item" aria-current="page"
-                              style="margin-left: .75rem;">{category ? category : ''}
+                              style="margin-left: .75rem;">{category
+                            ? category
+                            : ''}
                           </li>
                           <li class="item">
                               <svg width="17" height="17"
@@ -130,7 +137,9 @@ const {title, category} = Astro.props;
                                         clip-rule="evenodd"/>
                               </svg>
                           </li>
-                          <li class="item active" aria-current="page">{title ? title.split('|')[0].trim() : ''}
+                          <li class="item active" aria-current="page">{title
+                            ? title.split('|')[0].trim()
+                            : ''}
                           </li>
                       </ul>
                   </nav>
@@ -222,12 +231,12 @@ const {title, category} = Astro.props;
   );
 
   $navbar: (
-    --navbar-grid-template-columns: auto auto,
+    --grid-template-columns: auto auto,
     _subclasses : (
       ':nth-child(1)' : (
         _subclasses : (
           '.nav' : (
-            --nav-gap : 15px,
+            --gap : 15px,
             _subclasses : (
               '&.menu' : (
                 display: none,
@@ -245,7 +254,7 @@ const {title, category} = Astro.props;
         justify-self: end,
         _subclasses : (
           '.nav' : (
-            --nav-gap : .825rem,
+            --gap : .825rem,
             _subclasses : (
               '&.menu' : (
                 _subclasses : (
@@ -298,7 +307,7 @@ const {title, category} = Astro.props;
         border-bottom: var(--border),
         box-shadow: none,
         /***/
-        padding-inline: var(global(--padding-inline)),
+        padding-inline: var(--padding-inline),
         padding-block: 7px,
         /***/
         _responsive : (
@@ -321,7 +330,7 @@ const {title, category} = Astro.props;
         display: block,
         border-bottom: var(--border),
         /***/
-        padding-inline: var(global(--padding-inline)),
+        padding-inline: var(--padding-inline),
         padding-block: 10px 10px,
         box-shadow: var(--shadow),
         /***/
@@ -340,13 +349,7 @@ const {title, category} = Astro.props;
     ),
   );
 
-  @include app.generate-component(
-      $header-section,
-      'header',
-      app.$config,
-      app.$theme,
-      (variable: (exclude : ('nav', 'navbar')))
-  );
+  @include app.generate-component($header-section, 'header', app.$config, app.$theme);
 </style>
 
 <script type="text/javascript">
@@ -355,9 +358,9 @@ const {title, category} = Astro.props;
 
   function stickyNavigation () {
     if (window.scrollY > navTop) {
-      nav.classList.add('sticky')
+      nav.classList.add('sticky');
     } else {
-      nav.classList.remove('sticky')
+      nav.classList.remove('sticky');
     }
   }
 
@@ -374,22 +377,22 @@ const {title, category} = Astro.props;
 
       light_dark_toggler.classList.add('clicked');
 
-      const current_theme = document.documentElement.getAttribute('data-theme')
-      const new_theme = current_theme === 'dark' ? 'light' : 'dark'
-      document.documentElement.setAttribute('data-theme', new_theme)
+      const current_theme = document.documentElement.getAttribute('data-theme');
+      const new_theme = current_theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', new_theme);
 
       document.body.classList.add('preload');
-      localStorage.setItem('theme', new_theme)
+      localStorage.setItem('theme', new_theme);
       setTimeout(() => {
         document.body.classList.remove('preload');
-      }, 200)
+      }, 200);
       const event = new CustomEvent('theme_change', {
         detail: {
           theme: new_theme,
         },
-      })
+      });
       document.dispatchEvent(event);
-    })
+    });
   }
 
   const nav = document.querySelector('.header');
@@ -407,7 +410,7 @@ const {title, category} = Astro.props;
       document.getElementById('main_mobile_menu').classList.toggle('show');
       document.body.toggleAttribute('scroll-lock');
     }
-  }))
+  }));
 
 </script>
 

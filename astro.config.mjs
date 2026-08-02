@@ -1,31 +1,42 @@
-import path, { dirname } from 'path'
-import { fileURLToPath } from 'url'
+import path, {dirname} from 'path';
+import {fileURLToPath} from 'url';
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-import { defineConfig } from 'astro/config'
+import {defineConfig} from 'astro/config';
 
-import preact from '@astrojs/preact'
-import mdx from '@astrojs/mdx'
-import sitemap from '@astrojs/sitemap'
+import preact from '@astrojs/preact';
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 
-import {iframe} from './src/utils/integrations/iframe'
+import {unified, rehypeHeadingIds} from '@astrojs/markdown-remark';
+
+import {iframe} from './src/utils/integrations/iframe';
 
 export default defineConfig({
   site: 'https://nulllogic.github.io',
   // adding sub directory ( it's required for github pages )
   base: import.meta.env.PROD ? '/scssleon-docs' : '',
-  integrations: [mdx(), sitemap(), preact(), iframe(), (await import('astro-compress')).default({
-    CSS: true,
-    HTML: true,
-    SVG: true,
-  })],
+  integrations: [
+    mdx({
+      processor: unified({
+        rehypePlugins: [rehypeHeadingIds],
+      }),
+    }),
+    sitemap(),
+    preact(),
+    iframe(),
+    (await import('astro-compress')).default({
+      CSS: true,
+      HTML: true,
+      SVG: true,
+    })],
   prefetch: true,
   compressHTML: true,
   output: 'static',
   security: {
-    checkOrigin: true
+    checkOrigin: true,
   },
   server: {
     host: true,
@@ -39,14 +50,5 @@ export default defineConfig({
         '~': path.resolve(__dirname, './src'),
       },
     },
-  },
-  markdown: {
-    shikiConfig: {
-      defaultColor: false,
-      themes: {
-        light: 'min-light',
-        dark: 'github-dark-default',
-      },
-    },
   }
-})
+});
