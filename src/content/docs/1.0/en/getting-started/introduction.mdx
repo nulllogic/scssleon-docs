@@ -7,18 +7,21 @@ visible: false
 ---
 import { Snippet } from "/src/components/snippet"
 
-<Snippet file={file} inline={true} title={'🎐 Intro (ﾉ◕ヮ◕)ﾉ*-✧'}>
-  <Fragment slot={'code'} lang={'scss'}>
-      @use '~/src/styles/app.scss' as app; [!code highlight]
+<Snippet file={file} inline={true} title={'🎐 Intro (ﾉ◕ヮ◕)ﾉ*-✧'} lang={'scss'}>
+  <Fragment slot={'code'}>
+      ```
+      @use '~/src/styles/app.scss' as app; // [!code highlight]
 
-      $accordion: app.get-theme(app.$theme, 'components.accordion'); // [\!code focus]
-
+      // [!code highlight]
+      $accordion: app.get-theme(app.$theme, 'components.accordion');
+      // [!code highlight]
       @include app.generate-component(
-        $accordion,
+        $accordion, // [!code ++]
         'accordion',
         app.$config,
         app.$theme
       );
+      ```
   </Fragment>
 </Snippet>
 
