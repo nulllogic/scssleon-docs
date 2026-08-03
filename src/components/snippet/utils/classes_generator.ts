@@ -28,8 +28,50 @@ const scss_importes = [
 
 export async function snippet_classes () {
   let compiled_css = '';
+
+  const base_style = await sass.compileStringAsync(`
+  @use 'sass:list';
+  @use 'sass:meta';
+
+  @use '~/styles/app.scss' as app;
+
+  // ↓ Root
+  @use '@nulllogic/scssleon/scss/root' with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
+
+  // Great reset
+  @use '@nulllogic/scssleon/scss/reset' with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
+
+  // Base
+  // Special utility, that will dynamically generate CSS
+  // properties for HTML tags, specified in theme
+  @use '@nulllogic/scssleon/scss/base' with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
+  
+  // ↓ Buttons
+  @use '~/styles/scss/components/button' with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
+`, { importers: scss_importes });
+
+  const host_wrapper = await sass.compileStringAsync(`
+  :host {
+    ${base_style.css}
+  }
+`, { importers: scss_importes });
+
+  compiled_css += host_wrapper.css;
+
   const output = await sass.compileStringAsync(`
-  .outline {
+  :host(.outline) {
     body { outline: 1px solid #2980b9 !important; }
     article { outline: 1px solid #3498db !important; }
     nav { outline: 1px solid #0088c3 !important; }
@@ -131,48 +173,7 @@ export async function snippet_classes () {
     wbr { outline: 1px solid #db175b !important; }
   }
 `);
-  compiled_css = output.css;
 
-  const base_style = await sass.compileStringAsync(`
-  @use 'sass:list';
-  @use 'sass:meta';
-
-  @use '~/styles/app.scss' as app;
-
-  // ↓ Root
-  @use '@nulllogic/scssleon/scss/root' with (
-    $config: app.$config,
-    $theme: app.$theme
-  );
-
-  // Great reset
-  @use '@nulllogic/scssleon/scss/reset' with (
-    $config: app.$config,
-    $theme: app.$theme
-  );
-
-  // Base
-  // Special utility, that will dynamically generate CSS
-  // properties for HTML tags, specified in theme
-  @use '@nulllogic/scssleon/scss/base' with (
-    $config: app.$config,
-    $theme: app.$theme
-  );
-
-  // ↓ Amazing content
-  // Special class \`.content\` to allow formatting of the default html tags
-  @use '@nulllogic/scssleon/scss/content' with (
-    $config: app.$config,
-    $theme: app.$theme
-  );
-  
-  // ↓ Buttons
-  @use '~/styles/scss/components/button' with (
-    $config: app.$config,
-    $theme: app.$theme
-  );
-`, { importers: scss_importes });
-
-  compiled_css += base_style.css;
+  compiled_css += output.css;
   return compiled_css;
 }
