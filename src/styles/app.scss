@@ -7,7 +7,7 @@
 @forward '~/styles/scss/mixins';
 @forward '~/styles/scss/functions';
 
-@use '@nulllogic/scssleon/scss/config.scss' as config with (
+@use '~/styles/scss/config.scss' as config with (
   $config: (
     prefix: "xii",
     enable: (
@@ -16,7 +16,7 @@
   )
 );
 
-@use '@nulllogic/scssleon/scss/themes/default.scss' as theme with (
+@use '~/styles/scss/themes/default.scss' as theme with (
   $config : config.$config,
   $theme: (
     root : (

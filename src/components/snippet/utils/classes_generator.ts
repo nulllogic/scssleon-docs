@@ -34,32 +34,68 @@ export async function snippet_classes () {
   @use 'sass:list';
   @use 'sass:meta';
 
-  @use '~/styles/app.scss' as app;
+  @forward '~/styles/scss/mixins';
+  @forward '~/styles/scss/functions';
 
-  // ↓ Root
-  @use '@nulllogic/scssleon/scss/root' with (
-    $config: app.$config,
-    $theme: app.$theme
+  @use '~/styles/scss/config.scss' as config with (
+    $config: (
+      prefix: "xii",
+      enable: (
+        web_components: true
+      ),
+    )
   );
+  
+  @use '~/styles/scss/themes/default.scss' as theme with (
+    $config : config.$config,
+    $theme: (
+      root : (
+        scroll-timeline: --page-scroll y,
+        --padding-inline: 1rem 1rem,
+        _responsive : (
+          xxl: (
+            --padding-inline: 0,
+          )
+        )
+      ),
+      html : (
+        body : (
+          _colors: (
+            light : (
+              background : rgb(244, 244, 244),
+              color: rgb(28, 29, 31),
+            ),
+            dark : (
+              background : rgb(5, 17, 4),
+              color: '#ccc'
+            )
+          )
+        )
+      )
+    )
+  );
+  
+  $config: config.$config;
+  $theme: theme.$theme;
 
   // Great reset
-  @use '@nulllogic/scssleon/scss/reset' with (
-    $config: app.$config,
-    $theme: app.$theme
+  @use '~/styles/scss/reset' with (
+    $config: $config,
+    $theme: $theme
   );
 
   // Base
   // Special utility, that will dynamically generate CSS
   // properties for HTML tags, specified in theme
-  @use '@nulllogic/scssleon/scss/base' with (
-    $config: app.$config,
-    $theme: app.$theme
+  @use '~/styles/scss/base' with (
+    $config: $config,
+    $theme: $theme
   );
   
   // ↓ Buttons
   @use '~/styles/scss/components/button' with (
-    $config: app.$config,
-    $theme: app.$theme
+    $config: $config,
+    $theme: $theme
   );
 `, { importers: scss_importes });
 

@@ -116,7 +116,7 @@ const snippet_classes_css = await snippet_classes();
       
       <div class="code-wrapper">
             <slot part="code" name="code"></slot>
-            <a class="clipboard has-tooltip btn" href="#" type="button" style="--xii-padding: 0.25rem;">
+            <a class="clipboard has-tooltip btn" href="#" type="button" style="--xii-padding: 0.25rem 0.5rem;font-size: 0.925rem;gap: 5px;">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      width="16"
                      height="16" viewBox="0 0 24 24"
@@ -137,9 +137,7 @@ const snippet_classes_css = await snippet_classes();
                           clip-rule="evenodd"></path>
                     <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
                 </svg>
-                <span class="tooltip with-arrow">
-                    <span>Copied</span>
-                </span>
+                <span>Copy</span>
             </a>
         </div>
     `;
@@ -162,7 +160,6 @@ const snippet_classes_css = await snippet_classes();
       //
       // Apply saved theme or system preference on page load
       const saved_theme = localStorage.getItem('theme');
-      console.log(saved_theme);
 
       if (saved_theme) {
         this.dataset.theme = saved_theme;
