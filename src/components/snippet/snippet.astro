@@ -1,80 +1,80 @@
 ---
-import {Preview} from './';
-import {extractor} from './utils/extractor.ts';
+import { Preview } from './';
+import { extractor } from './utils/extractor.ts';
 
-import {codeToHtml} from 'shiki';
+import { codeToHtml } from 'shiki';
 
 import type {
-    ShikiTransformer,
-    ThemeRegistration,
-    ThemeRegistrationRaw,
+  ShikiTransformer,
+  ThemeRegistration,
+  ThemeRegistrationRaw,
 } from 'shiki';
 
 import {
-    transformerNotationDiff,
-    transformerNotationHighlight,
-    transformerNotationFocus,
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationFocus,
 } from '@shikijs/transformers';
 
 // then later you can use `highlighter.codeToHtml` synchronously
 // with the loaded themes and languages.
 const code2 = await codeToHtml(
-    '// [!code highlight:5]\n' +
-    'import {\n' +
-    '  transformerNotationDiff,\n' +
-    '  // ...\n' +
-    '} from \'@shikijs/transformers\'\n' +
-    'import {\n' +
-    '  codeToHtml,\n' +
-    '} from \'shiki\'\n' +
-    '\n' +
-    '// [!code highlight:3]\n' +
-    'console.log(\'Highlighted\')\n' +
-    'console.log(\'Highlighted\')\n' +
-    'console.log(\'Highlighted\')\n' +
-    'console.log(\'hewwo\') // [!code --]\n' +
-    'console.log(\'hello\') // [!code ++]\n' +
-    'const code = `console.log(\'hello\')`\n' +
-    'const html = await codeToHtml(code, {\n' +
-    '  lang: \'ts\',\n' +
-    '  theme: \'nord\',\n' +
-    '  transformers: [\n' +
-    '    transformerNotationDiff(), // [!code highlight]\n' +
-    '    // ...\n' +
-    '  ],\n' +
-    'import { codeToHtml } from \'shiki\'\n' +
-    '\n' +
-    'const code = await codeToHtml(\'foo\\bar\', {\n' +
-    '  lang: \'js\',\n' +
-    '  theme: \'vitesse-light\',\n' +
-    '  transformers: [\n' +
-    '    {\n' +
-    '      code(node) {\n' +
-    '        this.addClassToHast(node, \'language-js\')\n' +
-    '      },\n' +
-    '      line(node, line) {\n' +
-    '        node.properties[\'data-line\'] = line\n' +
-    '        if ([1, 3, 4].includes(line))\n' +
-    '          this.addClassToHast(node, \'highlight\')\n' +
-    '      },\n' +
-    '      span(node, line, col) {\n' +
-    '        node.properties[\'data-token\'] = `token:${line}:${col}`\n' +
-    '      },\n' +
-    '    },\n' +
-    '  ]\n' +
-    '})', {
-        lang: 'javascript',
-        themes: {
-            light: 'github-light-default',
-            dark: 'github-dark-default',
-        },
-        defaultColor: 'light-dark()',
-        transformers: [
-            transformerNotationDiff(),
-            transformerNotationHighlight(),
-            transformerNotationFocus(),
-        ],
-    });
+  '// [!code highlight:5]\n' +
+  'import {\n' +
+  '  transformerNotationDiff,\n' +
+  '  // ...\n' +
+  '} from \'@shikijs/transformers\'\n' +
+  'import {\n' +
+  '  codeToHtml,\n' +
+  '} from \'shiki\'\n' +
+  '\n' +
+  '// [!code highlight:3]\n' +
+  'console.log(\'Highlighted\')\n' +
+  'console.log(\'Highlighted\')\n' +
+  'console.log(\'Highlighted\')\n' +
+  'console.log(\'hewwo\') // [!code --]\n' +
+  'console.log(\'hello\') // [!code ++]\n' +
+  'const code = `console.log(\'hello\')`\n' +
+  'const html = await codeToHtml(code, {\n' +
+  '  lang: \'ts\',\n' +
+  '  theme: \'nord\',\n' +
+  '  transformers: [\n' +
+  '    transformerNotationDiff(), // [!code highlight]\n' +
+  '    // ...\n' +
+  '  ],\n' +
+  'import { codeToHtml } from \'shiki\'\n' +
+  '\n' +
+  'const code = await codeToHtml(\'foo\\bar\', {\n' +
+  '  lang: \'js\',\n' +
+  '  theme: \'vitesse-light\',\n' +
+  '  transformers: [\n' +
+  '    {\n' +
+  '      code(node) {\n' +
+  '        this.addClassToHast(node, \'language-js\')\n' +
+  '      },\n' +
+  '      line(node, line) {\n' +
+  '        node.properties[\'data-line\'] = line\n' +
+  '        if ([1, 3, 4].includes(line))\n' +
+  '          this.addClassToHast(node, \'highlight\')\n' +
+  '      },\n' +
+  '      span(node, line, col) {\n' +
+  '        node.properties[\'data-token\'] = `token:${line}:${col}`\n' +
+  '      },\n' +
+  '    },\n' +
+  '  ]\n' +
+  '})', {
+    lang: 'javascript',
+    themes: {
+      light: 'github-light-default',
+      dark: 'github-dark-default',
+    },
+    defaultColor: 'light-dark()',
+    transformers: [
+      transformerNotationDiff(),
+      transformerNotationHighlight(),
+      transformerNotationFocus(),
+    ],
+  });
 
 // HTML
 const html_rendered = (await Astro.slots.render('html'));
@@ -84,20 +84,20 @@ const scss_rendered = (await Astro.slots.render('scss'));
 const js_rendered = (await Astro.slots.render('js'));
 
 const {
-    title = '',
-    preview = false,
-    file = null,
-    min_height = '',
-    inline = false,
-    single = true,
-    multi_line = true,
+  title = '',
+  preview = false,
+  file = null,
+  min_height = '',
+  inline = false,
+  single = true,
+  multi_line = true,
 } = Astro.props;
 
 const {
-    html = null,
-    scss = null,
-    js = null,
-    code = null,
+  html = null,
+  scss = null,
+  js = null,
+  code = null,
 } = await extractor(file, title);
 ---
 <div class="snippet">
@@ -120,11 +120,12 @@ const {
   @use '~/styles/app.scss' as app;
 
   $code: (
+    border: 1px solid #3d444d,
+    border-radius: .425rem,
     _subclasses : (
       'pre.shiki' : (
-        border-radius: .425rem,
         text-align: left,
-        padding: .825rem 2.25rem .825rem 1rem,
+        padding: 0,
       )
     )
   );
@@ -143,10 +144,71 @@ const {
 </style>
 
 <style is:global>
+
+  .code {
+    pre.shiki {
+      border-radius: .425rem;
+      text-align: left;
+      padding: 0;
+      line-height: 1.8;
+      display: block;
+      margin: 0;
+
+      code {
+        display: block;
+      }
+    }
+  }
+
   .code {
 
     counter-reset: step;
     counter-increment: step 0;
+
+    & .line {
+      display: inline-block;
+      width: 100%;
+
+      &:first-child {
+        padding-top: 8px;
+      }
+
+      &:last-child {
+        padding-bottom: 8px;
+      }
+    }
+
+    & .line.highlighted {
+      background-color: rgb(21, 27, 35);
+      //width: calc(100% + 48px);
+      //margin: 0px -24px;
+      //padding: 0px 24px;
+      transition: background-color 0.5s;
+    }
+
+    & .diff {
+      background: rgba(248, 81, 73, 0.1);
+    }
+
+    & .diff:before {
+      position: absolute;
+      left: 10px;
+      color: #cb7676;
+      content: "-";
+    }
+
+    & .add {
+      background: rgba(46, 160, 67, 0.15);
+      width: 100%;
+
+    }
+
+    & .add:before {
+      position: absolute;
+      left: 10px;
+      content: "+";
+      color: #3dd68c;
+    }
 
     &.show-line-numbers pre.shiki .line::before {
       content: counter(step);
@@ -155,14 +217,7 @@ const {
       margin-right: 1.5rem;
       display: inline-block;
       text-align: right;
-      color: rgba(115,138,148,.4)
-    }
-
-    pre.shiki {
-      border-radius: .425rem;
-      text-align: left;
-      padding: .825rem 2.25rem .825rem 1rem;
-      line-height: 1.225
+      color: rgba(115, 138, 148, .4)
     }
   }
 </style>
