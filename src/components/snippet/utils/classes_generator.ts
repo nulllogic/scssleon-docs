@@ -29,6 +29,7 @@ const scss_importes = [
 export async function snippet_classes () {
   let compiled_css = '';
 
+  // ⚠️ Note: this is a minified version;;
   const base_style = await sass.compileStringAsync(`
   @use 'sass:list';
   @use 'sass:meta';
@@ -62,13 +63,7 @@ export async function snippet_classes () {
   );
 `, { importers: scss_importes });
 
-  const host_wrapper = await sass.compileStringAsync(`
-  :host {
-    ${base_style.css}
-  }
-`, { importers: scss_importes });
-
-  compiled_css += host_wrapper.css;
+  compiled_css += base_style.css;
 
   const output = await sass.compileStringAsync(`
   :host(.outline) {
