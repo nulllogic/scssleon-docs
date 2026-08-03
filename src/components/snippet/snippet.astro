@@ -1,6 +1,8 @@
 ---
+import * as sass from 'sass';
 import { Preview } from './';
-import { extractor } from './utils/extractor.ts';
+import { extractor } from './utils/';
+import { outline_classes_compile } from './utils/';
 
 import { codeToHtml } from 'shiki';
 
@@ -15,6 +17,7 @@ import {
   transformerNotationHighlight,
   transformerNotationFocus,
 } from '@shikijs/transformers';
+import { snippet_classes } from './utils';
 
 // HTML
 const html_rendered = (await Astro.slots.render('html'));
@@ -55,10 +58,17 @@ const code2 = await codeToHtml(code, {
     transformerNotationFocus(),
   ],
 });
-console.log(code.split("\n").length);
+
+const snippet_classes_css = await snippet_classes();
+// console.log(snippet_classes_css);
+const __vite__css = '@charset "UTF-8";\n/*\n┌─┐┌─┐┌┐┌┌─┐┬┌─┐\n│  │ ││││├┤ ││ ┬\n└─┘└─┘┘└┘└  ┴└─┘\n*/\n/* - ૮₍ ˃ ⤙ ˂ ₎ა – root  */\n:root {\n  /* 🌱𖣂🫚🌿 */\n  --xii-font-family-default: system-ui, -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, \'Helvetica Neue\', \'Noto Sans\', \'Liberation Sans\', Arial, sans-serif, \'Apple Color Emoji\', \'Segoe UI Emoji\', \'Segoe UI Symbol\', \'Noto Color Emoji\';\n  --xii-font-family-monospace: ui-monospace, Menlo, Monaco, Consolas, \'Liberation Mono\', \'Courier New\', monospace;\n  scroll-timeline: --page-scroll y;\n  --xii-padding-inline: 1rem 1rem;\n}\n@media (min-width: 1536px) {\n  :root {\n    --xii-padding-inline: 0;\n  }\n}\n@media (prefers-reduced-motion: no-preference) {\n  :root {\n    scroll-behavior: smooth;\n  }\n}\n\n/*\n┬─┐┌─┐┌─┐┌─┐┌┬┐\n├┬┘├┤ └─┐├┤  │\n┴└─└─┘└─┘└─┘ ┴\n*/\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nabbr[title] {\n  text-decoration: underline dotted;\n  cursor: help;\n  text-decoration-skip-ink: none;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin: 0;\n  line-height: 1;\n}\n\np {\n  margin: 0;\n  line-height: 1;\n}\n\nul, ol,\nol ol,\nul ul,\nol ul,\nul ol {\n  margin: 0;\n}\n\nsub,\nsup {\n  position: relative;\n  line-height: 0;\n  vertical-align: baseline;\n}\n\na:not([href]):not([class]), a:not([href]):not([class]):hover {\n  color: inherit;\n  text-decoration: none;\n}\n\npre,\ncode,\nkbd,\nsamp {\n  font-size: 1em;\n}\n\npre {\n  display: block;\n  margin: 0;\n  overflow: auto;\n}\npre code {\n  font-size: inherit;\n  color: inherit;\n  word-break: normal;\n}\n\ncode {\n  word-wrap: break-word;\n}\na > code {\n  color: inherit;\n}\n\nkbd {\n  padding: 0.1875rem 0.375rem;\n  font-size: 0.875em;\n  border-radius: 0.25rem;\n}\nkbd kbd {\n  padding: 0;\n  font-size: inherit;\n}\n\nfigure {\n  margin: 0;\n}\n\nimg,\niframe,\nsvg {\n  display: inline-block;\n  vertical-align: middle;\n}\n\ntable {\n  caption-side: bottom;\n  border-collapse: collapse;\n}\n\ncaption {\n  text-align: left;\n}\n\nth {\n  font-weight: inherit;\n  text-align: inherit;\n  text-align: -webkit-match-parent;\n}\n\nthead,\ntbody,\ntfoot,\ntr,\ntd,\nth {\n  border-color: inherit;\n  border-style: solid;\n  border-width: 0;\n}\n\nbutton {\n  border-radius: 0;\n}\n\nbutton:focus:not(:focus-visible) {\n  outline: 0;\n}\n\ninput,\nbutton,\nselect,\noptgroup,\ntextarea {\n  margin: 0;\n  line-height: inherit;\n}\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n[role=button] {\n  cursor: pointer;\n}\n\nselect {\n  word-wrap: normal;\n}\nselect:disabled {\n  opacity: 1;\n}\n\n[list]:not([type=date]):not([type=datetime-local]):not([type=month]):not([type=week]):not([type=time])::-webkit-calendar-picker-indicator {\n  display: none !important;\n}\n\nbutton,\n[type=button],\n[type=reset],\n[type=submit] {\n  -webkit-appearance: button;\n}\n\n::-moz-focus-inner {\n  padding: 0;\n  border-style: none;\n}\n\ntextarea {\n  resize: vertical;\n}\n\nfieldset {\n  min-width: 0;\n  padding: 0;\n  margin: 0;\n  border: 0;\n}\n\nlegend {\n  float: left;\n  width: 100%;\n  padding: 0;\n  margin: 0;\n  line-height: inherit;\n}\nlegend + * {\n  clear: left;\n}\n\n::-webkit-datetime-edit-fields-wrapper,\n::-webkit-datetime-edit-text,\n::-webkit-datetime-edit-minute,\n::-webkit-datetime-edit-hour-field,\n::-webkit-datetime-edit-day-field,\n::-webkit-datetime-edit-month-field,\n::-webkit-datetime-edit-year-field {\n  padding: 0;\n}\n\n::-webkit-inner-spin-button {\n  height: auto;\n}\n\n[type=search] {\n  outline-offset: -2px;\n  -webkit-appearance: textfield;\n}\n\n/* rtl:raw:\n[type="tel"],\n[type="url"],\n[type="email"],\n[type="number"] {\n  direction: ltr;\n}\n*/\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n::-webkit-color-swatch-wrapper {\n  padding: 0;\n}\n\n::file-selector-button {\n  font: inherit;\n  -webkit-appearance: button;\n}\n\noutput {\n  display: inline-block;\n}\n\niframe {\n  border: 0;\n}\n\nsummary {\n  display: list-item;\n  cursor: pointer;\n}\n\nprogress {\n  vertical-align: baseline;\n}\n\ndl dd {\n  margin: 0;\n}\ndl dt {\n  margin: 0;\n}\n\nblockquote {\n  margin: 0;\n}\n\n[hidden] {\n  display: none !important;\n}\n\n/*\n┌┐ ┌─┐┌─┐┌─┐\n├┴┐├─┤└─┐├┤\n└─┘┴ ┴└─┘└─┘\n*/\n/* Load settings and functions */\n/* SCSS variables definition requirement */\nhtml {\n  color-scheme: light dark;\n}\n\nhtml[data-theme=dark] {\n  color-scheme: dark;\n}\n\nhtml[data-theme=light] {\n  color-scheme: light;\n}\n\nbody {\n  -webkit-text-size-adjust: 100%;\n  -webkit-font-smoothing: antialiased;\n  margin: 0;\n  font-size: 1em;\n  font-weight: normal;\n  font-family: var(--xii-font-family-default);\n  line-height: 1;\n  text-rendering: optimizelegibility;\n  font-synthesis-weight: none;\n  color: var(--xii-color);\n  background: var(--xii-background);\n  --xii-background: rgb(244, 244, 244);\n  --xii-color: rgb(28, 29, 31);\n}\nbody:where([data-theme=dark], [data-theme=dark] *) {\n  --xii-background: rgb(5, 17, 4);\n  --xii-color: "#ccc";\n}\nbody[scroll-lock] {\n  overflow: hidden;\n}\n\na {\n  text-decoration: none;\n  color: var(--xii-color);\n  --xii-color: "#333";\n}\na:where([data-theme=dark], [data-theme=dark] *) {\n  --xii-color: "#ccc";\n}\na:hover {\n  text-decoration: none;\n}\n\nol {\n  margin: 0;\n  padding: 0;\n}\n\nul {\n  margin: 0;\n  padding: 0;\n}\n\ndl {\n  margin: 0;\n  padding: 0;\n}\n\nimg {\n  vertical-align: middle;\n  width: auto;\n  height: auto;\n  max-width: 100%;\n}\n\ncode {\n  color: var(--xii-color);\n  background: var(--xii-background);\n  --xii-background: rgba(228, 221, 83, 0.65);\n  --xii-color: inherit;\n}\ncode:where([data-theme=dark], [data-theme=dark] *) {\n  --xii-background: oklch(63% 0.14 106.65999999999997deg / 0.54);\n  --xii-color: inherit;\n}\n\nkbd {\n  font-family: var(--xii-font-family-monospace);\n  margin-block: -0.125rem;\n  padding: 0.125rem 0.375rem;\n  border: var(--xii-border);\n  background: var(--xii-background);\n  color: var(--xii-color);\n  --xii-background: rgb(255, 255, 255);\n  --xii-color: inherit;\n  --xii-border: 1px solid rgba(19, 19, 19, 0.2);\n  --xii-shadow:  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px;\n}\nkbd:where([data-theme=dark], [data-theme=dark] *) {\n  --xii-background: oklch(20.5% 0 0deg);\n  --xii-color: inherit;\n  --xii-border: 1px solid rgba(19, 19, 19, 0.2);\n  --xii-shadow:  rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px;\n}\n\n/**\n┌─┐┌─┐┌┐┌┌┬┐┌─┐┬┌┐┌┌─┐┬─┐\n│  │ ││││ │ ├─┤││││├┤ ├┬┘\n└─┘└─┘┘└┘ ┴ ┴ ┴┴┘└┘└─┘┴└─\n**/\n.container {\n  margin: 0 auto;\n  width: 100%;\n}\n@media (min-width: 640px) {\n  .container.sm {\n    max-width: 640px;\n  }\n}\n@media (min-width: 768px) {\n  .container.md {\n    max-width: 768px;\n  }\n}\n@media (min-width: 1024px) {\n  .container.lg {\n    max-width: 1024px;\n  }\n}\n@media (min-width: 1280px) {\n  .container.xl {\n    max-width: 1280px;\n  }\n}\n@media (min-width: 1536px) {\n  .container.xxl {\n    max-width: 1536px;\n  }\n}\n\n/**\n==[ Note ]==\nWe are using mixin here, because @include is not working with @media query in SCSS | 07.12.2023\n**/\n/*\n┌┐┌┌─┐┬  ┬┬┌─┐┌─┐┌┬┐┬┌─┐┌┐┌\n│││├─┤└┐┌┘││ ┬├─┤ │ ││ ││││\n┘└┘┴ ┴ └┘ ┴└─┘┴ ┴ ┴ ┴└─┘┘└┘\n*/\n/* Load mixins/functions */\n/* SCSS variables definition requirement */\n/* Loading component settings and styling */\n.navbar {\n  --xii-grid-template-columns: auto auto 1fr;\n  --xii-gap: 10px;\n  display: grid;\n  width: 100%;\n  max-width: 100%;\n  align-items: center;\n  margin: 0;\n  padding: 0;\n  grid-template-columns: var(--xii-grid-template-columns);\n  grid-gap: var(--xii-gap);\n}\n\n/**\n┌┐┌┌─┐┬  ┬\n│││├─┤└┐┌┘\n┘└┘┴ ┴ └┘ \n**/\n/* Load mixins/functions */\n/* SCSS variables definition requirement */\n/* Loading component settings and styling */\n.nav {\n  --xii-flex-direction: row;\n  --xii-align-items: center;\n  --xii-gap: 0;\n  display: flex;\n  flex-direction: var(--xii-flex-direction);\n  align-items: var(--xii-align-items);\n  gap: var(--xii-gap);\n  margin: 0;\n  padding: 0;\n  list-style-type: none;\n}\n.nav.horizontal {\n  --xii-align-items: center;\n  --xii-flex-direction: row;\n  --xii-gap: 12.5px;\n}\n.nav.vertical {\n  --xii-flex-direction: column;\n  --xii-align-items: auto;\n  --xii-gap: 0.5rem;\n}\n.nav .item {\n  width: auto;\n}\n.nav .item .link {\n  display: inline-flex;\n}\n.nav .item .link:hover {\n  text-decoration: none;\n}\n\n/**\n┌┐ ┬─┐┌─┐┌─┐┌┬┐┌─┐┬─┐┬ ┬┌┬┐┌┐ ┌─┐\n├┴┐├┬┘├┤ ├─┤ │││  ├┬┘│ ││││├┴┐└─┐\n└─┘┴└─└─┘┴ ┴─┴┘└─┘┴└─└─┘┴ ┴└─┘└─┘\n**/\n/* Load mixins/functions */\n/* SCSS variables definition requirement */\n/* Loading component settings and styling */\n.breadcrumb {\n  list-style: none;\n  align-items: center;\n  display: flex;\n  flex-wrap: wrap;\n  margin: 0;\n}\n.breadcrumb .item {\n  display: inline-flex;\n}\n/**\n┌┐ ┬ ┬┌┬┐┌┬┐┌─┐┌┐┌┌─┐\n├┴┐│ │ │  │ │ ││││└─┐\n└─┘└─┘ ┴  ┴ └─┘┘└┘└─┘\n**/\n/* Load mixins/functions */\n/* SCSS variables definition requirement */\n/* Loading component settings and styling */\n.btn {\n  --xii-padding: 0.5rem 0.75rem;\n  --xii-border-radius: 0.25rem;\n  display: inline-flex;\n  align-items: center;\n  align-content: center;\n  white-space: nowrap;\n  text-decoration: none;\n  cursor: pointer;\n  vertical-align: middle;\n  font-size: 1em;\n  padding: var(--xii-padding);\n  border: var(--xii-border);\n  background: var(--xii-background);\n  color: var(--xii-color);\n  border-radius: var(--xii-border-radius);\n  box-shadow: var(--xii-box-shadow);\n  position: relative;\n  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n  --xii-color: inherit;\n  --xii-background: rgb(250, 250, 250);\n  --xii-border: 1px solid rgb(188, 188, 188);\n  --xii-hover-color: inherit;\n  --xii-hover-background: rgb(235, 235, 235);\n  --xii-hover-border: 1px solid rgb(180, 180, 180);\n  --xii-active-color: inherit;\n  --xii-active-background: rgb(235, 235, 235);\n  --xii-active-border: 1px solid rgb(180, 180, 180);\n  --xii-active-shadow: -0.0625rem 0rem 0.0625rem 0rem rgba(33,33,33,.1) inset,0.0625rem 0rem 0.0625rem 0rem rgba(3,33,33,.15) inset,0rem 0.125rem 0.0625rem 0rem rgba(44,44,44,0.15) inset;\n  --xii-focus: 0 0 0 0.2rem rgba(98, 175, 97, 0.5);\n}\n.btn:where([data-theme=dark], [data-theme=dark] *) {\n  --xii-color: #fff;\n  --xii-background: rgb(48, 56, 66);\n  --xii-border: 1px solid rgba(240, 246, 252, 0.25);\n  --xii-hover-color: #fff;\n  --xii-hover-background: rgb(59, 68, 81);\n  --xii-hover-border: 1px solid rgba(229, 235, 240, 0.55);\n  --xii-active-color: #fff;\n  --xii-active-background: rgb(39, 45, 53);\n  --xii-active-border: 1px solid rgba(240, 246, 252, 0.25);\n  --xii-active-shadow: -0.0625rem 0rem 0.0625rem 0rem rgba(15,15,15,.35) inset,0.0625rem 0rem 0.0625rem 0rem rgba(13,13,13, .35) inset,0rem 0.125rem 0.0625rem 0rem rgba(15,15,15,0.35) inset;\n  --xii-focus: 0 0 0 0.2rem rgba(98, 175, 97, 0.5);\n}\n.btn:focus-visible:not([disabled]) {\n  outline: none;\n  box-shadow: var(--xii-focus);\n}\n.btn:hover:not(.loading, [disabled], .link, .blank) {\n  color: var(--xii-hover-color);\n  background: var(--xii-hover-background);\n  border: var(--xii-hover-border);\n}\n.btn:active:not(.loading, [disabled], .link, .blank) {\n  color: var(--xii-active-color);\n  background: var(--xii-active-background);\n  border: var(--xii-active-border);\n  box-shadow: var(--xii-active-shadow);\n}\n.btn.link {\n  display: inline-flex;\n  align-items: center;\n  background: transparent;\n  padding: var(--xii-padding);\n  border: none;\n  box-shadow: none;\n  text-decoration: underline;\n}\n.btn.link:hover {\n  text-decoration: none;\n}\n.btn.blank {\n  display: inline-flex;\n  align-items: center;\n  padding: 0;\n  border: none;\n  box-shadow: none;\n  background: transparent;\n  text-decoration: none;\n}\n.btn.loading {\n  cursor: wait;\n}\n.btn[disabled] {\n  cursor: not-allowed;\n  color: var(--xii-color);\n  background: var(--xii-background);\n  border: var(--xii-border);\n  box-shadow: none;\n  --xii-color: rgba(28, 29, 31, 0.5);\n  --xii-background: rgb(235, 235, 235);\n  --xii-border: 1px solid rgb(188, 188, 188);\n}\n.btn[disabled]:where([data-theme=dark], [data-theme=dark] *) {\n  --xii-color: inherit;\n  --xii-background: #21262d;\n  --xii-border: 1px solid rgba(240, 246, 252, 0.1);\n}\n\n/*\n┌─┐┌─┐┬─┐┌┬┐\n│  ├─┤├┬┘ ││\n└─┘┴ ┴┴└──┴┘\n */\n/* Load mixins/functions */\n/* SCSS variables definition requirement */\n/* Loading component settings and styling */\n.card {\n  --xii-border-radius: 0.5rem;\n  --xii-padding: 0.825rem;\n  background: var(--xii-background);\n  padding: var(--xii-padding);\n  border-radius: var(--xii-border-radius);\n  box-shadow: var(--xii-shadow);\n  border: var(--xii-border);\n  height: 100%;\n  margin: 0;\n  --xii-background: rgb(250, 250, 250);\n  --xii-border: 1px solid rgb(219, 219, 219);\n  --xii-shadow: 0 4px 12px rgba(224,224,224,0.5);\n}\n.card:where([data-theme=dark], [data-theme=dark] *) {\n  --xii-border: 1px solid #3d444d;\n  --xii-background: rgb(22, 27, 34);\n  --xii-shadow: rgba(1, 4, 9, 0.4) 0 1px 0 0;\n}\n\n/**\n┌┐ ┌─┐┌┬┐┌─┐┌─┐\n├┴┐├─┤ │││ ┬├┤\n└─┘┴ ┴─┴┘└─┘└─┘\n**/\n/* Load mixins/functions */\n/* SCSS variables definition requirement */\n/* Loading component settings and styling */\n.badge {\n  --xii-border-radius: 0.25rem;\n  --xii-padding: 0.125rem 0.625rem;\n  font-size: 0.75rem;\n  line-height: 1rem;\n  font-weight: 500;\n  white-space: nowrap;\n  vertical-align: middle;\n  align-items: center;\n  display: inline-flex;\n  padding: var(--xii-padding);\n  border-radius: var(--xii-border-radius);\n  background: var(--xii-background);\n  box-shadow: var(--xii-box-shadow);\n  border: var(--xii-border);\n  --xii-box-shadow: none;\n  --xii-border: 1px solid rgba(33, 33, 33, 0.15);\n  --xii-background: rgba(247, 247, 247, 0.85);\n}\n.badge:where([data-theme=dark], [data-theme=dark] *) {\n  --xii-background: rgba(40, 50, 60, 0.85);\n  --xii-box-shadow: none;\n  --xii-border: 1px solid rgba(255, 255, 255, 0.15);\n}';
+console.log(__vite__css);
 ---
 <div>
-    <xii-snippet>
+    <xii-snippet class:list={[
+      {
+        single: (code2 && code2.split('\n').length === 1) ?? false,
+      }]}>
       {code2 && (
               <div slot="code" set:html={code2}></div>
       )}
@@ -76,8 +86,8 @@ console.log(code.split("\n").length);
     </div>
 </div>
 
-<script>
-  export default class Snippet extends HTMLElement {
+<script define:vars={{ snippet_classes_css }} is:inline>
+  class Snippet extends HTMLElement {
     constructor () {
       super();
       const shadow = this.attachShadow({ mode: 'open' });
@@ -88,25 +98,28 @@ console.log(code.split("\n").length);
             background: red;
         }
         
-        :host .single {
+        :host .code-wrapper {
             position: relative;
         }
         
-        :host .link {
+        :host .code-wrapper .btn {
+            right: 8px;
+            top: 8px;
             position: absolute;
-            right: 5px;
-            top: 5px;
         }
+        
+        :host(.single) .code-wrapper .btn {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        ${snippet_classes_css}
+        
       </style>
       
-      <div class="card-wrapper">
-        <!-- Named slot inserts here -->
-        <slot name="title"></slot>
-        
-        <!-- Unnamed/default slot inserts here -->
-        <div class="single">
+      <div class="code-wrapper" part="code">
             <slot part="code" name="code"></slot>
-            <a class="clipboard link has-tooltip btn" href="#">
+            <a class="clipboard has-tooltip btn" href="#" type="button" style="--xii-padding: 0.25rem;">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      width="16"
                      height="16" viewBox="0 0 24 24"
@@ -132,8 +145,6 @@ console.log(code.split("\n").length);
                 </span>
             </a>
         </div>
-       
-      </div>
     `;
     }
 
@@ -143,12 +154,14 @@ console.log(code.split("\n").length);
 
     connectedCallback () {
       // Read the message from the data attribute.
+      console.log(this.dataset);
       const message = this.dataset.message;
       const button = this.querySelector('button');
       button?.addEventListener('click', () => {
         alert(message);
       });
       this.classList.add('snippet');
+      this.dataset.theme = 'dark';
       console.log(this.classList);
     }
   }
@@ -168,7 +181,7 @@ console.log(code.split("\n").length);
     border: 1px solid #3d444d,
     border-radius: .425rem,
     padding: 0,
-    line-height: 1.725,
+    line-height: 1.72,
     _subclasses : (
       'code' : (
         background: none,
