@@ -1,23 +1,25 @@
 ---
-import Index from '../layouts/index.astro'
-import {Raw, Snippet, CodeWrapper} from '../components/snippet'
-import Link from '~/components/link.astro'
-import {generate_rel_link} from "~/utils/links";
+import Index from '../layouts/index.astro';
+import { Snippet } from '../components/snippet';
+import Link from '~/components/link.astro';
+import { generate_rel_link } from '~/utils/links';
 
-const response = await fetch('https://api.github.com/repos/nulllogic/scssleon/branches/master');
+const response = await fetch(
+  'https://api.github.com/repos/nulllogic/scssleon/branches/master');
 
-const data = await response.json()
+const data = await response.json();
 const commit_date =
-    typeof data.message === 'undefined'
-        ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
-        })
-        : new Date()
+  typeof data.message === 'undefined'
+    ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    })
+    : new Date();
 
-const package_response = await fetch('https://raw.githubusercontent.com/nulllogic/scssleon/refs/heads/master/package.json')
-const package_info = await package_response.json()
+const package_response = await fetch(
+  'https://raw.githubusercontent.com/nulllogic/scssleon/refs/heads/master/package.json');
+const package_info = await package_response.json();
 ---
 <Index>
     <main>
@@ -25,7 +27,8 @@ const package_info = await package_response.json()
             <div class="top_bg_glow"/>
             <div class="container xxl">
                 <div class="promo">
-                    <div>SCSS on steroids <span aria-label="emoji" role="img">💊</span></div>
+                    <div>SCSS on steroids <span aria-label="emoji"
+                                                role="img">💊</span></div>
                 </div>
                 <h1 class="title">
                     <span class="first">SCSS</span>
@@ -45,15 +48,18 @@ const package_info = await package_response.json()
 
                 <div class="grid">
                     <div>
-                        <Snippet inline={true} title={'🎐 Intro (ﾉ◕ヮ◕)ﾉ*-✧'}>
-                            <Fragment slot={'code'} lang={'sh'} oneline={true}>
+                        <Snippet file={import.meta.filename} single={true} title={'🎐 Intro (ﾉ◕ヮ◕)ﾉ*-✧'}
+                                 lang={'sh'}>
+                            <Fragment slot={'code'}>
+                                ```
                                 npm i @nulllogic/scssleon@latest
+                                ```
                             </Fragment>
                         </Snippet>
                     </div>
                     <div>
                         <a href={generate_rel_link(Astro,
-                            './docs/1.0/en/getting-started/introduction')}
+                          './docs/1.0/en/getting-started/introduction')}
                            class="btn"
                            style="height:100%;border-radius: 0.425rem 0.425rem;">🚀
                             Get
@@ -81,7 +87,8 @@ const package_info = await package_response.json()
                 <div style="margin: 0 auto; display: inline-block;">
                     <h3 class="title">Ready for more productive
                         development?</h3>
-                    <p class="subtitle">Try SCSSLeon for a few sessions and start building your
+                    <p class="subtitle">Try SCSSLeon for a few sessions and
+                        start building your
                         product today</p>
                     <div class="grid">
                         <div>
@@ -98,15 +105,19 @@ const package_info = await package_response.json()
         <section>
             <div class="container xxl">
                 <p>100% Open Source</p>
-                <p>We believe in transparency and community. OutRay is built in the open, so you can inspect the code,
-                    contribute features, or self-host the entire platform on your own infrastructure.</p>
+                <p>We believe in transparency and community. OutRay is built in
+                    the open, so you can inspect the code,
+                    contribute features, or self-host the entire platform on
+                    your own infrastructure.</p>
                 <p>
                     Auditable Security
 
-                    Verify our security claims by inspecting the source code yourself.
+                    Verify our security claims by inspecting the source code
+                    yourself.
                     Community Driven
 
-                    Built with feedback and contributions from developers like you.
+                    Built with feedback and contributions from developers like
+                    you.
                     Self-Hostable
 
                     Run the entire stack on your own servers. No vendor lock-in.

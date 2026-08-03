@@ -43,7 +43,7 @@ const {
 // then later you can use `highlighter.codeToHtml` synchronously
 // with the loaded themes and languages.
 const code2 = await codeToHtml(code, {
-  lang: 'scss',
+  lang: Astro.props?.lang ? Astro.props?.lang : 'html',
   themes: {
     light: 'github-light-default',
     dark: 'github-dark-default',
@@ -55,18 +55,25 @@ const code2 = await codeToHtml(code, {
     transformerNotationFocus(),
   ],
 });
-console.log(Astro.props);
+console.log(code.split("\n").length);
 ---
-<div class="snippet">
-    <div class="tabs">
-        <div class="buttons">
+<div>
+    <xii-snippet>
+      {code2 && (
+              <div slot="code" set:html={code2}></div>
+      )}
+    </xii-snippet>
 
-        </div>
-        <div class="panels">
-            <div class="code show-line-numbers" set:html={code2}></div>
+    <div class="snippet">
+        <div class="tabs">
+            <div class="buttons">
+
+            </div>
+            <div class="panels">
+                <div class="code show-line-numbers" set:html={code2}></div>
+            </div>
         </div>
     </div>
-    <xii-snippet set:html={code2} />
 </div>
 
 <script>
@@ -76,12 +83,56 @@ console.log(Astro.props);
       const shadow = this.attachShadow({ mode: 'open' });
 
       shadow.innerHTML = `
+      <style>
+        :host {
+            background: red;
+        }
+        
+        :host .single {
+            position: relative;
+        }
+        
+        :host .link {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+        }
+      </style>
+      
       <div class="card-wrapper">
         <!-- Named slot inserts here -->
         <slot name="title"></slot>
-        <hr>
+        
         <!-- Unnamed/default slot inserts here -->
-        <slot></slot>
+        <div class="single">
+            <slot part="code" name="code"></slot>
+            <a class="clipboard link has-tooltip btn" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="16"
+                     height="16" viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                >
+                    <rect width="14" height="14" x="8"
+                          y="8"
+                          rx="2"
+                          ry="2"></rect>
+                    <path stroke="rgb(74, 109, 71)"
+                          fill="none"
+                          fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd"></path>
+                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                </svg>
+                <span class="tooltip with-arrow">
+                    <span>Copied</span>
+                </span>
+            </a>
+        </div>
+       
       </div>
     `;
     }
@@ -97,13 +148,15 @@ console.log(Astro.props);
       button?.addEventListener('click', () => {
         alert(message);
       });
+      this.classList.add('snippet');
+      console.log(this.classList);
     }
   }
 
   customElements.define('xii-snippet', Snippet);
 </script>
 
-<style lang="scss">
+<style lang="scss" is:global>
   @use 'sass:list';
   @use 'sass:string';
   @use 'sass:meta';
@@ -114,21 +167,80 @@ console.log(Astro.props);
   $code: (
     border: 1px solid #3d444d,
     border-radius: .425rem,
+    padding: 0,
+    line-height: 1.725,
     _subclasses : (
-      'pre.shiki' : (
-        text-align: left,
-        padding: 0,
+      'code' : (
+        background: none,
+        display: block,
+        counter-reset: step,
+        counter-increment: step 0,
+        _subclasses: (
+          '& .line' : (
+            display: inline-block,
+            width: 100%,
+            padding: 0 .825rem,
+            _subclasses: (
+              '&:first-child' : (
+                padding-top: 8px
+              ),
+              '&:last-child' : (
+                padding-bottom: 8px
+              ),
+            )
+          ),
+          '& .line.highlighted' : (
+            background-color: rgb(21, 27, 35),
+            //width: calc(100% + 48px),
+            //margin: 0px -24px,
+            //padding: 0px 24px,
+            transition: background-color 0.5s,
+          ),
+          '& .diff' : (
+            background: rgba(248, 81, 73, 0.1),
+          ),
+          '&[show-line-numbers] pre.shiki .line.diff:before' : (
+            display: inline-block,
+            text-align: right,
+            color: #cb7676,
+            content: "-",
+          ),
+          '& .add' : (
+            background: rgba(46, 160, 67, 0.15),
+            width: 100%,
+          ),
+          '&[show-line-numbers] pre.shiki .line.add:before' : (
+            display: inline-block,
+            text-align: right,
+            content: "+",
+            color: #3dd68c,
+          ),
+          '&[show-line-numbers] pre.shiki .line:before' : (
+            content: counter(step),
+            counter-increment: step,
+            width: 2ch,
+            margin-right: 1rem,
+            margin-left: .525rem,
+            display: inline-block,
+            text-align: right,
+            color: rgba(115, 138, 148, .4),
+          )
+        )
       )
     )
   );
 
   $snippet: (
-    border-radius: 0.5rem,
     background: var(--background),
     box-shadow: var(--shadow),
     z-index: 1,
+    border-radius: .425rem,
+    text-align: left,
+    padding: 0,
+    display: block,
+    margin: 0,
     _subclasses : (
-      '.code' : $code,
+      '.shiki' : $code,
     )
   );
 

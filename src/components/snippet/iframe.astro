@@ -1,8 +1,8 @@
 ---
-import * as sass from 'sass'
-import path from 'path'
+import * as sass from 'sass';
+import path from 'path';
 
-const { min_height } = Astro.props
+const { min_height } = Astro.props;
 
 let iframe_scripts = Astro.slots.has('js') ? (await Astro.slots.render(
   'js')) : '';
@@ -16,7 +16,7 @@ const scss_importes = [
         // console.log(path.resolve(process.cwd()), url.substring(1));
         // console.log(path.resolve(process.cwd()) + '/src' + url.substring(1));
         return new URL(
-          `file://` + path.resolve(process.cwd()) + '/src' + url.substring(1))
+          `file://` + path.resolve(process.cwd()) + '/src' + url.substring(1));
       }
       if (url.startsWith('@')) {
         return import.meta.env.PROD ?
@@ -25,18 +25,18 @@ const scss_importes = [
             url.substring(1)) :
           new URL(
             `file://` + path.resolve(process.cwd()) + '/src/styles/scss/' +
-            url.substring(1).replace('nulllogic/scssleon/scss/', ''))
+            url.substring(1).replace('nulllogic/scssleon/scss/', ''));
       }
 
-      return null
+      return null;
     },
-  }]
+  }];
 
 let srcdoc = `<!doctype html>
 <html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<head>`
+<head>`;
 
 srcdoc += `<script>
     
@@ -44,7 +44,7 @@ srcdoc += `<script>
       
     })
 
-</script>`
+</script>`;
 
 // Outline styling for debug purposes
 
@@ -148,7 +148,7 @@ const outline = await sass.compileStringAsync(`
   span { outline: 1px solid #cc2643 !important; }
   br { outline: 1px solid #db687d !important; }
   wbr { outline: 1px solid #db175b !important; }
-`)
+`);
 
 const base_style = await sass.compileStringAsync(`
   @use 'sass:list';
@@ -182,11 +182,11 @@ const base_style = await sass.compileStringAsync(`
     $config: app.$config,
     $theme: app.$theme
   );
-`, { importers: scss_importes })
+`, { importers: scss_importes });
 
 srcdoc += `<style>
     ${base_style.css}
-</style>`
+</style>`;
 
 const iframe_wrapper_style = await sass.compileStringAsync(`
   @use 'sass:list';
@@ -226,7 +226,7 @@ const iframe_wrapper_style = await sass.compileStringAsync(`
 
   @include app.generate-component($wrapper, 'wrapper', app.$config, app.$theme);
   @include app.generate-component($background, 'background', app.$config, app.$theme);
-`, { importers: scss_importes })
+`, { importers: scss_importes });
 
 if (Astro.slots.has('scss')) {
   const scss = (await Astro.slots.render('scss')).replace(
@@ -236,30 +236,30 @@ if (Astro.slots.has('scss')) {
 
   srcdoc += `<style>
         ${scss_compiled.css}
-    </style>`
+    </style>`;
 }
 
 srcdoc += `<style>
     ${iframe_wrapper_style.css}
-</style>`
+</style>`;
 
-srcdoc += '</head>'
+srcdoc += '</head>';
 
-srcdoc += '<body>'
+srcdoc += '<body>';
 
 // Adding background here ;;
-srcdoc += '<div class="background"></div>'
+srcdoc += '<div class="background"></div>';
 
-srcdoc += '<div class="wrapper">'
+srcdoc += '<div class="wrapper">';
 
 if (Astro.slots.has('html')) {
   srcdoc += (await Astro.slots.render('html'));
 }
 
-srcdoc += '</div>'
+srcdoc += '</div>';
 
 if (Astro.slots.has('js')) {
-  srcdoc += '<script is:inline>' + iframe_scripts + '</script>'
+  srcdoc += '<script is:inline>' + iframe_scripts + '</script>';
 }
 
 srcdoc += `<script is:inline>
@@ -319,7 +319,7 @@ srcdoc += `<style>
 }
 </style>`;
 
-srcdoc += '</body></html>'
+srcdoc += '</body></html>';
 ---
 
 <iframe class="iframe"
@@ -327,7 +327,7 @@ srcdoc += '</body></html>'
         seamless
         loading="lazy"
         srcdoc={srcdoc}
-        onload="iframe_onload(this)"
+        onload="iframe_onload(this);"
         data-min-height={min_height !== null ? min_height + 'px' : 0}
 />
 
@@ -350,22 +350,22 @@ srcdoc += '</body></html>'
   );
 
   @include app.generate-component(
-      $iframe,
-      'iframe',
-      app.$config,
-      app.$theme,
+    $iframe,
+    'iframe',
+    app.$config,
+    app.$theme,
   );
 </style>
 
 <script is:inline>
-    function iframe_onload (iframe) {
+  function iframe_onload (iframe) {
 
-        if (iframe.dataset.minHeight) {
-            iframe.contentDocument.querySelector(
-                '.wrapper').style.minHeight = iframe.dataset.minHeight;
-        }
-        iframe.style.height = iframe.contentDocument.body.scrollHeight +
-            'px'
-        iframe.style.visibility = 'visible'
+    if (iframe.dataset.minHeight) {
+      iframe.contentDocument.querySelector(
+        '.wrapper').style.minHeight = iframe.dataset.minHeight;
     }
+    iframe.style.height = iframe.contentDocument.body.scrollHeight +
+      'px';
+    iframe.style.visibility = 'visible';
+  }
 </script>
