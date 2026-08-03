@@ -150,7 +150,7 @@ const {
       border-radius: .425rem;
       text-align: left;
       padding: 0;
-      line-height: 1.8;
+      line-height: 1.725;
       display: block;
       margin: 0;
 
@@ -190,9 +190,10 @@ const {
       background: rgba(248, 81, 73, 0.1);
     }
 
-    & .diff:before {
-      position: absolute;
-      left: 10px;
+    &.show-line-numbers pre.shiki .line.diff:before {
+
+      display: inline-block;
+      text-align: center;
       color: #cb7676;
       content: "-";
     }
@@ -203,18 +204,19 @@ const {
 
     }
 
-    & .add:before {
-      position: absolute;
-      left: 10px;
+    &.show-line-numbers pre.shiki .line.add:before {
+      display: inline-block;
+      text-align: center;
       content: "+";
       color: #3dd68c;
     }
 
-    &.show-line-numbers pre.shiki .line::before {
+    &.show-line-numbers pre.shiki .line:before {
       content: counter(step);
       counter-increment: step;
-      width: 1rem;
-      margin-right: 1.5rem;
+      width: 2ch;
+      margin-right: 1rem;
+      margin-left: .525rem;
       display: inline-block;
       text-align: right;
       color: rgba(115, 138, 148, .4)
