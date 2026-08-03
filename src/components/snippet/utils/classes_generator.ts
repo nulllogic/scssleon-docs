@@ -33,69 +33,50 @@ export async function snippet_classes () {
   const base_style = await sass.compileStringAsync(`
   @use 'sass:list';
   @use 'sass:meta';
+  @use 'sass:map';
 
   @forward '~/styles/scss/mixins';
   @forward '~/styles/scss/functions';
 
-  @use '~/styles/scss/config.scss' as config with (
-    $config: (
-      prefix: "xii",
+  @use '~/styles/app.scss' as app with (
+    $overwrite : (
       enable: (
-        web_components: true
-      ),
-    )
-  );
-  
-  @use '~/styles/scss/themes/default.scss' as theme with (
-    $config : config.$config,
-    $theme: (
-      root : (
-        scroll-timeline: --page-scroll y,
-        --padding-inline: 1rem 1rem,
-        _responsive : (
-          xxl: (
-            --padding-inline: 0,
-          )
-        )
-      ),
-      html : (
-        body : (
-          _colors: (
-            light : (
-              background : rgb(244, 244, 244),
-              color: rgb(28, 29, 31),
-            ),
-            dark : (
-              background : rgb(5, 17, 4),
-              color: '#ccc'
-            )
-          )
-        )
+        web_components: true,
       )
     )
-  );
+  ); 
   
-  $config: config.$config;
-  $theme: theme.$theme;
+  // ↓ Root
+  @use '~/styles/scss/root' with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
 
   // Great reset
   @use '~/styles/scss/reset' with (
-    $config: $config,
-    $theme: $theme
+    $config: app.$config,
+    $theme: app.$theme
   );
 
   // Base
   // Special utility, that will dynamically generate CSS
   // properties for HTML tags, specified in theme
   @use '~/styles/scss/base' with (
-    $config: $config,
-    $theme: $theme
+    $config: app.$config,
+    $theme: app.$theme
+  );
+
+  // ↓ Amazing content
+  // Special class \`.content\` to allow formatting of the default html tags
+  @use '~/styles/scss/content' with (
+    $config: app.$config,
+    $theme: app.$theme
   );
   
   // ↓ Buttons
   @use '~/styles/scss/components/button' with (
-    $config: $config,
-    $theme: $theme
+    $config: app.$config,
+    $theme: app.$theme
   );
 `, { importers: scss_importes });
 

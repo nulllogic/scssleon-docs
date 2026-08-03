@@ -7,13 +7,15 @@
 @forward '~/styles/scss/mixins';
 @forward '~/styles/scss/functions';
 
+$overwrite : () !default;
+
 @use '~/styles/scss/config.scss' as config with (
-  $config: (
+  $config: map.deep-merge($overwrite, (
     prefix: "xii",
     enable: (
       wrapper: false,
     ),
-  )
+  ))
 );
 
 @use '~/styles/scss/themes/default.scss' as theme with (

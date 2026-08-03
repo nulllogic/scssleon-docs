@@ -43,9 +43,11 @@ const {
   code = null,
 } = await extractor(file, title);
 
+console.log(html, scss, js, code);
+
 // then later you can use `highlighter.codeToHtml` synchronously
 // with the loaded themes and languages.
-const code2 = await codeToHtml(code, {
+const code_formatted = code ? await codeToHtml(code, {
   lang: Astro.props?.lang ? Astro.props?.lang : 'html',
   themes: {
     light: 'github-light-default',
@@ -57,31 +59,52 @@ const code2 = await codeToHtml(code, {
     transformerNotationHighlight(),
     transformerNotationFocus(),
   ],
-});
+}) : null;
 
 const snippet_classes_css = await snippet_classes();
+console.log(code_formatted);
 ---
-<div>
-    <xii-snippet class:list={[
-      {
-        single: (code2 && code2.split('\n').length === 1) ?? false,
-      }]}>
-      {code2 && (
-              <div slot="code" set:html={code2}></div>
-      )}
-    </xii-snippet>
-
-    <div class="snippet">
-        <div class="tabs">
-            <div class="buttons">
-
-            </div>
-            <div class="panels">
-                <div class="code show-line-numbers" set:html={code2}></div>
-            </div>
-        </div>
-    </div>
-</div>
+<xii-snippet class:list={[
+  {
+    single: (code_formatted && code_formatted.split('\n').length === 1) ??
+      false,
+  }]}>
+  {code_formatted ? (
+          <div class="code" slot="code">
+              <Fragment set:html={code_formatted} />
+              <a class="clipboard has-tooltip btn" href="#" type="button" style="font-size: 0.925rem;gap: 5px;">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       width="16"
+                       height="16" viewBox="0 0 24 24"
+                       fill="none"
+                       stroke="currentColor"
+                       stroke-width="2"
+                       stroke-linecap="round"
+                       stroke-linejoin="round"
+                  >
+                      <rect width="14" height="14" x="8"
+                            y="8"
+                            rx="2"
+                            ry="2"></rect>
+                      <path stroke="rgb(74, 109, 71)"
+                            fill="none"
+                            fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd"></path>
+                      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                  </svg>
+                  <span class="text">Copy</span>
+              </a>
+          </div>
+  ) : (
+          <div>
+              <div slot="preview" set:html={html}></div>
+              <div slot="html" set:html={html}></div>
+              <div slot="scss" set:html={scss}></div>
+              <div slot="js" set:html={js}></div>
+          </div>
+  )}
+</xii-snippet>
 
 <script define:vars={{ snippet_classes_css }} is:inline>
   class Snippet extends HTMLElement {
@@ -91,55 +114,36 @@ const snippet_classes_css = await snippet_classes();
 
       shadow.innerHTML = `
       <style>
-        :host {
-            background: red;
-        }
         
-        :host .code-wrapper {
+        ::slotted(code) {
             position: relative;
         }
         
-        :host .code-wrapper .btn {
+        :host .code .btn {
             right: 8px;
             top: 8px;
             position: absolute;
+            --xii-padding: 0.25rem 0.5rem;
         }
         
-        :host(.single) .code-wrapper .btn {
+        :host(.single) .code .btn {
             top: 50%;
             transform: translateY(-50%);
+            --xii-padding: 0.25rem;
+        }
+        
+        :host(.single) .code .btn .text {
+            display: none;
         }
         
         ${snippet_classes_css}
-        
       </style>
       
-      <div class="code-wrapper">
-            <slot part="code" name="code"></slot>
-            <a class="clipboard has-tooltip btn" href="#" type="button" style="--xii-padding: 0.25rem 0.5rem;font-size: 0.925rem;gap: 5px;">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     width="16"
-                     height="16" viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="2"
-                     stroke-linecap="round"
-                     stroke-linejoin="round"
-                >
-                    <rect width="14" height="14" x="8"
-                          y="8"
-                          rx="2"
-                          ry="2"></rect>
-                    <path stroke="rgb(74, 109, 71)"
-                          fill="none"
-                          fill-rule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clip-rule="evenodd"></path>
-                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-                </svg>
-                <span>Copy</span>
-            </a>
-        </div>
+      <slot name="preview"></slot>
+      <slot name="html"></slot>
+      <slot name="scss"></slot>
+      <slot name="js"></slot>
+      <slot part="code" name="code"></slot>
     `;
     }
 
@@ -247,7 +251,7 @@ const snippet_classes_css = await snippet_classes();
   );
 
   $snippet: (
-    background: var(--background),
+    /*background: var(--background),*/
     box-shadow: var(--shadow),
     z-index: 1,
     border-radius: .425rem,
