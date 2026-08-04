@@ -4,23 +4,78 @@ code {
   background: none;
 }
 
-$code : (
+$shiki: (
   padding: 0,
-  background: 0,
+  line-height: 1.72,
   _subclasses : (
     '.shiki' : (
+      border-radius: .425rem,
       _subclasses : (
         'code' : (
           background: none,
+          display: block,
+          counter-reset: step,
+          counter-increment: step 0,
+          _subclasses: (
+            '& .line' : (
+              display: inline-block,
+              width: 100%,
+              padding: 0 .825rem,
+              _subclasses: (
+                '&:first-child' : (
+                  padding-top: 8px
+                ),
+                '&:last-child' : (
+                  padding-bottom: 8px
+                ),
+              )
+            ),
+            '& .line.highlighted' : (
+              background-color: rgb(21, 27, 35),
+              //width: calc(100% + 48px),
+              //margin: 0px -24px,
+              //padding: 0px 24px,
+              transition: background-color 0.5s,
+            ),
+            '& .diff' : (
+              background: rgba(248, 81, 73, 0.1),
+            ),
+            '&[show-line-numbers] pre.shiki .line.diff:before' : (
+              display: inline-block,
+              text-align: right,
+              color: #cb7676,
+              content: "-",
+            ),
+            '& .add' : (
+              background: rgba(46, 160, 67, 0.15),
+              width: 100%,
+            ),
+            '&[show-line-numbers] pre.shiki .line.add:before' : (
+              display: inline-block,
+              text-align: right,
+              content: "+",
+              color: #3dd68c,
+            ),
+            '&[show-line-numbers] pre.shiki .line:before' : (
+              content: counter(step),
+              counter-increment: step,
+              width: 2ch,
+              margin-right: 1rem,
+              margin-left: .525rem,
+              display: inline-block,
+              text-align: right,
+              color: rgba(115, 138, 148, .4),
+            )
+          )
         )
       )
-    )
+    ),
   )
 );
 
 @include app.generate-component(
-  $code,
-  '.code',
+  $shiki,
+  '.code_wrapper',
   app.$config,
   app.$theme
 );

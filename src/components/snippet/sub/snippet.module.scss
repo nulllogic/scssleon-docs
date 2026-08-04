@@ -1,0 +1,31 @@
+@use '~/styles/app.scss' as app;
+
+code {
+  background: none;
+}
+
+$snippet: (
+  position: relative,
+  z-index: 1,
+  text-align: left,
+  padding: 0,
+  display: block,
+  margin: 0,
+  border: 1px solid #3d444d,
+  border-radius: .425rem,
+  _subclasses : (
+    '.clipboard' : (
+      --padding: 0.25rem 0.5rem,
+      right: 8px,
+      top: 8px,
+      position: absolute,
+    )
+  )
+);
+
+@include app.generate-component(
+  $snippet,
+  '.snippet',
+  app.$config,
+  app.$theme
+);

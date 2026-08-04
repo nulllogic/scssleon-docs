@@ -45,6 +45,12 @@ export default defineConfig({
     enabled: false,
   },
   vite: {
+    css: {
+      modules: {
+        // This disables the hash and keeps your raw class name
+        generateScopedName: '[local]',
+      },
+    },
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),
