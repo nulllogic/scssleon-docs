@@ -4,10 +4,26 @@ code {
   background: none;
 }
 
-$shiki: (
+$code_wrapper: (
   padding: 0,
   line-height: 1.72,
   _subclasses : (
+    '&.single' : (
+      _subclasses : (
+        '.shiki' : (
+          _subclasses : (
+            'code' : (
+              _subclasses : (
+                '.line' : (
+                  padding: 0 2.5rem 0 0.825rem,
+                  line-height: 1.95,
+                )
+              )
+            )
+          )
+        ),
+      )
+    ),
     '.shiki' : (
       border-radius: .425rem,
       _subclasses : (
@@ -21,6 +37,7 @@ $shiki: (
               display: inline-block,
               width: 100%,
               padding: 0 .825rem,
+              line-height: 1.72,
               _subclasses: (
                 '&:first-child' : (
                   padding-top: 8px
@@ -74,7 +91,7 @@ $shiki: (
 );
 
 @include app.generate-component(
-  $shiki,
+  $code_wrapper,
   '.code_wrapper',
   app.$config,
   app.$theme

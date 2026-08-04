@@ -23,7 +23,8 @@
     "sharp": "^0.35.3",
     "shiki": "^4.4.1",
     "@shikijs/transformers" : "^4.4.1",
-    "@shikijs/twoslash" : "^4.4.1"
+    "@shikijs/twoslash" : "^4.4.1",
+    "clsx" : "^2.1.1"
   },
   "devDependencies": {
     "sass": "^1.102.0",

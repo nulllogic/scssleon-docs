@@ -1,1 +1,22 @@
 @use '~/styles/app.scss' as app;
+
+$button: (
+  --xii-padding: 0.25rem 0.5rem,
+  _subclasses : (
+    '&.single' : (
+      --padding: 0.25rem,
+      _subclasses : (
+        '.text' : (
+          display: none,
+        )
+      )
+    ),
+  )
+);
+
+@include app.generate-component(
+  $button,
+  '.button',
+  app.$config,
+  app.$theme
+);
