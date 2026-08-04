@@ -1,1 +1,1 @@
-export { default as Btn } from './btn.astro';
+export { default as InitButton } from './button.ts';

@@ -62,7 +62,7 @@ let snippet_classes_css = await snippet_classes();
 
 const snippet_template = code_formatted ? `<div class="code${code_formatted && code_formatted.split('\n').length === 1 ? ' single' : ''}">
     ${code_formatted}
-    <xii-button />
+    <xii-button class="clipboard" />
 </div>` : `<div slot="code">
     <div class="top">
         <div class="nav">
@@ -104,13 +104,14 @@ const snippet_template = code_formatted ? `<div class="code${code_formatted && c
     </div>
 </div>`;
 ---
-<xii-snippet />
+<xii-snippet/>
 
-<script define:vars={{snippet_template, snippet_classes_css}} is:inline>
+<script define:vars={{snippet_template, snippet_classes_css}}>
   const editTemplate = snippet_template;
 
   class Snippet extends HTMLElement {
     constructor() {
+
       super();
       const shadow = this.attachShadow({mode: 'open'});
       // 2. Create the constructable stylesheet object
@@ -170,4 +171,9 @@ const snippet_template = code_formatted ? `<div class="code${code_formatted && c
   }
 
   customElements.define('xii-snippet', Snippet);
+</script>
+
+<script>
+  import {InitButton} from './sub';
+  InitButton('<test>', 'test');
 </script>

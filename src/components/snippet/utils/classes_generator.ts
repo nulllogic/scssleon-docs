@@ -27,7 +27,7 @@ const scss_importes = [
     },
   }];
 
-export async function snippet_classes () {
+export async function snippet_classes() {
   let compiled_css = '';
 
   // ⚠️ Note: this is a minified version;;
