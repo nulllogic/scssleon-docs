@@ -1,1 +1,2 @@
-export { default as InitButton } from './button.ts';
+export { default as Snippet } from './snippet.tsx';
+export { default as Code } from './code.tsx';

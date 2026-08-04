@@ -1,4 +1,4 @@
-export default function () {
+export default function InitButton(html, css) {
 
   const button_template = `<a class="clipboard has-tooltip btn btn-link" 
     href="#" type="button" style="font-size: 0.925rem;gap: 5px;">

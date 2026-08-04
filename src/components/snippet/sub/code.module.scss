@@ -1,0 +1,26 @@
+@use '~/styles/app.scss' as app;
+
+code {
+  background: none;
+}
+
+$code : (
+  padding: 0,
+  background: 0,
+  _subclasses : (
+    '.shiki' : (
+      _subclasses : (
+        'code' : (
+          background: none,
+        )
+      )
+    )
+  )
+);
+
+@include app.generate-component(
+  $code,
+  '.code',
+  app.$config,
+  app.$theme
+);

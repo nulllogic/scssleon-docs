@@ -6,7 +6,7 @@ const scss_importes = [
   {
     // An importer that redirects relative URLs starting with "~" to
     // `node_modules`.
-    findFileUrl (url) {
+    findFileUrl(url) {
       if (url.startsWith('~')) {
         // console.log(path.resolve(process.cwd()), url.substring(1));
         // console.log(path.resolve(process.cwd()) + '/src' + url.substring(1));
@@ -26,6 +26,32 @@ const scss_importes = [
       return null;
     },
   }];
+
+export async function component_classes(scss) {
+  let compiled_css = '';
+
+  // ⚠️ Note: this is a minified version;;
+  const base_style = await sass.compileStringAsync(`
+  @use 'sass:list';
+  @use 'sass:meta';
+  @use 'sass:map';
+
+  @forward '~/styles/scss/mixins';
+  @forward '~/styles/scss/functions';
+
+  @use '~/styles/app.scss' as app with (
+    $overwrite : (
+      enable: (
+        web_components: true,
+      )
+    )
+  );
+  
+  ${scss}
+`, {importers: scss_importes});
+  compiled_css += base_style.css;
+  return compiled_css;
+}
 
 export async function snippet_classes() {
   let compiled_css = '';
@@ -72,7 +98,19 @@ export async function snippet_classes() {
     $config: app.$config,
     $theme: app.$theme
   );
-`, { importers: scss_importes });
+  
+  // ↓ Navigation bar
+  @use '~/styles/scss/components/navbar' with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
+
+  // ↓ Nav
+  @use '~/styles/scss/components/nav' with (
+    $config: app.$config,
+    $theme: app.$theme
+  );
+`, {importers: scss_importes});
 
   compiled_css += base_style.css;
 
@@ -191,10 +229,9 @@ export async function snippet_classes() {
   @use '~/styles/app.scss' as app;
 
   $code: (
-    border: 1px solid #3d444d,
-    border-radius: .425rem,
     padding: 0,
     line-height: 1.72,
+    border-radius: .425rem,
     _subclasses : (
       'code' : (
         background: none,
@@ -255,22 +292,35 @@ export async function snippet_classes() {
       )
     )
   );
+  
+  $snippet-top : (
+    background: #0d1117,
+    border-radius: 0 .425rem .425rem 0,
+  );
+  
+  $snippet-bottom : (
+    background: #0d1117,
+    border-radius: .425rem 0 0 .425rem,
+  );
 
   $snippet: (
     /*background: var(--background),*/
     box-shadow: var(--shadow),
     z-index: 1,
-    border-radius: .425rem,
     text-align: left,
     padding: 0,
     display: block,
     margin: 0,
+    border: 1px solid #3d444d,
+    border-radius: .425rem,
     _subclasses : (
       '.shiki' : $code,
       '.code' : (
         position: relative,
         _subclasses : (
-          '.btn' : (
+          '.top' : $snippet-top,
+          '.bottom' : $snippet-bottom,
+          '.clipboard' : (
             --padding: 0.25rem 0.5rem,
             right: 8px,
             top: 8px,
@@ -281,7 +331,7 @@ export async function snippet_classes() {
               '.line' : (
                 padding: 0 2.5rem 0 0.825rem,
               ),
-              '.btn' : (
+              '.clipboard' : (
                 --padding: 0.25rem,
                 top: 50%,
                 transform: translateY(-50%),
@@ -298,8 +348,8 @@ export async function snippet_classes() {
     ),
   );
 
-  @include app.generate-component($snippet, ':host', app.$config, app.$theme);
-  `, { importers: scss_importes });
+  @include app.generate-component($snippet, ':host(.snippet)', app.$config, app.$theme);
+  `, {importers: scss_importes});
 
   compiled_css += snippet.css;
   return compiled_css;

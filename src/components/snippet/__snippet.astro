@@ -1,0 +1,270 @@
+---
+import * as sass from 'sass';
+import {Preview} from './';
+import {extractor} from './utils/';
+
+import {codeToHtml} from 'shiki';
+
+import type {
+  ShikiTransformer,
+  ThemeRegistration,
+  ThemeRegistrationRaw,
+} from 'shiki';
+
+import {
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationFocus,
+} from '@shikijs/transformers';
+import {snippet_classes} from './utils';
+import {component_classes} from "./utils/classes_generator.ts";
+
+// HTML
+const html_rendered = (await Astro.slots.render('html'));
+// SCSS
+const scss_rendered = (await Astro.slots.render('scss'));
+// JS
+const js_rendered = (await Astro.slots.render('js'));
+
+const {
+  title = '',
+  preview = false,
+  file = null,
+  min_height = '',
+  inline = false,
+  single = true,
+  multi_line = true,
+} = Astro.props;
+
+const {
+  html = null,
+  scss = null,
+  js = null,
+  code = null,
+} = await extractor(file, title);
+
+// then later you can use `highlighter.codeToHtml` synchronously
+// with the loaded themes and languages.
+const code_formatted = code ? await codeToHtml(code, {
+  lang: Astro.props?.lang ? Astro.props?.lang : 'html',
+  themes: {
+    light: 'github-light-default',
+    dark: 'github-dark-default',
+  },
+  defaultColor: 'light-dark()',
+  transformers: [
+    transformerNotationDiff(),
+    transformerNotationHighlight(),
+    transformerNotationFocus(),
+  ],
+}) : null;
+
+const snippet_classes_css = await snippet_classes();
+const button_classes_css = await component_classes(`
+  @include app.generate-component(
+    app.get-theme(app.$theme, 'components.button'),
+    '.btn',
+    app.$config,
+    app.$theme
+  );
+`);
+
+const snippet_template = code_formatted ? `<div class="code${code_formatted && code_formatted.split('\n').length === 1 ? ' single' : ''}">
+    ${code_formatted}
+    <xii-button class="clipboard${code_formatted && code_formatted.split('\n').length === 1 ? ' small' : ''}" />
+</div>` : `<div class="code">
+    <div class="top">
+        <div class="navbar">
+          <div class="nav">
+              <div class="left">
+                  <div class="title">${title}</div>
+              </div>
+              <div class="right">
+                  2
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="middle">
+        <div class="preview">
+            ${html}
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="nav">
+            <div class="left">
+                3
+            </div>
+            <div class="right">
+                4
+            </div>
+        </div>
+        <div class="tabs">
+            <div class="tab">
+                <div>
+                    ${code_formatted}
+                </div>
+                <div>
+                    ${code_formatted}
+                </div>
+                <div>
+                    ${code_formatted}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>`;
+---
+<xii-snippet/>
+
+<script define:vars={{snippet_template, snippet_classes_css}}>
+  const editTemplate = snippet_template;
+
+  class Snippet extends HTMLElement {
+    constructor() {
+
+      super();
+      const shadow = this.attachShadow({mode: 'open'});
+      // 2. Create the constructable stylesheet object
+      const sheet = new CSSStyleSheet();
+      sheet.replaceSync(snippet_classes_css);
+
+// 3. Attach the stylesheet to the shadow root
+      shadow.adoptedStyleSheets = [sheet];
+
+      //   shadow.innerHTML = `
+      //   <slot part="code" name="code"></slot>
+      // `;
+      // this.render();
+    }
+
+    render() {
+      // Create a temporary template element instance
+      const tmpl = document.createElement('template');
+      tmpl.innerHTML = editTemplate;
+
+      this.shadowRoot.appendChild(tmpl.content.cloneNode(true));
+    }
+
+    // Initialize the component
+    init() {
+      this.render();
+    }
+
+    connectedCallback() {
+
+      if (document.readyState !== 'loading') {
+        this.init();
+        return;
+      }
+
+      document.addEventListener('DOMContentLoaded', () => this.init(), {once: true});
+
+      // Read the message from the data attribute.
+      const message = this.dataset.message;
+      const button = this.querySelector('button');
+      button?.addEventListener('click', () => {
+        alert(message);
+      });
+      this.classList.add('snippet');
+      // this.dataset.theme = 'dark';
+      // console.log(this.classList);
+      //
+      // Apply saved theme or system preference on page load
+      const saved_theme = localStorage.getItem('theme');
+
+      if (saved_theme) {
+        this.dataset.theme = saved_theme;
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        this.dataset.theme = 'dark';
+      }
+    }
+  }
+
+  customElements.define('xii-snippet', Snippet);
+</script>
+
+<script define:vars={{button_classes_css}}>
+  const button_template = `<a class="btn btn-link" 
+    href="#" type="button" style="font-size: 0.925rem;gap: 5px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+            <path stroke="rgb(74, 109, 71)" fill="none" fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd"></path>
+            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+        </svg>
+        <span class="text">Copy</span>
+  </a>`;
+
+  class Button extends HTMLElement {
+    constructor() {
+
+      super();
+      const shadow = this.attachShadow({mode: 'open'});
+
+      // 2. Create the constructable stylesheet object
+      const sheet = new CSSStyleSheet();
+      sheet.replaceSync(`:host(.small) { 
+                              .btn {
+                                --xii-padding: 0.275rem;
+                              } 
+                              .text { 
+                                display: none; 
+                              }
+      }`);
+
+      const sheet2 = new CSSStyleSheet();
+      sheet2.replaceSync(button_classes_css);
+
+      shadow.adoptedStyleSheets = [sheet, sheet2];
+
+      // // Find inside elements scoped to this specific component instance
+      // const button = this.querySelector('button');
+      // const countSpan = this.querySelector('span');
+      //
+      // // Get the initial count state passed from the Astro server
+      // let count = parseInt(this.dataset.count || '0', 10);
+      //
+      // button?.addEventListener('click', () => {
+      //   count++;
+      //   if (countSpan) countSpan.textContent = count.toString();
+      //   this.dataset.count = count.toString(); // Sync state back to DOM attribute
+      // });
+
+    }
+
+    // Initialize the component
+    init() {
+      this.render();
+    }
+
+    render() {
+      // Create a temporary template element instance
+      const tmpl = document.createElement('template');
+      tmpl.innerHTML = button_template;
+
+      this.shadowRoot.appendChild(tmpl.content.cloneNode(true));
+
+      // Apply saved theme or system preference on page load
+      const saved_theme = localStorage.getItem('theme');
+
+      if (saved_theme) {
+        this.dataset.theme = saved_theme;
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        this.dataset.theme = 'dark';
+      }
+    }
+
+    connectedCallback() {
+      if (document.readyState !== 'loading') {
+        this.init();
+        return;
+      }s
+    }
+  }
+
+  // Register the custom element with the browser
+  customElements.define('xii-button', Button);
+</script>
