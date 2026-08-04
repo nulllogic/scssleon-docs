@@ -1,27 +1,12 @@
 ---
-import {Preview} from './'
-import {extractor} from './utils/';
-
-import {codeToHtml} from 'shiki';
-
-import type {
-  ShikiTransformer,
-  ThemeRegistration,
-  ThemeRegistrationRaw,
-} from 'shiki';
-
-import {
-  transformerNotationDiff,
-  transformerNotationHighlight,
-  transformerNotationFocus,
-} from '@shikijs/transformers';
-
+import { extractor } from './utils/';
 // HTML
 const html_rendered = (await Astro.slots.render('html'));
 // SCSS
 const scss_rendered = (await Astro.slots.render('scss'));
 // JS
 const js_rendered = (await Astro.slots.render('js'));
+
 const {
   title = '',
   preview = false,
@@ -30,31 +15,22 @@ const {
   inline = false,
   single = true,
   multi_line = true,
-} = Astro.props
+} = Astro.props;
 
 const {
   html = null,
   scss = null,
   js = null,
-  code = null
+  code = null,
 } = await extractor(file, title);
 
-// then later you can use `highlighter.codeToHtml` synchronously
-// with the loaded themes and languages.
-const code_formatted = code ? await codeToHtml(code, {
-  lang: Astro.props?.lang ? Astro.props?.lang : 'html',
-  themes: {
-    light: 'github-light-default',
-    dark: 'github-dark-default',
-  },
-  defaultColor: 'light-dark()',
-  transformers: [
-    transformerNotationDiff(),
-    transformerNotationHighlight(),
-    transformerNotationFocus(),
-  ],
-}) : null;
-
-import {Snippet} from './sub';
+import { Snippet } from './sub';
 ---
-<Snippet client:load title={Astro.props.title} />
+<Snippet client:load
+         title={Astro.props.title}
+         html={html}
+         scss={scss}
+         js={js}
+         code={code}
+         single={single}
+/>

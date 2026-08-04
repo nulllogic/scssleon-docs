@@ -2,7 +2,9 @@
 
 $snippet-top: (
   background: #0d1117,
-  border-radius: 0 .425rem .425rem 0,
+  border-radius: .425rem .425rem 0 0,
+  padding: 8px,
+  border-bottom: 1px solid #3d444d,
   _subclasses : (
     '.nav' : (
       justify-content : space-between,

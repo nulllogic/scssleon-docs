@@ -1,9 +1,5 @@
 @use '~/styles/app.scss' as app;
 
-code {
-  background: none;
-}
-
 $code_wrapper: (
   padding: 0,
   line-height: 1.72,
@@ -92,7 +88,7 @@ $code_wrapper: (
 
 @include app.generate-component(
   $code_wrapper,
-  '.code_wrapper',
+  '.wrapper',
   app.$config,
   app.$theme
 );
