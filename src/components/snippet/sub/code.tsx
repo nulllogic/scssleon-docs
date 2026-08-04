@@ -6,6 +6,7 @@ export default function Snippet(props, { single = false }) {
   return (
     <div class={styles.code_wrapper}>
       {props.children}
+      123
     </div>
   );
 }
