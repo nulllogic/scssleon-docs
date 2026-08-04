@@ -1,5 +1,6 @@
 import * as sass from 'sass';
 import path from 'path';
+import {$output} from "zod";
 
 const scss_importes = [
   {
@@ -73,7 +74,7 @@ export async function snippet_classes () {
   );
 `, { importers: scss_importes });
 
-  // compiled_css += base_style.css;
+  compiled_css += base_style.css;
 
   const output = await sass.compileStringAsync(`
   :host(.outline) {
@@ -181,5 +182,125 @@ export async function snippet_classes () {
 
   compiled_css += output.css;
 
+  const snippet = await sass.compileStringAsync(`
+  @use 'sass:list';
+  @use 'sass:string';
+  @use 'sass:meta';
+  @use 'sass:map';
+
+  @use '~/styles/app.scss' as app;
+
+  $code: (
+    border: 1px solid #3d444d,
+    border-radius: .425rem,
+    padding: 0,
+    line-height: 1.72,
+    _subclasses : (
+      'code' : (
+        background: none,
+        display: block,
+        counter-reset: step,
+        counter-increment: step 0,
+        _subclasses: (
+          '& .line' : (
+            display: inline-block,
+            width: 100%,
+            padding: 0 .825rem,
+            _subclasses: (
+              '&:first-child' : (
+                padding-top: 8px
+              ),
+              '&:last-child' : (
+                padding-bottom: 8px
+              ),
+            )
+          ),
+          '& .line.highlighted' : (
+            background-color: rgb(21, 27, 35),
+            //width: calc(100% + 48px),
+            //margin: 0px -24px,
+            //padding: 0px 24px,
+            transition: background-color 0.5s,
+          ),
+          '& .diff' : (
+            background: rgba(248, 81, 73, 0.1),
+          ),
+          '&[show-line-numbers] pre.shiki .line.diff:before' : (
+            display: inline-block,
+            text-align: right,
+            color: #cb7676,
+            content: "-",
+          ),
+          '& .add' : (
+            background: rgba(46, 160, 67, 0.15),
+            width: 100%,
+          ),
+          '&[show-line-numbers] pre.shiki .line.add:before' : (
+            display: inline-block,
+            text-align: right,
+            content: "+",
+            color: #3dd68c,
+          ),
+          '&[show-line-numbers] pre.shiki .line:before' : (
+            content: counter(step),
+            counter-increment: step,
+            width: 2ch,
+            margin-right: 1rem,
+            margin-left: .525rem,
+            display: inline-block,
+            text-align: right,
+            color: rgba(115, 138, 148, .4),
+          )
+        )
+      )
+    )
+  );
+
+  $snippet: (
+    /*background: var(--background),*/
+    box-shadow: var(--shadow),
+    z-index: 1,
+    border-radius: .425rem,
+    text-align: left,
+    padding: 0,
+    display: block,
+    margin: 0,
+    _subclasses : (
+      '.shiki' : $code,
+      '.code' : (
+        position: relative,
+        _subclasses : (
+          '.btn' : (
+            --padding: 0.25rem 0.5rem,
+            right: 8px,
+            top: 8px,
+            position: absolute,
+          ),
+          '&.single' : (
+            _subclasses : (
+              '.line' : (
+                padding: 0 2.5rem 0 0.825rem,
+              ),
+              '.btn' : (
+                --padding: 0.25rem,
+                top: 50%,
+                transform: translateY(-50%),
+                _subclasses : (
+                  '.text' : (
+                    display: none
+                  )
+                )
+              ),
+            )
+          ),
+        )
+      )
+    ),
+  );
+
+  @include app.generate-component($snippet, ':host', app.$config, app.$theme);
+  `, { importers: scss_importes });
+
+  compiled_css += snippet.css;
   return compiled_css;
 }

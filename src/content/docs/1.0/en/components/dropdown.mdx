@@ -66,12 +66,11 @@ import {Snippet} from "/src/components/snippet"
         $components : (
           (
             app.get-theme(app.$theme, 'components.dropdown'),
-            'has-dropdown',
-            ( property: (name : 'dropdown', exclude : ('nav') ))
+            '.has-dropdown',
           ),
           (
             app.get-theme(app.$theme, 'components.nav'),
-            'nav',
+            '.nav',
           )
         ),
         $config : app.$config,

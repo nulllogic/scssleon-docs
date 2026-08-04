@@ -57,12 +57,11 @@ import {Snippet} from '/src/components/snippet';
       $components : (
         (
           app.get-theme(app.$theme, 'components.megamenu'),
-          'has-megamenu',
-          ( property: (name : 'megamenu', exclude : ('nav', 'navbar') ))
+          '.has-megamenu',
         ),
         (
           app.get-theme(app.$theme, 'components.navbar'),
-          'navbar',
+          '.navbar',
         ),
         (
           app.get-theme(app.$theme, 'components.nav'),

@@ -2,7 +2,6 @@
 import * as sass from 'sass';
 import {Preview} from './';
 import {extractor} from './utils/';
-import {outline_classes_compile} from './utils/';
 
 import {codeToHtml} from 'shiki';
 
@@ -43,8 +42,6 @@ const {
   code = null,
 } = await extractor(file, title);
 
-console.log(html, scss, js, code);
-
 // then later you can use `highlighter.codeToHtml` synchronously
 // with the loaded themes and languages.
 const code_formatted = code ? await codeToHtml(code, {
@@ -61,109 +58,119 @@ const code_formatted = code ? await codeToHtml(code, {
   ],
 }) : null;
 
-const snippet_classes_css = await snippet_classes();
----
-<xii-snippet>
-  <style id="global" set:html={snippet_classes_css} is:raw />
-  {code_formatted ? (
-          <div class:list={[
-            'code',
-            {
-              single: (code_formatted && code_formatted.split('\n').length === 1) ??
-                false,
-            }]} slot="code" part="code">
-              <Fragment set:html={code_formatted}/>
-              <a class="clipboard has-tooltip btn btn-link" href="#" type="button"
-                 style="font-size: 0.925rem;gap: 5px;">
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                       width="16"
-                       height="16" viewBox="0 0 24 24"
-                       fill="none"
-                       stroke="currentColor"
-                       stroke-width="2"
-                       stroke-linecap="round"
-                       stroke-linejoin="round"
-                  >
-                      <rect width="14" height="14" x="8"
-                            y="8"
-                            rx="2"
-                            ry="2"></rect>
-                      <path stroke="rgb(74, 109, 71)"
-                            fill="none"
-                            fill-rule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clip-rule="evenodd"></path>
-                      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-                  </svg>
-                  <span class="text">Copy</span>
-              </a>
-          </div>
-  ) : (
-          <div slot="code">
-              <div class="top">
-                  <div class="nav">
-                      <div class="left">
-                          1
-                      </div>
-                      <div class="right">
-                          2
-                      </div>
-                  </div>
-              </div>
-              <div class="middle">
-                  <div class="preview">
-                      <Fragment set:html={html} />
-                  </div>
-              </div>
-              <div class="bottom">
-                  <div class="nav">
-                      <div class="left">
-                          3
-                      </div>
-                      <div class="right">
-                          4
-                      </div>
-                  </div>
-                  <div class="tabs">
-                      <div class="tab">
-                          <div>
-                              <Fragment set:html={code_formatted}/>
-                          </div>
-                          <div>
-                              <Fragment set:html={code_formatted}/>
-                          </div>
-                          <div>
-                              <Fragment set:html={code_formatted}/>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-  )}
-</xii-snippet>
+let snippet_classes_css = await snippet_classes();
 
-<script is:inline>
+const snippet_template = code_formatted ? `<div class="code${code_formatted && code_formatted.split('\n').length === 1 ? ' single' : ''}">
+    ${code_formatted}
+    <a class="clipboard has-tooltip btn btn-link" href="#" type="button"
+       style="font-size: 0.925rem;gap: 5px;">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="16"
+             height="16" viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+        >
+            <rect width="14" height="14" x="8"
+                  y="8"
+                  rx="2"
+                  ry="2"></rect>
+            <path stroke="rgb(74, 109, 71)"
+                  fill="none"
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"></path>
+            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+        </svg>
+        <span class="text">Copy</span>
+    </a>
+</div>` : `<div slot="code">
+    <div class="top">
+        <div class="nav">
+            <div class="left">
+                1
+            </div>
+            <div class="right">
+                2
+            </div>
+        </div>
+    </div>
+    <div class="middle">
+        <div class="preview">
+            ${html}
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="nav">
+            <div class="left">
+                3
+            </div>
+            <div class="right">
+                4
+            </div>
+        </div>
+        <div class="tabs">
+            <div class="tab">
+                <div>
+                    ${code_formatted}
+                </div>
+                <div>
+                    ${code_formatted}
+                </div>
+                <div>
+                    ${code_formatted}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>`;
+---
+<xii-snippet />
+
+<script define:vars={{snippet_template, snippet_classes_css}} is:inline>
+  const editTemplate = snippet_template;
+
   class Snippet extends HTMLElement {
     constructor() {
       super();
       const shadow = this.attachShadow({mode: 'open'});
       // 2. Create the constructable stylesheet object
       const sheet = new CSSStyleSheet();
-      sheet.replaceSync( document.getElementById('global')?.innerHTML);
+      sheet.replaceSync(snippet_classes_css);
 
 // 3. Attach the stylesheet to the shadow root
       shadow.adoptedStyleSheets = [sheet];
 
-      shadow.innerHTML = `
-      <slot part="code" name="code"></slot>
-    `;
+      //   shadow.innerHTML = `
+      //   <slot part="code" name="code"></slot>
+      // `;
+      // this.render();
     }
 
-    // render () {
-    //   return `<div><slot></slot></div>`;
-    // }
+    render() {
+      // Create a temporary template element instance
+      const tmpl = document.createElement('template');
+      tmpl.innerHTML = editTemplate;
+
+      this.shadowRoot.appendChild(tmpl.content.cloneNode(true));
+    }
+
+    // Initialize the component
+    init() {
+      this.render();
+    }
 
     connectedCallback() {
+
+      if (document.readyState !== 'loading') {
+        this.init();
+        return;
+      }
+
+      document.addEventListener('DOMContentLoaded', () => this.init(), {once: true});
+
       // Read the message from the data attribute.
       const message = this.dataset.message;
       const button = this.querySelector('button');
@@ -187,122 +194,3 @@ const snippet_classes_css = await snippet_classes();
 
   customElements.define('xii-snippet', Snippet);
 </script>
-
-<style lang="scss" is:global>
-  @use 'sass:list';
-  @use 'sass:string';
-  @use 'sass:meta';
-  @use 'sass:map';
-
-  @use '~/styles/app.scss' as app;
-
-  $code: (
-    border: 1px solid #3d444d,
-    border-radius: .425rem,
-    padding: 0,
-    line-height: 1.72,
-    _subclasses : (
-      'code' : (
-        background: none,
-        display: block,
-        counter-reset: step,
-        counter-increment: step 0,
-        _subclasses: (
-          '& .line' : (
-            display: inline-block,
-            width: 100%,
-            padding: 0 .825rem,
-            _subclasses: (
-              '&:first-child' : (
-                padding-top: 8px
-              ),
-              '&:last-child' : (
-                padding-bottom: 8px
-              ),
-            )
-          ),
-          '& .line.highlighted' : (
-            background-color: rgb(21, 27, 35),
-            //width: calc(100% + 48px),
-            //margin: 0px -24px,
-            //padding: 0px 24px,
-            transition: background-color 0.5s,
-          ),
-          '& .diff' : (
-            background: rgba(248, 81, 73, 0.1),
-          ),
-          '&[show-line-numbers] pre.shiki .line.diff:before' : (
-            display: inline-block,
-            text-align: right,
-            color: #cb7676,
-            content: "-",
-          ),
-          '& .add' : (
-            background: rgba(46, 160, 67, 0.15),
-            width: 100%,
-          ),
-          '&[show-line-numbers] pre.shiki .line.add:before' : (
-            display: inline-block,
-            text-align: right,
-            content: "+",
-            color: #3dd68c,
-          ),
-          '&[show-line-numbers] pre.shiki .line:before' : (
-            content: counter(step),
-            counter-increment: step,
-            width: 2ch,
-            margin-right: 1rem,
-            margin-left: .525rem,
-            display: inline-block,
-            text-align: right,
-            color: rgba(115, 138, 148, .4),
-          )
-        )
-      )
-    )
-  );
-
-  $snippet: (
-    /*background: var(--background),*/
-    box-shadow: var(--shadow),
-    z-index: 1,
-    border-radius: .425rem,
-    text-align: left,
-    padding: 0,
-    display: block,
-    margin: 0,
-    _subclasses : (
-      '.shiki' : $code,
-      '.code' : (
-        position: relative,
-        _subclasses : (
-          '.btn' : (
-            --padding: 0.25rem 0.5rem,
-            right: 8px,
-            top: 8px,
-            position: absolute,
-          ),
-          '&.single' : (
-            _subclasses : (
-              '.line' : (
-                padding: 0 2.5rem 0 0.825rem,
-              ),
-              '.btn' : (
-                --padding: 0.25rem,
-                top: 50%,
-                transform: translateY(-50%),
-                _subclasses : (
-                  '.text' : (
-                    display: none
-                  )
-                )
-              ),
-            )
-          ),
-        )
-      )
-    ),
-  );
-
-  @include app.generate-component($snippet, 'snippet', app.$config, app.$theme);
-</style>

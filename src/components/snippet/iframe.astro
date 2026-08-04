@@ -224,8 +224,8 @@ const iframe_wrapper_style = await sass.compileStringAsync(`
     )
   );
 
-  @include app.generate-component($wrapper, 'wrapper', app.$config, app.$theme);
-  @include app.generate-component($background, 'background', app.$config, app.$theme);
+  @include app.generate-component($wrapper, '.wrapper', app.$config, app.$theme);
+  @include app.generate-component($background, '.background', app.$config, app.$theme);
 `, { importers: scss_importes });
 
 if (Astro.slots.has('scss')) {
@@ -351,7 +351,7 @@ srcdoc += '</body></html>';
 
   @include app.generate-component(
     $iframe,
-    'iframe',
+    '.iframe',
     app.$config,
     app.$theme,
   );
