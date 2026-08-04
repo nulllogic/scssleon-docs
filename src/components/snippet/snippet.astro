@@ -1,10 +1,10 @@
 ---
 import * as sass from 'sass';
-import { Preview } from './';
-import { extractor } from './utils/';
-import { outline_classes_compile } from './utils/';
+import {Preview} from './';
+import {extractor} from './utils/';
+import {outline_classes_compile} from './utils/';
 
-import { codeToHtml } from 'shiki';
+import {codeToHtml} from 'shiki';
 
 import type {
   ShikiTransformer,
@@ -17,7 +17,7 @@ import {
   transformerNotationHighlight,
   transformerNotationFocus,
 } from '@shikijs/transformers';
-import { snippet_classes } from './utils';
+import {snippet_classes} from './utils';
 
 // HTML
 const html_rendered = (await Astro.slots.render('html'));
@@ -62,17 +62,19 @@ const code_formatted = code ? await codeToHtml(code, {
 }) : null;
 
 const snippet_classes_css = await snippet_classes();
-console.log(code_formatted);
 ---
-<xii-snippet class:list={[
-  {
-    single: (code_formatted && code_formatted.split('\n').length === 1) ??
-      false,
-  }]}>
+<xii-snippet>
+  <style id="global" set:html={snippet_classes_css} is:raw />
   {code_formatted ? (
-          <div class="code" slot="code">
-              <Fragment set:html={code_formatted} />
-              <a class="clipboard has-tooltip btn" href="#" type="button" style="font-size: 0.925rem;gap: 5px;">
+          <div class:list={[
+            'code',
+            {
+              single: (code_formatted && code_formatted.split('\n').length === 1) ??
+                false,
+            }]} slot="code" part="code">
+              <Fragment set:html={code_formatted}/>
+              <a class="clipboard has-tooltip btn btn-link" href="#" type="button"
+                 style="font-size: 0.925rem;gap: 5px;">
                   <svg xmlns="http://www.w3.org/2000/svg"
                        width="16"
                        height="16" viewBox="0 0 24 24"
@@ -97,52 +99,62 @@ console.log(code_formatted);
               </a>
           </div>
   ) : (
-          <div>
-              <div slot="preview" set:html={html}></div>
-              <div slot="html" set:html={html}></div>
-              <div slot="scss" set:html={scss}></div>
-              <div slot="js" set:html={js}></div>
+          <div slot="code">
+              <div class="top">
+                  <div class="nav">
+                      <div class="left">
+                          1
+                      </div>
+                      <div class="right">
+                          2
+                      </div>
+                  </div>
+              </div>
+              <div class="middle">
+                  <div class="preview">
+                      <Fragment set:html={html} />
+                  </div>
+              </div>
+              <div class="bottom">
+                  <div class="nav">
+                      <div class="left">
+                          3
+                      </div>
+                      <div class="right">
+                          4
+                      </div>
+                  </div>
+                  <div class="tabs">
+                      <div class="tab">
+                          <div>
+                              <Fragment set:html={code_formatted}/>
+                          </div>
+                          <div>
+                              <Fragment set:html={code_formatted}/>
+                          </div>
+                          <div>
+                              <Fragment set:html={code_formatted}/>
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
   )}
 </xii-snippet>
 
-<script define:vars={{ snippet_classes_css }} is:inline>
+<script is:inline>
   class Snippet extends HTMLElement {
-    constructor () {
+    constructor() {
       super();
-      const shadow = this.attachShadow({ mode: 'open' });
+      const shadow = this.attachShadow({mode: 'open'});
+      // 2. Create the constructable stylesheet object
+      const sheet = new CSSStyleSheet();
+      sheet.replaceSync( document.getElementById('global')?.innerHTML);
+
+// 3. Attach the stylesheet to the shadow root
+      shadow.adoptedStyleSheets = [sheet];
 
       shadow.innerHTML = `
-      <style>
-        
-        ::slotted(code) {
-            position: relative;
-        }
-        
-        :host .code .btn {
-            right: 8px;
-            top: 8px;
-            position: absolute;
-            --xii-padding: 0.25rem 0.5rem;
-        }
-        
-        :host(.single) .code .btn {
-            top: 50%;
-            transform: translateY(-50%);
-            --xii-padding: 0.25rem;
-        }
-        
-        :host(.single) .code .btn .text {
-            display: none;
-        }
-        
-        ${snippet_classes_css}
-      </style>
-      
-      <slot name="preview"></slot>
-      <slot name="html"></slot>
-      <slot name="scss"></slot>
-      <slot name="js"></slot>
       <slot part="code" name="code"></slot>
     `;
     }
@@ -151,7 +163,7 @@ console.log(code_formatted);
     //   return `<div><slot></slot></div>`;
     // }
 
-    connectedCallback () {
+    connectedCallback() {
       // Read the message from the data attribute.
       const message = this.dataset.message;
       const button = this.querySelector('button');
@@ -168,7 +180,7 @@ console.log(code_formatted);
       if (saved_theme) {
         this.dataset.theme = saved_theme;
       } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        this.dataset.theme = saved_theme;
+        this.dataset.theme = 'dark';
       }
     }
   }
@@ -261,89 +273,36 @@ console.log(code_formatted);
     margin: 0,
     _subclasses : (
       '.shiki' : $code,
-    )
+      '.code' : (
+        position: relative,
+        _subclasses : (
+          '.btn' : (
+            --padding: 0.25rem 0.5rem,
+            right: 8px,
+            top: 8px,
+            position: absolute,
+          ),
+          '&.single' : (
+            _subclasses : (
+              '.line' : (
+                padding: 0 2.5rem 0 0.825rem,
+              ),
+              '.btn' : (
+                --padding: 0.25rem,
+                top: 50%,
+                transform: translateY(-50%),
+                _subclasses : (
+                  '.text' : (
+                    display: none
+                  )
+                )
+              ),
+            )
+          ),
+        )
+      )
+    ),
   );
 
   @include app.generate-component($snippet, 'snippet', app.$config, app.$theme);
-</style>
-
-<style is:global>
-
-  .code {
-    pre.shiki {
-      border-radius: .425rem;
-      text-align: left;
-      padding: 0;
-      line-height: 1.725;
-      display: block;
-      margin: 0;
-
-      code {
-        display: block;
-      }
-    }
-  }
-
-  .code {
-
-    counter-reset: step;
-    counter-increment: step 0;
-
-    & .line {
-      display: inline-block;
-      width: 100%;
-
-      &:first-child {
-        padding-top: 8px;
-      }
-
-      &:last-child {
-        padding-bottom: 8px;
-      }
-    }
-
-    & .line.highlighted {
-      background-color: rgb(21, 27, 35);
-      //width: calc(100% + 48px);
-      //margin: 0px -24px;
-      //padding: 0px 24px;
-      transition: background-color 0.5s;
-    }
-
-    & .diff {
-      background: rgba(248, 81, 73, 0.1);
-    }
-
-    &.show-line-numbers pre.shiki .line.diff:before {
-
-      display: inline-block;
-      text-align: right;
-      color: #cb7676;
-      content: "-";
-    }
-
-    & .add {
-      background: rgba(46, 160, 67, 0.15);
-      width: 100%;
-
-    }
-
-    &.show-line-numbers pre.shiki .line.add:before {
-      display: inline-block;
-      text-align: right;
-      content: "+";
-      color: #3dd68c;
-    }
-
-    &.show-line-numbers pre.shiki .line:before {
-      content: counter(step);
-      counter-increment: step;
-      width: 2ch;
-      margin-right: 1rem;
-      margin-left: .525rem;
-      display: inline-block;
-      text-align: right;
-      color: rgba(115, 138, 148, .4)
-    }
-  }
 </style>

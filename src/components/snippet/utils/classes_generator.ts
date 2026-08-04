@@ -44,7 +44,7 @@ export async function snippet_classes () {
         web_components: true,
       )
     )
-  ); 
+  );
   
   // ↓ Root
   @use '~/styles/scss/root' with (
@@ -66,13 +66,6 @@ export async function snippet_classes () {
     $theme: app.$theme
   );
 
-  // ↓ Amazing content
-  // Special class \`.content\` to allow formatting of the default html tags
-  @use '~/styles/scss/content' with (
-    $config: app.$config,
-    $theme: app.$theme
-  );
-  
   // ↓ Buttons
   @use '~/styles/scss/components/button' with (
     $config: app.$config,
@@ -80,7 +73,7 @@ export async function snippet_classes () {
   );
 `, { importers: scss_importes });
 
-  compiled_css += base_style.css;
+  // compiled_css += base_style.css;
 
   const output = await sass.compileStringAsync(`
   :host(.outline) {
@@ -187,5 +180,6 @@ export async function snippet_classes () {
 `);
 
   compiled_css += output.css;
+
   return compiled_css;
 }
