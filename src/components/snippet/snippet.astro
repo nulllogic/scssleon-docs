@@ -62,30 +62,7 @@ let snippet_classes_css = await snippet_classes();
 
 const snippet_template = code_formatted ? `<div class="code${code_formatted && code_formatted.split('\n').length === 1 ? ' single' : ''}">
     ${code_formatted}
-    <a class="clipboard has-tooltip btn btn-link" href="#" type="button"
-       style="font-size: 0.925rem;gap: 5px;">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="16"
-             height="16" viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="2"
-             stroke-linecap="round"
-             stroke-linejoin="round"
-        >
-            <rect width="14" height="14" x="8"
-                  y="8"
-                  rx="2"
-                  ry="2"></rect>
-            <path stroke="rgb(74, 109, 71)"
-                  fill="none"
-                  fill-rule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"></path>
-            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-        </svg>
-        <span class="text">Copy</span>
-    </a>
+    <xii-button />
 </div>` : `<div slot="code">
     <div class="top">
         <div class="nav">
