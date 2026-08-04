@@ -1,12 +1,12 @@
 // src/components/MyReactComponent.jsx
 
 import styles from './code.module.scss';
+import clsx from 'clsx';
 
-export default function Snippet(props, { single = false }) {
+export default function Code(props) {
   return (
-    <div class={styles.code_wrapper}>
+    <div class={clsx({'single': props.single}, styles.code_wrapper)}>
       {props.children}
-      123
     </div>
   );
 }
