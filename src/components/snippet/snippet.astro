@@ -15,6 +15,7 @@ const {
   inline = false,
   single = true,
   multi_line = true,
+  lang = 'js'
 } = Astro.props;
 
 const {
@@ -33,4 +34,5 @@ import { Snippet } from './sub';
          js={js}
          code={code}
          single={single}
+         lang={lang}
 />

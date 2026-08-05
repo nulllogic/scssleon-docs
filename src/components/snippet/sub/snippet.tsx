@@ -4,7 +4,7 @@ import Code from './code.tsx';
 import styles from './snippet.module.scss';
 import clsx from 'clsx';
 
-export default function Snippet({title, html, scss, js, code = null, single = false}) {
+export default function Snippet({title, html = null, scss = null, js = null, code = null, lang = 'js', single = false}) {
   // console.log(title, html, scss, js, code, single);
   const lines = code ? code.split(/\r\n|\r|\n/).length : null;
   // console.log(single && lines && lines > 1);
@@ -30,7 +30,7 @@ export default function Snippet({title, html, scss, js, code = null, single = fa
 
         </div>
         <div className="code">
-          <Code code={code} lang={'scss'} />
+          <Code code={code} lang={lang} />
         </div>
       </div>
       {!single && (
