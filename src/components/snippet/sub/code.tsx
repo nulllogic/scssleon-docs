@@ -42,7 +42,7 @@ function getSharedHighlighter() {
   return highlighterPromise;
 }
 
-export default function Code({ code, lang, single = false, lines }: { code: string; lang: string }) {
+export default function Code({ code, lang, single = false, oneline = false }: { code: string; lang: string }) {
   const [html, setHtml] = useState<string | null>(null);
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function Code({ code, lang, single = false, lines }: { code: stri
     return <pre style={{padding: '0.625rem 0.825rem;', lineHeight : '1.35'}}><code>{code}</code></pre>; // Fallback unstyled view
   }
 
-  return <div className={clsx(styles.wrapper, {single : 'single'})} dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div className={clsx(styles.wrapper, {single : 'single'}, {oneline : 'oneline'})} dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
 // export default function Code({ code }) {

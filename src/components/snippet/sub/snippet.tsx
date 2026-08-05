@@ -34,7 +34,6 @@ export default function Snippet({title, html = null, scss = null, js = null, cod
         )}
         <div className="code">
           <Code code={code} lang={lang} single={single} oneline={lines && lines === 1} />
-          <Button />
         </div>
       </div>
       {!single && (
