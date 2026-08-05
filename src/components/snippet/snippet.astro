@@ -13,7 +13,7 @@ const {
   file = null,
   min_height = '',
   inline = false,
-  single = true,
+  single = false,
   multi_line = true,
   lang = 'js',
 } = Astro.props;
@@ -41,33 +41,39 @@ import Code from './sub/code.astro';
 // lang={lang}
 const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 ---
-<div class:list={[{'single' : Astro.props.single }]}>
-  {Astro.props.single && Astro.props.s && lines > 1 && (
-          <div class={clsx(styles.top)}>
+<div class:list={['snippet', { 'single': single }]}>
+  {(!single || (lines && lines > 1 )) && (
+          <div class="top">
               <div class="nav">
                   <div class="left">
                       <div class="title">
-                        {title}
+                        {Astro.props.title}
                       </div>
                   </div>
                   <div class="right">
-                      2
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                          <button type="button" class="btn">Left</button>
+                          <button type="button" class="btn">Middle</button>
+                          <button type="button" class="btn">Right</button>
+                      </div>
                   </div>
               </div>
           </div>
   )}
 
     <div class="middle">
-      {Astro.props.preview && (
+      {preview && (
               <div class="preview">
 
               </div>
       )}
-        <Code code={code} lang={lang} single={single}
-              oneline={lines && lines === 1}/>
-        <Button small={lines && lines === 1}/>
+      {code && (
+              <Code code={code} lang={lang} single={single}
+                    oneline={lines && lines === 1}/>
+              <Button small={lines && lines === 1}/>
+      )}
     </div>
-  {!Astro.props.single && (
+  {!single && (
           <div class="bottom">
               <div class="nav">
                   <div class="left">
@@ -80,13 +86,18 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
               <div class="tabs">
                   <div class="tab">
                       <div>
-
+                          <Code code={html} lang={'html'}
+                                show_line_numbers={true}/>
+                          <Button small={lines && lines === 1}/>
                       </div>
                       <div>
-
+                          <Code code={scss} lang={'scss'}
+                                show_line_numbers={true}/>
+                          <Button small={lines && lines === 1}/>
                       </div>
                       <div>
-
+                          <Code code={js} lang={'js'} show_line_numbers={true}/>
+                          <Button small={lines && lines === 1}/>
                       </div>
                   </div>
               </div>
@@ -100,8 +111,8 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
   $snippet-top: (
     background: #0d1117,
     border-radius: .425rem .425rem 0 0,
-    padding: 8px,
-    border-bottom: 1px solid #3d444d,
+    padding: .525rem 1rem,
+    border-bottom: 1px solid #333434,
     _subclasses : (
       '.nav' : (
         justify-content : space-between,
@@ -118,7 +129,7 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
     border-radius: 0 0 0.425rem 0.425rem,
     position: relative,
     _subclasses : (
-      '.btn' : (
+      ':global(.btn)' : (
         position: absolute,
         top: 8px,
         right: 8px,

@@ -29,7 +29,7 @@ const code_formatted = Astro.props.code ? await codeToHtml(Astro.props.code, {
 
 const html = `${code_formatted}`
 ---
-<div class:list={['code', {'single' : Astro.props.single }, {'oneline' : Astro.props.oneline }]}>
+<div class:list={['code', {'single' : Astro.props.single }, {'oneline' : Astro.props.oneline }, {'show_line_numbers' : Astro.props.show_line_numbers }]}>
     <Fragment class="codes" set:html={html} />
 </div>
 
@@ -44,6 +44,32 @@ const html = `${code_formatted}`
     padding: 0,
     line-height: 1.72,
     _subclasses : (
+      '&.show_line_numbers' : (
+        _subclasses : (
+          ':global(pre.shiki .line.diff:before)' : (
+            display: inline-block,
+            text-align: right,
+            color: #cb7676,
+            content: "-",
+          ),
+          ':global(pre.shiki .line.add:before)' : (
+            display: inline-block,
+            text-align: right,
+            content: "+",
+            color: #3dd68c,
+          ),
+          ':global(pre.shiki .line:before)' : (
+            content: counter(step),
+            counter-increment: step,
+            width: 2ch,
+            margin-right: 1rem,
+            margin-left: .525rem,
+            display: inline-block,
+            text-align: right,
+            color: rgba(115, 138, 148, .4),
+          )
+        )
+      ),
       '&.single' : (
         _subclasses : (
           ':global(.shiki)' : (
@@ -61,7 +87,7 @@ const html = `${code_formatted}`
           ),
         )
       ),
-      ':global(&.single.oneline)' : (
+      '&.single.oneline' : (
         _subclasses : (
           ':global(.shiki)' : (
             border-radius: .425rem,
@@ -76,6 +102,7 @@ const html = `${code_formatted}`
             display: block,
             counter-reset: step,
             counter-increment: step 0,
+            font-size: .825rem,
             _subclasses: (
               '& :global(.line)' : (
                 display: inline-block,
@@ -101,32 +128,10 @@ const html = `${code_formatted}`
               '& :global(.diff)' : (
                 background: rgba(248, 81, 73, 0.1),
               ),
-              '&[show-line-numbers] :global(pre.shiki .line.diff:before)' : (
-                display: inline-block,
-                text-align: right,
-                color: #cb7676,
-                content: "-",
-              ),
               '& :global(.add)' : (
                 background: rgba(46, 160, 67, 0.15),
                 width: 100%,
               ),
-              '&[show-line-numbers] :global(pre.shiki .line.add:before)' : (
-                display: inline-block,
-                text-align: right,
-                content: "+",
-                color: #3dd68c,
-              ),
-              '&[show-line-numbers] :global(pre.shiki .line:before)' : (
-                content: counter(step),
-                counter-increment: step,
-                width: 2ch,
-                margin-right: 1rem,
-                margin-left: .525rem,
-                display: inline-block,
-                text-align: right,
-                color: rgba(115, 138, 148, .4),
-              )
             )
           )
         )
