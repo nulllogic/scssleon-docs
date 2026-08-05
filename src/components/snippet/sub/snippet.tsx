@@ -1,7 +1,7 @@
 // src/components/MyReactComponent.jsx
 
-import Code from './code.tsx';
 import Button from './button.tsx';
+import Code from './code.tsx';
 import styles from './snippet.module.scss';
 import clsx from 'clsx';
 
@@ -34,6 +34,7 @@ export default function Snippet({title, html = null, scss = null, js = null, cod
         )}
         <div className="code">
           <Code code={code} lang={lang} single={single} oneline={lines && lines === 1} />
+          <Button small={lines && lines === 1} />
         </div>
       </div>
       {!single && (

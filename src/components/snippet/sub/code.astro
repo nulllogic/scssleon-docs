@@ -1,0 +1,143 @@
+---
+import {codeToHtml} from 'shiki';
+
+import type {
+  ShikiTransformer,
+  ThemeRegistration,
+  ThemeRegistrationRaw,
+} from 'shiki';
+
+import {
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationFocus,
+} from '@shikijs/transformers';
+
+const code_formatted = Astro.props.code ? await codeToHtml(Astro.props.code, {
+  lang: Astro.props?.lang ? Astro.props?.lang : 'html',
+  themes: {
+    light: 'github-light-default',
+    dark: 'github-dark-default',
+  },
+  defaultColor: 'light-dark()',
+  transformers: [
+    transformerNotationDiff(),
+    transformerNotationHighlight(),
+    transformerNotationFocus(),
+  ],
+}) : null;
+
+const html = `${code_formatted}`
+---
+<div class:list={['code', {'single' : Astro.props.single }, {'oneline' : Astro.props.oneline }]}>
+    <Fragment class="codes" set:html={html} />
+</div>
+
+<style lang="scss">
+  @use '~/styles/app.scss' as app;
+
+  code {
+    background: none;
+  }
+
+  $code_wrapper: (
+    padding: 0,
+    line-height: 1.72,
+    _subclasses : (
+      '&.single' : (
+        _subclasses : (
+          ':global(.shiki)' : (
+            border-radius: 0 0 .425rem .425rem,
+            _subclasses : (
+              ':global(code)' : (
+                _subclasses : (
+                  ':global(.line)' : (
+                    padding: 0 2.5rem 0 0.825rem,
+                    line-height: 1.875,
+                  )
+                )
+              )
+            )
+          ),
+        )
+      ),
+      ':global(&.single.oneline)' : (
+        _subclasses : (
+          ':global(.shiki)' : (
+            border-radius: .425rem,
+          )
+        )
+      ),
+      ':global(.shiki)' : (
+        border-radius: .425rem,
+        _subclasses : (
+          ':global(code)' : (
+            background: none,
+            display: block,
+            counter-reset: step,
+            counter-increment: step 0,
+            _subclasses: (
+              '& :global(.line)' : (
+                display: inline-block,
+                width: 100%,
+                padding: 0 .825rem,
+                line-height: 1.72,
+                _subclasses: (
+                  '&:first-child' : (
+                    padding-top: 8px
+                  ),
+                  '&:last-child' : (
+                    padding-bottom: 8px
+                  ),
+                )
+              ),
+              '& :global(.line.highlighted)' : (
+                background-color: rgb(21, 27, 35),
+                //width: calc(100% + 48px),
+                //margin: 0px -24px,
+                //padding: 0px 24px,
+                transition: background-color 0.5s,
+              ),
+              '& :global(.diff)' : (
+                background: rgba(248, 81, 73, 0.1),
+              ),
+              '&[show-line-numbers] :global(pre.shiki .line.diff:before)' : (
+                display: inline-block,
+                text-align: right,
+                color: #cb7676,
+                content: "-",
+              ),
+              '& :global(.add)' : (
+                background: rgba(46, 160, 67, 0.15),
+                width: 100%,
+              ),
+              '&[show-line-numbers] :global(pre.shiki .line.add:before)' : (
+                display: inline-block,
+                text-align: right,
+                content: "+",
+                color: #3dd68c,
+              ),
+              '&[show-line-numbers] :global(pre.shiki .line:before)' : (
+                content: counter(step),
+                counter-increment: step,
+                width: 2ch,
+                margin-right: 1rem,
+                margin-left: .525rem,
+                display: inline-block,
+                text-align: right,
+                color: rgba(115, 138, 148, .4),
+              )
+            )
+          )
+        )
+      ),
+    )
+  );
+
+  @include app.generate-component(
+    $code_wrapper,
+    '.code',
+    app.$config,
+    app.$theme
+  );
+</style>

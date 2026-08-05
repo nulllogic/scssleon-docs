@@ -15,7 +15,7 @@ const {
   inline = false,
   single = true,
   multi_line = true,
-  lang = 'js'
+  lang = 'js',
 } = Astro.props;
 
 const {
@@ -26,13 +26,145 @@ const {
 } = await extractor(file, title);
 
 import { Snippet } from './sub';
+import clsx from 'clsx';
+import styles from './sub/snippet.module.scss';
+// import Code from './sub/code.tsx';
+import Button from './sub/button.tsx';
+import Code from './sub/code.astro';
+
+// title={Astro.props.title}
+// html={html}
+// scss={scss}
+// js={js}
+// code={code}
+// single={single}
+// lang={lang}
+const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 ---
-<Snippet client:load
-         title={Astro.props.title}
-         html={html}
-         scss={scss}
-         js={js}
-         code={code}
-         single={single}
-         lang={lang}
-/>
+<div class:list={[{'single' : Astro.props.single }]}>
+  {Astro.props.single && Astro.props.s && lines > 1 && (
+          <div class={clsx(styles.top)}>
+              <div class="nav">
+                  <div class="left">
+                      <div class="title">
+                        {title}
+                      </div>
+                  </div>
+                  <div class="right">
+                      2
+                  </div>
+              </div>
+          </div>
+  )}
+
+    <div class="middle">
+      {Astro.props.preview && (
+              <div class="preview">
+
+              </div>
+      )}
+        <Code code={code} lang={lang} single={single}
+              oneline={lines && lines === 1}/>
+        <Button small={lines && lines === 1}/>
+    </div>
+  {!Astro.props.single && (
+          <div class="bottom">
+              <div class="nav">
+                  <div class="left">
+                      3
+                  </div>
+                  <div class="right">
+                      4
+                  </div>
+              </div>
+              <div class="tabs">
+                  <div class="tab">
+                      <div>
+
+                      </div>
+                      <div>
+
+                      </div>
+                      <div>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+  )}
+</div>
+
+<style lang="scss">
+  @use '~/styles/app.scss' as app;
+
+  $snippet-top: (
+    background: #0d1117,
+    border-radius: .425rem .425rem 0 0,
+    padding: 8px,
+    border-bottom: 1px solid #3d444d,
+    _subclasses : (
+      '.nav' : (
+        justify-content : space-between,
+        _subclasses : (
+          '.title' : (
+          )
+        )
+      ),
+    )
+  );
+
+  $snippet-middle: (
+    background: #0d1117,
+    border-radius: 0 0 0.425rem 0.425rem,
+    position: relative,
+    _subclasses : (
+      '.btn' : (
+        position: absolute,
+        top: 8px,
+        right: 8px,
+        _subclasses : (
+          '&.small' : (
+            top: 50%,
+            transform: translateY(-50%)
+          )
+        )
+      )
+    )
+  );
+
+
+  $snippet-bottom: (
+    background: #0d1117,
+    border-radius: 0 0 0.425rem 0.425rem,
+  );
+
+  $snippet: (
+    position: relative,
+    z-index: 1,
+    text-align: left,
+    padding: 0,
+    display: block,
+    margin: 0,
+    border: 1px solid #3d444d,
+    border-radius: .425rem,
+    _subclasses : (
+      '.top' : $snippet-top,
+      '.middle' : $snippet-middle,
+      '.bottom' : $snippet-bottom,
+      '&.single' : (
+        _subclasses : (
+          '.middle' : (
+            border-radius: .425rem,
+          )
+        )
+      )
+    )
+  );
+
+  @include app.generate-component(
+    $snippet,
+    '.snippet',
+    app.$config,
+    app.$theme
+  );
+</style>

@@ -3,7 +3,7 @@
 $button: (
   --xii-padding: 0.25rem 0.5rem,
   _subclasses : (
-    '&.single' : (
+    '&.small' : (
       --padding: 0.25rem,
       _subclasses : (
         '.text' : (
