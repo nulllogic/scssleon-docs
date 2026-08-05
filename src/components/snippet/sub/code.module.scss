@@ -1,5 +1,9 @@
 @use '~/styles/app.scss' as app;
 
+code {
+  background: none;
+}
+
 $code_wrapper: (
   padding: 0,
   line-height: 1.72,
