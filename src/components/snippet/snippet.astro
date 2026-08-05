@@ -127,8 +127,12 @@ const scss_generated = scss ? component_classes(scss) : null;
     border-radius: .425rem .425rem 0 0,
     padding: .525rem .825rem,
     border-bottom: 1px solid #333434,
+    min-height: 46px,
+    align-items: center,
+    display: flex,
     _subclasses : (
       '.nav' : (
+        width: 100%,
         justify-content : space-between,
         _subclasses : (
           '.title' : (
@@ -136,7 +140,7 @@ const scss_generated = scss ? component_classes(scss) : null;
               ':global(.bold)' : (
                 font-weight: 500,
                 display: inline-block,
-                padding: 0 .25rem,
+                padding: 0 .25rem 0 0,
               )
             )
           )
