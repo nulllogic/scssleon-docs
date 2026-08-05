@@ -34,7 +34,7 @@ const html = `${code_formatted}`;
   { 'single': Astro.props.single },
   { 'oneline': Astro.props.oneline },
   { 'show_line_numbers': Astro.props.show_line_numbers }]}>
-    <Fragment class="codes" set:html={html}/>
+    <Fragment set:html={html}/>
 </div>
 
 <style lang="scss">

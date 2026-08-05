@@ -25,13 +25,8 @@ const {
   code = null,
 } = await extractor(file, title);
 
-import { Snippet } from './sub';
-import clsx from 'clsx';
-import styles from './sub/snippet.module.scss';
-// import Code from './sub/code.tsx';
-import Button from './sub/button.tsx';
+import Button from './sub/button.astro';
 import Code from './sub/code.astro';
-import Preview from './sub/preview.ts';
 import { component_classes } from './utils/classes_generator.ts';
 
 // title={Astro.props.title}
@@ -57,10 +52,10 @@ const scss_generated = scss ? component_classes(scss) : null;
                     {!code && (
                             <div class="btn-group" role="group"
                                  aria-label="Basic example">
-                                <button type="button" class="btn">Left</button>
-                                <button type="button" class="btn">Middle
-                                </button>
-                                <button type="button" class="btn">Right</button>
+                                <Button type="button" class="btn small">Left</Button>
+                                <Button type="button" class="btn small">Middle
+                                </Button>
+                                <Button type="button" class="btn small">Right</Button>
                             </div>
                     )}
                   </div>
@@ -95,14 +90,14 @@ const scss_generated = scss ? component_classes(scss) : null;
                   <div class="left">
                       <div class="btn-group" role="group"
                            aria-label="Basic example">
-                          <button type="button" class="btn">Left</button>
-                          <button type="button" class="btn">Middle
-                          </button>
-                          <button type="button" class="btn">Right</button>
+                          <Button type="button" class="btn">Left</Button>
+                          <Button type="button" class="btn">Middle
+                          </Button>
+                          <Button type="button" class="btn">Right</Button>
                       </div>
                   </div>
                   <div class="right">
-                      <button type="button" class="btn">Right</button>
+                      <Button type="button" class="btn">Right</Button>
                   </div>
               </div>
               <div class="tabs">
@@ -131,7 +126,7 @@ const scss_generated = scss ? component_classes(scss) : null;
   $snippet-top: (
     background: #0d1117,
     border-radius: .425rem .425rem 0 0,
-    padding: 0 .825rem,
+    padding: .525rem .825rem,
     border-bottom: 1px solid #333434,
     _subclasses : (
       '.nav' : (

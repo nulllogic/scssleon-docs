@@ -26,22 +26,25 @@ const generate_class = (link) => {
 
     return [classes]
 }
+console.log(docs);
 ---
 
 <nav>
     <ul class="nav vertical">
         {components_category.sort(
             (a, b) => a?.data?.position - b?.data?.position).map((category) => {
+            const sort_options = category.id === 'getting-started' ? 'b.data.title.localeCompare(a.data.title)' : 'a.data.title.localeCompare(b.data.title)'
             return (
                     <li class="item">
                         <h5 class="title">{category.data.title}</h5>
                         <ul class="nav vertical">
                             {
-                                docs.filter((doc) => doc.data.category ===
+                                docs.sort((a, b) => a.data.title.localeCompare(b.data.title)).filter((doc) => doc.data.category ===
                                     category.id).sort((
                                     a,
-                                    b) => a?.data?.title.localeCompare(
-                                    b?.data?.title)).map((doc) => {
+                                    b) => {
+
+                                    return category.id === 'getting-started' ? b?.data.title.localeCompare(a.data.title) : a?.data.title.localeCompare(b.data.title)}).map((doc) => {
                                     return (
                                             <li class="item">
                                                 <a

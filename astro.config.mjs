@@ -6,7 +6,6 @@ const __dirname = dirname(__filename);
 
 import {defineConfig} from 'astro/config';
 
-import preact from '@astrojs/preact';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
@@ -25,7 +24,6 @@ export default defineConfig({
       }),
     }),
     sitemap(),
-    preact(),
     iframe(),
     (await import('astro-compress')).default({
       CSS: true,
