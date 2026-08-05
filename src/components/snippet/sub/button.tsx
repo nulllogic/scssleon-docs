@@ -3,9 +3,9 @@
 import styles from './button.module.scss';
 import clsx from 'clsx';
 
-export default function Button(props, { single = false }) {
+export default function Button({ single = false }) {
   return (
-    <div class={clsx({'single' : props.single}, 'btn clipboard', styles.button)}>
+    <div class={clsx({'small' : single}, 'btn clipboard', styles.button)}>
       <svg class={'icon'} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>

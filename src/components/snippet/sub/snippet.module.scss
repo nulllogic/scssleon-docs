@@ -40,6 +40,13 @@ $snippet: (
     '.top' : $snippet-top,
     '.middle' : $snippet-middle,
     '.bottom' : $snippet-bottom,
+    '&.single' : (
+      _subclasses : (
+        '.middle' : (
+          border-radius: .425rem,
+        )
+      )
+    )
   )
 );
 

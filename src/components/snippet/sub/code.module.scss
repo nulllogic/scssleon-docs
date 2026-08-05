@@ -11,6 +11,7 @@ $code_wrapper: (
     '&.single' : (
       _subclasses : (
         '.shiki' : (
+          border-radius: 0 0 .425rem .425rem,
           _subclasses : (
             'code' : (
               _subclasses : (
@@ -22,6 +23,13 @@ $code_wrapper: (
             )
           )
         ),
+      )
+    ),
+    '&.single.oneline' : (
+      _subclasses : (
+        '.shiki' : (
+          border-radius: .425rem,
+        )
       )
     ),
     '.shiki' : (

@@ -1,15 +1,16 @@
 // src/components/MyReactComponent.jsx
 
 import Code from './code.tsx';
+import Button from './button.tsx';
 import styles from './snippet.module.scss';
 import clsx from 'clsx';
 
-export default function Snippet({title, html = null, scss = null, js = null, code = null, lang = 'js', single = false}) {
+export default function Snippet({title, html = null, scss = null, js = null, code = null, lang = 'js', single = false, preview = false}) {
   // console.log(title, html, scss, js, code, single);
   const lines = code ? code.split(/\r\n|\r|\n/).length : null;
   // console.log(single && lines && lines > 1);
   return (
-    <div className={clsx(styles.snippet)}>
+    <div className={clsx(styles.snippet, {single : 'single'}, lines && lines === 1 && 'oneline' )}>
       {single && lines && lines > 1 && (
         <div className={clsx(styles.top)}>
           <div className="nav">
@@ -26,11 +27,14 @@ export default function Snippet({title, html = null, scss = null, js = null, cod
       )}
 
       <div className="middle">
-        <div className="preview">
+        {preview && (
+          <div className="preview">
 
-        </div>
+          </div>
+        )}
         <div className="code">
-          <Code code={code} lang={lang} />
+          <Code code={code} lang={lang} single={single} oneline={lines && lines === 1} />
+          <Button />
         </div>
       </div>
       {!single && (
