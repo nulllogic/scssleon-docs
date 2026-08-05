@@ -38,14 +38,6 @@ export async function component_classes(scss) {
 
   @forward '~/styles/scss/mixins';
   @forward '~/styles/scss/functions';
-
-  @use '~/styles/app.scss' as app with (
-    $overwrite : (
-      enable: (
-        web_components: true,
-      )
-    )
-  );
   
   ${scss}
 `, {importers: scss_importes});

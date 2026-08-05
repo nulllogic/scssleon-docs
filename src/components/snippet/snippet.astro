@@ -32,6 +32,7 @@ import styles from './sub/snippet.module.scss';
 import Button from './sub/button.tsx';
 import Code from './sub/code.astro';
 import Preview from './sub/preview.ts';
+import { component_classes } from './utils/classes_generator.ts';
 
 // title={Astro.props.title}
 // html={html}
@@ -41,6 +42,7 @@ import Preview from './sub/preview.ts';
 // single={single}
 // lang={lang}
 const lines = code ? code.split(/\r\n|\r|\n/).length : null;
+const scss_generated = scss ? component_classes(scss) : null;
 ---
 <div class:list={['snippet', { 'single': single }]}>
   {(!single || (lines && lines > 1)) && (
@@ -72,14 +74,11 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                   <xii-preview>
                       <div slot="html" set:html={html}></div>
                     {scss && (
-                            <div slot="scss">
-                              {scss}
-                            </div>
+                            <style slot="scss" set:html={scss_generated}>
+                            </style>
                     )}
                     {js && (
-                            <div slot="js">
-                              {js}
-                            </div>
+                      <script slot="js" set:html={js}></script>
                     )}
                   </xii-preview>
               </div>
@@ -124,6 +123,9 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 </div>
 
 <style lang="scss">
+  @use 'sass:map';
+  @use 'sass:string';
+
   @use '~/styles/app.scss' as app;
 
   $snippet-top: (
@@ -143,15 +145,24 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
   );
 
   $snippet-middle: (
-    background: #0d1117,
     border-radius: 0 0 0.425rem 0.425rem,
     position: relative,
     _subclasses : (
       '.preview' : (
-        padding: 0 .825rem,
+        padding: 1rem .825rem,
         border-bottom: 1px solid #333434,
+        background: var(--background),
+        _colors : (
+          light : (
+            /*color: rgb(229, 236, 226),*/
+            background : string.unquote('rgba(55, 241, 14, 0.09) linear-gradient(135deg, rgba(219, 226, 216, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(219, 226, 216, 0.45) 0, rgba(219, 226, 216, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
+          ),
+          dark : (
+            background : string.unquote('rgba(19, 38, 81, 0.1) linear-gradient(135deg, rgba(19, 83, 14, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(19, 83, 14, 0.45) 0, rgba(19, 83, 14, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
+          )
+        )
       ),
-      ':global(.btn)' : (
+      '> :global(.btn)' : (
         position: absolute,
         top: 8px,
         right: 8px,
@@ -222,6 +233,7 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 </style>
 
 <script client:load>
+  customElements.get('xii-preview') === undefined &&
   window.customElements.define('xii-preview', class extends HTMLElement {
     constructor () {
       super();
@@ -231,23 +243,9 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 
       // 添加样式和内容
       shadow.innerHTML = `
-      <style>
-        button {
-          background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-          border: none;
-          border-radius: 25px;
-          color: white;
-          cursor: pointer;
-          font-size: 16px;
-          padding: 12px 24px;
-          transition: transform 0.2s;
-        }
-        
-        button:hover {
-          transform: scale(1.05);
-        }
-      </style>
       <slot name="html"></slot>
+      <slot name="scss"></slot>
+      <slot name="js"></slot>
     `;
     }
   });

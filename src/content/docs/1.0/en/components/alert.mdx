@@ -37,25 +37,13 @@ import {Snippet} from "/src/components/snippet"
     </Fragment>
     <Fragment slot="scss">
         ```scss
-        @use 'sass:map';
         @use '~/styles/app.scss' as app;
 
-        // Load default button component
-        @use '@nulllogic/scssleon/scss/components/button' with (
-          $config: app.$config,
-          $theme: app.$theme
-        );
+        $accordion: app.get-theme(app.$theme, 'components.alert');
 
-        // Load alert component
         @include app.generate-component(
-          map.deep-merge(app.get-theme(app.$theme, 'components.alert'), (
-            _subclasses : (
-              '> div:nth-child(1)' : (
-                align-self: start
-              )
-            )
-          )),
-          'alert',
+          $accordion,
+          '.accordion',
           app.$config,
           app.$theme
         );
