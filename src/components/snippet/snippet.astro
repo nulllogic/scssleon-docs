@@ -31,6 +31,7 @@ import styles from './sub/snippet.module.scss';
 // import Code from './sub/code.tsx';
 import Button from './sub/button.tsx';
 import Code from './sub/code.astro';
+import Preview from './sub/preview.ts';
 
 // title={Astro.props.title}
 // html={html}
@@ -42,7 +43,7 @@ import Code from './sub/code.astro';
 const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 ---
 <div class:list={['snippet', { 'single': single }]}>
-  {(!single || (lines && lines > 1 )) && (
+  {(!single || (lines && lines > 1)) && (
           <div class="top">
               <div class="nav">
                   <div class="left">
@@ -51,11 +52,15 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                       </div>
                   </div>
                   <div class="right">
-                      <div class="btn-group" role="group" aria-label="Basic example">
-                          <button type="button" class="btn">Left</button>
-                          <button type="button" class="btn">Middle</button>
-                          <button type="button" class="btn">Right</button>
-                      </div>
+                    {!code && (
+                            <div class="btn-group" role="group"
+                                 aria-label="Basic example">
+                                <button type="button" class="btn">Left</button>
+                                <button type="button" class="btn">Middle
+                                </button>
+                                <button type="button" class="btn">Right</button>
+                            </div>
+                    )}
                   </div>
               </div>
           </div>
@@ -64,7 +69,19 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
     <div class="middle">
       {preview && (
               <div class="preview">
-
+                  <xii-preview>
+                      <div slot="html" set:html={html}></div>
+                    {scss && (
+                            <div slot="scss">
+                              {scss}
+                            </div>
+                    )}
+                    {js && (
+                            <div slot="js">
+                              {js}
+                            </div>
+                    )}
+                  </xii-preview>
               </div>
       )}
       {code && (
@@ -77,28 +94,29 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
           <div class="bottom">
               <div class="nav">
                   <div class="left">
-                      3
+                      <div class="btn-group" role="group"
+                           aria-label="Basic example">
+                          <button type="button" class="btn">Left</button>
+                          <button type="button" class="btn">Middle
+                          </button>
+                          <button type="button" class="btn">Right</button>
+                      </div>
                   </div>
                   <div class="right">
-                      4
+                      <button type="button" class="btn">Right</button>
                   </div>
               </div>
               <div class="tabs">
                   <div class="tab">
-                      <div>
-                          <Code code={html} lang={'html'}
-                                show_line_numbers={true}/>
-                          <Button small={lines && lines === 1}/>
-                      </div>
-                      <div>
-                          <Code code={scss} lang={'scss'}
-                                show_line_numbers={true}/>
-                          <Button small={lines && lines === 1}/>
-                      </div>
-                      <div>
-                          <Code code={js} lang={'js'} show_line_numbers={true}/>
-                          <Button small={lines && lines === 1}/>
-                      </div>
+                      <Code code={html} lang={'html'}
+                            show_line_numbers={true}/>
+                  </div>
+                  <div class="tab">
+                      <Code code={scss} lang={'scss'}
+                            show_line_numbers={true}/>
+                  </div>
+                  <div class="tab">
+                      <Code code={js} lang={'js'} show_line_numbers={true}/>
                   </div>
               </div>
           </div>
@@ -111,7 +129,7 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
   $snippet-top: (
     background: #0d1117,
     border-radius: .425rem .425rem 0 0,
-    padding: .525rem 1rem,
+    padding: 0 .825rem,
     border-bottom: 1px solid #333434,
     _subclasses : (
       '.nav' : (
@@ -129,6 +147,10 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
     border-radius: 0 0 0.425rem 0.425rem,
     position: relative,
     _subclasses : (
+      '.preview' : (
+        padding: 0 .825rem,
+        border-bottom: 1px solid #333434,
+      ),
       ':global(.btn)' : (
         position: absolute,
         top: 8px,
@@ -147,6 +169,25 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
   $snippet-bottom: (
     background: #0d1117,
     border-radius: 0 0 0.425rem 0.425rem,
+    _subclasses : (
+      '.nav' : (
+        padding: 0 .825rem,
+        justify-content : space-between,
+        border-bottom: 1px solid #333434,
+      ),
+      '.tabs' : (
+        _subclasses : (
+          '.tab' : (
+            _subclasses : (
+              '&:first-child' : (
+                display: block,
+              )
+            ),
+            display: none
+          )
+        )
+      )
+    )
   );
 
   $snippet: (
@@ -179,3 +220,35 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
     app.$theme
   );
 </style>
+
+<script client:load>
+  window.customElements.define('xii-preview', class extends HTMLElement {
+    constructor () {
+      super();
+
+      // 创建Shadow DOM
+      const shadow = this.attachShadow({ mode: 'open' });
+
+      // 添加样式和内容
+      shadow.innerHTML = `
+      <style>
+        button {
+          background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+          border: none;
+          border-radius: 25px;
+          color: white;
+          cursor: pointer;
+          font-size: 16px;
+          padding: 12px 24px;
+          transition: transform 0.2s;
+        }
+        
+        button:hover {
+          transform: scale(1.05);
+        }
+      </style>
+      <slot name="html"></slot>
+    `;
+    }
+  });
+</script>
