@@ -50,12 +50,9 @@ const scss_generated = scss ? component_classes(scss) : null;
                   </div>
                   <div class="right">
                     {!code && (
-                            <div class="btn-group" role="group"
-                                 aria-label="Basic example">
-                                <Button type="button" class="btn small">Left</Button>
-                                <Button type="button" class="btn small">Middle
-                                </Button>
-                                <Button type="button" class="btn small">Right</Button>
+                            <div class="btn-group separated" role="group" aria-label="Basic example" style="--xii-gap: .425rem;">
+                                <Button small icon={'outline'} />
+                                <Button small icon={'color_scheme'} />
                             </div>
                     )}
                   </div>
@@ -81,7 +78,7 @@ const scss_generated = scss ? component_classes(scss) : null;
       {code && (
               <Code code={code} lang={lang} single={single}
                     oneline={lines && lines === 1}/>
-              <Button small={lines && lines === 1}/>
+              <Button small={lines && lines === 1} icon={'clipboard'}/>
       )}
     </div>
   {!single && (
@@ -90,14 +87,13 @@ const scss_generated = scss ? component_classes(scss) : null;
                   <div class="left">
                       <div class="btn-group" role="group"
                            aria-label="Basic example">
-                          <Button type="button" class="btn">Left</Button>
-                          <Button type="button" class="btn">Middle
-                          </Button>
-                          <Button type="button" class="btn">Right</Button>
+                          <Button>HTML</Button>
+                          <Button>SCSS</Button>
+                          <Button>JS</Button>
                       </div>
                   </div>
                   <div class="right">
-                      <Button type="button" class="btn">Right</Button>
+                      <Button>Right</Button>
                   </div>
               </div>
               <div class="tabs">

@@ -1,6 +1,6 @@
 ---
-const {title, description} = Astro.props
-import {generate_rel_link} from "~/utils/links";
+const { title, description } = Astro.props;
+import { generate_rel_link } from '~/utils/links';
 ---
 <!-- |–––––––––––––––––––– SCSSLeon ϟ made with ♥ ––––-––––––––––––––––––––-| -->
 <!-- Global Metadata -->
@@ -10,11 +10,12 @@ import {generate_rel_link} from "~/utils/links";
 
 <slot/>
 
-<link rel="icon" type="image/svg+xml" href={generate_rel_link(Astro, './favicon.svg')}/>
+<link rel="icon" type="image/svg+xml"
+      href={generate_rel_link(Astro, './favicon.svg')}/>
 <meta name="generator" content={Astro.generator}/>
 
 <!-- Sitemap -->
-<link rel="sitemap" href={generate_rel_link(Astro, './sitemap-index.xml')} />
+<link rel="sitemap" href={generate_rel_link(Astro, './sitemap-index.xml')}/>
 
 <!-- Primary Meta Tags -->
 <meta name="title" content={title}/>
@@ -25,18 +26,23 @@ import {generate_rel_link} from "~/utils/links";
 <meta property="og:url" content={Astro.url}/>
 <meta property="og:title" content={title}/>
 <meta property="og:description" content={description}/>
-<meta property="og:image" content={import.meta.env.PROD ? Astro.url.origin + import.meta.env.BASE_URL + '/placeholder.png' : Astro.url + '/placeholder.png'}/>
-<meta property="og:image:alt" content={description} />
+<meta property="og:image" content={import.meta.env.PROD ? Astro.url.origin +
+  import.meta.env.BASE_URL + '/placeholder.png' : Astro.url +
+  '/placeholder.png'}/>
+<meta property="og:image:alt" content={description}/>
 
 <!-- Twitter -->
-<meta name="twitter:site" content="@nulllogic" />
-<meta name="twitter:creator" content="@nulllogic" />
+<meta name="twitter:site" content="@nulllogic"/>
+<meta name="twitter:creator" content="@nulllogic"/>
 <meta property="twitter:card" content="summary_large_image"/>
 <meta property="twitter:url" content={Astro.url}/>
 <meta property="twitter:title" content={title}/>
 <meta property="twitter:description" content={description}/>
-<meta property="twitter:image" content={import.meta.env.PROD ? Astro.url.origin + import.meta.env.BASE_URL + '/placeholder.png' : Astro.url + '/placeholder.png'} />
-<meta property="twitter:image:alt" content={description} />
+<meta property="twitter:image"
+      content={import.meta.env.PROD ? Astro.url.origin +
+        import.meta.env.BASE_URL + '/placeholder.png' : Astro.url +
+        '/placeholder.png'}/>
+<meta property="twitter:image:alt" content={description}/>
 
 <!-- Styles -->
 <style lang="scss" is:global>
@@ -96,8 +102,12 @@ import {generate_rel_link} from "~/utils/links";
 
   // ↓ Buttons
   @use '~/styles/scss/components/button' with (
-  $config: $config,
-  $theme: $theme
+    $config: $config,
+    $theme: $theme
+  );
+  @use '~/styles/scss/components/button_group' with (
+    $config: $config,
+    $theme: $theme
   );
 
   // ↓ Card
@@ -115,12 +125,12 @@ import {generate_rel_link} from "~/utils/links";
 </style>
 
 <script is:inline>
-    // Apply saved theme or system preference on page load
-    const saved_theme = localStorage.getItem('theme');
+  // Apply saved theme or system preference on page load
+  const saved_theme = localStorage.getItem('theme');
 
-    if (saved_theme) {
-        document.documentElement.setAttribute('data-theme', saved_theme);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    }
+  if (saved_theme) {
+    document.documentElement.setAttribute('data-theme', saved_theme);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
 </script>
