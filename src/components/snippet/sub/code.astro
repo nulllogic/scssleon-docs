@@ -1,5 +1,5 @@
 ---
-import {codeToHtml} from 'shiki';
+import { codeToHtml } from 'shiki';
 
 import type {
   ShikiTransformer,
@@ -27,10 +27,14 @@ const code_formatted = Astro.props.code ? await codeToHtml(Astro.props.code, {
   ],
 }) : null;
 
-const html = `${code_formatted}`
+const html = `${code_formatted}`;
 ---
-<div class:list={['code', {'single' : Astro.props.single }, {'oneline' : Astro.props.oneline }, {'show_line_numbers' : Astro.props.show_line_numbers }]}>
-    <Fragment class="codes" set:html={html} />
+<div class:list={[
+  'code',
+  { 'single': Astro.props.single },
+  { 'oneline': Astro.props.oneline },
+  { 'show_line_numbers': Astro.props.show_line_numbers }]}>
+    <Fragment class="codes" set:html={html}/>
 </div>
 
 <style lang="scss">
@@ -96,6 +100,8 @@ const html = `${code_formatted}`
       ),
       ':global(.shiki)' : (
         border-radius: .425rem,
+        padding: 0,
+        margin: 0,
         _subclasses : (
           ':global(code)' : (
             background: none,

@@ -238,10 +238,9 @@ const scss_generated = scss ? component_classes(scss) : null;
     constructor () {
       super();
 
-      // 创建Shadow DOM
+      // 🥷创建 Shadow DOM
       const shadow = this.attachShadow({ mode: 'open' });
 
-      // 添加样式和内容
       shadow.innerHTML = `
       <slot name="html"></slot>
       <slot name="scss"></slot>
