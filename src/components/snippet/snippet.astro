@@ -76,12 +76,15 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
           <div class="bottom">
               <div class="nav">
                   <div class="left">
-                      <div class="btn-group" role="group"
-                           aria-label="Basic example">
-                          <Button>HTML</Button>
-                          <Button>SCSS</Button>
-                          <Button>JS</Button>
-                      </div>
+                      <Button class="link active html5 tab" title="HTML"
+                              icon="html5" badge={1} />
+                      {scss && (
+                        <Button class="link scss tab" title="SCSS"
+                                icon="scss"/>
+                      )}
+                      {js && (
+                        <Button class="link js tab" title="JS" icon="js"/>
+                      )}
                   </div>
                   <div class="right">
                       <div class="wrapper">
@@ -92,17 +95,21 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                   </div>
               </div>
               <div class="tabs">
-                  <div class="tab">
+                  <div class="tab active">
                       <Code code={html} lang={'html'}
                             show_line_numbers={true}/>
                   </div>
-                  <div class="tab">
-                      <Code code={scss} lang={'scss'}
-                            show_line_numbers={true}/>
-                  </div>
-                  <div class="tab">
-                      <Code code={js} lang={'js'} show_line_numbers={true}/>
-                  </div>
+                  {scss && (
+                    <div class="tab">
+                        <Code code={scss} lang={'scss'}
+                              show_line_numbers={true}/>
+                    </div>
+                  )}
+                  {js && (
+                    <div class="tab">
+                        <Code code={js} lang={'js'} show_line_numbers={true}/>
+                    </div>
+                  )}
               </div>
           </div>
   )}
@@ -166,16 +173,53 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
     background: #0d1117,
     border-radius: 0 0 0.425rem 0.425rem,
     _subclasses : (
-      '.nav' : (
+      '> .nav' : (
         padding: .525rem .825rem,
         justify-content : space-between,
         border-bottom: 1px solid #333434,
+        _subclasses : (
+          '.left' : (
+            --gap: .425rem,
+            text-decoration: none,
+            display: flex,
+            gap: var(--gap),
+            _subclasses : (
+              '.btn.link' : (
+                text-decoration: none,
+                --padding: .365rem .45rem,
+                _subclasses : (
+                  '&:hover' : (
+                    background: #656c7633,
+                  ),
+                  '&.active' : (
+                    font-weight: 700,
+                    background: #656c7633,
+                    position: relative,
+                    _subclasses : (
+                      '&:after' : (
+                        content: "",
+                        height: 2px,
+                        pointer-events: none,
+                        background-color: oklch(0.7304 0.1502 34.05),
+                        position: absolute,
+                        width: 100%,
+                        left:0,
+                        bottom: -9px,
+                        right: 0,
+                      )
+                    )
+                  ),
+                )
+              )
+            )
+          )
+        )
       ),
       '.tabs' : (
         _subclasses : (
           '.tab' : (
             _subclasses : (
-              '&:first-child' : (
+              '&.active' : (
                 display: block,
               )
             ),
@@ -265,34 +309,24 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 
     // @TODO rewrite a bit code below to make it look nicer
 
-    if (snippet.querySelector('.bottomnav .navbar')) {
-      const nav_items_left = snippet.querySelectorAll(
-        '.bottomnav .navbar .left .nav .item');
-      const tab_items = snippet.querySelectorAll('.tab-content .tab');
+    if (snippet.querySelector('.bottom .nav .left')) {
+      const tabs_nav_items = snippet.querySelectorAll(
+        '.bottom .nav .left .tab');
+      const tab_items = snippet.querySelectorAll('.bottom .tabs .tab');
 
-      nav_items_left.forEach((nav, index) => {
-        nav.querySelectorAll('.link').
-          forEach(element => element.addEventListener('click', function (e) {
-            e.preventDefault();
+        tabs_nav_items.forEach((nav, index) => {
+            nav.addEventListener('click', function (e) {
+                e.preventDefault();
+                console.log(nav);
 
-            nav_items_left.forEach(
-              element => element.classList.remove('active'));
-            nav.classList.add('active');
+                tabs_nav_items.forEach(
+                  element => element.classList.remove('active'));
+                nav.classList.add('active');
 
-            tab_items.forEach(element => element.classList.remove('active'));
-            tab_items[index].classList.add('active');
-          }));
-      });
-
-      const nav_items_right = snippet.querySelectorAll(
-        '.navbar .right .nav .item');
-      nav_items_right.forEach((nav, index) => {
-        nav.querySelectorAll('.link').
-          forEach(element => element.addEventListener('click', function (e) {
-            e.preventDefault();
-
-          }));
-      });
+                tab_items.forEach(element => element.classList.remove('active'));
+                tab_items[index].classList.add('active');
+            });
+        });
 
     }
 
@@ -407,9 +441,9 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
             // button.classList.toggle('clicked');
           }
 
-            if (button.classList.contains('outline')) {
-                button.classList.toggle('clicked');
-            }
+          if (button.classList.contains('outline')) {
+            button.classList.toggle('clicked');
+          }
 
         });
       });

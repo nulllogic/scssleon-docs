@@ -167,7 +167,7 @@ const base_style = await sass.compileStringAsync(`
     $config: app.$config,
     $theme: app.$theme
   );
-`, { importers: scss_importes });
+`, { importers: scss_importes, style: 'compressed' });
 
 srcdoc += `<style>    
     ${base_style.css}
@@ -198,13 +198,13 @@ srcdoc += '</head>';
 
 srcdoc += '<body>';
 
-srcdoc += '<div class="wrapper">';
+srcdoc += '';
 
 if (Astro.slots.has('html')) {
   srcdoc += (await Astro.slots.render('html'));
 }
 
-srcdoc += '</div>';
+srcdoc += '';
 
 srcdoc += `<script is:inline>
   // Apply saved theme or system preference on page load
