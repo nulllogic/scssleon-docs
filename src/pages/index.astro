@@ -8,6 +8,7 @@ const response = await fetch(
   'https://api.github.com/repos/nulllogic/scssleon/branches/master');
 
 const data = await response.json();
+
 const commit_date =
   typeof data.message === 'undefined'
     ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
