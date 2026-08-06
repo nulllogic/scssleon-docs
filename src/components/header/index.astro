@@ -319,7 +319,7 @@ const { title, category } = Astro.props;
             box-shadow: var(--shadow),
           ),
           '.navbar' : $navbar,
-          '.link' : (
+          '.link:has(svg)' : (
             _subclasses : (
               '&:hover' : (
                 transform: scale(1.15),
