@@ -7,26 +7,26 @@ visible: false
 ---
 import { Snippet } from "/src/components/snippet"
 
-<Snippet file={file} single={true} title={'*Intro* (ﾉ◕ヮ◕)ﾉ*-✧✨'} lang={'scss'}>
-  <Fragment slot={'code'}>
-      ```
-      @use '~/src/styles/app.scss' as app; // [!code highlight]
-
-      // [!code highlight]
-      $accordion: app.get-theme(app.$theme, 'components.accordion');
-      // [!code highlight]
-      @include app.generate-component(
-        $accordion, // [!code ++]
-        '.accordion',
-        app.$config,
-        app.$theme
-      );
-      ```
-  </Fragment>
-</Snippet>
-
 ## Quick start
 SCSSLeon is a sassy and stylish framework that's here to revolutionize your CSS game. With its sleek and modern approach, SCSSleon brings a touch of class to your web development projects. It's like the James Bond of CSS frameworks - suave, sophisticated, and always dressed to impress.
+
+<Snippet file={file} single={true} title={'*Intro* (ﾉ◕ヮ◕)ﾉ*-✧✨'} lang={'scss'}>
+  <Fragment slot={'code'}>
+    ```
+    @use '~/src/styles/app.scss' as app; // [!code highlight]
+
+    // [!code highlight]
+    $accordion: app.get-theme(app.$theme, 'components.accordion');
+    // [!code highlight]
+    @include app.generate-component(
+      $accordion, // [!code ++]
+      '.accordion',
+      app.$config,
+      app.$theme
+    );
+    ```
+  </Fragment>
+</Snippet>
 
 ## Community
 33
