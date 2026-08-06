@@ -2,7 +2,11 @@
 const { class: className } = Astro.props;
 ---
 <a href="#"
-   class:list={['btn', { 'small': Astro.props?.small }, className]}>
+   class:list={[
+     'btn',
+     { 'small': Astro.props?.small },
+     className,
+     { 'has-tooltip': Astro.props?.tooltip }]}>
   {Astro.props?.icon === 'clipboard' && (
           <span class={'icon_wrapper'}>
               <svg class={'icon copy'} xmlns="http://www.w3.org/2000/svg"
@@ -23,11 +27,14 @@ const { class: className } = Astro.props;
           </span>
   )}
   {Astro.props?.icon === 'outline' && (
-          <svg viewBox="0 0 14 14" width="17" height="17"
-               xmlns="http://www.w3.org/2000/svg" fill="none" class={'icon'}>
-              <path d="M2 2.004v2H1v-2.5a.5.5 0 01.5-.5H4v1H2zM1 9.004v-4h1v4H1zM1 10.004v2.5a.5.5 0 00.5.5H4v-1H2v-2H1zM10 13.004h2.5a.5.5 0 00.5-.5v-2.5h-1v2h-2v1zM12 4.004h1v-2.5a.5.5 0 00-.5-.5H10v1h2v2zM9 12.004v1H5v-1h4zM9 1.004v1H5v-1h4zM13 9.004h-1v-4h1v4zM7 8.004a1 1 0 100-2 1 1 0 000 2z"
-                    fill="currentColor"></path>
-          </svg>
+          <span class={'icon_wrapper'}>
+            <svg viewBox="0 0 14 14" width="17" height="17"
+                 xmlns="http://www.w3.org/2000/svg" fill="none" class={'icon'}>
+                <path d="M2 2.004v2H1v-2.5a.5.5 0 01.5-.5H4v1H2zM1 9.004v-4h1v4H1zM1 10.004v2.5a.5.5 0 00.5.5H4v-1H2v-2H1zM10 13.004h2.5a.5.5 0 00.5-.5v-2.5h-1v2h-2v1zM12 4.004h1v-2.5a.5.5 0 00-.5-.5H10v1h2v2zM9 12.004v1H5v-1h4zM9 1.004v1H5v-1h4zM13 9.004h-1v-4h1v4zM7 8.004a1 1 0 100-2 1 1 0 000 2z"
+                      fill="currentColor"></path>
+            </svg>
+            <span class="indicator"/>
+          </span>
   )}
   {Astro.props?.icon === 'color_scheme' && (
           <span class={'icon_wrapper'}>
@@ -51,6 +58,11 @@ const { class: className } = Astro.props;
   {!Astro.props?.small && (
           <span class="text">Copy</span>
   )}
+  {Astro.props?.tooltip && (
+          <span class="tooltip">
+            <span>Copied</span>
+          </span>
+  )}
 </a>
 
 <style lang="scss">
@@ -61,6 +73,174 @@ const { class: className } = Astro.props;
 
   @use '~/styles/app.scss' as app;
 
+  $icon-clipboard: (
+    _subclasses: (
+      '&.clicked' : (
+        --border : var(--hover-border)
+      ),
+      '&.clicked .icon.copy' : (
+        visibility: hidden,
+        filter: blur(0.75px),
+        transform: scale(0.8),
+      ),
+      '&.clicked .icon.complete' : (
+        filter: blur(0),
+        transform: scale(1),
+        opacity: 1,
+        visibility: visible,
+        _subclasses : (
+          ':global(path)' : (
+            animation: icon_reveal .4s ease-out 1,
+            _animations: (
+              'icon_reveal' : (
+                'from' : (
+                  clip-path: inset(0 100% 0 0),
+                ),
+                'to' : (
+                  clip-path: inset(0 0 0 0),
+                )
+              )
+            ),
+          )
+        )
+      ),
+      '&.clicked .tooltip' : (
+        display: block,
+        opacity: 1,
+        transform: translateY(5px),
+        _atrule : (
+          '@starting-style' : (
+            opacity: 0,
+            transform: translateY(-3px)
+          )
+        ),
+      ),
+      '.icon.copy' : (
+        display: inherit,
+        opacity: 1,
+        visibility: visible,
+        transform: scale(1),
+        filter: blur(0),
+        transition: string.unquote("filter 0.15s ease-out, opacity 0.15s ease-out, transform 0.15s ease-out, visibility 0.15s ease-out"),
+      ),
+      '.icon.complete' : (
+        position: absolute,
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        width: 100%,
+        height: 100%,
+        transform: scale(0),
+        transition: string.unquote("filter 0.15s ease-in, opacity 0.15s ease-in, transform 0.15s ease-in, visibility 0.2s ease-in"),
+        filter: blur(2px),
+        opacity: 0,
+        visibility: hidden,
+        _subclasses: (
+          ':global(path)' : (
+            fill : oklch(0.695 0.181 145.621)
+          )
+        )
+      ),
+    )
+  );
+
+  $icon-color-scheme: (
+    _subclasses: (
+      '&.clicked' : (
+        _subclasses: (
+          '.icon.light' : (
+            opacity: 0,
+            animation: icon-enter 0.2s forwards,
+          ),
+          '.icon.dark' : (
+            opacity: 0,
+            animation: icon-enter 0.2s forwards,
+          )
+        )
+      ),
+      '.icon_wrapper' : (
+        position: relative,
+        width: 17px,
+        height: 17px,
+      ),
+      '.icon' : (
+        display: none,
+        _animations : (
+          'icon-enter' : (
+            '0%' : (
+              opacity: 0,
+              transform:rotate(180deg)
+            ),
+            '100%' : (
+              opacity: 1,
+              transform:rotate(0deg)
+            )
+          ),
+        ),
+      ),
+      'svg' : (
+        transform: rotate(0),
+        opacity: 1,
+        position: absolute,
+        transition: string.unquote('transform 0.2s ease-in, opacity 0.2s ease-in'),
+      ),
+      '&.dark .icon.dark' : (
+        display: inline-block
+      ),
+      '&.light .icon.light' : (
+        display: inline-block
+      ),
+    )
+  );
+
+  $icon-outline: (
+    _subclasses: (
+      '.icon_wrapper' : (
+        position: relative,
+        _subclasses: (
+          '.indicator' : (
+            position: absolute,
+            bottom: -11px,
+            width: 100%,
+            height: 2px,
+            background: oklch(0.55 0.16 143.41),
+            border-radius: 2px,
+            left: 0,
+            opacity: 0,
+            visibility: hidden,
+            pointer-events: none,
+            transition: string.unquote("filter 0.15s ease-out, opacity 0.15s ease-out, transform 0.15s ease-out, visibility 0.15s ease-out"),
+            transform: translateY(-4px),
+            filter: blur(1px)
+          )
+        )
+      ),
+      '&.clicked' : (
+        /*box-shadow: var(--active-shadow),*/
+        border: 1px solid oklch(0.695 0.181 145.621 / 0.63),
+        background: oklch(0.3164 0.0819 143.39),
+        _subclasses: (
+          '.icon_wrapper .indicator' : (
+            transform: translateY(0),
+            opacity: 1,
+            visibility: visible,
+            filter: blur(0)
+          ),
+          '.icon' : (
+            /*-webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7)),*/
+            filter: drop-shadow(1px 1px 1px oklch(0 0 0 / 70.17%)),
+            _subclasses: (
+              ':global(path)' : (
+                fill : oklch(0.79 0.23 145.75),
+              )
+            )
+          ),
+        )
+      ),
+    )
+  );
+
   $button: (
     _subclasses : (
       '&.small' : (
@@ -70,83 +250,9 @@ const { class: className } = Astro.props;
         display: block,
         position: relative,
       ),
-      '&.color_scheme' : (
-        _subclasses: (
-          '&.dark .icon.dark' : (
-            display: block
-          ),
-          '&.light .icon.light' : (
-            display: block
-          ),
-          '& .icon_wrapper' : (
-            width: 17px,
-            height: 17px,
-          ),
-          '& .icon' : (
-            display: none,
-          )
-        )
-      ),
-      '&.clipboard': (
-        _subclasses: (
-          '&.clicked' : (
-            --border : var(--hover-border)
-          ),
-          '&.clicked .icon.copy' : (
-            visibility: hidden,
-            filter: blur(0.75px),
-            transform: scale(0.8),
-          ),
-          '&.clicked .icon.complete' : (
-            filter: blur(0),
-            transform: scale(1),
-            opacity: 1,
-            visibility: visible,
-            _subclasses : (
-              ':global(path)' : (
-                animation: icon_reveal .4s ease-out 1,
-                _animations: (
-                  'icon_reveal' : (
-                    'from' : (
-                      clip-path: inset(0 100% 0 0),
-                    ),
-                    'to' : (
-                      clip-path: inset(0 0 0 0),
-                    )
-                  )
-                ),
-              )
-            )
-          ),
-          '.icon.copy' : (
-            display: inherit,
-            opacity: 1,
-            visibility: visible,
-            transform: scale(1),
-            filter: blur(0),
-            transition: string.unquote("filter 0.15s ease-out, opacity 0.15s ease-out, transform 0.15s ease-out, visibility 0.15s ease-out"),
-          ),
-          '.icon.complete' : (
-            position: absolute,
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            width: 100%,
-            height: 100%,
-            transform: scale(0),
-            transition: string.unquote("filter 0.15s ease-in, opacity 0.15s ease-in, transform 0.15s ease-in, visibility 0.2s ease-in"),
-            filter: blur(2px),
-            opacity: 0,
-            visibility: hidden,
-            _subclasses: (
-              ':global(path)' : (
-                fill : #1fba39,
-              )
-            )
-          ),
-        )
-      )
+      '&.color_scheme' : $icon-color-scheme,
+      '&.clipboard': $icon-clipboard,
+      '&.outline': $icon-outline,
     )
   );
 

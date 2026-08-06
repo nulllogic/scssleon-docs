@@ -67,7 +67,8 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
               <div class:list={[
                 'wrapper',
                 { 'vertical': lines && lines === 1 }]}>
-                  <Button class="clipboard" small={lines && lines === 1} icon={'clipboard'}/>
+                  <Button class="clipboard" small={lines && lines === 1}
+                          icon={'clipboard'} tooltip/>
               </div>
       )}
     </div>
@@ -393,6 +394,9 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
           if (button.classList.contains('color_scheme')) {
             const event = new Event('dark_mode_toggle');
             document.dispatchEvent(event);
+
+            button.classList.add('clicked');
+
             if (button.classList.contains('dark')) {
               button.classList.remove('dark');
               button.classList.add('light');
@@ -402,6 +406,10 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
             }
             // button.classList.toggle('clicked');
           }
+
+            if (button.classList.contains('outline')) {
+                button.classList.toggle('clicked');
+            }
 
         });
       });
