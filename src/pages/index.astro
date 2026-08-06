@@ -4,23 +4,28 @@ import { Snippet } from '../components/snippet';
 import Link from '~/components/link.astro';
 import { generate_rel_link } from '~/utils/links';
 
-const response = await fetch(
-  'https://api.github.com/repos/nulllogic/scssleon/branches/master');
+// const response = await fetch(
+//   'https://api.github.com/repos/nulllogic/scssleon/branches/master');
+//
+// const data = await response.json();
 
-const data = await response.json();
+// const commit_date =
+//   typeof data.message === 'undefined'
+//     ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
+//       month: 'long',
+//       day: 'numeric',
+//       year: 'numeric',
+//     })
+//     : new Date();
 
-const commit_date =
-  typeof data.message === 'undefined'
-    ? new Date(data.commit.commit.author.date).toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    })
-    : new Date();
+const commit_date = Date.now();
 
-const package_response = await fetch(
-  'https://raw.githubusercontent.com/nulllogic/scssleon/refs/heads/master/package.json');
-const package_info = await package_response.json();
+// const package_response = await fetch(
+//   'https://raw.githubusercontent.com/nulllogic/scssleon/refs/heads/master/package.json');
+// const package_info = await package_response.json();
+const package_info = {
+    version: '1.3.5'
+}
 ---
 <Index>
     <main>
@@ -394,6 +399,7 @@ const package_info = await package_response.json();
             color: transparent,
             -webkit-text-fill-color: transparent,
             font-size: 3rem,
+            letter-spacing: 2px,
             /*text-transform: uppercase,*/
             /*margin-top: -40px,*/
             _colors : (

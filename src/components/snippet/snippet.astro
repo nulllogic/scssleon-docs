@@ -1,11 +1,5 @@
 ---
 import { extractor } from './utils/';
-// HTML
-const html_rendered = (await Astro.slots.render('html'));
-// SCSS
-const scss_rendered = (await Astro.slots.render('scss'));
-// JS
-const js_rendered = (await Astro.slots.render('js'));
 
 const {
   title = '',
@@ -25,12 +19,13 @@ const {
   code = null,
 } = await extractor(file, title);
 
-import Button from './sub/button.astro';
-import Code from './sub/code.astro';
+import { Button } from './sub';
+import { Code } from './sub';
+import { Preview } from './sub';
+
 import { component_classes } from './utils/classes_generator.ts';
 
 const lines = code ? code.split(/\r\n|\r|\n/).length : null;
-const scss_generated = scss ? await component_classes(scss) : null;
 ---
 <div class:list={['snippet', { 'single': single }]}>
   {(!single || (lines && lines > 1)) && (
@@ -47,8 +42,10 @@ const scss_generated = scss ? await component_classes(scss) : null;
                             <div class="btn-group separated" role="group"
                                  aria-label="Basic example"
                                  style="--xii-gap: .425rem;">
-                                <Button small icon={'outline'}/>
-                                <Button small icon={'color_scheme'}/>
+                                <Button class="toggle outline" small
+                                        icon={'outline'}/>
+                                <Button class="toggle color_scheme" small
+                                        icon={'color_scheme'}/>
                             </div>
                     )}
                   </div>
@@ -58,24 +55,19 @@ const scss_generated = scss ? await component_classes(scss) : null;
 
     <div class="middle">
       {preview && (
-              <div class="preview">
-                  <xii-preview>
-                      <template set:html={'<div class="wrapper">' +
-                                html + '</div>' + '<style>' +
-                                (scss ? scss_generated : '') +
-                                '</style>' + '<script>' + (js ? js : '') +
-                                '</script>'}>
-                      </template>
-                  </xii-preview>
-              </div>
+              <Preview min_height={min_height}>
+                  <Fragment slot="html" set:html={html} is:raw/>
+                  <Fragment slot="scss" set:html={scss} is:raw/>
+                  <Fragment slot="js" set:html={js} is:raw/>
+              </Preview>
       )}
       {code && (
               <Code code={code} lang={lang} single={single}
                     oneline={lines && lines === 1}/>
               <div class:list={[
-                'btn_wrapper',
+                'wrapper',
                 { 'vertical': lines && lines === 1 }]}>
-                  <Button small={lines && lines === 1} icon={'clipboard'}/>
+                  <Button class="clipboard" small={lines && lines === 1} icon={'clipboard'}/>
               </div>
       )}
     </div>
@@ -91,8 +83,10 @@ const scss_generated = scss ? await component_classes(scss) : null;
                       </div>
                   </div>
                   <div class="right">
-                      <div class="btn_wrapper">
-                          <Button small icon="clipboard">Right</Button>
+                      <div class="wrapper">
+                          <Button class="clipboard" small icon="clipboard">
+                              Right
+                          </Button>
                       </div>
                   </div>
               </div>
@@ -147,24 +141,11 @@ const scss_generated = scss ? await component_classes(scss) : null;
   );
 
   $snippet-middle: (
-    border-radius: 0 0 0.425rem 0.425rem,
+    /*border-radius: 0 0 0.425rem 0.425rem,*/
     position: relative,
+    border-bottom: 1px solid #333434,
     _subclasses : (
-      '.preview' : (
-        padding: 1rem .825rem,
-        border-bottom: 1px solid #333434,
-        background: var(--background),
-        _colors : (
-          light : (
-            /*color: rgb(229, 236, 226),*/
-            background : string.unquote('rgba(55, 241, 14, 0.09) linear-gradient(135deg, rgba(219, 226, 216, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(219, 226, 216, 0.45) 0, rgba(219, 226, 216, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
-          ),
-          dark : (
-            background : string.unquote('rgba(19, 38, 81, 0.1) linear-gradient(135deg, rgba(19, 83, 14, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(19, 83, 14, 0.45) 0, rgba(19, 83, 14, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
-          )
-        )
-      ),
-      '> .btn_wrapper' : (
+      '.wrapper' : (
         position: absolute,
         top: 8px,
         right: 8px,
@@ -221,6 +202,7 @@ const scss_generated = scss ? await component_classes(scss) : null;
         _subclasses : (
           '.middle' : (
             border-radius: .425rem,
+            border-bottom: none,
           )
         )
       )
@@ -234,38 +216,6 @@ const scss_generated = scss ? await component_classes(scss) : null;
     app.$theme
   );
 </style>
-
-<script>
-    customElements.get('xii-preview') === undefined &&
-    window.customElements.define('xii-preview', class extends HTMLElement {
-        constructor () {
-            super();
-
-            // 🥷创建 Shadow DOM
-            const shadow = this.attachShadow({ mode: 'open' });
-
-            const template = this.querySelector('template');
-
-            const sheet = new CSSStyleSheet();
-            sheet.replaceSync(template.content.querySelector('style').innerHTML);
-            shadow.adoptedStyleSheets.push(sheet); // Component's paragraphs are red
-
-            shadow.appendChild(template.content.querySelector('.wrapper').cloneNode(true));
-
-        }
-
-        connectedCallback () {
-            // Apply saved theme or system preference on page load
-            const saved_theme = localStorage.getItem('theme');
-
-            if (saved_theme) {
-                this.shadowRoot.firstElementChild.setAttribute('data-theme', saved_theme);
-            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                this.shadowRoot.firstElementChild.setAttribute('data-theme', 'dark');
-            }
-        }
-    });
-</script>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -296,5 +246,165 @@ const scss_generated = scss ? await component_classes(scss) : null;
         console.log(button);
       });
     });
+  });
+</script>
+
+<script>
+
+  document.querySelectorAll('.snippet').forEach((snippet) => {
+
+    // Tabs
+
+    // Checking first, if element exist
+    if (snippet.querySelector('.topnav .navbar')) {
+      const nav_items_top_left = snippet.querySelectorAll(
+        '.topnav .navbar .left .nav .item .link');
+
+    }
+
+    // @TODO rewrite a bit code below to make it look nicer
+
+    if (snippet.querySelector('.bottomnav .navbar')) {
+      const nav_items_left = snippet.querySelectorAll(
+        '.bottomnav .navbar .left .nav .item');
+      const tab_items = snippet.querySelectorAll('.tab-content .tab');
+
+      nav_items_left.forEach((nav, index) => {
+        nav.querySelectorAll('.link').
+          forEach(element => element.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            nav_items_left.forEach(
+              element => element.classList.remove('active'));
+            nav.classList.add('active');
+
+            tab_items.forEach(element => element.classList.remove('active'));
+            tab_items[index].classList.add('active');
+          }));
+      });
+
+      const nav_items_right = snippet.querySelectorAll(
+        '.navbar .right .nav .item');
+      nav_items_right.forEach((nav, index) => {
+        nav.querySelectorAll('.link').
+          forEach(element => element.addEventListener('click', function (e) {
+            e.preventDefault();
+
+          }));
+      });
+
+    }
+
+    const preview = snippet.querySelector('.preview');
+
+    if (preview) {
+      // Proceed, if preview is enabled
+
+      const resizer = snippet.querySelector('.preview .resizer .drag');
+      if (resizer) {
+        const container_limit = Math.round(preview.clientWidth / 1.5);
+
+        resizer.onmousedown = (event) => {
+          event.preventDefault();
+
+          const original_margin = parseFloat(
+            isNaN(preview.style.marginRight) ? preview.style.marginRight : 0,
+          );
+          const original_mouse_x = event.pageX;
+
+          const event_drag_start_handler = (event) => {
+            const width = original_margin - (event.pageX - original_mouse_x);
+            if (width < container_limit && width > 0) {
+              preview.style.marginRight = width + 'px';
+            } else if (width < 0) {
+              preview.style.marginRight = 0 + 'px';
+            }
+          };
+
+          const event_drag_end_handler = (event) => {
+            document.documentElement.classList.remove('dragging');
+            preview.classList.remove('is_resizing');
+            document.removeEventListener('mousemove', event_drag_start_handler);
+            document.removeEventListener('mouseup', event_drag_end_handler);
+          };
+
+          document.documentElement.classList.add('dragging');
+          preview.classList.add('is_resizing');
+          document.addEventListener('mousemove', event_drag_start_handler);
+          document.addEventListener('mouseup', event_drag_end_handler,
+            { once: true });
+        };
+      }
+    }
+
+    const buttons = snippet.querySelectorAll('.btn');
+
+    if (buttons.length > 0) {
+      buttons.forEach((button, index) => {
+
+        if (button.classList.contains('toggle') &&
+          button.classList.contains('color_scheme')) {
+          button?.classList.add(localStorage.getItem('theme'));
+        }
+
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+
+          if (button.classList.contains('clipboard')) {
+
+            if (!button?.classList.contains('clicked')) {
+              button?.classList.add('clicked');
+              setTimeout(() => {
+                button?.classList.remove('clicked');
+              }, 1250);
+            }
+
+            // let tooltip = button.querySelector('.tooltip')
+            //
+            // tooltip?.classList.add('show')
+            //
+            // let random_tooltip_index = Math.floor(Math.random() * 5)
+            //
+            // tooltip?.querySelectorAll(':scope.funky > *').forEach((text, index) => {
+            //     text.setAttribute('hidden', '')
+            //     if (index === random_tooltip_index) {
+            //         text.removeAttribute('hidden')
+            //     }
+            // })
+            //
+            // let copied_text = snippet.querySelector('.astro-code code')?.innerText;
+            //
+            // navigator.clipboard.writeText(copied_text).then(function () {
+            //     /* clipboard successfully set */
+            //     setTimeout(() => {
+            //         button.querySelector('.tooltip')?.classList.remove('show')
+            //     }, 800)
+            // }, function () {
+            //     /* clipboard write failed */
+            // })
+          }
+
+          // if (button.classList.contains('toggle_outline')) {
+          //   const event = new Event('toggle_outline');
+          //   document.dispatchEvent(event);
+          // }
+          //
+
+          if (button.classList.contains('color_scheme')) {
+            const event = new Event('dark_mode_toggle');
+            document.dispatchEvent(event);
+            if (button.classList.contains('dark')) {
+              button.classList.remove('dark');
+              button.classList.add('light');
+            } else {
+              button.classList.remove('light');
+              button.classList.add('dark');
+            }
+            // button.classList.toggle('clicked');
+          }
+
+        });
+      });
+    }
   });
 </script>

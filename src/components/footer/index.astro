@@ -1,9 +1,14 @@
 ---
-import Logo from '~/components/logo/index.astro'
-import Link from '~/components/link.astro'
+import Logo from '~/components/logo/index.astro';
+import Link from '~/components/link.astro';
 
-const package_response = await fetch('https://raw.githubusercontent.com/nulllogic/scssleon/refs/heads/master/package.json')
-const package_info = await package_response.json()
+// const package_response = await fetch(
+//   'https://raw.githubusercontent.com/nulllogic/scssleon/refs/heads/master/package.json');
+// const package_info = await package_response.json();
+
+const package_info = {
+    version : '1.3.5',
+}
 ---
 
 <footer class="footer">
@@ -33,17 +38,23 @@ const package_info = await package_response.json()
                 <h5 class="title">Links</h5>
                 <ul class="nav vertical">
                     <li class="item">
-                        <Link href={import.meta.env.PROD ? '/scssleon-docs' : '/'} aria-label="Home" title="Home">Home
+                        <Link href={import.meta.env.PROD
+                          ? '/scssleon-docs'
+                          : '/'} aria-label="Home" title="Home">Home
                         </Link>
                     </li>
                     <li class="item">
-                        <Link href={import.meta.env.PROD ? '/scssleon-docs/docs/1.0/en/getting-started/introduction' : '/docs/1.0/en/getting-started/introduction'}
+                        <Link href={import.meta.env.PROD
+                          ? '/scssleon-docs/docs/1.0/en/getting-started/introduction'
+                          : '/docs/1.0/en/getting-started/introduction'}
                               aria-label="Components"
                               title="Components">Components
                         </Link>
                     </li>
                     <li class="item">
-                        <Link href={import.meta.env.PROD ? '/scssleon-docs/sections/1.0/en/welcome/' : '/sections/1.0/en/welcome/'}
+                        <Link href={import.meta.env.PROD
+                          ? '/scssleon-docs/sections/1.0/en/welcome/'
+                          : '/sections/1.0/en/welcome/'}
                               aria-label="Sections" title="Sections">Sections
                         </Link>
                     </li>
@@ -154,88 +165,88 @@ const package_info = await package_response.json()
 </style>
 
 <script>
-    customElements.define('svg-circle', class extends HTMLElement {
-        connectedCallback() {
-            this.innerHTML = `<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+  customElements.define('svg-circle', class extends HTMLElement {
+    connectedCallback () {
+      this.innerHTML = `<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
              fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd"
                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                   clip-rule="evenodd"/>
-        </svg>`
-        }
-    });
+        </svg>`;
+    }
+  });
 
-    // BFCache
-    window.addEventListener('pageshow', (event) => {
-        if (event.persisted) {
-            // Force a reload if the user has logged out.
-            location.reload();
-        }
-    });
+  // BFCache
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      // Force a reload if the user has logged out.
+      location.reload();
+    }
+  });
 </script>
 
 <style>
-    .spinner {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center
+  .spinner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+  }
+
+  .spinner-circle {
+    transform-origin: center;
+    animation: spinner-circle-animate 1s step-start infinite
+  }
+
+  //rect {
+  //    fill: rgb(161, 161, 161);
+  //}
+
+  @keyframes spinner-circle-animate {
+    0% {
+      transform: rotate(0)
     }
 
-    .spinner-circle {
-        transform-origin: center;
-        animation: spinner-circle-animate 1s step-start infinite
+    10% {
+      transform: rotate(36deg)
     }
 
-    //rect {
-    //    fill: rgb(161, 161, 161);
-    //}
-
-    @keyframes spinner-circle-animate {
-        0% {
-            transform: rotate(0)
-        }
-
-        10% {
-            transform: rotate(36deg)
-        }
-
-        20% {
-            transform: rotate(72deg)
-        }
-
-        30% {
-            transform: rotate(108deg)
-        }
-
-        40% {
-            transform: rotate(144deg)
-        }
-
-        50% {
-            transform: rotate(180deg)
-        }
-
-        60% {
-            transform: rotate(216deg)
-        }
-
-        70% {
-            transform: rotate(252deg)
-        }
-
-        80% {
-            transform: rotate(288deg)
-        }
-
-        90% {
-            transform: rotate(324deg)
-        }
-
-        to {
-            transform: rotate(360deg)
-        }
+    20% {
+      transform: rotate(72deg)
     }
+
+    30% {
+      transform: rotate(108deg)
+    }
+
+    40% {
+      transform: rotate(144deg)
+    }
+
+    50% {
+      transform: rotate(180deg)
+    }
+
+    60% {
+      transform: rotate(216deg)
+    }
+
+    70% {
+      transform: rotate(252deg)
+    }
+
+    80% {
+      transform: rotate(288deg)
+    }
+
+    90% {
+      transform: rotate(324deg)
+    }
+
+    to {
+      transform: rotate(360deg)
+    }
+  }
 </style>
 
 <style lang="scss" is:global>
@@ -255,7 +266,7 @@ const package_info = await package_response.json()
 </style>
 
 <style is:global>
-    .preload * {
-        transition: none !important;
-    }
+  .preload * {
+    transition: none !important;
+  }
 </style>{}

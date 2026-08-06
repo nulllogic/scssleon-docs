@@ -38,14 +38,6 @@ let srcdoc = `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <head>`;
 
-srcdoc += `<script>
-    
-    window.addEventListener('load', function(){
-      
-    })
-
-</script>`;
-
 // Outline styling for debug purposes
 
 const outline = await sass.compileStringAsync(`
@@ -175,58 +167,11 @@ const base_style = await sass.compileStringAsync(`
     $config: app.$config,
     $theme: app.$theme
   );
-
-  // ↓ Amazing content
-  // Special class \`.content\` to allow formatting of the default html tags
-  @use '@nulllogic/scssleon/scss/content' with (
-    $config: app.$config,
-    $theme: app.$theme
-  );
 `, { importers: scss_importes });
 
-srcdoc += `<style>
+srcdoc += `<style>    
     ${base_style.css}
 </style>`;
-
-const iframe_wrapper_style = await sass.compileStringAsync(`
-  @use 'sass:list';
-  @use 'sass:string';
-  @use 'sass:meta';
-  @use 'sass:map';
-
-  @use '~/styles/app.scss' as app;
-
-  $wrapper: (
-    position: relative,
-    padding: 1rem,
-    overflow: scroll,
-    z-index: 2,
-  );
-  
-  $background: (
-    position: absolute,
-    width: 100%,
-    height: 100%,
-    top: 0,
-    left: 0,
-    z-index: 1,
-    -webkit-user-select: none,
-    user-select: none,
-    background: var(--background),
-    _colors : (
-      light : (
-        /*color: rgb(229, 236, 226),*/
-        background : string.unquote('rgba(55, 241, 14, 0.09) linear-gradient(135deg, rgba(219, 226, 216, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(219, 226, 216, 0.45) 0, rgba(219, 226, 216, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
-      ),
-      dark : (
-        background : string.unquote('rgba(19, 38, 81, 0.1) linear-gradient(135deg, rgba(19, 83, 14, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(19, 83, 14, 0.45) 0, rgba(19, 83, 14, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
-      )
-    )
-  );
-
-  @include app.generate-component($wrapper, '.wrapper', app.$config, app.$theme);
-  @include app.generate-component($background, '.background', app.$config, app.$theme);
-`, { importers: scss_importes });
 
 if (Astro.slots.has('scss')) {
   const scss = (await Astro.slots.render('scss')).replace(
@@ -240,15 +185,18 @@ if (Astro.slots.has('scss')) {
 }
 
 srcdoc += `<style>
-    ${iframe_wrapper_style.css}
+    body {
+      position: relative;
+      padding: 1rem;
+      overflow: scroll;
+      z-index: 2;
+      background: none;
+    }
 </style>`;
 
 srcdoc += '</head>';
 
 srcdoc += '<body>';
-
-// Adding background here ;;
-srcdoc += '<div class="background"></div>';
 
 srcdoc += '<div class="wrapper">';
 
@@ -258,60 +206,35 @@ if (Astro.slots.has('html')) {
 
 srcdoc += '</div>';
 
+srcdoc += `<script is:inline>
+  // Apply saved theme or system preference on page load
+  const saved_theme = localStorage.getItem('theme');
+
+  if (saved_theme) {
+    document.documentElement.setAttribute('data-theme', saved_theme);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+</script>`;
+
+srcdoc += `<script>
+document.addEventListener('readystatechange', function () {
+  
+  if (document.readyState === 'interactive') {
+    // DOM is ready
+    // All resources loaded
+    document.querySelector('body').classList.remove('preload');
+   
+  }
+  if (document.readyState === 'complete') {
+    
+  }
+}, {once : true})
+</script>`;
+
 if (Astro.slots.has('js')) {
   srcdoc += '<script is:inline>' + iframe_scripts + '</script>';
 }
-
-srcdoc += `<script is:inline>
-parent.document.addEventListener('toggle_outline', (e) => {
-  const existingStyle = document.getElementById('outline')
-
-  if (!existingStyle) {
-    const style = document.createElement('style')
-    style.setAttribute('id', 'outline')
-    style.innerHTML = "${outline.css.replace(/(\r\n|\n|\r)/gm, '')}";
-    document.head.appendChild(style)
-  } else {
-    existingStyle.remove()
-  }
-})
-</script>`;
-
-srcdoc += `<script is:inline>
-
-parent.document.addEventListener('dark_mode_toggle', (e) => {
-  const current_theme = document.documentElement.getAttribute('data-theme')
-  const new_theme = current_theme === 'dark' ? 'light' : 'dark'
-  document.documentElement.setAttribute('data-theme', new_theme)
-})
-
-// Apply saved theme or system preference on page load
-const saved_theme = localStorage.getItem('theme')
-
-if (saved_theme) {
-  document.documentElement.setAttribute('data-theme', saved_theme)
-} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  document.documentElement.setAttribute('data-theme', 'dark')
-}
-</script>`;
-
-srcdoc += `<script is:inline>
-parent.document.addEventListener('theme_change', (e) => {
-  document.documentElement.setAttribute('data-theme', e?.detail?.theme)
-})
-</script>`;
-
-srcdoc += `<script is:inline>
-document.addEventListener('readystatechange', function () {
-  if (document.readyState === 'interactive') {
-    // DOM is ready
-  }
-  if (document.readyState === 'complete') {
-    // All resources loaded
-    document.querySelector('body').classList.remove('preload');
-  }
-})
-</script>`;
 
 srcdoc += `<style>
 .preload * {
@@ -328,7 +251,7 @@ srcdoc += '</body></html>';
         loading="lazy"
         srcdoc={srcdoc}
         onload="iframe_onload(this);"
-        data-min-height={min_height !== null ? min_height + 'px' : 0}
+        style="flex-grow: 1;width: 100%; border: none;height: auto"
 />
 
 <style lang="scss">
@@ -360,12 +283,15 @@ srcdoc += '</body></html>';
 <script is:inline>
   function iframe_onload (iframe) {
 
-    if (iframe.dataset.minHeight) {
-      iframe.contentDocument.querySelector(
-        '.wrapper').style.minHeight = iframe.dataset.minHeight;
-    }
-    iframe.style.height = iframe.contentDocument.body.scrollHeight +
-      'px';
+    iframe.style.height = iframe.contentDocument.body.scrollHeight + 'px';
     iframe.style.visibility = 'visible';
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        iframe.style.height = entry.borderBoxSize[0].blockSize + 'px';
+      }
+    });
+
+    resizeObserver.observe(iframe.contentDocument.body, {box: 'border-box'});
   }
 </script>

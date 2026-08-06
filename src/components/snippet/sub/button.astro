@@ -1,39 +1,52 @@
 ---
-
+const { class: className } = Astro.props;
 ---
-<a href="#" class:list={['btn', { 'small': Astro.props?.small }]}>
+<a href="#"
+   class:list={['btn', { 'small': Astro.props?.small }, className]}>
   {Astro.props?.icon === 'clipboard' && (
-          <svg class={'icon'} xmlns="http://www.w3.org/2000/svg" width="16"
-               height="16" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round"
-               stroke-linejoin="round">
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-              <path stroke="rgb(74, 109, 71)" fill="none" fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"></path>
-              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+          <span class={'icon_wrapper'}>
+              <svg class={'icon copy'} xmlns="http://www.w3.org/2000/svg"
+                   width="16"
+                   height="16" viewBox="0 0 16 16" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round">
+              <path stroke-width="1.5" d="M6.7,5.3h6.7c0.7,0,1.3,0.6,1.3,1.3v6.7c0,0.7-0.6,1.3-1.3,1.3H6.7c-0.7,0-1.3-0.6-1.3-1.3V6.7
+	C5.3,5.9,5.9,5.3,6.7,5.3z"/>
+              <path stroke-width="1.5"
+                    d="M2.7,10.7c-0.7,0-1.3-0.6-1.3-1.3V2.7c0-0.7,0.6-1.3,1.3-1.3h6.7c0.7,0,1.3,0.6,1.3,1.3"/>
           </svg>
+          <svg class="icon complete" aria-hidden="true" height="16"
+               viewBox="0 0 16 16" width="16">
+              <path d="M14.3,2.7c0.2,0.3,0.3,1.1-0.2,1.7l-7.4,8.2c-0.3,0.3-0.8,0.3-1.1,0L2.3,8.9C1.7,8.3,1.9,7.6,2.2,7.3
+	c0.2-0.2,0.9-0.6,1.3-0.1l2.7,3l6.7-7.4C13.3,2.3,14,2.4,14.3,2.7z"/>
+          </svg>
+          </span>
   )}
   {Astro.props?.icon === 'outline' && (
-          <svg viewBox="0 0 14 14" width="16" height="16"
+          <svg viewBox="0 0 14 14" width="17" height="17"
                xmlns="http://www.w3.org/2000/svg" fill="none" class={'icon'}>
               <path d="M2 2.004v2H1v-2.5a.5.5 0 01.5-.5H4v1H2zM1 9.004v-4h1v4H1zM1 10.004v2.5a.5.5 0 00.5.5H4v-1H2v-2H1zM10 13.004h2.5a.5.5 0 00.5-.5v-2.5h-1v2h-2v1zM12 4.004h1v-2.5a.5.5 0 00-.5-.5H10v1h2v2zM9 12.004v1H5v-1h4zM9 1.004v1H5v-1h4zM13 9.004h-1v-4h1v4zM7 8.004a1 1 0 100-2 1 1 0 000 2z"
                     fill="currentColor"></path>
           </svg>
   )}
   {Astro.props?.icon === 'color_scheme' && (
-          <svg viewBox="0 0 24 24" width="16" height="16" class="icon white" fill="none"
-               stroke-width="1.5" stroke="currentColor">
-              <path d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"></path>
-          </svg>
-          <svg viewBox="0 0 24 24" width="16" height="16"
-               xmlns="http://www.w3.org/2000/svg" class="icon dark" fill="none"
-               stroke="currentColor"
-               stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
-              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-          </svg>
+          <span class={'icon_wrapper'}>
+            <svg viewBox="0 0 24 24" width="17" height="17" class="icon dark"
+                 fill="none"
+                 stroke-width="1.5" stroke="currentColor">
+                <path d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+            </svg>
+            <svg viewBox="0 0 24 24" width="17" height="17"
+                 xmlns="http://www.w3.org/2000/svg" class="icon light"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-linecap="round" stroke-linejoin="round"
+                 stroke-width="1">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+          </span>
   )}
   {!Astro.props?.small && (
           <span class="text">Copy</span>
@@ -44,6 +57,7 @@
   @use 'sass:list';
   @use 'sass:meta';
   @use 'sass:map';
+  @use 'sass:string';
 
   @use '~/styles/app.scss' as app;
 
@@ -52,9 +66,83 @@
       '&.small' : (
         --padding: .325rem
       ),
-      '.icon' : (
-        width: 16px,
-        height: 16px,
+      '.icon_wrapper' : (
+        display: block,
+        position: relative,
+      ),
+      '&.color_scheme' : (
+        _subclasses: (
+          '&.dark .icon.dark' : (
+            display: block
+          ),
+          '&.light .icon.light' : (
+            display: block
+          ),
+          '& .icon_wrapper' : (
+            width: 17px,
+            height: 17px,
+          ),
+          '& .icon' : (
+            display: none,
+          )
+        )
+      ),
+      '&.clipboard': (
+        _subclasses: (
+          '&.clicked .icon.copy' : (
+            visibility: hidden,
+            filter: blur(1px),
+            transform: scale(0.8),
+          ),
+          '&.clicked .icon.complete' : (
+            filter: blur(0),
+            transform: scale(1),
+            opacity: 1,
+            visibility: visible,
+            _subclasses : (
+              ':global(path)' : (
+                animation: icon_reveal .45s ease-in-out 1,
+                _animations: (
+                  'icon_reveal' : (
+                    'from' : (
+                      clip-path: inset(0 100% 0 0),
+                    ),
+                    'to' : (
+                      clip-path: inset(0 0 0 0),
+                    )
+                  )
+                ),
+              )
+            )
+          ),
+          '.icon.copy' : (
+            display: inherit,
+            opacity: 1,
+            visibility: visible,
+            transform: scale(1),
+            filter: blur(0),
+            transition: string.unquote("filter 0.15s ease-out, opacity 0.15s ease-out, transform 0.15s ease-out, visibility 0.15s ease-out"),
+          ),
+          '.icon.complete' : (
+            position: absolute,
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            width: 100%,
+            height: 100%,
+            transform: scale(0),
+            transition: string.unquote("filter 0.3s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s ease-out"),
+            filter: blur(5px),
+            opacity: 0,
+            visibility: hidden,
+            _subclasses: (
+              ':global(path)' : (
+                fill : #1fba39,
+              )
+            )
+          ),
+        )
       )
     )
   );
