@@ -1,7 +1,7 @@
 ---
 
 ---
-<div class:list={['btn', { 'small': Astro.props?.small }]}>
+<a href="#" class:list={['btn', { 'small': Astro.props?.small }]}>
   {Astro.props?.icon === 'clipboard' && (
           <svg class={'icon'} xmlns="http://www.w3.org/2000/svg" width="16"
                height="16" viewBox="0 0 24 24" fill="none"
@@ -38,7 +38,7 @@
   {!Astro.props?.small && (
           <span class="text">Copy</span>
   )}
-</div>
+</a>
 
 <style lang="scss">
   @use 'sass:list';

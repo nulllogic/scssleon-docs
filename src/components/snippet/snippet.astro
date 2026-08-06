@@ -1,5 +1,5 @@
 ---
-import { extractor } from './utils/';
+import {extractor} from './utils/';
 // HTML
 const html_rendered = (await Astro.slots.render('html'));
 // SCSS
@@ -27,7 +27,7 @@ const {
 
 import Button from './sub/button.astro';
 import Code from './sub/code.astro';
-import { component_classes } from './utils/classes_generator.ts';
+import {component_classes} from './utils/classes_generator.ts';
 
 // title={Astro.props.title}
 // html={html}
@@ -39,7 +39,7 @@ import { component_classes } from './utils/classes_generator.ts';
 const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 const scss_generated = scss ? component_classes(scss) : null;
 ---
-<div class:list={['snippet', { 'single': single }]}>
+<div class:list={['snippet', {'single': single}]}>
   {(!single || (lines && lines > 1)) && (
           <div class="top">
               <div class="nav">
@@ -81,7 +81,9 @@ const scss_generated = scss ? component_classes(scss) : null;
       {code && (
               <Code code={code} lang={lang} single={single}
                     oneline={lines && lines === 1}/>
-              <Button small={lines && lines === 1} icon={'clipboard'}/>
+              <div class:list={['btn_wrapper', {'vertical': lines && lines === 1}]}>
+                  <Button small={lines && lines === 1} icon={'clipboard'}/>
+              </div>
       )}
     </div>
   {!single && (
@@ -96,7 +98,9 @@ const scss_generated = scss ? component_classes(scss) : null;
                       </div>
                   </div>
                   <div class="right">
-                      <Button small icon="clipboard">Right</Button>
+                      <div class="btn_wrapper">
+                          <Button small icon="clipboard">Right</Button>
+                      </div>
                   </div>
               </div>
               <div class="tabs">
@@ -167,12 +171,13 @@ const scss_generated = scss ? component_classes(scss) : null;
           )
         )
       ),
-      '> :global(.btn)' : (
+      '> .btn_wrapper' : (
         position: absolute,
         top: 8px,
         right: 8px,
+        display: inline-block,
         _subclasses : (
-          '&.small' : (
+          '&.vertical' : (
             top: 50%,
             transform: translateY(-50%)
           )
@@ -240,11 +245,11 @@ const scss_generated = scss ? component_classes(scss) : null;
 <script client:load>
   customElements.get('xii-preview') === undefined &&
   window.customElements.define('xii-preview', class extends HTMLElement {
-    constructor () {
+    constructor() {
       super();
 
       // 🥷创建 Shadow DOM
-      const shadow = this.attachShadow({ mode: 'open' });
+      const shadow = this.attachShadow({mode: 'open'});
 
       shadow.innerHTML = `
       <slot name="html"></slot>
@@ -253,4 +258,31 @@ const scss_generated = scss ? component_classes(scss) : null;
     `;
     }
   });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const snippets = document.querySelectorAll('.snippet');
+    snippets.forEach((snippet) => {
+
+      const top_buttons = snippet.querySelectorAll('.top .btn');
+
+      top_buttons.forEach((button, index) => {
+        switch (index) {
+          // Outline button click
+          case 0 :
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+            });
+            break;
+        }
+      })
+
+      const middle_buttons = snippet.querySelectorAll('.middle .btn');
+
+      middle_buttons.forEach((button, index) => {
+        console.log(button);
+      })
+    });
+  })
 </script>
