@@ -215,6 +215,16 @@ srcdoc += `<script is:inline>
   } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.documentElement.setAttribute('data-theme', 'dark');
   }
+  
+  try {
+    // Directly bind to the parent window's custom event
+    window.parent.addEventListener('theme_change', (event) => {
+      document.documentElement.setAttribute('data-theme', event.detail.theme)
+    });
+  } catch (e) {
+    console.error("Cross-origin security blocked direct parent access. Use Method 1 instead.", e);
+  }
+  
 </script>`;
 
 srcdoc += `<script>
@@ -292,6 +302,6 @@ srcdoc += '</body></html>';
       }
     });
 
-    resizeObserver.observe(iframe.contentDocument.body, {box: 'border-box'});
+    resizeObserver.observe(iframe.contentDocument.body, { box: 'border-box' });
   }
 </script>

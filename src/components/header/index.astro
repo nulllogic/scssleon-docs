@@ -410,7 +410,8 @@ const { title, category } = Astro.props;
         },
       });
 
-      document.dispatchEvent(event);
+      window.dispatchEvent(event);
+
     });
   }
 
