@@ -319,9 +319,7 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
           case 0 :
             button.addEventListener('click', (e) => {
               e.preventDefault();
-              snippet.querySelector('.preview > xii-preview')?.
-                shadowRoot.
-                querySelector('.wrapper').
+              snippet.querySelector('.preview iframe')?.contentDocument.body.
                 classList.
                 toggle('outline');
             });
