@@ -219,7 +219,11 @@ srcdoc += `<script is:inline>
   try {
     // Directly bind to the parent window's custom event
     window.parent.addEventListener('theme_change', (event) => {
+      document.documentElement.classList.add('preload');
       document.documentElement.setAttribute('data-theme', event.detail.theme)
+      setTimeout(() => {
+       document.documentElement.classList.remove('preload');
+      },10);
     });
   } catch (e) {
     console.error("Cross-origin security blocked direct parent access. Use Method 1 instead.", e);

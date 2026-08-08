@@ -5,7 +5,7 @@ const {
   title = '',
   preview = false,
   file = null,
-  min_height = '',
+  min_height = null,
   inline = false,
   single = false,
   multi_line = true,
@@ -27,7 +27,7 @@ import { component_classes } from './utils/classes_generator.ts';
 
 const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 ---
-<div class:list={['snippet', { 'single': single }]}>
+<div class:list={['snippet card', { 'single': single }]}>
   {(!single || (lines && lines > 1)) && (
           <div class="top">
               <div class="nav">
@@ -77,14 +77,14 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
               <div class="nav">
                   <div class="left">
                       <Button class="link active html5 tab" title="HTML"
-                              icon="html5" badge={1} />
-                      {scss && (
-                        <Button class="link scss tab" title="SCSS"
-                                icon="scss"/>
-                      )}
-                      {js && (
-                        <Button class="link js tab" title="JS" icon="js"/>
-                      )}
+                              icon="html5" badge={1}/>
+                    {scss && (
+                            <Button class="link scss tab" title="SCSS"
+                                    icon="scss"/>
+                    )}
+                    {js && (
+                            <Button class="link js tab" title="JS" icon="js"/>
+                    )}
                   </div>
                   <div class="right">
                       <div class="wrapper">
@@ -99,17 +99,18 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                       <Code code={html} lang={'html'}
                             show_line_numbers={true}/>
                   </div>
-                  {scss && (
-                    <div class="tab">
-                        <Code code={scss} lang={'scss'}
-                              show_line_numbers={true}/>
-                    </div>
-                  )}
-                  {js && (
-                    <div class="tab">
-                        <Code code={js} lang={'js'} show_line_numbers={true}/>
-                    </div>
-                  )}
+                {scss && (
+                        <div class="tab">
+                            <Code code={scss} lang={'scss'}
+                                  show_line_numbers={true}/>
+                        </div>
+                )}
+                {js && (
+                        <div class="tab">
+                            <Code code={js} lang={'js'}
+                                  show_line_numbers={true}/>
+                        </div>
+                )}
               </div>
           </div>
   )}
@@ -122,10 +123,10 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
   @use '~/styles/app.scss' as app;
 
   $snippet-top: (
-    background: #0d1117,
+    background: var(--section-background),
+    border-bottom: var(--border),
     border-radius: .425rem .425rem 0 0,
     padding: .525rem .825rem,
-    border-bottom: 1px solid #333434,
     min-height: 46px,
     align-items: center,
     display: flex,
@@ -145,13 +146,13 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
           )
         )
       ),
-    )
+    ),
   );
 
   $snippet-middle: (
     /*border-radius: 0 0 0.425rem 0.425rem,*/
     position: relative,
-    border-bottom: 1px solid #333434,
+    border-bottom: var(--border),
     _subclasses : (
       '.wrapper' : (
         position: absolute,
@@ -170,13 +171,14 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 
 
   $snippet-bottom: (
-    background: #0d1117,
+    background: var(--section-background),
+    border-bottom: var(--border),
     border-radius: 0 0 0.425rem 0.425rem,
     _subclasses : (
       '> .nav' : (
         padding: .525rem .825rem,
         justify-content : space-between,
-        border-bottom: 1px solid #333434,
+        border-bottom: var(--border),
         _subclasses : (
           '.left' : (
             --gap: .425rem,
@@ -189,15 +191,15 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                 --padding: .365rem .45rem,
                 _subclasses : (
                   '&:hover' : (
-                    background: #656c7633,
+                    background: var(--background),
                   ),
                   '&.active' : (
                     font-weight: 700,
-                    background: #656c7633,
+                    background: var(--background),
                     position: relative,
                     _subclasses : (
                       ':global(.text)' : (
-                          // tweaking to make text look better
+                        // tweaking to make text look better
                         letter-spacing: 0,
                         font-size: .975rem,
                         padding-right: 0,
@@ -232,6 +234,14 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                       )
                     )
                   )
+                ),
+                _colors : (
+                  'light' : (
+                    background : #818b981f
+                  ),
+                  'dark' : (
+                    background : #656c7633
+                  )
                 )
               )
             )
@@ -250,7 +260,7 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
           )
         )
       )
-    )
+    ),
   );
 
   $snippet: (
@@ -260,8 +270,8 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
     padding: 0,
     display: block,
     margin: 0,
-    border: 1px solid #3d444d,
-    border-radius: .425rem,
+    /*border: 1px solid #3d444d,*/
+    /*border-radius: .425rem,*/
     _subclasses : (
       '.top' : $snippet-top,
       '.middle' : $snippet-middle,
@@ -273,6 +283,16 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
             border-bottom: none,
           )
         )
+      )
+    ),
+    _colors : (
+      'light' : (
+        section-background: rgb(248, 249, 250),
+        section-border: 1px solid rgb(222, 226, 230),
+      ),
+      'dark' : (
+        section-background: #0d1117,
+        section-border: 1px solid #333434,
       )
     )
   );
@@ -337,19 +357,19 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
         '.bottom .nav .left .tab');
       const tab_items = snippet.querySelectorAll('.bottom .tabs .tab');
 
-        tabs_nav_items.forEach((nav, index) => {
-            nav.addEventListener('click', function (e) {
-                e.preventDefault();
-                console.log(nav);
+      tabs_nav_items.forEach((nav, index) => {
+        nav.addEventListener('click', function (e) {
+          e.preventDefault();
+          console.log(nav);
 
-                tabs_nav_items.forEach(
-                  element => element.classList.remove('active'));
-                nav.classList.add('active');
+          tabs_nav_items.forEach(
+            element => element.classList.remove('active'));
+          nav.classList.add('active');
 
-                tab_items.forEach(element => element.classList.remove('active'));
-                tab_items[index].classList.add('active');
-            });
+          tab_items.forEach(element => element.classList.remove('active'));
+          tab_items[index].classList.add('active');
         });
+      });
 
     }
 
