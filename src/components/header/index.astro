@@ -288,9 +288,9 @@ const { title, category } = Astro.props;
     /***/
     _colors: (
       light : (
-        background : string.unquote('linear-gradient(rgba(216, 216, 216, 0.79), rgba(55, 241, 14, 0.09))'),
+        background : string.unquote('linear-gradient(rgba(216, 216, 216, 0.79), #ffffff17)'),
         border : 1px solid rgba(232, 244, 229, 1),
-        shadow: 0 1px 2px #00000026,
+        shadow: 0 1px 2px oklch(0.38 0.08 140.51 / 0.18),
       ),
       dark : (
         background : string.unquote('linear-gradient(rgba(10, 34, 8, 0.85) 0%, rgba(28, 43, 31, 0.55) 100%)'),

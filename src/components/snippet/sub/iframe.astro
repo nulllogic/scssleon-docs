@@ -173,6 +173,12 @@ srcdoc += `<style>
     ${base_style.css}
 </style>`;
 
+const props_style = await sass.compileStringAsync(`
+  ${min_height ? 'body { min-height:' + min_height + 'px;}' : ''}
+`, { importers: scss_importes, style: 'compressed' });
+
+srcdoc += `<style>${props_style.css}</style>`;
+
 if (Astro.slots.has('scss')) {
   const scss = (await Astro.slots.render('scss')).replace(
     /^<div[^>]*>|<\/div>$/g, '');
