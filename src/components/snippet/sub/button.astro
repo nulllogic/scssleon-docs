@@ -265,7 +265,7 @@ const [attr, cond] = Object.entries(Astro.props).at(-1);
           ),
           '.icon' : (
             // Drop shadow to the icon
-            /*filter: drop-shadow(1px 1px 1px oklch(0 0 0 / 70.17%)),*/
+            filter: var(--filter),
             _subclasses: (
               ':global(path)' : (
                 fill : var(--fill)
@@ -273,9 +273,11 @@ const [attr, cond] = Object.entries(Astro.props).at(-1);
             ),
             _colors : (
               'light' : (
+                filter: drop-shadow(1px 1px 1px oklch(0.72 0 0 / 0.7)),
                 fill: oklch(0.49 0.13 145.62)
               ),
               'dark' : (
+                filter : none,
                 fill: oklch(0.68 0.19 145.57),
               )
             )
