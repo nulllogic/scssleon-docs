@@ -188,6 +188,9 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                 text-decoration: none,
                 --padding: .365rem .45rem,
                 _subclasses : (
+                  '&:first-child' : (
+                    --gap: 8px,
+                  ),
                   '&:hover' : (
                     background: #656c7633,
                   ),
@@ -196,6 +199,13 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                     background: #656c7633,
                     position: relative,
                     _subclasses : (
+                      ':global(.text)' : (
+                          // tweaking to make text look better
+                        letter-spacing: 0,
+                        font-size: .975rem,
+                        padding-right: 0,
+                        margin-top: 0,
+                      ),
                       '&:after' : (
                         content: "",
                         height: 2px,
@@ -209,6 +219,22 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                       )
                     )
                   ),
+                  ':global(.text)' : (
+                    display: inline-block,
+                    vertical-align: middle,
+                    min-height: 1rem,
+                    // tweaking to make text look better
+                    letter-spacing: 0.75px,
+                    font-size: 0.925rem,
+                    padding-right: 1px,
+                    margin-top: 1px,
+                    position: relative,
+                    _atrule : (
+                      '@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)' : (
+                        margin-top: 0,
+                      )
+                    )
+                  )
                 )
               )
             )
