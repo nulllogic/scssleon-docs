@@ -23,10 +23,10 @@
   },
   "devDependencies": {
     "sass": "^1.102.0",
-    "astro-compress": "^2.4.2",
+    "astro-compress": "^2.4.3",
     "size-limit": "^13.0.3",
-    "shiki": "^4.4.2",
-    "@shikijs/transformers" : "^4.4.2",
-    "@shikijs/twoslash" : "^4.4.2"
+    "shiki": "^4.4.3",
+    "@shikijs/transformers" : "^4.4.3",
+    "@shikijs/twoslash" : "^4.4.3"
   }
 }

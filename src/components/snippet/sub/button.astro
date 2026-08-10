@@ -123,9 +123,9 @@ const [attr, cond] = Object.entries(Astro.props).at(-1);
 
   $icon-clipboard: (
     _subclasses: (
-      '&.clicked' : (
-        --border : var(--hover-border)
-      ),
+      /*'&.clicked' : (*/
+      /*  --border : var(--hover-border)*/
+      /*),*/
       '&.clicked .icon.copy' : (
         visibility: hidden,
         filter: blur(0.75px),
@@ -376,6 +376,9 @@ const [attr, cond] = Object.entries(Astro.props).at(-1);
 
   $button: (
     _subclasses : (
+      '&.clicked' : (
+
+      ),
       '&.small' : (
         --padding: .325rem
       ),
@@ -387,7 +390,7 @@ const [attr, cond] = Object.entries(Astro.props).at(-1);
       '&.clipboard': $icon-clipboard,
       '&.outline': $icon-outline,
       '&.measure': $icon-outline,
-      '&.html5': $icon-html5,
+      '&.html5': $icon-html5
     ),
     '.icon' : (
       _colors : (

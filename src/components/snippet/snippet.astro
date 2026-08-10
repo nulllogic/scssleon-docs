@@ -195,11 +195,11 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                 --padding: .365rem .45rem,
                 _subclasses : (
                   '&:hover' : (
-                    background: var(--background),
+                    background: var(--background-hover),
                   ),
                   '&.active' : (
                     font-weight: 700,
-                    background: var(--background),
+                    background: var(--background-hover),
                     position: relative,
                     _subclasses : (
                       ':global(.text)' : (
@@ -241,10 +241,12 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                 ),
                 _colors : (
                   'light' : (
-                    background : #818b981f
+                    background : oklch(0.9782 0.0034 247.86),
+                    background-hover : oklch(0.6329 0.0228 254.97 / 12%)
                   ),
                   'dark' : (
-                    background : #656c7633
+                    background : oklch(0.5287 0.0179 257.24 / 20%),
+                    background-hover : oklch(0.5287 0.0179 257.24 / 20%),
                   )
                 )
               )
