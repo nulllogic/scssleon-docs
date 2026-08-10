@@ -42,10 +42,10 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                             <div class="btn-group separated" role="group"
                                  aria-label="Basic example"
                                  style="--xii-gap: .425rem;">
-                                <Button class="toggle outline" small
-                                        icon={'outline'}/>
-                                <Button class="toggle outline" small
-                                        icon={'outline'}/>
+                                <Button class="toggle" small
+                                        icon={'measure'}/>
+                                <Button class="toggle measure" small
+                                        icon={'measure'}/>
                                 <Button class="toggle outline" small
                                         icon={'outline'}/>
                                 <Button class="toggle color_scheme" small
@@ -319,14 +319,25 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 
       top_buttons.forEach((button, index) => {
         switch (index) {
+          // Measure button click
+          case 1 :
+            button.addEventListener('click', (e) => {
+              e.preventDefault();
+              // snippet.querySelector('.preview iframe')?.contentDocument.body.
+              //   classList.
+              //   toggle('outline');
+            });
+            break;
           // Outline button click
-          case 0 :
+          case 2 :
             button.addEventListener('click', (e) => {
               e.preventDefault();
               snippet.querySelector('.preview iframe')?.contentDocument.body.
                 classList.
                 toggle('outline');
             });
+            break;
+          default:
             break;
         }
       });
@@ -488,6 +499,10 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
           }
 
           if (button.classList.contains('outline')) {
+            button.classList.toggle('clicked');
+          }
+
+          if (button.classList.contains('measure')) {
             button.classList.toggle('clicked');
           }
 
