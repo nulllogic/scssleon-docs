@@ -115,6 +115,7 @@ const [attr, cond] = Object.entries(Astro.props).at(-1);
         visibility: hidden,
         filter: blur(0.75px),
         transform: scale(0.8),
+        opacity: 0,
       ),
       '&.clicked .icon.complete' : (
         filter: blur(0),
@@ -123,7 +124,8 @@ const [attr, cond] = Object.entries(Astro.props).at(-1);
         visibility: visible,
         _subclasses : (
           ':global(path)' : (
-            animation: icon_reveal .2s ease-out 1,
+            animation: icon_reveal .25s ease-out 1,
+            animation-delay: 0.1s,
             _animations: (
               'icon_reveal' : (
                 'from' : (
@@ -165,7 +167,7 @@ const [attr, cond] = Object.entries(Astro.props).at(-1);
         width: 100%,
         height: 100%,
         transform: scale(0),
-        transition: string.unquote("filter 0.15s ease-out, opacity 0.15s ease-out, transform 0.15s ease-out, visibility 0.2s ease-out"),
+        transition: string.unquote("filter 0.15s ease-out .075s, opacity 0.15s ease-out .075s, transform 0.15s ease-out .1s, visibility 0.2s ease-out .075s"),
         filter: blur(4px),
         opacity: 0,
         visibility: hidden,
