@@ -2,6 +2,8 @@
 import * as sass from 'sass';
 import path from 'path';
 
+const { title, badge, class: className, ...rest } = Astro.props;
+
 const canvas_src = '/src/components/snippet/utils/measure/canvas.ts';
 const visualizer_src = '/src/components/snippet/utils/measure/visualizer.ts';
 const search_src = '/src/components/snippet/utils/measure/search.ts';
@@ -270,6 +272,21 @@ srcdoc += `<script type="module">
   let nodeAtPointerRef;
   const pointer = { x: 0, y: 0 };
 
+
+  function getFakeDomElement(node) {
+    const fakeNode = {
+        nodeName: node.nodeName,
+        nodeType: node.nodeType,
+        tagName: node.tagName,
+        childNodes: [...node.childNodes].map(child => getFakeDomElement(child)),
+        textContent: node.textContent
+    }
+    if(node.attributes) {
+        fakeNode.attributes = [...node.attributes].map(attribute => ({name:attribute.name, value:attribute.value}))
+    }
+    return fakeNode;
+}
+
   function findAndDrawElement(x, y) {
     nodeAtPointerRef = deepElementFromPoint(x, y);
     drawSelectedElement(nodeAtPointerRef);
@@ -296,11 +313,11 @@ srcdoc += `<script type="module">
     });
   };
 
-  document.addEventListener('pointerover', onPointerOver);
-  init();
-  window.addEventListener('resize', onResize);
+  //document.addEventListener('pointerover', onPointerOver);
+  //init();
+  //window.addEventListener('resize', onResize);
   // Draw the element below the pointer when first enabled
-  findAndDrawElement(pointer.x, pointer.y);
+  //findAndDrawElement(pointer.x, pointer.y);
 
 </script>`;
 
@@ -324,6 +341,7 @@ srcdoc += '</body></html>';
         srcdoc={srcdoc}
         onload="iframe_onload(this);"
         style="flex-grow: 1;width: 100%; border: none;height: auto"
+        {...rest}
 />
 
 <style lang="scss">

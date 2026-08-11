@@ -7,15 +7,14 @@ const scss = await Astro.slots.render('scss');
 const js = await Astro.slots.render('js');
 ---
 <xii-preview class="preview">
-    <div class="wrapper">
-        <Iframe min_height={min_height}>
-            <Fragment slot="html" set:html={html} is:raw/>
-            <Fragment slot="scss" set:html={scss} is:raw/>
-            <Fragment slot="js" set:html={js} is:raw/>
-        </Iframe>
-    </div>
+    <Iframe min_height={min_height}>
+        <Fragment slot="html" set:html={html} is:raw/>
+        <Fragment slot="scss" set:html={scss} is:raw/>
+        <Fragment slot="js" set:html={js} is:raw/>
+    </Iframe>
     <div class="resizer"><span class="drag"><span
-      class="el"/></span></div>
+            class="el"/></span></div>
+    <canvas class="canvas" slot="canvas"/>
 </xii-preview>
 
 <style lang="scss">
@@ -23,6 +22,17 @@ const js = await Astro.slots.render('js');
   @use 'sass:string';
 
   @use '~/styles/app.scss' as app;
+
+  $preview-canvas: (
+    position: absolute,
+    top:-50px,
+    right:-50px,
+    bottom:-50px,
+    left:-50px,
+    width: calc(100% + 100px),
+    height: calc(100% + 100px),
+    pointer-events: none
+  );
 
   $preview-resizer-dragging-element: (
     position: absolute,
@@ -95,15 +105,7 @@ const js = await Astro.slots.render('js');
         )
       ),
       '.resizer' : $preview-resizer-dragging-element,
-      ':global(canvas)' : (
-        position: absolute,
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        width: 100%,
-        height: 100%,
-      )
+      '.canvas' : $preview-canvas,
     ),
   );
 
@@ -118,49 +120,131 @@ const js = await Astro.slots.render('js');
 
 <script>
 
-    // import { destroy, init, rescale } from "../utils/measure/canvas.ts";
-    // import { drawSelectedElement } from "../utils/measure/visualizer.ts";
-    // import { deepElementFromPoint } from "../utils/measure/search.ts";
-    //
-    // let nodeAtPointerRef;
-    // const pointer = { x: 0, y: 0 };
+  // import { destroy, init, rescale } from "../utils/measure/canvas.ts";
+  import {
+    drawBoxModel,
+    drawSelectedElement2,
+  } from '../utils/measure/visualizer.ts';
+  import { deepElementFromPoint } from '../utils/measure/search.ts';
+  //
 
-    class SnippetPreview extends HTMLElement {
-        connectedCallback() {
+  // let nodeAtPointerRef;
+  // const pointer = { x: 0, y: 0 };
 
-            // function findAndDrawElement(x, y, container) {
-            //     nodeAtPointerRef = deepElementFromPoint(x, y, container);
-            //     drawSelectedElement(nodeAtPointerRef);
-            // }
-            //
-            // this.addEventListener('pointerover', (e) => {
-            //     window.requestAnimationFrame(() => {
-            //         e.stopPropagation();
-            //         findAndDrawElement(e.clientX, e.clientY, this);
-            //     });
-            // });
-            //
-            // init({
-            //     container : this
-            // });
-            //
-            // this.addEventListener('resize', (e) => {
-            //     window.requestAnimationFrame(() => {
-            //         rescale();
-            //     });
-            // });
-            //
-            // // Draw the element below the pointer when first enabled
-            // findAndDrawElement(pointer.x, pointer.y, this);
-            // console.log('Root element:', root);
-            //
-            // const button = root.querySelector('.trigger');
-            // button?.addEventListener('click', () => {
-            //     root.style.backgroundColor = 'lightblue';
-            // });
-        }
+  class SnippetPreview extends HTMLElement {
+
+    constructor () {
+      super();
+      // 1. Create the shadow root and a slot
+      const shadow = this.attachShadow({ mode: 'open' });
+      shadow.innerHTML = `<slot />`;
+
+      const sheet = new CSSStyleSheet();
+      sheet.replaceSync(`
+          canvas {
+            position: absolute;
+            top:-50px;
+            right:-100px;
+            bottom:-50px;
+            left:-100px;
+            width: calc(100% + 200px);
+            height: calc(100% + 100px);
+            pointer-events: none;
+          }
+      `);
+      shadow.adoptedStyleSheets = [sheet];
+
+      // 2. Target the slot element
+      const slot = shadow.querySelector('slot[name="iframe"]');
+
     }
 
-    // Register the element with the browser
-    customElements.define('xii-preview', SnippetPreview);
+    connectedCallback () {
+
+      this.canvas = document.createElement('canvas');
+      this.ctx = this.canvas.getContext('2d');
+
+      this.shadowRoot.appendChild(this.canvas);
+
+      this.shadowRoot?.appendChild(this.querySelector('iframe'));
+      this.iframe = this.shadowRoot?.querySelector('iframe');
+
+      this.iframe.addEventListener('load', () => {
+        // Bind the mouseover event to the iframe's internal document
+        this.iframe.contentDocument.addEventListener('pointerover',
+          this._iframe_point_over_event.bind(this));
+      });
+    }
+
+    _iframe_point_over_event (e) {
+      window.requestAnimationFrame(() => {
+        e.stopPropagation();
+        this._find_and_draw_element(e.clientX, e.clientY);
+      });
+    }
+
+    _deep_element_from_point (x, y) {
+      const element = this.iframe.contentWindow.document.elementFromPoint(x,
+        y) as HTMLElement;
+
+      if (element.tagName === 'BODY') return;
+
+      const crawlShadows = (node: HTMLElement): HTMLElement => {
+        if (node && node.shadowRoot) {
+          // elementFromPoint() doesn't exist in ShadowRoot type
+          const nestedElement = (node.shadowRoot as any).elementFromPoint(x, y);
+
+          // Nested node is same as the root one
+          if (node.isEqualNode(nestedElement)) {
+            return node;
+          }
+          // The nested node has shadow DOM too so continue crawling
+          if (nestedElement.shadowRoot) {
+            return crawlShadows(nestedElement);
+          }
+          // No more shadow DOM
+          return nestedElement;
+        }
+
+        return node;
+      };
+
+      const shadowElement = crawlShadows(element);
+
+      return shadowElement || element;
+    }
+
+    _find_and_draw_element (x, y) {
+      let nodeAtPointerRef = this._deep_element_from_point(x, y);
+      this._draw(drawBoxModel(nodeAtPointerRef));
+    }
+
+    _draw (callback) {
+
+      this.height = this.iframe.contentWindow.document.body.offsetHeight + 100;
+      this.width = this.iframe.contentWindow.document.body.scrollWidth + 200;
+
+      this.canvas.width = this.width;
+      this.canvas.height = this.height;
+
+      const scale = window.devicePixelRatio;
+      this.canvas.width = Math.floor(this.width * scale);
+      this.canvas.height = Math.floor(this.height * scale);
+
+      this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+      this.ctx.clearRect(0, 0, this.width ?? 0, this.height ?? 0);
+      // Set color to black (or any color you want)
+      this.ctx.fillStyle = 'red';
+
+      callback(this.ctx);
+    }
+
+    disconnectedCallback () {
+
+    }
+  }
+
+  // Register the element with the browser
+  customElements.define('xii-preview', SnippetPreview);
 </script>

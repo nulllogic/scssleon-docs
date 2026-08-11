@@ -67,10 +67,10 @@ function measureElement(element: HTMLElement): ElementMeasurements {
     borderRightWidth,
   } = style;
 
-  top = top + global.window.scrollY;
-  left = left + global.window.scrollX;
-  bottom = bottom + global.window.scrollY;
-  right = right + global.window.scrollX;
+  top = top + 50;
+  left = left + 100;
+  bottom = bottom + 50;
+  right = right + 100;
 
   const margin = {
     top: pxToNumber(marginTop),
@@ -279,7 +279,7 @@ function drawContent(
   ];
 }
 
-function drawBoxModel(element: HTMLElement) {
+export function drawBoxModel(element: HTMLElement) {
   return (context?: CanvasRenderingContext2D) => {
     if (element && context) {
       const measurements = measureElement(element);
@@ -304,4 +304,8 @@ function drawBoxModel(element: HTMLElement) {
 
 export function drawSelectedElement(element: HTMLElement) {
   draw(drawBoxModel(element));
+}
+
+export function drawSelectedElement2(element: HTMLElement) {
+  // return drawBoxModel(element);
 }

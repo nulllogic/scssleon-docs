@@ -62,7 +62,6 @@ function setCanvasWidthAndHeight (
 let state: CanvasState = {};
 
 export function init () {
-  console.log(444);
   if (!state.canvas) {
     state = createCanvas();
   }
@@ -74,8 +73,9 @@ export function clear () {
   }
 }
 
-export function draw (callback: (context?: CanvasRenderingContext2D) => void) {
+export function draw (callback) {
   clear();
+  // console.log(callback);
   callback(state.context);
 }
 
