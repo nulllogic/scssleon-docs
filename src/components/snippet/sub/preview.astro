@@ -6,7 +6,7 @@ const html = await Astro.slots.render('html');
 const scss = await Astro.slots.render('scss');
 const js = await Astro.slots.render('js');
 ---
-<div class="preview">
+<xii-preview class="preview">
     <div class="wrapper">
         <Iframe min_height={min_height}>
             <Fragment slot="html" set:html={html} is:raw/>
@@ -16,7 +16,7 @@ const js = await Astro.slots.render('js');
     </div>
     <div class="resizer"><span class="drag"><span
       class="el"/></span></div>
-</div>
+</xii-preview>
 
 <style lang="scss">
   @use 'sass:map';
@@ -69,6 +69,7 @@ const js = await Astro.slots.render('js');
   $preview: (
     position: relative,
     background: var(--background),
+    display: block,
     _colors : (
       light : (
         background : string.unquote('rgba(55, 241, 14, 0.09) linear-gradient(135deg, rgba(219, 226, 216, 0.45) 10%, rgba(0, 0, 0, 0) 0, #0000 50%, rgba(219, 226, 216, 0.45) 0, rgba(219, 226, 216, 0.45) 60%, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0)) repeat 100% /7.07px 7.07px'),
@@ -94,6 +95,15 @@ const js = await Astro.slots.render('js');
         )
       ),
       '.resizer' : $preview-resizer-dragging-element,
+      ':global(canvas)' : (
+        position: absolute,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: 100%,
+        height: 100%,
+      )
     ),
   );
 
@@ -105,3 +115,52 @@ const js = await Astro.slots.render('js');
   );
 
 </style>
+
+<script>
+
+    // import { destroy, init, rescale } from "../utils/measure/canvas.ts";
+    // import { drawSelectedElement } from "../utils/measure/visualizer.ts";
+    // import { deepElementFromPoint } from "../utils/measure/search.ts";
+    //
+    // let nodeAtPointerRef;
+    // const pointer = { x: 0, y: 0 };
+
+    class SnippetPreview extends HTMLElement {
+        connectedCallback() {
+
+            // function findAndDrawElement(x, y, container) {
+            //     nodeAtPointerRef = deepElementFromPoint(x, y, container);
+            //     drawSelectedElement(nodeAtPointerRef);
+            // }
+            //
+            // this.addEventListener('pointerover', (e) => {
+            //     window.requestAnimationFrame(() => {
+            //         e.stopPropagation();
+            //         findAndDrawElement(e.clientX, e.clientY, this);
+            //     });
+            // });
+            //
+            // init({
+            //     container : this
+            // });
+            //
+            // this.addEventListener('resize', (e) => {
+            //     window.requestAnimationFrame(() => {
+            //         rescale();
+            //     });
+            // });
+            //
+            // // Draw the element below the pointer when first enabled
+            // findAndDrawElement(pointer.x, pointer.y, this);
+            // console.log('Root element:', root);
+            //
+            // const button = root.querySelector('.trigger');
+            // button?.addEventListener('click', () => {
+            //     root.style.backgroundColor = 'lightblue';
+            // });
+        }
+    }
+
+    // Register the element with the browser
+    customElements.define('xii-preview', SnippetPreview);
+</script>

@@ -1,6 +1,8 @@
 export const deepElementFromPoint = (x: number, y: number) => {
   const element = document.elementFromPoint(x, y) as HTMLElement;
 
+  if(element.tagName === 'BODY') return;
+
   const crawlShadows = (node: HTMLElement): HTMLElement => {
     if (node && node.shadowRoot) {
       // elementFromPoint() doesn't exist in ShadowRoot type
