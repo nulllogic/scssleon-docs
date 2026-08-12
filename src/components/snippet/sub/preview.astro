@@ -157,15 +157,30 @@ const js = await Astro.slots.render('js');
 
       this.shadowRoot?.appendChild(this.querySelector('iframe'));
       this.iframe = this.shadowRoot?.querySelector('iframe');
-      this.iframe.addEventListener('load', this._iframe_load_event.bind(this));
+      // Event ⏳ iframe load
+      this.iframe.addEventListener('load',
+        this._iframe_initial_load_event.bind(this));
 
       this.canvas = document.createElement('canvas');
       this.ctx = this.canvas.getContext('2d');
 
       this.shadowRoot.appendChild(this.canvas);
+
+      this.iframe.contentDocument.addEventListener('pointerover',
+        this._iframe_point_over_event.bind(this));
     }
 
-    _iframe_load_event (e) {
+    connectedCallback () {
+      this.iframe.addEventListener('load',
+        this._iframe_connected_load_event.bind(this));
+    }
+
+    disconnectedCallback () {
+      this.iframe.removeEventListener('load',
+        this._iframe_connected_load_event.bind(this));
+    }
+
+    _iframe_initial_load_event (e) {
       this.iframe.style.height = this.iframe.contentDocument.body.scrollHeight +
         'px';
       this.iframe.style.visibility = 'visible';
@@ -180,11 +195,11 @@ const js = await Astro.slots.render('js');
         { box: 'border-box' });
     }
 
-    // _iframe_load_event (e) {
-    //   // Bind the mouseover event to the iframe's internal document
-    //   this.iframe.contentDocument.addEventListener('pointerover',
-    //     this._iframe_point_over_event.bind(this));
-    // }
+    _iframe_connected_load_event (e) {
+      // Bind the mouseover event to the iframe's internal document
+      this.iframe.contentDocument.addEventListener('pointerover',
+        this._iframe_point_over_event.bind(this));
+    }
 
     _iframe_point_over_event (e) {
       window.requestAnimationFrame(() => {
