@@ -42,8 +42,6 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
                             <div class="btn-group separated" role="group"
                                  aria-label="Basic example"
                                  style="--xii-gap: .425rem;">
-                                <Button class="toggle" small
-                                        icon={'measure'}/>
                                 <Button class="toggle measure" small
                                         icon={'measure'}/>
                                 <Button class="toggle outline" small
@@ -313,51 +311,6 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const snippets = document.querySelectorAll('.snippet');
-    snippets.forEach((snippet) => {
-
-      const top_buttons = snippet.querySelectorAll('.top .btn');
-
-      top_buttons.forEach((button, index) => {
-        switch (index) {
-          // Measure button click
-          case 1 :
-            button.addEventListener('click', (e) => {
-              e.preventDefault();
-
-                snippet.querySelector('.preview')?.
-                  setAttribute('measure',
-                    !(snippet.querySelector('.preview')?.getAttribute('measure').toLowerCase() === 'true'));
-
-            });
-            break;
-          // Outline button click
-          case 2 :
-            button.addEventListener('click', (e) => {
-              e.preventDefault();
-
-              snippet.querySelector('.preview')?.
-                setAttribute('outline',
-                  !(snippet.querySelector('.preview')?.getAttribute('outline').toLowerCase() === 'true'));
-
-            });
-            break;
-          default:
-            break;
-        }
-      });
-
-      const middle_buttons = snippet.querySelectorAll('.middle .btn');
-
-      middle_buttons.forEach((button, index) => {
-        console.log(button);
-      });
-    });
-  });
-</script>
-
-<script>
 
   document.querySelectorAll('.snippet').forEach((snippet) => {
 
@@ -506,10 +459,20 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
 
           if (button.classList.contains('outline')) {
             button.classList.toggle('clicked');
+              snippet.querySelector('.preview')?.
+                setAttribute('outline',
+                  !(snippet.querySelector('.preview')?.
+                    getAttribute('outline').
+                    toLowerCase() === 'true'));
           }
 
           if (button.classList.contains('measure')) {
             button.classList.toggle('clicked');
+              snippet.querySelector('.preview')?.
+                setAttribute('measure',
+                  !(snippet.querySelector('.preview')?.
+                    getAttribute('measure').
+                    toLowerCase() === 'true'));
           }
 
         });
