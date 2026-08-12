@@ -335,12 +335,10 @@ srcdoc += '</body></html>';
 ---
 
 <iframe class="iframe"
-        frameborder="0"
         seamless
         loading="lazy"
         srcdoc={srcdoc}
-        onload="iframe_onload(this);"
-        style="flex-grow: 1;width: 100%; border: none;height: auto"
+        style="flex-grow: 1;width: 100%; border: none;height: auto;visibility: hidden"
         {...rest}
 />
 
@@ -369,19 +367,3 @@ srcdoc += '</body></html>';
     app.$theme,
   );
 </style>
-
-<script is:inline>
-  function iframe_onload (iframe) {
-
-    iframe.style.height = iframe.contentDocument.body.scrollHeight + 'px';
-    iframe.style.visibility = 'visible';
-
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        iframe.style.height = entry.borderBoxSize[0].blockSize + 'px';
-      }
-    });
-
-    resizeObserver.observe(iframe.contentDocument.body, { box: 'border-box' });
-  }
-</script>

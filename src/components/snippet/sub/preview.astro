@@ -152,29 +152,39 @@ const js = await Astro.slots.render('js');
             pointer-events: none;
           }
       `);
+
       shadow.adoptedStyleSheets = [sheet];
 
-      // 2. Target the slot element
-      const slot = shadow.querySelector('slot[name="iframe"]');
-
-    }
-
-    connectedCallback () {
+      this.shadowRoot?.appendChild(this.querySelector('iframe'));
+      this.iframe = this.shadowRoot?.querySelector('iframe');
+      this.iframe.addEventListener('load', this._iframe_load_event.bind(this));
 
       this.canvas = document.createElement('canvas');
       this.ctx = this.canvas.getContext('2d');
 
       this.shadowRoot.appendChild(this.canvas);
-
-      this.shadowRoot?.appendChild(this.querySelector('iframe'));
-      this.iframe = this.shadowRoot?.querySelector('iframe');
-
-      this.iframe.addEventListener('load', () => {
-        // Bind the mouseover event to the iframe's internal document
-        this.iframe.contentDocument.addEventListener('pointerover',
-          this._iframe_point_over_event.bind(this));
-      });
     }
+
+    _iframe_load_event (e) {
+      this.iframe.style.height = this.iframe.contentDocument.body.scrollHeight +
+        'px';
+      this.iframe.style.visibility = 'visible';
+
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          this.iframe.style.height = entry.borderBoxSize[0].blockSize + 'px';
+        }
+      });
+
+      resizeObserver.observe(this.iframe.contentDocument.body,
+        { box: 'border-box' });
+    }
+
+    // _iframe_load_event (e) {
+    //   // Bind the mouseover event to the iframe's internal document
+    //   this.iframe.contentDocument.addEventListener('pointerover',
+    //     this._iframe_point_over_event.bind(this));
+    // }
 
     _iframe_point_over_event (e) {
       window.requestAnimationFrame(() => {
@@ -241,7 +251,8 @@ const js = await Astro.slots.render('js');
     }
 
     disconnectedCallback () {
-
+      this.iframe.removeEventListener('load',
+        this._iframe_load_event.bind(this));
     }
   }
 
