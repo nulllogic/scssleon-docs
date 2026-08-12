@@ -198,7 +198,12 @@ const js = await Astro.slots.render('js');
           }
           break;
         case 'measure':
-          this.#measure_option = (newValue === 'true') ? true : false;
+          if (newValue === 'true') {
+            this.#measure_option = true;
+          } else {
+            this.#measure_option = false;
+            this.ctx.clearRect(0, 0, this.width ?? 0, this.height ?? 0);
+          }
           break;
         default:
           break;
@@ -229,7 +234,6 @@ const js = await Astro.slots.render('js');
     _iframe_point_over_event (e) {
       window.requestAnimationFrame(() => {
         e.stopPropagation();
-        console.log(this.#measure_option);
         if (this.#measure_option) {
           this._find_and_draw_element(e.clientX, e.clientY);
         }
