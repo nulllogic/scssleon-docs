@@ -325,18 +325,22 @@ const lines = code ? code.split(/\r\n|\r|\n/).length : null;
           case 1 :
             button.addEventListener('click', (e) => {
               e.preventDefault();
-              // snippet.querySelector('.preview iframe')?.contentDocument.body.
-              //   classList.
-              //   toggle('outline');
+
+                snippet.querySelector('.preview')?.
+                  setAttribute('measure',
+                    !(snippet.querySelector('.preview')?.getAttribute('measure').toLowerCase() === 'true'));
+
             });
             break;
           // Outline button click
           case 2 :
             button.addEventListener('click', (e) => {
               e.preventDefault();
-              snippet.querySelector('.preview iframe')?.contentDocument.body.
-                classList.
-                toggle('outline');
+
+              snippet.querySelector('.preview')?.
+                setAttribute('outline',
+                  !(snippet.querySelector('.preview')?.getAttribute('outline').toLowerCase() === 'true'));
+
             });
             break;
           default:

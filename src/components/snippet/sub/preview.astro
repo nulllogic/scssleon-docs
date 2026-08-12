@@ -6,7 +6,7 @@ const html = await Astro.slots.render('html');
 const scss = await Astro.slots.render('scss');
 const js = await Astro.slots.render('js');
 ---
-<xii-preview class="preview">
+<xii-preview class="preview" outline="false" measure="false">
     <Iframe min_height={min_height}>
         <Fragment slot="html" set:html={html} is:raw/>
         <Fragment slot="scss" set:html={scss} is:raw/>
@@ -133,6 +133,12 @@ const js = await Astro.slots.render('js');
 
   class SnippetPreview extends HTMLElement {
 
+    #measure_option = null;
+
+    static get observedAttributes () {
+      return ['outline', 'measure'];
+    }
+
     constructor () {
       super();
       // 1. Create the shadow root and a slot
@@ -180,6 +186,25 @@ const js = await Astro.slots.render('js');
         this._iframe_connected_load_event.bind(this));
     }
 
+    attributeChangedCallback (name, oldValue, newValue) {
+      if (oldValue === null) return;
+
+      switch (name) {
+        case 'outline':
+          if (newValue === 'true') {
+            this.iframe.contentDocument.body.classList.add('outline');
+          } else {
+            this.iframe.contentDocument.body.classList.remove('outline');
+          }
+          break;
+        case 'measure':
+          this.#measure_option = (newValue === 'true') ? true : false;
+          break;
+        default:
+          break;
+      }
+    }
+
     _iframe_initial_load_event (e) {
       this.iframe.style.height = this.iframe.contentDocument.body.scrollHeight +
         'px';
@@ -204,7 +229,10 @@ const js = await Astro.slots.render('js');
     _iframe_point_over_event (e) {
       window.requestAnimationFrame(() => {
         e.stopPropagation();
-        this._find_and_draw_element(e.clientX, e.clientY);
+        console.log(this.#measure_option);
+        if (this.#measure_option) {
+          this._find_and_draw_element(e.clientX, e.clientY);
+        }
       });
     }
 
@@ -212,7 +240,7 @@ const js = await Astro.slots.render('js');
       const element = this.iframe.contentWindow.document.elementFromPoint(x,
         y) as HTMLElement;
 
-      if (element.tagName === 'BODY') return;
+      if (element && element.tagName === 'BODY') return;
 
       const crawlShadows = (node: HTMLElement): HTMLElement => {
         if (node && node.shadowRoot) {
@@ -263,11 +291,6 @@ const js = await Astro.slots.render('js');
       this.ctx.fillStyle = 'red';
 
       callback(this.ctx);
-    }
-
-    disconnectedCallback () {
-      this.iframe.removeEventListener('load',
-        this._iframe_load_event.bind(this));
     }
   }
 
